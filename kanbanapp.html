@@ -68,11 +68,19 @@
 .topbar .menu button,
 .topbar .menu .btn {
   border-color: rgba(124,77,255,0.45);
-  box-shadow: 0 6px 20px rgba(124,77,255,0.10);
+  /* subtle outer purple glow + softer cast shadow */
+  box-shadow: 0 0 8px rgba(124,77,255,0.18), 0 4px 10px rgba(124,77,255,0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 6px 12px;
+  transition: box-shadow .18s ease, transform .12s ease;
 }
 .topbar .menu button:hover,
 .topbar .menu .btn:hover {
-  box-shadow: 0 10px 30px rgba(124,77,255,0.18);
+  transform: translateY(-1px);
+  box-shadow: 0 0 12px rgba(124,77,255,0.22), 0 6px 18px rgba(124,77,255,0.12);
 }
  /* Board */ 
  main{ padding: 16px; padding-top: 18px; } 
