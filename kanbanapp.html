@@ -236,6 +236,9 @@
    position: relative;
  }
 
+/* Reduce space between checklist checkbox and its text by 50% */
+.checklist-item input[type="checkbox"] { margin-right: 4px; }
+
  .card-header input[type="checkbox"]::after,
  .checklist-item input[type="checkbox"]::after,
  input.card-done::after,
@@ -326,7 +329,7 @@
 
 /* Checklist: hide inner checkmark and use darker purple background when checked */
 .checklist-item input[type="checkbox"]::after { display: none; }
-.checklist-item input[type="checkbox"]:checked { background-color: var(--purple-strong); border-color: rgba(255,255,255,0.12); }
+.checklist-item input[type="checkbox"]:checked { background-color: var(--progress-color, var(--purple)); border-color: rgba(255,255,255,0.12); }
  .checklist-header{ 
  display: flex; 
  align-items: center; 
@@ -1273,7 +1276,10 @@ let currentDraggedChecklistItem = null;
  const itemsWrap = $('.items', node); 
  $('.add-item', node).addEventListener('click', function(e){ 
  e.stopPropagation(); 
- itemsWrap.appendChild(createChecklistItem()); 
+ const newItem = createChecklistItem();
+ // inserir no topo da lista (aparecer por cima)
+ if (itemsWrap.firstChild) itemsWrap.insertBefore(newItem, itemsWrap.firstChild);
+ else itemsWrap.appendChild(newItem);
  updateItemsCount(node); 
  touchCardUpdated(node); 
  const col = node.closest('.column'); 
@@ -1421,21 +1427,27 @@ let currentDraggedChecklistItem = null;
  if(key === 'Escape' || key === 'Esc'){ exitEdit(false); editor.blur(); } 
  if((e.ctrlKey || e.metaKey) && (key === 'Enter')){ editor.blur(); } 
  }); 
- chk.addEventListener('change', function(e){ 
+  chk.addEventListener('change', function(e){ 
     e.stopPropagation(); 
     const card = node.closest('.card'); 
+    const itemsWrap = node.closest('.items');
     if (card) {
       // quando checado, mover o item para o fim do checklist
       if (chk.checked) {
-        const itemsWrap = node.closest('.items');
         if (itemsWrap) itemsWrap.appendChild(node);
+      } else {
+        // quando deschecado, mover para o topo da lista
+        if (itemsWrap) {
+          const first = itemsWrap.querySelector('.checklist-item');
+          if (first && first !== node) itemsWrap.insertBefore(node, first);
+        }
       }
       touchCardUpdated(card);
       // atualizar contadores/progresso
       updateItemsCount(card);
     }
     const col = node.closest('.column'); if (col) applyColumnFilter(col); 
- }); 
+  }); 
  $('.delete-item', node).addEventListener('click', function(e){ 
  e.stopPropagation(); 
  node.remove(); 
