@@ -1218,27 +1218,27 @@ let currentDraggedChecklistItem = null;
  id: uid('col'),
  title: 'A Fazer',
  cards: [
- { id: uid('card'), title: 'Definir escopo da semana', description: 'Listar prioridades e alinhar expectativas do time. Referencia: https://www.atlassian.com/agile/project-management', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Organizar backlog', description: 'Revisar tarefas pendentes e ordenar por prioridade. Exemplo de tecnica: https://www.scrum.org/resources/what-is-a-product-backlog', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Planejar entrega', description: 'Separar itens da proxima entrega e responsaveis. Checklist base: https://www.productplan.com/glossary/release-plan/', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' }
+ { id: uid('card'), title: 'Definir escopo da semana', description: 'Listar prioridades e alinhar expectativas do time. Referencia: https://www.atlassian.com/agile/project-management', completed: false, checklist: [{ checked: true, label: 'Levantar demandas com o time' }, { checked: false, label: 'Definir prioridades da sprint' }, { checked: false, label: 'Validar capacidade semanal' }], createdAt: now, updatedAt: now, dueDate: '' },
+ { id: uid('card'), title: 'Organizar backlog', description: 'Revisar tarefas pendentes e ordenar por prioridade. Exemplo de tecnica: https://www.scrum.org/resources/what-is-a-product-backlog', completed: false, checklist: [{ checked: true, label: 'Remover itens duplicados' }, { checked: true, label: 'Padronizar titulos' }, { checked: false, label: 'Repriorizar historias' }], createdAt: now, updatedAt: now, dueDate: '' },
+ { id: uid('card'), title: 'Planejar entrega', description: 'Separar itens da proxima entrega e responsaveis. Checklist base: https://www.productplan.com/glossary/release-plan/', completed: false, checklist: [{ checked: false, label: 'Definir janela de release' }, { checked: false, label: 'Mapear riscos da entrega' }, { checked: true, label: 'Listar responsaveis' }], createdAt: now, updatedAt: now, dueDate: '' }
  ]
  },
  {
  id: uid('col'),
  title: 'Fazendo',
  cards: [
- { id: uid('card'), title: 'Implementar tela inicial', description: 'Ajustar layout e textos principais da pagina. Guia de usabilidade: https://www.nngroup.com/articles/ten-usability-heuristics/', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Validar fluxo de uso', description: 'Testar abertura do app e exportacao/importacao JSON. Referencia de JSON: https://developer.mozilla.org/docs/Learn_web_development/Core/Scripting/JSON', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Revisar criterios de pronto', description: 'Conferir padrao para mover tarefa para Feito. Exemplo: https://www.agilealliance.org/glossary/definition-of-done/', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' }
+ { id: uid('card'), title: 'Implementar tela inicial', description: 'Ajustar layout e textos principais da pagina. Guia de usabilidade: https://www.nngroup.com/articles/ten-usability-heuristics/', completed: false, checklist: [{ checked: true, label: 'Criar estrutura HTML base' }, { checked: false, label: 'Ajustar espacamentos mobile' }, { checked: false, label: 'Revisar contraste das cores' }], createdAt: now, updatedAt: now, dueDate: '' },
+ { id: uid('card'), title: 'Validar fluxo de uso', description: 'Testar abertura do app e exportacao/importacao JSON. Referencia de JSON: https://developer.mozilla.org/docs/Learn_web_development/Core/Scripting/JSON', completed: false, checklist: [{ checked: true, label: 'Testar criacao de coluna' }, { checked: false, label: 'Testar importacao JSON' }, { checked: false, label: 'Testar exportacao JSON' }], createdAt: now, updatedAt: now, dueDate: '' },
+ { id: uid('card'), title: 'Revisar criterios de pronto', description: 'Conferir padrao para mover tarefa para Feito. Exemplo: https://www.agilealliance.org/glossary/definition-of-done/', completed: false, checklist: [{ checked: true, label: 'Definir checklist minimo' }, { checked: true, label: 'Alinhar com o time' }, { checked: false, label: 'Publicar criterio final' }], createdAt: now, updatedAt: now, dueDate: '' }
  ]
  },
  {
  id: uid('col'),
  title: 'Feito',
  cards: [
- { id: uid('card'), title: 'Criar estrutura do quadro', description: 'Quadro inicial configurado com colunas padrao. Modelo kanban: https://kanban.university/kanban-guide/', completed: true, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Publicar primeira versao', description: 'Primeira versao disponibilizada para o time. Registro de release: https://keepachangelog.com/pt-BR/1.1.0/', completed: true, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Validar links nas descricoes', description: 'Links de suporte convertidos para clique automatico. Documentacao: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/replace', completed: true, checklist: [], createdAt: now, updatedAt: now, dueDate: '' }
+ { id: uid('card'), title: 'Criar estrutura do quadro', description: 'Quadro inicial configurado com colunas padrao. Modelo kanban: https://kanban.university/kanban-guide/', completed: true, checklist: [{ checked: true, label: 'Criar colunas iniciais' }, { checked: true, label: 'Adicionar acoes de card' }, { checked: true, label: 'Validar drag and drop' }], createdAt: now, updatedAt: now, dueDate: '' },
+ { id: uid('card'), title: 'Publicar primeira versao', description: 'Primeira versao disponibilizada para o time. Registro de release: https://keepachangelog.com/pt-BR/1.1.0/', completed: true, checklist: [{ checked: true, label: 'Gerar pacote da versao' }, { checked: true, label: 'Atualizar changelog' }, { checked: true, label: 'Comunicar stakeholders' }], createdAt: now, updatedAt: now, dueDate: '' },
+ { id: uid('card'), title: 'Validar links nas descricoes', description: 'Links de suporte convertidos para clique automatico. Documentacao: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/replace', completed: true, checklist: [{ checked: true, label: 'Testar link http' }, { checked: true, label: 'Testar link https' }, { checked: true, label: 'Confirmar abertura em nova aba' }], createdAt: now, updatedAt: now, dueDate: '' }
  ]
  }
  ]
