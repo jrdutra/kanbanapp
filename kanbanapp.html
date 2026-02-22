@@ -15,6 +15,7 @@
  --purple: #7c4dff; /* faixa roxa padrão */ 
  --purple-dark: #2a254b; /* faixa roxa mais escura (concluído) */ 
  --purple-2: #9e7fff; 
+ --purple-strong: #4b2cd6; /* roxo mais escuro para checkboxes */
  --card: #2f2f2f; 
  --card-hover: #363636; 
  --card-completed: #262626; /* levemente mais escuro */ 
@@ -219,7 +220,7 @@
  
  /* Checkbox escuro e arredondado para cards e checklist */
  .card-header input[type="checkbox"],
- .checklist-item input[type="checkbox"],
+.checklist-item input[type="checkbox"],
  input.card-done,
  input.item-check {
    -webkit-appearance: none;
@@ -322,6 +323,10 @@
   border-radius: 8px;
   margin: 4px 0;
 }
+
+/* Checklist: hide inner checkmark and use darker purple background when checked */
+.checklist-item input[type="checkbox"]::after { display: none; }
+.checklist-item input[type="checkbox"]:checked { background-color: var(--purple-strong); border-color: rgba(255,255,255,0.12); }
  .checklist-header{ 
  display: flex; 
  align-items: center; 
@@ -341,17 +346,7 @@
  padding: 8px; 
  cursor: text; 
  } 
- .drag-handle{ 
-   width: 20px; 
-   height: 20px; 
-   display: inline-flex; 
-   align-items: center; 
-   justify-content: center; 
-   color: var(--muted); 
-   cursor: grab; 
-   user-select: none; 
- }
- .drag-handle:active{ cursor: grabbing; }
+/* drag-handle removed: using item-level drag instead */
  .item-view{ 
  grid-column: 3 / 4; 
  color: var(--muted); 
@@ -614,7 +609,7 @@
  </template> 
  <template id="tpl-checklist-item"> 
  <div class="checklist-item"> 
- <div class="drag-handle" title="Arrastar item" aria-hidden="true">≡</div>
+ 
  <input type="checkbox" class="item-check" aria-label="Marcar item"> 
  <div class="item-view" aria-label="Rótulo (clique para editar)"></div> 
  <div class="item-actions"> 
@@ -735,6 +730,8 @@
  const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel)); 
  const uid = (p='id') => `${p}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`; 
  const nextFrame = () => new Promise(r => requestAnimationFrame(() => r())); 
+// Currently dragged checklist item (handle-driven)
+let currentDraggedChecklistItem = null;
  function escapeHtml(str){ 
  const s = String(str == null ? '' : str); 
  const map = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }; 
@@ -1285,7 +1282,7 @@
   // Habilita arrastar/soltar para reordenar itens de checklist dentro deste card
   itemsWrap.addEventListener('dragover', function(e){
     e.preventDefault();
-    const dragged = itemsWrap.querySelector('.checklist-item.dragging');
+    const dragged = currentDraggedChecklistItem;
     if (!dragged) return;
     const after = (function(container, y){
       const items = Array.from(container.querySelectorAll('.checklist-item:not(.dragging)'));
@@ -1303,6 +1300,7 @@
     const card = node; // card node is outer scope here
     updateItemsCount(card);
     touchCardUpdated(card);
+    currentDraggedChecklistItem = null;
   });
  // Concluir card: move para o fim se marcado 
  const done = $('.card-done', node); 
@@ -1369,19 +1367,18 @@
  } 
  function createChecklistItem(labelText='', checked=false){ 
  const node = tplItem.content.firstElementChild.cloneNode(true); 
-  // drag handle: lateral handle controls dragging for this item
-  const handle = $('.drag-handle', node);
-  if (handle) {
-    handle.draggable = true;
-    handle.addEventListener('dragstart', function(e){
-      node.classList.add('dragging');
-      try{ e.dataTransfer.setData('text/plain', ''); e.dataTransfer.effectAllowed = 'move'; }catch(_){ }
-    });
-    handle.addEventListener('dragend', function(e){
-      node.classList.remove('dragging');
-      const card = node.closest('.card'); if (card) { updateItemsCount(card); touchCardUpdated(card); }
-    });
-  }
+  // make whole item draggable (no visible handle)
+  node.draggable = true;
+  node.addEventListener('dragstart', function(e){
+    currentDraggedChecklistItem = node;
+    node.classList.add('dragging');
+    try{ e.dataTransfer.setData('text/plain', ''); e.dataTransfer.effectAllowed = 'move'; }catch(_){ }
+  });
+  node.addEventListener('dragend', function(e){
+    node.classList.remove('dragging');
+    currentDraggedChecklistItem = null;
+    const card = node.closest('.card'); if (card) { updateItemsCount(card); touchCardUpdated(card); }
+  });
  const chk = $('.item-check', node); 
  const view = $('.item-view', node); 
  const editor = $('.item-editor', node); 
