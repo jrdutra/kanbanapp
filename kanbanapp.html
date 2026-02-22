@@ -3,7 +3,7 @@
 <head> 
  <meta charset="utf-8" /> 
  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
- <title>Kanban App – Dark/Purple</title> 
+ <title>Organizador de Tarefas – Dark/Purple</title> 
  <style> 
  :root{ 
  --bg: #1e1e1e; 
@@ -438,7 +438,7 @@
 </head> 
 <body> 
  <header class="topbar"> 
- <div class="brand">Kanban App</div> 
+ <div class="brand">Organizador de Tarefas</div> 
  <div class="menu"> 
  <button id="btnAddColumn" class="btn">+ Coluna</button> 
  <button id="btnSettings" class="btn">Configurações</button> 
@@ -938,40 +938,6 @@
  // garantia 
  applyDueColorsAll(); 
  } 
- 
- function getDefaultBoardData(){
- const now = nowISO();
- return {
- meta: { version: 10, exportedAt: now, ageColorRules: Array.isArray(boardMeta.ageColorRules) ? boardMeta.ageColorRules : [] },
- columns: [
- {
- id: uid('col'),
- title: 'A Fazer',
- cards: [
- { id: uid('card'), title: 'Definir escopo da semana', description: 'Listar prioridades e alinhar expectativas do time.', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Organizar backlog', description: 'Revisar tarefas pendentes e ordenar por prioridade.', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Planejar entrega', description: 'Separar itens da próxima entrega e responsáveis.', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' }
- ]
- },
- {
- id: uid('col'),
- title: 'Fazendo',
- cards: [
- { id: uid('card'), title: 'Implementar tela inicial', description: 'Ajustar layout e textos principais da página.', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' },
- { id: uid('card'), title: 'Validar fluxo de uso', description: 'Testar abertura do app e exportação/importação JSON.', completed: false, checklist: [], createdAt: now, updatedAt: now, dueDate: '' }
- ]
- },
- {
- id: uid('col'),
- title: 'Feito',
- cards: [
- { id: uid('card'), title: 'Criar estrutura do quadro', description: 'Quadro inicial configurado com colunas padrão.', completed: true, checklist: [], createdAt: now, updatedAt: now, dueDate: '' }
- ]
- }
- ]
- };
- }
-
  // ===== Criação de elementos ===== 
  const board = document.getElementById('board'); 
  const tplColumn = document.getElementById('tpl-column'); 
@@ -1749,7 +1715,7 @@ document.addEventListener('click', function(e){
  mo.observe(board, { childList: true, subtree: true }); 
  } 
  // Try to restore on first load 
- (async function(){ const restored = await restoreFromAutosave(); if(!restored){ await loadBoardSequential(getDefaultBoardData()); } })(); 
+ (async function(){ await restoreFromAutosave(); })(); 
  })(); 
  </script> 
 </body> 
