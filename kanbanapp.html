@@ -12,10 +12,10 @@
  --border: #3a3a3a; 
  --text: #ffffff; 
  --muted: #bdbdbd; 
- --purple: #8a3bff; /* faixa roxa padrão — mais viva */
+ --purple: #9b00ff; /* faixa roxa padrão — mais viva e saturada */
  --purple-dark: #2a254b; /* faixa roxa mais escura (concluído) */
- --purple-2: #b89bff;
- --purple-strong: #5b1ff0; /* roxo mais escuro para checkboxes*/
+ --purple-2: #d4a8ff;
+ --purple-strong: #7a00ff; /* roxo mais escuro para checkboxes*/
  --card: #2f2f2f; 
  --card-hover: #363636; 
  --card-completed: #262626; /* levemente mais escuro */ 
@@ -42,8 +42,8 @@
   justify-content: space-between;
   padding: 12px 16px;
   /* Visual similar to index secondary-board: subtle purple gradient, border and rounded corners */
-  background: linear-gradient(180deg, rgba(138,59,255,0.14), rgba(138,59,255,0.06));
-  border: 1px solid rgba(138,59,255,0.44);
+  background: linear-gradient(180deg, rgba(155,0,255,0.18), rgba(155,0,255,0.08));
+  border: 1px solid rgba(155,0,255,0.56);
   border-radius: 0;
   color: var(--text);
   box-shadow: 0 10px 26px rgba(0,0,0,0.25);
@@ -68,9 +68,9 @@
 /* Menu buttons styled to match topbar: purple border and subtle outer glow */
 .topbar .menu button,
 .topbar .menu .btn {
-  border-color: rgba(138,59,255,0.65);
-  /* subtle outer purple glow + softer cast shadow (updated color) */
-  box-shadow: 0 0 10px rgba(138,59,255,0.22), 0 6px 12px rgba(138,59,255,0.10);
+  border-color: rgba(155,0,255,0.78);
+  /* subtle outer purple glow + softer cast shadow (updated color/intensity) */
+  box-shadow: 0 0 12px rgba(155,0,255,0.30), 0 6px 14px rgba(155,0,255,0.14);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -81,7 +81,7 @@
 .topbar .menu button:hover,
 .topbar .menu .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 0 14px rgba(138,59,255,0.28), 0 8px 20px rgba(138,59,255,0.14);
+  box-shadow: 0 0 16px rgba(155,0,255,0.36), 0 8px 24px rgba(155,0,255,0.18);
 }
  /* Board */ 
  main{ padding: 16px; padding-top: 18px; } 
@@ -113,6 +113,7 @@
   padding: clamp(6px, 1vw, 9px);
     /* Espaço inferior fixo relativo à altura da viewport (5% da altura da página) */
     margin-bottom: 5vh;
+    margin-top: 0.1vh;
  } 
  
  .column-header{ 
@@ -342,8 +343,8 @@
 
 /* Placeholder visual shown while dragging checklist items */
 .checklist-placeholder{
-  border: 2px dashed rgba(138,59,255,0.45);
-  background: rgba(138,59,255,0.06);
+  border: 2px dashed rgba(155,0,255,0.55);
+  background: rgba(155,0,255,0.08);
   border-radius: 8px;
   margin: 4px 0;
 }
