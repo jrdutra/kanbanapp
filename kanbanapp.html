@@ -91,6 +91,12 @@
  overflow-x: auto; 
  padding-bottom: 12px; 
   
+
+/* Extra spacer at board footer to ensure space larger than column shadow */
+.board-bottom-spacer{ width:100%; height:72px; /* larger than 40px shadow */ }
+
+/* Fixed transparent overlay right above the viewport scrollbar (30px height) */
+.board-scroll-overlay{ position: fixed; left: 0; right: 0; bottom: 0; height: 30px; background: transparent; pointer-events: none; z-index: 6; }
  } 
  .column{ 
   min-width: 320px;
@@ -104,6 +110,8 @@
   box-shadow: 0 20px 40px rgba(0,0,0,0.35);
   /* reduzir padding interno em 50% (valor anterior usado como referência) */
   padding: clamp(6px, 1vw, 9px);
+    /* Espaço inferior fixo relativo à altura da viewport (5% da altura da página) */
+    margin-bottom: 5vh;
  } 
  
  .column-header{ 
@@ -120,7 +128,9 @@
  color: var(--text); 
  border: 1px solid var(--border); 
  border-radius: 8px; 
- padding: 8px 10px; 
+ /* increase font-size by 20% and increase vertical padding to raise textbox height */
+ font-size: 120%;
+ padding: calc(8px * 1.2) 10px; 
  font-weight: 600; 
  } 
  .column-actions{ 
@@ -547,6 +557,9 @@
 <div id="topbarSpacer" class="topbar-spacer" aria-hidden="true"></div>
  <main> 
  <div id="board" class="board" aria-live="polite"></div> 
+<div class="board-bottom-spacer" aria-hidden="true"></div>
+<!-- Transparent overlay immediately above the viewport scrollbar (visual only) -->
+<div class="board-scroll-overlay" aria-hidden="true"></div>
  </main> 
  <!-- Templates --> 
  <template id="tpl-column"> 
