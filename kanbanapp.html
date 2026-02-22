@@ -542,6 +542,78 @@
 /* Spacer below topbar matching board background */
 .topbar-spacer{ position: fixed; top: 0; left: 0; right: 0; width: 100%; background: var(--bg); opacity: 1; z-index: 5; pointer-events: none; }
 
+/* ===== Mobile: hamburger + vertical menu ===== */
+.hamburger{
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text);
+  border-radius: 8px;
+  width: 40px; height: 36px;
+  align-items: center; justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+.mobile-menu{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: auto;
+  transform-origin: top center;
+  transform: scaleY(0);
+  transition: transform .26s cubic-bezier(.2,.9,.2,1), opacity .18s ease;
+  /* Background equal to board background */
+  background: var(--bg);
+  /* remove purple border for the opened mobile menu */
+  border: none;
+  border-radius: 0;
+  color: var(--text);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+  z-index: 12;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  pointer-events: none;
+}
+.mobile-menu.open{ transform: scaleY(1); opacity: 1; pointer-events: auto; }
+.mobile-menu-inner{ width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: 12px; }
+@media (max-width: 640px){
+  .menu{ display: none; }
+  .hamburger{ display: inline-flex; }
+  .topbar{ padding: 10px 12px; }
+  .mobile-menu{ left: 8px; right: 8px; }
+}
+
+/* When the desktop .menu is moved into the mobile panel, ensure it becomes visible
+   and displayed as a vertical centered column of buttons */
+.mobile-menu .menu {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0 0 12px 0;
+}
+.mobile-menu .menu .btn {
+  width: 70vw; /* 70% da largura da viewport */
+  max-width: none;
+  font-size: 18px;
+  /* horizontal padding = 5% da largura da viewport */
+  padding: 12px 5vw;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px; /* same visual as topbar buttons */
+  background: var(--panel-2);
+  border: 1px solid rgba(255,255,255,0.15);
+  /* topbar purple border/shadow to match large-screen buttons */
+  box-shadow: 0 0 12px rgba(155,0,255,0.30), 0 6px 14px rgba(155,0,255,0.14);
+  border-color: rgba(155,0,255,0.78);
+  color: var(--text);
+}
+
 </style> 
 </head> 
 <body> 
@@ -554,9 +626,12 @@
  <input type="file" id="fileJson" accept="application/json" hidden> 
  <button id="btnLoad" class="btn">Carregar JSON</button> 
  </div> 
+ <button id="hamburgerBtn" class="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Abrir menu">☰</button>
  </header> 
 <!-- Opaque spacer, same height as topbar, same color as board background -->
 <div id="topbarSpacer" class="topbar-spacer" aria-hidden="true"></div>
+<!-- Mobile menu container (hidden by default) -->
+<div id="mobileMenu" class="mobile-menu" aria-hidden="true"></div>
  <main> 
  <div id="board" class="board" aria-live="polite"></div> 
 <div class="board-bottom-spacer" aria-hidden="true"></div>
@@ -1945,6 +2020,73 @@ const tbEl = document.querySelector('.topbar'); if (tbEl) tbObs.observe(tbEl);
 // initial sync (defer a frame to ensure layout computed)
 requestAnimationFrame(syncTopbarSpacer);
  })(); 
+// ===== Mobile menu behaviour: move menu into a vertical mobile panel on narrow viewports =====
+(function(){
+  const topbar = document.querySelector('.topbar');
+  const desktopMenu = topbar ? topbar.querySelector('.menu') : null;
+  const mobileMenu = document.getElementById('mobileMenu');
+  const hamburger = document.getElementById('hamburgerBtn');
+  if(!desktopMenu || !mobileMenu || !hamburger) return;
+
+  // Keep a reference to original parent/position so we can restore
+  const originalParent = desktopMenu.parentElement;
+  const originalNext = desktopMenu.nextSibling;
+
+  function placeMenuMobile(){
+    if(window.innerWidth <= 640){
+      // move menu into mobile container if not already
+      if(!mobileMenu.contains(desktopMenu)){
+        const inner = document.createElement('div');
+        inner.className = 'mobile-menu-inner';
+        mobileMenu.appendChild(inner);
+        inner.appendChild(desktopMenu);
+      }
+      hamburger.setAttribute('aria-expanded','false');
+      mobileMenu.setAttribute('aria-hidden','true');
+      mobileMenu.classList.remove('open');
+      // position mobile menu directly below the topbar and let its height fit-content
+      const rect = topbar.getBoundingClientRect();
+      mobileMenu.style.top = Math.ceil(rect.bottom) + 'px';
+      mobileMenu.style.height = '';
+    } else {
+      // restore menu to original place
+      if(!originalParent.contains(desktopMenu)){
+        originalParent.insertBefore(desktopMenu, originalNext);
+      }
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden','true');
+      hamburger.setAttribute('aria-expanded','false');
+      // clear mobile sizing overrides
+      mobileMenu.style.top = '';
+      mobileMenu.style.height = '';
+    }
+    // when not in fullscreen, JS may position the mobile menu under the topbar; we clear here
+  }
+
+  // Toggle open/close
+  hamburger.addEventListener('click', function(){
+    const open = mobileMenu.classList.toggle('open');
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    hamburger.setAttribute('aria-expanded', String(open));
+    // recompute top in case layout changed
+    const rect = topbar.getBoundingClientRect();
+    mobileMenu.style.top = Math.ceil(rect.bottom) + 'px';
+  });
+
+  // Close mobile menu if clicking outside
+  document.addEventListener('click', function(e){
+    if(!mobileMenu.classList.contains('open')) return;
+    if(e.target === hamburger) return;
+    if(mobileMenu.contains(e.target)) return;
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden','true');
+    hamburger.setAttribute('aria-expanded','false');
+  }, true);
+
+  window.addEventListener('resize', placeMenuMobile);
+  // initial placement
+  placeMenuMobile();
+})();
  </script> 
 </body> 
 </html>
