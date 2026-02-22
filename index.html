@@ -300,14 +300,32 @@
   </style>
 </head>
 <body>
-  <main aria-label="Página principal do KanbanApp">
-    <h1>KANBAN gratuito: quadro Kanban online e offline, privado e sem cadastro</h1>
+  <header role="banner" class="site-header" aria-label="Cabeçalho do site">
+    <div class="center-text">
+      <span class="highlight" style="font-weight:800;">KanbanApp</span>
+      <p class="tagline" style="margin:6px 0 0;color:var(--muted);">Quadro Kanban online e offline</p>
+    </div>
+  </header>
 
-    <p class="intro center-text">
-      Se você busca um <span class="highlight">KANBAN simples, rápido e prático</span>, o KanbanApp oferece uma experiência direta para organizar tarefas com quadro kanban.
-      Use como <strong>kanban online</strong> no navegador ou como <strong>kanban offline</strong> baixando o arquivo HTML. É uma opção de <strong>kanban corporativo</strong>
-      para equipes que valorizam privacidade e baixo atrito de adoção.
-    </p>
+  <main id="maincontent" aria-label="Página principal do KanbanApp">
+    <header class="hero" role="banner" aria-label="Introdução do KanbanApp">
+      <h1>KANBAN gratuito: quadro Kanban online e offline, privado e sem cadastro</h1>
+
+      <p class="intro center-text">
+        Se você busca um <span class="highlight">KANBAN simples, rápido e prático</span>, o KanbanApp oferece uma experiência direta para organizar tarefas com quadro kanban.
+        Use como <strong>kanban online</strong> no navegador ou como <strong>kanban offline</strong> baixando o arquivo HTML. É uma opção de <strong>kanban corporativo</strong>
+        para equipes que valorizam privacidade e baixo atrito de adoção.
+      </p>
+    </header>
+
+    <nav aria-label="Navegação da página Kanban">
+      <ul>
+        <li><a href="#sec-o-que-e-kanban">O que é</a></li>
+        <li><a href="#sec-recursos">Recursos</a></li>
+        <li><a href="#sec-como-usar">Como usar</a></li>
+        <li><a href="#sec-faq">FAQ</a></li>
+      </ul>
+    </nav>
 
     <section class="cta" aria-label="Ações principais">
       <a class="btn btn-download" href="./kanbanapp.html" download="kanbanapp.html" aria-label="Baixar arquivo kanbanapp.html para uso offline">
@@ -373,32 +391,40 @@
     <section aria-labelledby="sec-faq">
       <h2 id="sec-faq">FAQ sobre KANBAN</h2>
 
-      <article class="faq-item">
-        <h3>1) O que é KANBAN?</h3>
-        <p>
-          KANBAN é uma forma visual de gestão de tarefas e fluxo de trabalho. Em geral, as atividades são distribuídas em colunas para representar etapas,
-          permitindo ver o que está pendente, em andamento e concluído. Essa visualização facilita priorização, comunicação e melhoria contínua do processo.
-        </p>
-      </article>
+        <article class="faq-item">
+          <header>
+            <h3>1) O que é KANBAN?</h3>
+          </header>
+          <p>
+            KANBAN é uma forma visual de gestão de tarefas e fluxo de trabalho. Em geral, as atividades são distribuídas em colunas para representar etapas,
+            permitindo ver o que está pendente, em andamento e concluído. Essa visualização facilita priorização, comunicação e melhoria contínua do processo.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <header>
+            <h3>2) KanbanApp é um KANBAN online?</h3>
+          </header>
+          <p>
+            Sim. Você pode abrir o app pelo botão “Acessar app” e utilizar diretamente no navegador, em nova guia. O foco é começar rápido, sem cadastro,
+            para organizar demandas com um quadro kanban de forma prática.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <header>
+            <h3>3) Como usar KANBAN offline?</h3>
+          </header>
+          <p>
+            Clique no botão de download para baixar o arquivo <code>kanbanapp.html</code>. Depois, abra esse arquivo em qualquer navegador compatível.
+            Assim, você usa o quadro mesmo sem conexão contínua e sem instalação adicional.
+          </p>
+        </article>
 
       <article class="faq-item">
-        <h3>2) KanbanApp é um KANBAN online?</h3>
-        <p>
-          Sim. Você pode abrir o app pelo botão “Acessar app” e utilizar diretamente no navegador, em nova guia. O foco é começar rápido, sem cadastro,
-          para organizar demandas com um quadro kanban de forma prática.
-        </p>
-      </article>
-
-      <article class="faq-item">
-        <h3>3) Como usar KANBAN offline?</h3>
-        <p>
-          Clique no botão de download para baixar o arquivo <code>kanbanapp.html</code>. Depois, abra esse arquivo em qualquer navegador compatível.
-          Assim, você usa o quadro mesmo sem conexão contínua e sem instalação adicional.
-        </p>
-      </article>
-
-      <article class="faq-item">
-        <h3>4) O KanbanApp armazena dados pessoais?</h3>
+        <header>
+          <h3>4) O KanbanApp armazena dados pessoais?</h3>
+        </header>
         <p>
           O app não requer cadastro e não foi construído para guardar dados pessoais em servidor. Os dados do board podem permanecer no armazenamento local
           do navegador para conveniência de uso.
@@ -406,7 +432,9 @@
       </article>
 
       <article class="faq-item">
-        <h3>5) Como fazer backup do meu quadro KANBAN?</h3>
+        <header>
+          <h3>5) Como fazer backup do meu quadro KANBAN?</h3>
+        </header>
         <p>
           Exporte regularmente o board para JSON e mantenha esse arquivo salvo na máquina (ou em local interno aprovado pela sua empresa).
           Esse hábito protege seu trabalho caso o cache/localStorage seja limpo.
@@ -414,7 +442,9 @@
       </article>
 
       <article class="faq-item">
-        <h3>6) Funciona em empresa / ambiente corporativo?</h3>
+        <header>
+          <h3>6) Funciona em empresa / ambiente corporativo?</h3>
+        </header>
         <p>
           Sim. O KanbanApp pode atender ambientes corporativos por ser leve, estático e permitir operação offline, com menor dependência de serviços externos
           para o uso básico de quadro KANBAN.
@@ -422,7 +452,9 @@
       </article>
 
       <article class="faq-item">
-        <h3>7) Precisa de cadastro?</h3>
+        <header>
+          <h3>7) Precisa de cadastro?</h3>
+        </header>
         <p>
           Não. Você pode abrir e usar imediatamente, sem criar conta. Isso reduz fricção para adoção rápida em uso individual e também em equipes.
         </p>
@@ -435,7 +467,7 @@
     </p>
   </main>
 
-  <section class="secondary-board" aria-labelledby="sec-kanban-referencias">
+  <aside class="secondary-board" aria-labelledby="sec-kanban-referencias">
     <h2 id="sec-kanban-referencias">O que é o KANBAN? Referências e contexto do framework</h2>
     <p>
       O <strong>KANBAN</strong> é um framework de gestão visual de fluxo de trabalho, usado para melhorar previsibilidade, reduzir gargalos e organizar prioridades.
@@ -452,7 +484,12 @@
       <li><a class="text-link" href="https://www.atlassian.com/agile/kanban" target="_blank" rel="noopener noreferrer">Atlassian: Guia de Kanban</a></li>
       <li><a class="text-link" href="https://www.digite.com/pt-br/blog/metodo-kanban/" target="_blank" rel="noopener noreferrer">Introdução ao método Kanban (PT-BR)</a></li>
     </ul>
-  </section>
+  </aside>
+
+  <footer role="contentinfo" aria-label="Rodapé do site">
+    <p>© 2026 KanbanApp</p>
+    <p>Quadro Kanban online e offline, gratuito e privado.</p>
+  </footer>
 
 </body>
 </html>
