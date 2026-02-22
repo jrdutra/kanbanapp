@@ -2,11 +2,163 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kanban App</title>
-  <meta http-equiv="refresh" content="0; url=./kanbanapp.html" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="application-name" content="KanbanApp" />
+  <meta name="keywords" content="kanban gratuito, kanban offline, kanban corporativo, quadro kanban html, gestão visual de tarefas, kanban sem cadastro, kanban sem nuvem" />
+  <meta name="description" content="KanbanApp é um quadro Kanban gratuito para uso online e offline. Sem cadastro, sem servidor e sem armazenamento de dados pessoais. Ideal para máquinas e ambientes corporativos." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="./index.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="KanbanApp Gratuito | Online e Offline para Ambientes Corporativos" />
+  <meta property="og:description" content="Use o KanbanApp no navegador ou baixe o HTML para rodar offline. Não armazena dados do usuário e é ideal para empresas que priorizam privacidade." />
+  <meta property="og:url" content="./index.html" />
+  <meta property="og:site_name" content="KanbanApp" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="KanbanApp Gratuito e sem armazenamento de dados" />
+  <meta name="twitter:description" content="Abra online em uma nova guia ou baixe o HTML para uso offline no navegador." />
+
+  <title>KanbanApp Gratuito | Kanban Online e Offline para Empresas</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "KanbanApp",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    },
+    "description": "Quadro Kanban gratuito para usar online ou offline em qualquer navegador, sem armazenar dados pessoais do usuário.",
+    "inLanguage": "pt-BR"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #13131a;
+      --panel: #1e1e2a;
+      --text: #f5f5ff;
+      --muted: #b8b8c7;
+      --primary: #7c4dff;
+      --primary-hover: #6b3ff2;
+      --secondary: #2c2c3d;
+      --border: #3b3b52;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e1e2f 0%, var(--bg) 55%);
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(900px, 100%);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(24px, 4vw, 48px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.35);
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      line-height: 1.2;
+    }
+
+    p {
+      margin: 0 auto 12px;
+      color: var(--muted);
+      max-width: 74ch;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .cta {
+      margin: 28px 0 24px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform .15s ease, background-color .15s ease, border-color .15s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-download {
+      background: var(--secondary);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-open {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-open:hover { background: var(--primary-hover); }
+
+    .note {
+      margin-top: 18px;
+      font-size: .78rem;
+      color: #9a9ab0;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
-  <p>Redirecionando para <a href="./kanbanapp.html">kanbanapp.html</a>...</p>
+  <main>
+    <h1>KanbanApp gratuito, privado e pronto para uso corporativo</h1>
+
+    <p>
+      O <span class="highlight">KanbanApp é 100% gratuito</span> e foi pensado para equipes e empresas que precisam de um quadro Kanban simples,
+      rápido e sem dependência de serviços externos.
+    </p>
+    <p>
+      O app <span class="highlight">não armazena dados pessoais dos usuários</span>. Você pode usar online agora pelo botão
+      <strong>Acessar app</strong> ou baixar o arquivo HTML para uso offline pelo botão <strong>Download</strong>.
+    </p>
+    <p>
+      Para usar offline, basta baixar o <code>kanbanapp.html</code>, abrir o arquivo no navegador e começar a organizar seu board.
+      O conteúdo do board fica no cache/localStorage do navegador, então mantenha sempre um backup em JSON salvo na sua máquina.
+    </p>
+
+    <section class="cta" aria-label="Ações principais">
+      <a class="btn btn-download" href="./kanbanapp.html" download="kanbanapp.html">Download do kanbanapp.html</a>
+      <a class="btn btn-open" href="./kanbanapp.html" target="_blank" rel="noopener noreferrer">Acessar app</a>
+    </section>
+
+    <p class="note">
+      Aviso: o KanbanApp não se responsabiliza por perda de dados causada por limpeza de cache do navegador.
+      Para reduzir riscos, utilize regularmente a exportação em JSON e mantenha cópias de backup no seu computador.
+    </p>
+  </main>
 </body>
 </html>
