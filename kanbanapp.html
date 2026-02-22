@@ -1422,9 +1422,19 @@ let currentDraggedChecklistItem = null;
  if((e.ctrlKey || e.metaKey) && (key === 'Enter')){ editor.blur(); } 
  }); 
  chk.addEventListener('change', function(e){ 
- e.stopPropagation(); 
- const card = node.closest('.card'); if (card) touchCardUpdated(card); 
- const col = node.closest('.column'); if (col) applyColumnFilter(col); 
+    e.stopPropagation(); 
+    const card = node.closest('.card'); 
+    if (card) {
+      // quando checado, mover o item para o fim do checklist
+      if (chk.checked) {
+        const itemsWrap = node.closest('.items');
+        if (itemsWrap) itemsWrap.appendChild(node);
+      }
+      touchCardUpdated(card);
+      // atualizar contadores/progresso
+      updateItemsCount(card);
+    }
+    const col = node.closest('.column'); if (col) applyColumnFilter(col); 
  }); 
  $('.delete-item', node).addEventListener('click', function(e){ 
  e.stopPropagation(); 
