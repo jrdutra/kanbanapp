@@ -517,6 +517,9 @@
 .modal-card { width: min(900px, 96vw); }
 .modal-card .modal-body { background: var(--panel); }
 
+/* Spacer below topbar matching board background */
+.topbar-spacer{ position: fixed; top: 0; left: 0; right: 0; width: 100%; background: var(--bg); opacity: 1; z-index: 5; pointer-events: none; }
+
 </style> 
 </head> 
 <body> 
@@ -530,6 +533,8 @@
  <button id="btnLoad" class="btn">Carregar JSON</button> 
  </div> 
  </header> 
+<!-- Opaque spacer, same height as topbar, same color as board background -->
+<div id="topbarSpacer" class="topbar-spacer" aria-hidden="true"></div>
  <main> 
  <div id="board" class="board" aria-live="polite"></div> 
  </main> 
@@ -1892,6 +1897,28 @@ document.addEventListener('click', function(e){
  } 
  // Try to restore on first load 
  (async function(){ const restored = await restoreFromAutosave(); if(!restored){ await loadBoardSequential(getDefaultBoardData()); } })(); 
+// Sync spacer height to match the topbar height so it sits immediately below the menu
+function syncTopbarSpacer(){
+  try{
+    const tb = document.querySelector('.topbar');
+    const sp = document.getElementById('topbarSpacer');
+    if (!tb || !sp) return;
+    const h = Math.ceil(tb.getBoundingClientRect().height);
+    sp.style.height = h + 'px';
+    // place spacer just beneath topbar so it does not appear above it
+    sp.style.top = '0px';
+    // ensure spacer uses the current board bg color variable
+    const rootStyles = getComputedStyle(document.documentElement);
+    const bg = rootStyles.getPropertyValue('--bg') || '';
+    if (bg) sp.style.background = bg.trim();
+  }catch(e){ /* ignore */ }
+}
+window.addEventListener('resize', syncTopbarSpacer);
+// observe topbar size changes (responsive) and adjust
+const tbObs = new ResizeObserver(syncTopbarSpacer);
+const tbEl = document.querySelector('.topbar'); if (tbEl) tbObs.observe(tbEl);
+// initial sync (defer a frame to ensure layout computed)
+requestAnimationFrame(syncTopbarSpacer);
  })(); 
  </script> 
 </body> 
