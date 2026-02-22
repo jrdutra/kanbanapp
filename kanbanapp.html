@@ -32,19 +32,21 @@
  color: var(--text); 
  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; 
  } 
- /* Topbar */ 
- .topbar{ 
- position: sticky; 
- top: 0; 
- z-index: 10; 
- display: flex; 
- align-items: center; 
- justify-content: space-between; 
- padding: 12px 16px; 
- background: var(--purple); 
- color: var(--text); 
- box-shadow: var(--shadow); 
- } 
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  /* Visual similar to index secondary-board: subtle purple gradient, border and rounded corners */
+  background: linear-gradient(180deg, rgba(124,77,255,0.10), rgba(124,77,255,0.04));
+  border: 1px solid rgba(124,77,255,0.35);
+  border-radius: 0;
+  color: var(--text);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+}
  .brand{ font-weight: 700; letter-spacing: 0.3px; } 
  .menu{ display: flex; gap: 8px; align-items: center; flex-wrap: wrap; } 
  button, .btn{ 
@@ -61,6 +63,16 @@
  .btn-small{ padding: 6px 10px; font-size: 12px; } 
  .btn-danger{ background: #B00020; border-color: rgba(255,255,255,0.25); color: #fff; } 
  .btn-danger:hover{ filter: brightness(1.1); } 
+/* Menu buttons styled to match topbar: purple border and subtle outer glow */
+.topbar .menu button,
+.topbar .menu .btn {
+  border-color: rgba(124,77,255,0.45);
+  box-shadow: 0 6px 20px rgba(124,77,255,0.10);
+}
+.topbar .menu button:hover,
+.topbar .menu .btn:hover {
+  box-shadow: 0 10px 30px rgba(124,77,255,0.18);
+}
  /* Board */ 
  main{ padding: 16px; padding-top: 18px; } 
  .board{ 
@@ -71,14 +83,17 @@
  padding-bottom: 12px; 
  } 
  .column{ 
- background: var(--panel); 
- min-width: 320px; 
- max-width: 380px; 
- border: 1px solid var(--border); 
- border-radius: var(--radius); 
- box-shadow: var(--shadow); 
- display: flex; 
- flex-direction: column; 
+  min-width: 320px;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  /* Aplicar visual do primeiro quadro em index.html: fundo sutil, borda neutra, radius maior e sombra mais pronunciada */
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  /* reduzir padding interno em 50% (valor anterior usado como referência) */
+  padding: clamp(6px, 1vw, 9px);
  } 
  .column-header{ 
  padding: 12px; 
@@ -201,6 +216,57 @@
  font-size: 12px; 
  color: var(--muted); 
  } 
+ 
+ /* Checkbox escuro e arredondado para cards e checklist */
+ .card-header input[type="checkbox"],
+ .checklist-item input[type="checkbox"],
+ input.card-done,
+ input.item-check {
+   -webkit-appearance: none;
+   appearance: none;
+   width: 18px;
+   height: 18px;
+   margin-right: 8px;
+   vertical-align: middle;
+   border-radius: 6px;
+   background-color: var(--card);
+   border: 1px solid var(--border);
+   display: inline-block;
+   position: relative;
+ }
+
+ .card-header input[type="checkbox"]::after,
+ .checklist-item input[type="checkbox"]::after,
+ input.card-done::after,
+ input.item-check::after {
+   content: '';
+   position: absolute;
+  left: 50%;
+  top: 50%;
+   width: 6px;
+   height: 10px;
+   border: 2px solid #fff;
+   border-top: none;
+   border-left: none;
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+   transform-origin: center;
+   transition: transform .12s ease;
+ }
+
+ .card-header input[type="checkbox"]:checked,
+ .checklist-item input[type="checkbox"]:checked,
+ input.card-done:checked,
+ input.item-check:checked {
+   background-color: var(--purple-2);
+   border-color: rgba(255,255,255,0.12);
+ }
+
+ .card-header input[type="checkbox"]:checked::after,
+ .checklist-item input[type="checkbox"]:checked::after,
+ input.card-done:checked::after,
+ input.item-check:checked::after {
+  transform: translate(-50%, -50%) rotate(45deg) scale(1);
+ }
  /* Timestamps abaixo do título */ 
  .card-meta{ 
  grid-column: 1 / -1; 
@@ -248,6 +314,14 @@
  flex-direction: column; 
  gap: 8px; 
  } 
+
+/* Placeholder visual shown while dragging checklist items */
+.checklist-placeholder{
+  border: 2px dashed rgba(124,77,255,0.35);
+  background: rgba(124,77,255,0.04);
+  border-radius: 8px;
+  margin: 4px 0;
+}
  .checklist-header{ 
  display: flex; 
  align-items: center; 
@@ -258,24 +332,35 @@
  .items{ display: flex; flex-direction: column; gap: 8px; } 
  .checklist-item{ 
  display: grid; 
- grid-template-columns: auto 1fr auto; 
+ grid-template-columns: auto auto 1fr auto; 
  gap: 8px; 
- align-items: start; 
+ align-items: center; 
  background: var(--panel-2); 
  border: 1px solid var(--border); 
  border-radius: 8px; 
  padding: 8px; 
  cursor: text; 
  } 
+ .drag-handle{ 
+   width: 20px; 
+   height: 20px; 
+   display: inline-flex; 
+   align-items: center; 
+   justify-content: center; 
+   color: var(--muted); 
+   cursor: grab; 
+   user-select: none; 
+ }
+ .drag-handle:active{ cursor: grabbing; }
  .item-view{ 
- grid-column: 2 / 3; 
+ grid-column: 3 / 4; 
  color: var(--muted); 
  font-size: 13px; 
- white-space: nowrap; 
  overflow: hidden; 
  text-overflow: ellipsis; 
  max-width: 100%; 
- } 
+ align-self: center;
+ }
  .item-view a{ color: #90caf9; text-decoration: underline; } 
  .item-editor{ 
  grid-column: 1 / -1; 
@@ -529,6 +614,7 @@
  </template> 
  <template id="tpl-checklist-item"> 
  <div class="checklist-item"> 
+ <div class="drag-handle" title="Arrastar item" aria-hidden="true">≡</div>
  <input type="checkbox" class="item-check" aria-label="Marcar item"> 
  <div class="item-view" aria-label="Rótulo (clique para editar)"></div> 
  <div class="item-actions"> 
@@ -1196,6 +1282,28 @@
  const col = node.closest('.column'); 
  if (col) applyColumnFilter(col); 
  }); 
+  // Habilita arrastar/soltar para reordenar itens de checklist dentro deste card
+  itemsWrap.addEventListener('dragover', function(e){
+    e.preventDefault();
+    const dragged = itemsWrap.querySelector('.checklist-item.dragging');
+    if (!dragged) return;
+    const after = (function(container, y){
+      const items = Array.from(container.querySelectorAll('.checklist-item:not(.dragging)'));
+      for (let i=0;i<items.length;i++){
+        const box = items[i].getBoundingClientRect();
+        if (y < box.top + box.height/2) return items[i];
+      }
+      return null;
+    })(itemsWrap, e.clientY);
+    if (after == null) itemsWrap.appendChild(dragged);
+    else itemsWrap.insertBefore(dragged, after);
+  });
+  itemsWrap.addEventListener('drop', function(e){
+    e.preventDefault();
+    const card = node; // card node is outer scope here
+    updateItemsCount(card);
+    touchCardUpdated(card);
+  });
  // Concluir card: move para o fim se marcado 
  const done = $('.card-done', node); 
  done.addEventListener('change', function(e){ 
@@ -1261,6 +1369,19 @@
  } 
  function createChecklistItem(labelText='', checked=false){ 
  const node = tplItem.content.firstElementChild.cloneNode(true); 
+  // drag handle: lateral handle controls dragging for this item
+  const handle = $('.drag-handle', node);
+  if (handle) {
+    handle.draggable = true;
+    handle.addEventListener('dragstart', function(e){
+      node.classList.add('dragging');
+      try{ e.dataTransfer.setData('text/plain', ''); e.dataTransfer.effectAllowed = 'move'; }catch(_){ }
+    });
+    handle.addEventListener('dragend', function(e){
+      node.classList.remove('dragging');
+      const card = node.closest('.card'); if (card) { updateItemsCount(card); touchCardUpdated(card); }
+    });
+  }
  const chk = $('.item-check', node); 
  const view = $('.item-view', node); 
  const editor = $('.item-editor', node); 
@@ -1280,17 +1401,17 @@
  editor.classList.add('hidden'); 
  view.classList.remove('hidden'); 
  }; 
- view.addEventListener('click', function(e){ 
- if(e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'a') return; 
- enterEdit(); 
- }); 
- node.addEventListener('click', function(e){ 
- const t = e.target; 
- if (t && t.classList && t.classList.contains('item-check')) return; 
- if (t && t.closest && t.closest('.delete-item')) return; 
- if (t && t.tagName && t.tagName.toLowerCase() === 'a') return; 
- if (editor.classList.contains('hidden')) enterEdit(); 
- }); 
+  view.addEventListener('click', function(e){ 
+    if(e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'a') return; 
+    enterEdit(); 
+  });
+  node.addEventListener('click', function(e){ 
+    const t = e.target; 
+    if (t && t.classList && t.classList.contains('item-check')) return; 
+    if (t && t.closest && t.closest('.delete-item')) return; 
+    if (t && t.tagName && t.tagName.toLowerCase() === 'a') return; 
+    if (editor.classList.contains('hidden')) enterEdit(); 
+  });
  editor.addEventListener('blur', function(){ 
  exitEdit(true); 
  const card = node.closest('.card'); 
@@ -1316,8 +1437,8 @@
  const col = node.closest('.column'); 
  if (col) applyColumnFilter(col); 
  }); 
- syncView(); 
- return node; 
+  syncView(); 
+  return node; 
  } 
  function updateItemsCount(cardNode){ 
  const count = $$('.checklist-item', cardNode).length; 
