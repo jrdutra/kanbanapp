@@ -1,0 +1,546 @@
+﻿<!DOCTYPE html>
+<html lang="en-US" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="application-name" content="KanbanApp" />
+  <meta name="author" content="KanbanApp" />
+  <meta name="theme-color" content="#7c4dff" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <meta name="description" content="What is Kanban? Complete and organized guide: kanban board, kanban system, WIP, flow, metrics, cadences, STATIK, and use in services and industry." />
+
+  <title>What Is Kanban? Complete Guide | KanbanApp</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="shortcut icon" href="../favicon.svg" />
+
+  <link rel="canonical" href="https://kanbanapp.io/what-is-kanban/" />
+  <link rel="alternate" hreflang="en" href="https://kanbanapp.io/what-is-kanban/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/o-que-e-kanban/" />
+  <link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/what-is-kanban/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://kanbanapp.io/what-is-kanban/" />
+  <meta property="og:title" content="What Is Kanban? Complete Guide" />
+  <meta property="og:description" content="Learn Kanban fundamentals, practices, and implementation in one practical guide." />
+  <meta property="og:image" content="https://kanbanapp.io/og-image.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="What Is Kanban? Complete Guide" />
+  <meta name="twitter:description" content="Kanban fundamentals: WIP, pull flow, metrics, cadences, and implementation roadmap." />
+  <meta name="twitter:image" content="https://kanbanapp.io/og-image.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "What Is Kanban? Complete Guide",
+    "description": "Structured material to learn the Kanban Method, flow management, and practical implementation.",
+    "inLanguage": "en-US",
+    "author": {
+      "@type": "Organization",
+      "name": "KanbanApp"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "KanbanApp"
+    },
+    "mainEntityOfPage": "https://kanbanapp.io/what-is-kanban/"
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #13131a;
+      --panel: #1e1e2a;
+      --panel-2: #2c2c3d;
+      --text: #f5f5ff;
+      --muted: #b8b8c7;
+      --primary: #7c4dff;
+      --primary-hover: #6b3ff2;
+      --border: #3b3b52;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e1e2f 0%, var(--bg) 55%);
+      color: var(--text);
+      padding: 24px;
+    }
+    main {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(24px, 4vw, 48px);
+      box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    }
+    h1 { margin: 0 0 8px; text-align: center; font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.2; }
+    h2 { margin-top: 30px; border-top: 1px solid var(--border); padding-top: 18px; font-size: clamp(1.08rem, 2.4vw, 1.35rem); }
+    h3 { margin-top: 18px; }
+    p { margin: 0 0 12px; color: var(--muted); line-height: 1.65; }
+    ul, ol { margin: 0 0 12px; padding-left: 20px; color: var(--muted); line-height: 1.65; }
+    li { margin-bottom: 6px; }
+    a { color: inherit; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 14px; }
+    th, td { border: 1px solid var(--border); padding: 8px; vertical-align: top; color: var(--muted); }
+    th { background: rgba(255,255,255,.03); text-align: left; color: var(--text); }
+    .small { font-size: 12px; color: #a8a8bc; }
+    .site-brand { display: inline-flex; align-items: center; gap: 10px; text-align: left; }
+    .site-brand-icon { width: 44px; height: 44px; border-radius: 6px; }
+    .site-brand-name { font-weight: 800; color: var(--text); }
+    .tagline { margin: 6px 0 0; color: var(--muted); line-height: 1.2; }
+    .center { text-align: center; max-width: 82ch; margin: 0 auto; }
+    .home-nav { position: absolute; top: 14px; left: 14px; z-index: 3; margin: 0; }
+    .home-link { text-decoration: none; width: 42px; height: 42px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel-2); color: var(--text); font-weight: 700; display: grid; place-items: center; padding: 8px; }
+    .home-link:hover { background: var(--primary); color: #fff; }
+    .home-icon { position: relative; width: 18px; height: 16px; display: inline-block; }
+    .home-icon::before { content: ""; position: absolute; left: 1px; right: 1px; bottom: 0; height: 9px; border: 2px solid currentColor; border-top: none; border-radius: 2px; }
+    .home-icon::after { content: ""; position: absolute; top: 0; left: 50%; width: 12px; height: 12px; border-top: 2px solid currentColor; border-left: 2px solid currentColor; transform: translateX(-50%) rotate(45deg); }
+    .box { background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: 14px; padding: 14px; margin: 14px 0; }
+    .kanban-collapse {
+      margin: 18px 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,.02);
+      overflow: hidden;
+    }
+    .kanban-collapse > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      font-weight: 800;
+      color: #e3dbff;
+      background: rgba(124,77,255,.12);
+      border-bottom: 1px solid rgba(124,77,255,.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .kanban-collapse > summary::-webkit-details-marker { display: none; }
+    .kanban-collapse-icon {
+      font-size: 12px;
+      line-height: 1;
+      color: #e3dbff;
+      transition: transform .2s ease;
+    }
+    .kanban-collapse[open] .kanban-collapse-icon { transform: rotate(180deg); }
+    .kanban-collapse-hint {
+      margin: 0;
+      padding: 12px 16px 4px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .kanban-collapse[open] .kanban-collapse-hint { display: none; }
+    .kanban-collapse-content { padding: 2px 16px 16px; }
+    .promo { border-color: rgba(124,77,255,.45); background: rgba(124,77,255,.08); }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .open-links a { color: #c9b9ff; text-underline-offset: 2px; }
+    .open-links a:hover { color: #e3dbff; }
+    .cta { margin: 24px 0 8px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn { text-decoration: none; padding: 12px 18px; border-radius: 12px; border: 1px solid transparent; font-weight: 700; display: inline-block; }
+    .btn-download { background: var(--panel-2); color: var(--text); border-color: var(--border); }
+    .btn-open { background: var(--primary); color: #fff; }
+    .btn-open:hover { background: var(--primary-hover); }
+    .related { margin-top: 22px; padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,.02); }
+    .related h2 { margin: 0 0 10px; border-top: none; padding-top: 0; }
+    .related ul { margin: 0; padding-left: 20px; }
+    .related a { color: #c9b9ff; text-underline-offset: 2px; }
+    footer { text-align: center; color: rgba(255,255,255,.35); margin-top: 18px; font-size: .9rem; }
+    @media (min-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) {
+      body { padding: 14px; }
+      .home-nav { top: 10px; left: 10px; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner" aria-label="Site header" class="center">
+    <div class="site-brand">
+      <img class="site-brand-icon" src="../favicon.svg" alt="" aria-hidden="true" />
+      <div>
+        <div class="site-brand-name">KanbanApp</div>
+        <p class="tagline">Offline Kanban Board</p>
+      </div>
+    </div>
+  </header>
+
+  <div aria-hidden="true" style="height:18px;"></div>
+  <main>
+    <nav class="home-nav" aria-label="Home navigation">
+      <a class="home-link" rel="home" href="/" aria-label="Go to Home" title="Home"><span class="home-icon" aria-hidden="true"></span></a>
+    </nav>
+
+    <header>
+      <h1>What Is Kanban?</h1>
+    </header>
+
+    <section id="summary">
+      <div class="box">
+        <h2 style="margin-top:0;border-top:none;padding-top:0;">Quick Summary: What Is Kanban and Why It Helps</h2>
+        <p>In practice, Kanban is a work management method based on a visual system (the Kanban board) that makes management more organized, fluid, and easier for everyone to follow.</p>
+        <p>This board is made of columns that represent process stages and cards that represent team tasks. In many cases, activities are organized into three main groups: to do, in progress, and done.</p>
+        <p>Each card includes the work description and completion criteria. As cards move across columns, the task path becomes explicit and the project or operational flow becomes much clearer.</p>
+        <p>With this visualization, teams gain a macro view of what is pending, in progress, and delivered, which improves organization, prioritization, and continuous management improvement.</p>
+      </div>
+    </section>
+
+    <section id="kanbanapp" class="box promo">
+      <h2 style="margin-top:0;border-top:none;padding-top:0;">Try it in practice: KanbanApp (offline, private, and no signup)</h2>
+      <p>
+        Learning Kanban is easier when you use a real <strong>kanban board</strong>. <strong>KanbanApp</strong> is a simple
+        <strong>kanban board</strong> that runs <strong>directly in your browser</strong> - no login, no installation, no server required.
+        It is designed for productivity and privacy, including corporate use.
+      </p>
+      <p class="open-links">
+        Open: <a href="https://kanbanapp.io">https://kanbanapp.io</a> or
+        <a href="https://jrdutra.github.io/kanbanapp/kanbanapp.html">https://jrdutra.github.io/kanbanapp/kanbanapp.html</a>.
+        You can also run it <strong>locally</strong> (offline).
+      </p>
+      <section class="cta" aria-label="Primary actions">
+        <a class="btn btn-download" href="/kanbanapp.html" download="kanbanapp.html">Download kanbanapp.html</a>
+        <a class="btn btn-open" href="/kanbanapp.html" target="_blank" rel="noopener noreferrer">Open app</a>
+      </section>
+      <div class="grid">
+        <div>
+          <h3>Why this works in corporate environments</h3>
+          <ul>
+            <li><strong>No installation</strong>: ideal for computers with IT restrictions.</li>
+            <li><strong>No signup</strong>: open and use.</li>
+            <li><strong>No cloud dependency</strong>: data stays in your browser storage/cache.</li>
+            <li><strong>File backup</strong>: export anytime and keep your data with you.</li>
+            <li><strong>Offline</strong>: useful in restricted networks or without internet.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Kanban, Scrum, and Agile - can they be combined?</h3>
+          <p>
+            Yes. Think of Kanban as a way to <em>manage flow</em> (not a rigid process).
+            You can combine Kanban with <strong>scrum</strong> and other Agile approaches.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="fundamentals">
+      <h2>1) The Kanban Method: Overview</h2>
+      <p>
+        The Kanban Method is an evolutionary improvement approach: start with what you do now,
+        combine small incremental changes, and encourage leadership at all levels.
+        It also follows service delivery principles focused on customer needs and continuous improvement.
+      </p>
+      <p>It is a way to improve the engine while the car is moving.</p>
+
+      <h3>1.1 Method, methodology, or framework?</h3>
+      <p>
+        Kanban is presented as a <strong>method</strong> (not a prescriptive methodology): you add visualization,
+        WIP control, and flow management to your current process to make it healthier and more predictable.
+      </p>
+
+      <h3>1.2 Principles (Change Management)</h3>
+      <ul>
+        <li>Start with what you do today.</li>
+        <li>Agree to improve through evolutionary change.</li>
+        <li>Encourage acts of leadership at all levels.</li>
+      </ul>
+
+      <h3>1.3 Principles (Service Delivery)</h3>
+      <ul>
+        <li>Understand customer needs and expectations.</li>
+        <li>Manage work and enable self-organization around it.</li>
+        <li>Review service networks and policies regularly to improve outcomes.</li>
+      </ul>
+    </section>
+
+    <section id="practices">
+      <h2>2) Kanban Practices (compatible lists)</h2>
+      <p>These two lists do not conflict; they complement each other.</p>
+      <div class="grid">
+        <div class="box">
+          <h3>2.1 Six general practices (Kanban Method)</h3>
+          <ol>
+            <li><strong>Visualize</strong> work.</li>
+            <li><strong>Limit WIP</strong> (work in progress).</li>
+            <li><strong>Manage flow</strong>.</li>
+            <li><strong>Make policies explicit</strong>.</li>
+            <li><strong>Implement feedback loops</strong>.</li>
+            <li><strong>Improve collaboratively, evolve experimentally</strong>.</li>
+          </ol>
+          <p class="small">These six practices are the operating map of daily Kanban.</p>
+        </div>
+        <div class="box">
+          <h3>2.2 Three practices (Kanban Guide)</h3>
+          <ol>
+            <li><strong>Define and visualize</strong> a workflow.</li>
+            <li><strong>Actively manage</strong> items in the workflow.</li>
+            <li><strong>Continuously improve</strong> the workflow.</li>
+          </ol>
+          <p class="small">The triad is the minimum core; the six practices detail operations and evolution.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="dow-board">
+      <h2>3) DoW (Definition of Workflow) and Kanban Board</h2>
+      <p>
+        The <strong>Definition of Workflow (DoW)</strong> is the explicit understanding of how work flows in your
+        <strong>kanban system</strong>. In practice, it defines start/end points, states, policies, and WIP control.
+      </p>
+      <p>If the team looks at the board and understands the same thing, the DoW is working.</p>
+      <ul>
+        <li><strong>Work items</strong>: value units that move through the flow.</li>
+        <li><strong>Start point</strong> and <strong>end point</strong>.</li>
+        <li><strong>Defined states</strong> the items pass through.</li>
+        <li><strong>End-to-end WIP control</strong>.</li>
+        <li><strong>Explicit movement policies</strong>.</li>
+        <li><strong>SLE</strong> (Service Level Expectation): time + probability.</li>
+      </ul>
+      <div class="box">
+        <h3>3.1 Kanban board in practice</h3>
+        <p>
+          The board is the visualization of the DoW. There is no universal "right board";
+          it should reflect the real context of the service or process.
+        </p>
+      </div>
+    </section>
+
+    <section id="wip-pull">
+      <h2>4) WIP and pull system</h2>
+      <p>
+        <strong>WIP</strong> (Work In Progress) is work currently in progress. When WIP grows too much, the system gets congested,
+        increasing lead times and reducing predictability. WIP limits create focus and encourage collaboration to finish work with quality.
+      </p>
+      <p>
+        With clear limits, you operate as a <strong>pull system</strong>: only pull a new item when capacity is available.
+      </p>
+    </section>
+
+    <section id="policies">
+      <h2>5) Explicit policies, blockers, and flow quality</h2>
+      <p>
+        Explicit policies are visible rules on how work should flow: entry/exit criteria,
+        done definition per stage, blocker handling, replenishment rules, and urgency management.
+      </p>
+      <div class="box">
+        <h3>Useful policy checklist</h3>
+        <ul>
+          <li>Definition of done per stage/column.</li>
+          <li>Rules for blocked items (signal and resolution).</li>
+          <li>Replenishment rules (who decides, when, and how much enters).</li>
+          <li>WIP limits per column and/or globally.</li>
+          <li>Rules by service class.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="metrics">
+      <h2>6) Metrics and flow management</h2>
+      <p>Metrics support better decisions, not dashboard theater.</p>
+      <h3>6.1 Core concepts</h3>
+      <ul>
+        <li><strong>Lead Time</strong>: from commitment point to delivery.</li>
+        <li><strong>Cycle Time</strong>: from start to finish (as defined in the DoW).</li>
+        <li><strong>Throughput</strong>: completed items per time unit.</li>
+        <li><strong>Work Item Age</strong>: how long an item has been in progress.</li>
+        <li><strong>WIP</strong>: items currently in progress.</li>
+      </ul>
+
+      <h3>6.2 Minimum required measures</h3>
+      <ul>
+        <li>WIP</li>
+        <li>Throughput</li>
+        <li>Work item age</li>
+        <li>Cycle time</li>
+      </ul>
+
+      <h3>6.3 Useful visualizations</h3>
+      <ul>
+        <li><strong>Run chart</strong> for lead/cycle times.</li>
+        <li><strong>Lead time distribution</strong> to understand predictability.</li>
+        <li><strong>CFD</strong> (Cumulative Flow Diagram) to reveal bottlenecks.</li>
+      </ul>
+    </section>
+
+    <section id="service-classes">
+      <h2>7) Work types and service classes</h2>
+      <p>
+        Not all work is equal. Service classes help define how different demand types enter and move through the system.
+        A classic example is <strong>Expedite</strong> (urgent work), with specific policies for controlled queue bypass.
+      </p>
+    </section>
+
+    <section id="cadences">
+      <h2>8) Cadences and feedback loops</h2>
+      <p>
+        Kanban emphasizes feedback loops for inspection and adaptation. Cadences are meetings/reviews with clear purpose.
+      </p>
+      <table>
+        <thead><tr><th>Cadence</th><th>Frequency (example)</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Team Kanban Meeting</td><td>Daily</td><td>Observe flow and decide next steps based on capacity and blockers.</td></tr>
+          <tr><td>Replenishment</td><td>Weekly (or as needed)</td><td>Select what enters the system through pull.</td></tr>
+          <tr><td>Retrospective</td><td>Biweekly or monthly</td><td>Improve policies, limits, and practices based on data.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="statik">
+      <h2>9) STATIK (System Thinking Approach to Introducing Kanban)</h2>
+      <p>STATIK is a structured approach to design and redesign a Kanban system based on systems thinking and continuous feedback.</p>
+      <ol>
+        <li>Identify sources of dissatisfaction.</li>
+        <li>Analyze demand (incoming work, patterns, and types).</li>
+        <li>Analyze capability (throughput, lead times, predictability).</li>
+        <li>Model workflow (activities and states).</li>
+        <li>Identify service classes.</li>
+        <li>Design the Kanban system (board, policies, metrics, cadences).</li>
+      </ol>
+    </section>
+
+    <section id="industry-toc">
+      <h2>10) Kanban in industry and Theory of Constraints (T.O.C)</h2>
+      <p>
+        In manufacturing, Kanban appears as a card system to control replenishment and inventory, preventing shortages and excess,
+        and aligning production with demand. The comparative view also includes <strong>Theory of Constraints (T.O.C)</strong>,
+        especially the <strong>Drum-Buffer-Rope</strong> method to synchronize with the bottleneck.
+      </p>
+      <h3>10.1 Production and movement Kanban</h3>
+      <ul>
+        <li><strong>Kp</strong>: production Kanban.</li>
+        <li><strong>Km</strong>: movement Kanban.</li>
+        <li>Sequencing and supply organization to minimize inventory and keep flow stable.</li>
+      </ul>
+      <h3>10.2 Drum-Buffer-Rope (DBR)</h3>
+      <ul>
+        <li><strong>Drum</strong>: schedule rhythm defined by the constraint.</li>
+        <li><strong>Buffer</strong>: variability protection (controlled slack/stock).</li>
+        <li><strong>Rope</strong>: synchronized release of work into the system.</li>
+      </ul>
+    </section>
+
+    <section id="roadmap">
+      <h2>11) Implementation roadmap (practical step by step)</h2>
+      <p>If you want to start without overcomplicating, this sequence helps you learn fast with controlled risk.</p>
+      <ol>
+        <li>Choose a real service/process and define value.</li>
+        <li>Design the DoW (items, start/end, stages, policies, WIP, SLE).</li>
+        <li>Build the board (KanbanApp can be used) and add real work.</li>
+        <li>Set WIP limits and practice disciplined pull.</li>
+        <li>Track the minimum: WIP, throughput, work item age, cycle time.</li>
+        <li>Create minimum cadences: flow meeting, replenishment, retrospective.</li>
+        <li>Use STATIK to redesign based on data and learning.</li>
+      </ol>
+    </section>
+
+    <details class="kanban-collapse">
+      <summary>Learn More About the Kanban Method <span class="kanban-collapse-icon" aria-hidden="true">▼</span></summary>
+      <p class="kanban-collapse-hint">In practice, Kanban is a visual system that represents workflow and enables more organized, fluid, and understandable management for everyone involved...</p>
+      <div class="kanban-collapse-content">
+        <section id="expanded-guide">
+          <h2>Expanded guide: concept, application, and advantages</h2>
+
+          <h3>What is Kanban?</h3>
+          <p>In practice, Kanban is a visual system that represents workflow and enables more organized, fluid, and understandable management for everyone involved. It is made of columns that represent production stages and cards that define team tasks.</p>
+          <p>It works as a framework that controls activities by execution order. In a board, there are usually three columns: tasks to be done, tasks in progress, and completed tasks.</p>
+          <p>Task cards contain the description and completion requirements of each work item. As work moves through ready, in progress, and done states, the workflow becomes clearer.</p>
+          <p>This gives a macro view of what must be executed, improving organization and management optimization.</p>
+          <p>Three key functions stand out:</p>
+          <ul>
+            <li>Organize task flow and show what must be produced, what is in execution, and production pace.</li>
+            <li>Balance upstream and downstream stages so no step is skipped or interrupted due to missing handoffs.</li>
+            <li>Set the number of concurrent activities so teams are not overloaded and capacity is respected.</li>
+          </ul>
+
+          <h3>What does Kanban mean?</h3>
+          <p>The term "kanban" can be understood as card, visual signal, or visual board. It was created in 1940 by engineer Taiichi Ohno in Japan. As a Toyota manager, he took inspiration from supermarket shelf replenishment.</p>
+          <p>At that time, markets replenished inventory only as needed to meet customer demand. Toyota used similar logic in inventory management.</p>
+          <p>Taiichi aligned stock levels to production needs using a card signal (kanban) that showed when a stage was completed, so teams could quickly respond to new demand.</p>
+          <p>Written with a lowercase k, kanban means card. In 2004, the modern Kanban Method emerged.</p>
+          <p>It was developed by David J. Anderson, who combined the 12 Agile Manifesto principles with Taiichi Ohno's visual signaling concept.</p>
+          <p>The result is a practical column-and-card system that can be applied across sectors, both digitally and physically.</p>
+
+          <h3>Kanban model</h3>
+          <p>In general, columns represent:</p>
+          <ul>
+            <li><strong>Idea</strong>: tasks not yet approved or needing more information.</li>
+            <li><strong>To do</strong>: approved tasks ready for execution.</li>
+            <li><strong>Doing</strong>: tasks currently in execution.</li>
+            <li><strong>Done</strong>: tasks completed by the team.</li>
+          </ul>
+          <p>This model helps teams do only what is necessary, when necessary, and in the right amount. It also improves communication because everyone understands what needs to be done.</p>
+
+          <h3>What is Kanban used for?</h3>
+          <p>Kanban visually represents project and production tasks and their completion status.</p>
+          <p>When someone is available, they pull a task from ready, move it to in progress, and after completion move it to done, then repeat the cycle.</p>
+          <p>This increases focus, productivity, and organization while reducing distractions and interruptions.</p>
+
+          <h3>How does Kanban work?</h3>
+          <p>After understanding what Kanban is and what it is for, the method can be summarized by four pillars:</p>
+          <ol>
+            <li><strong>Organize current demand</strong>: start with what the team already does.</li>
+            <li><strong>Gradual improvements</strong>: favor incremental change over disruptive shifts.</li>
+            <li><strong>Focus on finishing open work</strong>: ensure stable delivery flow before pushing extra output.</li>
+            <li><strong>Encourage internal initiative and feedback</strong>: teams lead continuous process improvements.</li>
+          </ol>
+
+          <h3>What are Kanban advantages?</h3>
+          <p>Kanban offers broad benefits because it is versatile, intuitive, and adaptable to digital or manual use.</p>
+          <ol>
+            <li><strong>Autonomy</strong>: with board visibility, each person manages deliveries better.</li>
+            <li><strong>Task prioritization</strong>: urgent work is clearly highlighted.</li>
+            <li><strong>Higher productivity</strong>: visibility improves planning and deadline performance.</li>
+            <li><strong>Collaboration</strong>: teams see workload distribution and support each other to remove delays.</li>
+          </ol>
+
+          <h3>How to use Kanban daily</h3>
+          <p>First, define the usage mode (physical or virtual). Then define board columns (basic or detailed flow). Finally, define access, distribute tasks, and start the flow. It works for professional and personal contexts.</p>
+
+          <h3>5 good practices for Kanban</h3>
+          <ol>
+            <li><strong>Make flow visual</strong>: use board and cards for full visibility.</li>
+            <li><strong>Set WIP limits</strong>: control concurrent tasks to avoid overload.</li>
+            <li><strong>Optimize flow management</strong>: track stage times and adjust bottlenecks.</li>
+            <li><strong>Specify process policies</strong>: keep rules clear and visible.</li>
+            <li><strong>Create continuous feedback</strong>: review outcomes and improve regularly.</li>
+          </ol>
+          <p>These policies usually include checklists, SLAs, activity descriptions, and roles involved.</p>
+
+          <h3>Kanban vs Scrum</h3>
+          <p>Kanban and Scrum are complementary. They can be used together, but they have important differences:</p>
+          <ul>
+            <li>Scrum works in timeboxed sprints. Kanban uses continuous flow.</li>
+            <li>Scrum has defined roles (Scrum Master, Product Owner). Kanban flow is usually more distributed.</li>
+            <li>Scrum deliveries are often validated at sprint end. Kanban delivery format can be agreed by management and team.</li>
+          </ul>
+          <p>In short, one does not replace the other. They can be combined for stronger long-term results.</p>
+
+          <h3>Why is Kanban important for project management and execution?</h3>
+          <p>Kanban is a proven technique used for decades, continuously evolving in digital contexts. It optimizes processes across sectors and improves transparency over responsibilities and demand.</p>
+          <p>Mastering Agile methods and Kanban became a relevant differentiator for leadership roles in environments that require efficient execution and continuous improvement.</p>
+          <p>Now that you know what Kanban is, the next step is to apply the method consistently in your context.</p>
+        </section>
+      </div>
+    </details>
+
+    <aside class="related" aria-label="Related links">
+      <h2>Related content</h2>
+      <ul>
+        <li><a href="/what-is-kanban/">What Is Kanban?</a></li>
+        <li><a href="/download-kanban-html/">Download Kanban in HTML</a></li>
+        <li><a href="/offline-kanban-app/">Offline Kanban</a></li>
+        <li><a href="/kanban-no-signup/">Kanban Without Signup</a></li>
+        <li><a href="/private-kanban-board/">Private Kanban Board</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Copyright 2026 KanbanApp</p>
+  </footer>
+</body>
+</html>
