@@ -74,23 +74,15 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is KANBAN?",
+        "name": "How can I access KanbanApp without downloading?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "KANBAN is a visual work management method. It organizes tasks into columns to show flow, such as 'to do', 'in progress', and 'done'. This gives teams and individuals clearer priorities, exposes bottlenecks, and helps track day-to-day progress."
+          "text": "You can open the app using the 'Open offline app' button and use it directly in your browser in a new tab. The goal is to start quickly, with no signup, and organize demands with a practical KANBAN board."
         }
       },
       {
         "@type": "Question",
-        "name": "Is KanbanApp an offline KANBAN?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-            "text": "Yes. You can use KanbanApp offline by downloading 'kanbanapp.html' and opening it in your browser. It requires no complex setup and no signup. It's a fast way to start organizing tasks with a KANBAN board in seconds."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do I use KANBAN offline?",
+        "name": "How do I use KanbanApp offline?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "To use it offline, download 'kanbanapp.html' and open it in your browser. The app keeps working locally without a continuous internet connection. This helps in restricted environments or when connectivity is limited."
@@ -347,24 +339,6 @@
       transform: none;
     }
 
-    .lang-switch {
-      margin: 0 auto 18px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .lang-btn {
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
-      font-weight: 600;
-    }
-
     .highlight {
       color: var(--text);
       font-weight: 700;
@@ -556,18 +530,9 @@
         </summary>
         <ul class="quick-links-list">
           <li><a class="text-link" href="/what-is-kanban/">What Is Kanban?</a></li>
-          <li><a class="text-link" href="/download-kanban-html/">Download Kanban HTML</a></li>
-          <li><a class="text-link" href="/kanban-no-signup/">Kanban With No Signup</a></li>
-          <li><a class="text-link" href="/offline-kanban-app/">Offline Kanban App</a></li>
-          <li><a class="text-link" href="/private-kanban-board/">Private Kanban Board</a></li>
-          <li><a class="text-link" href="/cloud-board-alternative/">Alternative to Cloud Board Solutions</a></li>
         </ul>
       </details>
     </nav>
-
-    <section class="lang-switch" aria-label="Language selector">
-      <a class="lang-btn" id="langPtBr" href="/pt-br/">Português (Brasil)</a>
-    </section>
 
     <header class="hero" role="banner" aria-label="KanbanApp introduction">
       <h1>Offline Kanban Board | Free, No Signup, No Installation</h1>
@@ -577,14 +542,10 @@
       </p>
 
       <p class="intro center-text">
-        If you need a <span class="highlight">simple, fast, and practical KANBAN</span>, KanbanApp provides a direct way to organize tasks with a Kanban board.
+        If you need a <span class="highlight">simple, fast, and practical KANBAN board</span>, KanbanApp provides a direct way to organize tasks with a Kanban board.
         Use it as an <strong>offline kanban</strong> by downloading the HTML file. It is a strong <strong>corporate kanban</strong> option
         for teams that value privacy and low adoption friction.
-        For focused use cases, explore <a class="text-link" href="/download-kanban-html/">Download Kanban HTML</a>,
-        <a class="text-link" href="/kanban-no-signup/">Kanban With No Signup</a>,
-        <a class="text-link" href="/offline-kanban-app/">Offline Kanban App</a>,
-        <a class="text-link" href="/private-kanban-board/">Private Kanban Board</a>,
-        plus <a class="text-link" href="/cloud-board-alternative/">Alternative to Cloud Board Solutions</a>.
+        To understand the method in depth, read <a class="text-link" href="/what-is-kanban/">What Is Kanban?</a>.
       </p>
       <p class="center-text corporate-note">
         If our domain is blocked in your corporation for security reasons, just download the HTML file, send it by email, and open it locally in the browser.
@@ -602,104 +563,22 @@
         Open offline app
       </a>
     </section>
-    <nav aria-label="Kanban page navigation">
-      <div class="nav-columns">
-        <section class="nav-column" aria-labelledby="nav-framework-title">
-          <h2 class="nav-column-title" id="nav-framework-title">The Kanban Framework</h2>
-          <ul class="nav-list">
-            <li>Visualizes workflow in columns.</li>
-            <li>Limits work in progress (WIP).</li>
-            <li>Highlights bottlenecks for continuous improvement.</li>
-            <li>Improves predictability and prioritization.</li>
-          </ul>
-        </section>
-        <section class="nav-column" aria-labelledby="nav-app-title">
-          <h2 class="nav-column-title" id="nav-app-title">About KanbanApp</h2>
-          <ul class="nav-list">
-            <li><a class="text-link" href="#sec-o-que-e-kanban">What it is</a></li>
-            <li><a class="text-link" href="#sec-recursos">Features</a></li>
-            <li><a class="text-link" href="#sec-como-usar">How to use</a></li>
-            <li><a class="text-link" href="#sec-faq">FAQ</a></li>
-          </ul>
-        </section>
-      </div>
-    </nav>
-
-    <p class="center-text post-nav-note">
-      You can also <a class="text-link" href="/kanbanapp.html" target="_blank" rel="noopener noreferrer">open the KANBAN board now</a>
-      or <a class="text-link" href="/kanbanapp.html" download="kanbanapp.html">download the HTML to use offline</a>.
-    </p>
-
-    <section aria-labelledby="sec-o-que-e-kanban">
-      <h2 id="sec-o-que-e-kanban">What is KANBAN and what is it for?</h2>
-      <p>
-        KANBAN is a visual method for organizing work in stages. Instead of relying only on long lists, you track flow through columns,
-        improve prioritization, and reduce bottlenecks. For individuals and teams, this makes daily execution easier and task progress more predictable.
-      </p>
-    </section>
-
-    <section aria-labelledby="sec-kanban-offline">
-      <h2 id="sec-kanban-offline">Why use an offline KANBAN board?</h2>
-      <p>
-        Offline mode helps when internet access is restricted, internal network policies apply, or you prefer local usage on your own machine.
-        With KanbanApp, just open the HTML file in the browser and continue using it normally.
-      </p>
-    </section>
-
-    <section aria-labelledby="sec-recursos">
-      <h2 id="sec-recursos">KanbanApp Features</h2>
-      <ul class="benefits">
-        <li>Immediate use, no signup and no login.</li>
-        <li>Runs offline in the browser.</li>
-        <li>No mandatory server dependency.</li>
-        <li>Board export and import in JSON.</li>
-        <li>Autosave in cache/localStorage for convenience.</li>
-        <li>Strong fit for privacy-focused corporate scenarios.</li>
-      </ul>
-    </section>
-
-    <section aria-labelledby="sec-como-usar">
-      <h2 id="sec-como-usar">How to use (offline)</h2>
-      <p>
-        <strong>Offline:</strong> click "Download kanbanapp.html", save the file, and open it in your browser whenever you need it.
-      </p>
-    </section>
-
-    <section aria-labelledby="sec-privacidade">
-      <h2 id="sec-privacidade">Privacy and data</h2>
-      <p>
-        KanbanApp does not require an account and is not designed to store your personal data on a server. The board can be stored locally
-        in browser cache/localStorage for continuity. Because this storage can be removed during browser cleanup,
-        keep recurring JSON exports as backups on your machine.
-      </p>
-    </section>
-
     <section aria-labelledby="sec-faq">
-      <h2 id="sec-faq">KANBAN FAQ</h2>
+      <h2 id="sec-faq">KanbanApp FAQ</h2>
 
         <article class="faq-item">
           <header>
-            <h3>1) What is KANBAN?</h3>
+            <h3>1) How can I access KanbanApp without downloading?</h3>
           </header>
           <p>
-            KANBAN is a visual way to manage tasks and workflow. Activities are usually distributed across columns representing stages,
-            letting you see what is pending, in progress, and completed. This visualization supports prioritization, communication, and continuous process improvement.
+            You can open the app using the “Open offline app” button and use it directly in your browser, in a new tab. The goal is to start quickly,
+            with no signup, and organize demands with a practical KANBAN board.
           </p>
         </article>
 
         <article class="faq-item">
           <header>
-            <h3>2) Is KanbanApp an offline KANBAN?</h3>
-          </header>
-          <p>
-            Yes. You can use it offline by downloading <code>kanbanapp.html</code> and opening it directly in your browser. The goal is to start quickly,
-            with no signup, and organize demands on a practical Kanban board.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <header>
-            <h3>3) How do I use KANBAN offline?</h3>
+            <h3>2) How do I use KanbanApp offline?</h3>
           </header>
           <p>
             Click the download button to get the <code>kanbanapp.html</code> file. Then open it in any compatible browser.
@@ -709,7 +588,7 @@
 
       <article class="faq-item">
         <header>
-          <h3>4) Does KanbanApp store personal data?</h3>
+          <h3>3) Does KanbanApp store personal data?</h3>
         </header>
         <p>
           The app does not require signup and was not built to store personal data on a server. Board data may stay in the browser's local storage
@@ -719,7 +598,7 @@
 
       <article class="faq-item">
         <header>
-          <h3>5) How do I back up my KANBAN board?</h3>
+          <h3>4) How do I back up my KANBAN board?</h3>
         </header>
         <p>
           Export the board to JSON regularly and keep the file saved on your machine (or in an internal location approved by your company).
@@ -729,7 +608,7 @@
 
       <article class="faq-item">
         <header>
-          <h3>6) Does it work in corporate environments?</h3>
+          <h3>5) Does it work in corporate environments?</h3>
         </header>
         <p>
           Yes. KanbanApp can support corporate environments because it is lightweight, static, and supports offline operation, with lower dependency on external services
@@ -739,7 +618,7 @@
 
       <article class="faq-item">
         <header>
-          <h3>7) Is signup required?</h3>
+          <h3>6) Is signup required?</h3>
         </header>
         <p>
           No. You can open and use it immediately without creating an account. This reduces friction for quick individual and team adoption.
@@ -754,26 +633,18 @@
   </main>
 
   <aside class="secondary-board" aria-labelledby="sec-kanban-referencias">
-    <h2 id="sec-kanban-referencias">What is KANBAN? Framework references and context</h2>
+    <h2 id="sec-kanban-referencias">KanbanApp References and Context</h2>
     <p>
-      <strong>KANBAN</strong> is a visual workflow management framework used to improve predictability, reduce bottlenecks, and organize priorities.
-      It can be applied by technology, operations, administrative, support, and other corporate teams.
+      The conceptual content of <strong>KanbanApp</strong> and the entire KanbanApp website follows the references listed below.
+      KanbanApp is positioned as a lightweight alternative focused on corporate use, with simple browser execution, including offline use through an HTML file.
     </p>
-    <p>
-      There are many tools in the market for KANBAN adoption. <strong>KanbanApp</strong> is designed as a lightweight alternative focused on corporate use,
-      with simple browser execution, including offline usage through an HTML file.
-    </p>
-    <p>If you want to go deeper into the method, these references are useful:</p>
-    <ul class="secondary-links" aria-label="Reference links about the Kanban framework">
-      <li><a class="text-link" href="https://pt.wikipedia.org/wiki/Kanban" target="_blank" rel="noopener noreferrer">Wikipedia: Kanban</a></li>
-      <li><a class="text-link" href="https://kanban.university/" target="_blank" rel="noopener noreferrer">Kanban University</a></li>
-      <li><a class="text-link" href="https://www.atlassian.com/agile/kanban" target="_blank" rel="noopener noreferrer">Atlassian: Kanban Guide</a></li>
-      <li><a class="text-link" href="https://www.digite.com/pt-br/blog/metodo-kanban/" target="_blank" rel="noopener noreferrer">Introduction to the Kanban method (PT-BR)</a></li>
-      <li><a class="text-link" href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank" rel="noopener noreferrer">Google Search Central: SEO Starter Guide</a></li>
-      <li><a class="text-link" href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank" rel="noopener noreferrer">Google Search Central: FAQPage Structured Data</a></li>
-      <li><a class="text-link" href="https://developers.google.com/search/docs/appearance/structured-data/software-app" target="_blank" rel="noopener noreferrer">Google Search Central: Software App Structured Data</a></li>
-      <li><a class="text-link" href="https://web.dev/learn/pwa/offline-data/" target="_blank" rel="noopener noreferrer">web.dev (Google): Offline Data Storage</a></li>
-      <li><a class="text-link" href="https://web.dev/learn/accessibility/" target="_blank" rel="noopener noreferrer">web.dev (Google): Web Accessibility</a></li>
+    <p>References used as conceptual basis:</p>
+    <ul class="secondary-links" aria-label="Reference links about the Kanban method">
+      <li><a class="text-link" href="https://kanbanguides.org/" target="_blank" rel="noopener noreferrer">Kanban Guide v2020.12 (pt-BR)</a></li>
+      <li><a class="text-link" href="https://kanban.university/" target="_blank" rel="noopener noreferrer">The Official Kanban Guide (Portuguese, A4)</a></li>
+      <li><a class="text-link" href="https://www.researchgate.net/publication/273328689_The_kanban_approach_between_agility_and_leanness_a_systematic_review" target="_blank" rel="noopener noreferrer">The Kanban Approach (Baik, 2015)</a></li>
+      <li><a class="text-link" href="https://revista.fatectq.edu.br/interfacetecnologica/article/view/853" target="_blank" rel="noopener noreferrer">Use of the Kanban system and Theory of Constraints (T.O.C.)</a></li>
+      <li><a class="text-link" href="https://www.researchgate.net/publication/350439389_USO_DO_SISTEMA_KANBAN_UM_COMPARATIVO_COM_O_DESENVOLVIMENTO_DA_TEORIA_DAS_RESTRICOES_TOC_EM_UMA_EMPRESA_DE_DISPOSITIVOS_DE_BORRACHA_AUTOMOTIVA" target="_blank" rel="noopener noreferrer">ResearchGate mirror (T.O.C. comparison study)</a></li>
     </ul>
   </aside>
 
@@ -813,40 +684,6 @@
       }
     })();
 
-    // Language preference only. Does not affect board JSON logic.
-    (function () {
-      const LANG_KEY = "kanbanapp.lang.v1";
-      const PT_PATH = "/pt-br/";
-      const isBot = /bot|crawler|spider|crawling|google|bing|yandex|duckduck/i.test(navigator.userAgent || "");
-
-      function getSavedLang() {
-        try {
-          const v = (localStorage.getItem(LANG_KEY) || "").toLowerCase();
-          return v === "pt-br" || v === "en" ? v : "";
-        } catch (_) {
-          return "";
-        }
-      }
-
-      function setSavedLang(lang) {
-        try { localStorage.setItem(LANG_KEY, lang); } catch (_) {}
-      }
-
-      document.getElementById("langEn")?.addEventListener("click", function () {
-        setSavedLang("en");
-      });
-      document.getElementById("langPtBr")?.addEventListener("click", function () {
-        setSavedLang("pt-br");
-      });
-
-      if (isBot) return;
-      if (window.location.pathname !== "/") return;
-
-      const saved = getSavedLang();
-      const nav = (navigator.language || "").toLowerCase();
-      const prefersPt = saved === "pt-br" || (!saved && nav.startsWith("pt"));
-      if (prefersPt) window.location.replace(PT_PATH);
-    })();
   </script>
 </body>
 </html>
