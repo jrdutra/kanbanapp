@@ -771,13 +771,26 @@
     </section>
     <section id="políticas">
       <h2>5) Políticas explícitas, bloqueios e qualidade do fluxo</h2>
-      <p>
-        Políticas explícitas são regras visíveis sobre como o trabalho pode fluir. Elas incluem critérios de
-        entrada/saida,
-        o que significa "pronto" em cada etapa, como sinalizar e tratar <strong>bloqueios</strong>,
-        como reabastecer a fila de trabalho e como lidar com urgências.
-      </p>
-      <p>Regra clara reduz atrito: menos suposição, menos discussão desnecessária, mais decisão objetiva.</p>
+      <p>Políticas explícitas são o “manual operacional” do seu <strong>Kanban</strong>: <strong>regras simples,
+          visíveis e acordadas</strong> que dizem como o trabalho deve fluir para o sistema continuar
+        <strong>previsível</strong> e <strong>saudável</strong>. Elas cobrem desde <strong>critérios de entrada e
+          saída</strong> (o que pode entrar nessa etapa? quando pode sair?) até o que significa <strong>“pronto” em cada
+          coluna</strong> (Definition of Done por etapa), como <strong>sinalizar e tratar bloqueios</strong> (quando um
+        item é considerado bloqueado, como marcar no quadro, qual o tempo de reação esperado e quem ajuda a destravar),
+        como acontece o <strong>reabastecimento</strong> (quem decide, quando decide e quanto trabalho entra) e como
+        lidar com <strong>urgências</strong> (ex.: classes de serviço como Expedite) sem bagunçar o fluxo. Na prática,
+        políticas explícitas transformam decisões “no improviso” em decisões <strong>repetíveis</strong>, deixando o
+        sistema mais justo, mais rápido de operar e mais fácil de melhorar.</p>
+      <p>O ganho direto é <strong>reduzir atrito</strong>: com regra clara, você tem <strong>menos suposição</strong>,
+        menos debate circular e mais decisões objetivas baseadas no que foi combinado. Por exemplo, se a coluna “Em
+        validação” tem um <strong>Done</strong> específico, diminui retrabalho e “vai e volta”; se itens bloqueados têm
+        uma política de escalonamento (ex.: após 24h bloqueado vira prioridade de desbloqueio), a equipe não deixa
+        problemas apodrecerem; se o reabastecimento tem critérios (capacidade, tamanho dos itens, prioridade), o time
+        protege a entrada e evita sobrecarga; e se os limites de <strong>WIP</strong> e as regras por <strong>classe de
+          serviço</strong> estão explícitos, todo mundo entende quando <strong>pode</strong> puxar, quando <strong>não
+          pode</strong>, e o que acontece quando surge um urgente. Esse checklist que você montou é ótimo exatamente por
+        isso: ele cobre as políticas que mais impactam <strong>fluxo</strong>, <strong>qualidade</strong> e
+        <strong>previsibilidade</strong>.</p>
       <div class="box">
         <h3>Checklist de políticas úteis</h3>
         <ul>
@@ -791,7 +804,28 @@
     </section>
     <section id="métricas">
       <h2>6) Métricas e gestão do fluxo</h2>
-      <p>Métricas servem para decidir melhor, não para enfeitar dashboard.</p>
+      <p>Métricas em <strong>Kanban</strong> existem para <strong>tomar decisões melhores sobre o fluxo</strong>, não
+        para “enfeitar dashboard”. A lógica é bem prática: se você mede o fluxo, você enxerga a <strong>saúde do
+          sistema</strong> e consegue agir antes que vire caos. No <strong>Guia Oficial</strong>, as “principais
+        métricas” destacadas são <strong>Lead Time</strong> (do ponto de comprometimento até a conclusão), <strong>taxa
+          de entrega/vazão</strong> (itens concluídos por unidade de tempo) e <strong>WIP</strong> (quantidade de itens
+        no sistema), e elas alimentam gráficos que ajudam a entender o comportamento do sistema e identificar melhorias.
+        :contentReference[oaicite:0]{index=0} No <strong>Guia Kanban (v2020.12)</strong>, o foco é ainda mais
+        “operacional”: ele define um conjunto mínimo de <strong>medidas obrigatórias de fluxo</strong> —
+        <strong>WIP</strong>, <strong>Vazão (Throughput)</strong>, <strong>Idade do item</strong> e <strong>Tempo de
+          ciclo (Cycle Time)</strong> — porque são as que realmente permitem inspecionar e ajustar o sistema no dia a
+        dia, com início e fim definidos na sua <strong>DoW</strong>.
+      </p>
+      <p>Na prática, essas métricas se complementam: <strong>WIP</strong> mostra o quanto de trabalho está “entupindo” o
+        sistema agora; <strong>Vazão</strong> mostra o quanto você consegue finalizar por período; <strong>Tempo de
+          ciclo</strong> e <strong>Lead Time</strong> mostram “quanto tempo demora” (em recortes diferentes), e a
+        <strong>Idade do item</strong> é um alarme simples para detectar itens que estão ficando velhos demais e
+        precisam de atenção. E é aqui que entram as visualizações úteis do Guia Oficial: um <strong>run chart</strong>
+        de Lead Time/Cycle Time ajuda a ver <strong>tendências</strong> ao longo do tempo; a <strong>distribuição de
+          Lead Time</strong> mostra a <strong>previsibilidade</strong> (a meta é estreitar a faixa e deslocar para a
+        esquerda); e o <strong>CFD (Diagrama de Fluxo Cumulativo)</strong> deixa visível onde o WIP está “empilhando” e
+        onde estão os gargalos no fluxo.
+      </p>
       <h3>6.1 Conceitos centrais</h3>
       <ul>
         <li><strong>Lead Time</strong>: do ponto de comprometimento até a entrega/conclusão.</li>
@@ -1098,5 +1132,4 @@
     <p>Copyright 2026 KanbanApp</p>
   </footer>
 </body>
-
 </html>
