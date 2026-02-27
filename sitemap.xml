@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://kanbanapp.io/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/" />
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://kanbanapp.io/pt-br/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/" />
     <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -14,7 +14,7 @@
   <url>
     <loc>https://kanbanapp.io/what-is-kanban/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/what-is-kanban/" />
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://kanbanapp.io/pt-br/o-que-e-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/o-que-e-kanban/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/what-is-kanban/" />
     <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -24,7 +24,7 @@
   <url>
     <loc>https://kanbanapp.io/pt-br/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/" />
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://kanbanapp.io/pt-br/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/" />
     <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -34,7 +34,7 @@
   <url>
     <loc>https://kanbanapp.io/pt-br/o-que-e-kanban/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/what-is-kanban/" />
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://kanbanapp.io/pt-br/o-que-e-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/o-que-e-kanban/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/what-is-kanban/" />
     <lastmod>2026-02-27</lastmod>
     <changefreq>weekly</changefreq>
