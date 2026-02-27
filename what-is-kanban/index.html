@@ -1,6 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
-<html lang="en-US" prefix="og: https://ogp.me/ns#">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -16,10 +16,10 @@
 <link href="https://kanbanapp.io/what-is-kanban/" rel="canonical"/>
 <link href="https://kanbanapp.io/sitemap.xml" rel="sitemap" type="application/xml"/>
 <link href="https://kanbanapp.io/what-is-kanban/" hreflang="en" rel="alternate"/>
-<link href="https://kanbanapp.io/pt-br/o-que-e-kanban/" hreflang="pt-BR" rel="alternate"/>
+<link href="https://kanbanapp.io/pt-br/o-que-e-kanban/" hreflang="pt-br" rel="alternate"/>
 <link href="https://kanbanapp.io/what-is-kanban/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="en_US" property="og:locale"/>
+<meta content="en" property="og:locale"/>
 <meta content="KanbanApp" property="og:site_name"/>
 <meta content="https://kanbanapp.io/what-is-kanban/" property="og:url"/>
 <meta content="What is Kanban? Complete Guide" property="og:title"/>
@@ -45,7 +45,7 @@
   "@type": "Article",
   "headline": "What is Kanban? Complete Guide",
   "description": "Structured material to learn the Kanban Method, flow management, advantages and practical implementation.",
-  "inLanguage": "en-US",
+  "inLanguage": "en",
   "url": "https://kanbanapp.io/what-is-kanban/",
   "keywords": [
     "what is kanban",
@@ -85,7 +85,7 @@
   "encodingFormat": "image/jpeg",
   "width": 1200,
   "height": 630,
-  "inLanguage": "en-US"
+  "inLanguage": "en"
 }</script>
 <style>
     :root {
@@ -235,62 +235,91 @@
       margin: 0 auto;
     }
 
-    .home-nav {
+    .quick-links-menu {
       position: absolute;
       top: 14px;
       left: 14px;
-      z-index: 3;
+      z-index: 40;
       margin: 0;
     }
 
-    .home-link {
-      text-decoration: none;
+    .quick-links-menu details { position: relative; }
+
+    .quick-links-menu summary {
+      list-style: none;
+      cursor: pointer;
       width: 42px;
       height: 42px;
       border-radius: 10px;
       border: 1px solid var(--border);
       background: var(--panel-2);
-      color: var(--text);
-      font-weight: 700;
       display: grid;
       place-items: center;
-      padding: 8px;
+      padding: 0;
+      outline: none;
     }
 
-    .home-link:hover {
-      background: var(--primary);
-      color: #fff;
-    }
+    .quick-links-menu summary::-webkit-details-marker { display: none; }
 
-    .home-icon {
-      position: relative;
+    .quick-links-toggle {
       width: 18px;
-      height: 16px;
-      display: inline-block;
+      height: 14px;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .home-icon::before {
-      content: "";
-      position: absolute;
-      left: 1px;
-      right: 1px;
-      bottom: 0;
-      height: 9px;
-      border: 2px solid currentColor;
-      border-top: none;
+    .quick-links-toggle span {
+      display: block;
+      height: 2px;
       border-radius: 2px;
+      background: var(--text);
+      transition: transform .2s ease, opacity .2s ease;
+      transform-origin: center;
     }
 
-    .home-icon::after {
-      content: "";
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .quick-links-list {
       position: absolute;
-      top: 0;
-      left: 50%;
-      width: 12px;
-      height: 12px;
-      border-top: 2px solid currentColor;
-      border-left: 2px solid currentColor;
-      transform: translateX(-50%) rotate(45deg);
+      top: 50px;
+      left: 0;
+      margin: 0;
+      padding: 10px;
+      min-width: 180px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, .35);
+      list-style: none;
+    }
+
+    .quick-links-list li + li { margin-top: 8px; }
+
+    .quick-links-list a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .quick-links-list a:hover {
+      background: var(--primary);
+      border-color: transparent;
     }
 
     .hero-image {
@@ -514,7 +543,7 @@
         padding: 14px;
       }
 
-      .home-nav {
+      .quick-links-menu {
         top: 10px;
         left: 10px;
       }
@@ -529,7 +558,7 @@
 <body>
 <header aria-label="Website header" class="center" role="banner">
 <div class="site-brand">
-<img alt="" aria-hidden="true" class="site-brand-icon" src="../../favicon.svg"/>
+<img alt="KanbanApp" aria-hidden="true" class="site-brand-icon" src="../../favicon.svg"/>
 <div>
 <div class="site-brand-name">KanbanApp</div>
 <p class="tagline">Offline Kanban Board</p>
@@ -538,8 +567,15 @@
 </header>
 <div aria-hidden="true" style="height:18px;"></div>
 <main>
-<nav aria-label="Home navigation" class="home-nav">
-<a aria-label="Go to Home" class="home-link" href="../" rel="home" title="Start"><span aria-hidden="true" class="home-icon"></span></a>
+<nav aria-label="Site menu" class="quick-links-menu">
+<details>
+<summary aria-label="Open menu" title="Menu">
+<span aria-hidden="true" class="quick-links-toggle"><span></span><span></span><span></span></span>
+</summary>
+<ul class="quick-links-list">
+<li><a href="../">Home</a></li>
+</ul>
+</details>
 </nav>
 <header>
 <h1>What is Kanban?</h1>
@@ -991,7 +1027,7 @@
 <p><strong>References (documents used as a basis):</strong></p>
 <ul>
 <li><strong><a href="https://kanbanguides.org/" rel="noopener noreferrer" target="_blank">Kanban Guide v2020.12
-              (pt-BR)</a></strong>— reference document with core Kanban practices, principles and concepts.</li>
+              (pt-br)</a></strong>— reference document with core Kanban practices, principles and concepts.</li>
 <li><strong><a href="https://kanban.university/" rel="noopener noreferrer" target="_blank">The Official Kanban
               Guide (Portuguese, A4)</a></strong>— official guide with fundamental definitions and guidelines.</li>
 <li><strong><a href="https://www.researchgate.net/publication/273328689_The_kanban_approach_between_agility_and_leanness_a_systematic_review" rel="noopener noreferrer" target="_blank">The Kanban Approach (Baik, 2015)</a></strong>— material
@@ -1014,12 +1050,42 @@
 <ul>
 <li><a href="/">Home</a></li>
 <li><a href="/what-is-kanban/">What is Kanban?</a></li>
-<li><a href="/pt-br/o-que-e-kanban/">O que é Kanban? (PT-BR)</a></li>
+<li><a href="/pt-br/o-que-e-kanban/">O que é Kanban? (pt-br)</a></li>
 </ul>
 </aside>
 </main>
 <footer>
 <p>Copyright 2026 KanbanApp</p>
 </footer>
+<script>
+    (function () {
+      var menuDetails = document.querySelector('.quick-links-menu details');
+      if (!menuDetails) return;
+
+      function closeMenu() {
+        if (menuDetails.hasAttribute('open')) {
+          menuDetails.removeAttribute('open');
+        }
+      }
+
+      document.addEventListener('click', function (event) {
+        if (!menuDetails.hasAttribute('open')) return;
+        if (menuDetails.contains(event.target)) return;
+        closeMenu();
+      }, true);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeMenu();
+      });
+
+      var links = menuDetails.querySelectorAll('.quick-links-list a');
+      for (var i = 0; i < links.length; i += 1) {
+        links[i].addEventListener('click', function () {
+          closeMenu();
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
+
