@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="zh-CN" prefix="og: https://ogp.me/ns#">
+<head>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5851652075835518"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="KanbanApp" name="application-name"/>
+<meta content="KanbanApp" name="author"/>
+<meta content="KanbanApp" name="generator"/>
+<meta content="#7c4dff" name="theme-color"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="什么是看板？包含专业用途的基础知识、实践、指标、服务类别、节奏、STATIK 和实施路线图的完整指南。" name="description"/>
+<title>什么是看板？完整指南 |看板应用程序</title>
+<link href="../../favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="../../favicon.svg" rel="shortcut icon"/>
+<link href="https://kanbanapp.io/zh-cn/shen-me-shi-kanban/" rel="canonical"/>
+<link href="https://kanbanapp.io/sitemap.xml" rel="sitemap" type="application/xml"/><link href="https://kanbanapp.io/what-is-kanban/" hreflang="en" rel="alternate"/><link href="https://kanbanapp.io/pt-br/o-que-e-kanban/" hreflang="pt-BR" rel="alternate"/><link href="https://kanbanapp.io/es/que-es-kanban/" hreflang="es" rel="alternate"/><link href="https://kanbanapp.io/ar/ma-huwa-kanban/" hreflang="ar" rel="alternate"/><link href="https://kanbanapp.io/hi/kanban-kya-hai/" hreflang="hi" rel="alternate"/><link href="https://kanbanapp.io/zh-cn/shen-me-shi-kanban/" hreflang="zh-CN" rel="alternate"/><link href="https://kanbanapp.io/what-is-kanban/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="en" property="og:locale"/>
+<meta content="KanbanApp" property="og:site_name"/>
+<meta content="https://kanbanapp.io/zh-cn/shen-me-shi-kanban/" property="og:url"/>
+<meta content="什么是看板？完整指南" property="og:title"/>
+<meta content="在实践中学习看板：拉动流程、WIP、指标、节奏、优势以及在企业环境中的实施。" property="og:description"/>
+<meta content="https://kanbanapp.io/what-is-kanban/kanban-board-social.jpg" property="og:image"/>
+<meta content="https://kanbanapp.io/what-is-kanban/kanban-board-social.jpg" property="og:image:secure_url"/>
+<meta content="image/jpeg" property="og:image:type"/>
+<meta content="https://kanbanapp.io/what-is-kanban/kanban-board-social.jpg" property="og:image:url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Horizontal illustration of Kanban board with backlog, in progress and completed columns." property="og:image:alt"/>
+<meta content="Kanban" property="article:section"/>
+<meta content="KanbanApp" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="什么是看板？完整指南" name="twitter:title"/>
+<meta content="看板基础知识：WIP、拉动流、指标、节奏、优势和实施路线图。" name="twitter:description"/>
+<meta content="https://kanbanapp.io/what-is-kanban/kanban-board-social.jpg" name="twitter:image"/>
+<meta content="Horizontal Kanban board for social networks, with visual flow by columns." name="twitter:image:alt"/>
+<meta content="https://kanbanapp.io/what-is-kanban/kanban-board-social.jpg" itemprop="image"/>
+<meta content="什么是看板、看板方法、看板、看板、WIP、工作流程、交付周期、周期时间、statik" name="keywords"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What is Kanban? Complete Guide",
+  "description": "Structured material to learn the Kanban Method, flow management, advantages and practical implementation.",
+  "inLanguage": "en",
+  "url": "https://kanbanapp.io/what-is-kanban/",
+  "keywords": [
+    "what is kanban",
+    "kanban method",
+    "kanban board",
+    "kanban board",
+    "wip",
+    "pulled flow",
+    "kanban metrics",
+    "statik"
+  ],
+  "image": [
+    "https://kanbanapp.io/what-is-kanban/kanban-board-social.jpg",
+    "https://kanbanapp.io/og-image.jpg",
+    "https://kanbanapp.io/what-is-kanban/kanban-board-vertical.jpg"
+  ],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kanbanapp.io/what-is-kanban/"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "KanbanApp"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "KanbanApp"
+  }
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  "name": "Horizontal (social) Kanban board",
+  "description": "Horizontal illustration of a Kanban board with backlog, in progress, and completed columns.",
+  "contentUrl": "https://kanbanapp.io/what-is-kanban/kanban-board-social.jpg",
+  "url": "https://kanbanapp.io/what-is-kanban/kanban-board-social.jpg",
+  "encodingFormat": "image/jpeg",
+  "width": 1200,
+  "height": 630,
+  "inLanguage": "en"
+}</script>
+<style>
+    :root {
+      --bg: #13131a;
+      --panel: #1e1e2a;
+      --panel-2: #2c2c3d;
+      --text: #f5f5ff;
+      --muted: #b8b8c7;
+      --primary: #7c4dff;
+      --primary-hover: #6b3ff2;
+      --border: #3b3b52;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e1e2f 0%, var(--bg) 55%);
+      color: var(--text);
+      padding: 24px;
+    }
+
+    main {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      position: relative;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(24px, 4vw, 48px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin-top: 30px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      font-size: clamp(1.08rem, 2.4vw, 1.35rem);
+    }
+
+    h3 {
+      margin-top: 18px;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 12px;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    code,
+    pre {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    pre {
+      padding: 12px;
+      overflow: auto;
+    }
+
+    code {
+      padding: 2px 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 8px;
+      vertical-align: top;
+      color: var(--muted);
+    }
+
+    th {
+      background: rgba(255, 255, 255, .03);
+      text-align: left;
+      color: var(--text);
+    }
+
+    .small {
+      font-size: 12px;
+      color: #a8a8bc;
+    }
+
+    .site-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .site-brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+    }
+
+    .site-brand-name {
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .tagline {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.2;
+    }
+
+    .center {
+      text-align: center;
+      max-width: 82ch;
+      margin: 0 auto;
+    }
+
+    .quick-links-menu {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 40;
+      margin: 0;
+    }
+
+    .quick-links-menu details { position: relative; }
+
+    .quick-links-menu summary {
+      list-style: none;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      display: grid;
+      place-items: center;
+      padding: 0;
+      outline: none;
+    }
+
+    .quick-links-menu summary::-webkit-details-marker { display: none; }
+
+    .quick-links-toggle {
+      width: 18px;
+      height: 14px;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quick-links-toggle span {
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text);
+      transition: transform .2s ease, opacity .2s ease;
+      transform-origin: center;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .quick-links-list {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      margin: 0;
+      padding: 10px;
+      min-width: 180px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, .35);
+      list-style: none;
+    }
+
+    .quick-links-list li + li { margin-top: 8px; }
+
+    .quick-links-list a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .quick-links-list a:hover {
+      background: var(--primary);
+      border-color: transparent;
+    }
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+      margin-top: 0;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin: 14px 0;
+    }
+
+    .kanban-collapse {
+      margin: 18px 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .02);
+      overflow: hidden;
+    }
+
+    .kanban-collapse>summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      font-weight: 800;
+      color: #e3dbff;
+      background: rgba(124, 77, 255, .12);
+      border-bottom: 1px solid rgba(124, 77, 255, .25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .kanban-collapse>summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .kanban-collapse-icon {
+      font-size: 12px;
+      line-height: 1;
+      color: #e3dbff;
+      transition: transform .2s ease;
+    }
+
+    .kanban-collapse[open] .kanban-collapse-icon {
+      transform: rotate(180deg);
+    }
+
+    .kanban-collapse-hint {
+      margin: 0;
+      padding: 12px 16px 4px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .kanban-collapse[open] .kanban-collapse-hint {
+      display: none;
+    }
+
+    .kanban-collapse-content {
+      padding: 2px 16px 16px;
+    }
+
+    .promo {
+      border-color: rgba(124, 77, 255, .45);
+      background: rgba(124, 77, 255, .08);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .promo-right-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .promo-board-figure {
+      margin: 10px 0 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .promo-board-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .promo-board-figure figcaption {
+      margin: 0;
+      padding: 8px 10px 10px;
+    }
+
+    .intro-banner {
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .02);
+      padding: 14px;
+    }
+
+    .intro-banner h2 {
+      margin-top: 0;
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .intro-banner-figure {
+      margin: 10px 0 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .intro-banner-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .intro-banner-figure figcaption {
+      margin: 0;
+      padding: 8px 10px 10px;
+    }
+
+    .open-links a {
+      color: #c9b9ff;
+      text-underline-offset: 2px;
+    }
+
+    .open-links a:hover {
+      color: #e3dbff;
+    }
+
+    .cta {
+      margin: 24px 0 8px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .btn-download {
+      background: var(--panel-2);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-open {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-open:hover {
+      background: var(--primary-hover);
+    }
+
+    .related {
+      margin-top: 22px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .02);
+    }
+
+    .related h2 {
+      margin: 0 0 10px;
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .related ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .related a {
+      color: #c9b9ff;
+      text-underline-offset: 2px;
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255, 255, 255, .35);
+      margin-top: 18px;
+      font-size: .9rem;
+    }
+
+    @media (min-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 14px;
+      }
+
+      .quick-links-menu {
+        top: 10px;
+        left: 10px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .lang-switcher {
+      position: absolute;
+      top: 14px;
+      left: 64px;
+      z-index: 40;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
+
+    .lang-flag-link {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel-2, #2c2c3d);
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      transition: transform .15s ease;
+    }
+
+    .lang-flag-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .lang-flag-link.is-active {
+      outline: 2px solid var(--primary);
+      outline-offset: 1px;
+    }
+
+    .lang-flag-icon { width: 24px; height: 18px; display: block; border-radius: 2px; }
+
+    @media (max-width:640px) {
+      .lang-switcher {
+        top: 10px;
+        left: 60px;
+      }
+    }
+
+
+  </style>
+<meta content="pc,mobile" name="applicable-device"/><meta content="webkit" name="renderer"/><meta content="webkit" name="force-rendering"/><meta content="telephone=no" name="format-detection"/><meta content="no-transform" http-equiv="Cache-Control"/></head>
+<body>
+<header aria-label="网站标题" class="center" role="banner">
+<div class="site-brand">
+<img alt="看板应用程序" aria-hidden="true" class="site-brand-icon" src="../../favicon.svg"/>
+<div>
+<div class="site-brand-name">看板应用程序</div>
+<p class="tagline">离线看板</p>
+</div>
+</div>
+</header>
+<div aria-hidden="true" style="height:18px;"></div>
+<main>
+<nav aria-label="站点菜单" class="quick-links-menu">
+<details>
+<summary aria-label="打开菜单" title="菜单">
+<span aria-hidden="true" class="quick-links-toggle"><span></span><span></span><span></span></span>
+</summary>
+<ul class="quick-links-list">
+<li><a href="../">家</a></li>
+<li><a href="/zh-cn/yin-si-zheng-ce/">隐私政策</a></li>
+<li><a href="/zh-cn/lian-xi/">接触</a></li>
+</ul>
+</details>
+</nav>
+<div aria-label="语言选择器" class="lang-switcher">
+<a class="lang-flag-link" data-language="en" href="/" lang="en" title="英语"><img alt="美国国旗" class="lang-flag-icon" src="/flags/us.svg"/></a>
+<a class="lang-flag-link" data-language="pt-BR" href="/pt-br/" lang="pt-BR" title="葡萄牙语（巴西）"><img alt="巴西国旗" class="lang-flag-icon" src="/flags/br.svg"/></a>
+<a class="lang-flag-link" data-language="es" href="/es/" lang="es" title="西班牙语"><img alt="西班牙国旗" class="lang-flag-icon" src="/flags/es.svg"/></a>
+<a class="lang-flag-link" data-language="ar" href="/ar/" lang="ar" title="العربية"><img alt="阿拉伯语语言标志标记" class="lang-flag-icon" src="/flags/ar.svg"/></a>
+<a class="lang-flag-link" data-language="hi" href="/hi/" lang="hi" title="हिन्दी"><img alt="印度国旗" class="lang-flag-icon" src="/flags/in.svg"/></a>
+<a class="lang-flag-link" data-language="zh-CN" href="/zh-cn/" lang="zh-CN" title="中文 (简体)"><img alt="中国国旗" class="lang-flag-icon" src="/flags/cn.svg"/></a>
+</div>
+<header>
+<h1>什么是看板？</h1>
+</header>
+<section id="resumo">
+<div class="box">
+<h2 style="margin-top:0;border-top:none;padding-top:0;">快速摘要：什么是看板以及它如何帮助我们
+          在日常生活中</h2>
+<p>实际上，看板是一种依赖于视觉系统（看板）的工作管理方法
+          代表流程，使管理更加有组织、流畅且易于每个人遵循。</p>
+<p>该表由指示流程阶段的列和代表任务的卡片组成。
+          在许多情况下，它将活动分为三个主要组：待办事项、进行中和已完成。</p>
+<p>每张卡片都汇集了工作的描述以及认为工作已完成的标准。根据卡牌
+          通过列前进，任务路径变得明确，项目或操作的流程变得非常清晰
+          更清晰。</p>
+<p>通过这种视图，团队可以了解待处理的内容、正在进行的内容以及正在执行的内容
+          已经交付，有助于组织、优先排序和持续管理改进。</p>
+</div>
+</section>
+<section class="box promo" id="kanbanapp">
+<h2 style="margin-top:0;border-top:none;padding-top:0;">尝试一下实践：KanbanApp（离线看板，
+        私人且无需注册）</h2>
+<p>使用看板时，学习看板会容易得多<strong>看板</strong>真实的。这<strong>看板应用程序</strong>是一个<strong>看板</strong>运行简单<strong>直接在浏览器中</strong>- 无需登录，无需安装
+        没有任何东西并且不依赖于服务器。
+        它是为那些想要在隐私的情况下提高工作效率的人而设计的，包括在<strong>企业使用</strong>.</p>
+<p class="open-links">您可以访问 KanbanApp：<a href="https://kanbanapp.io">https://kanbanapp.io</a>或在<a href="/kanbanapp.html">https://jrdutra.github.io/kanbanapp/kanbanapp.html</a>。
+        如果您愿意，可以离线使用：下载 HTML 文件并直接在浏览器中打开它。</p>
+<section aria-label="主要行动" class="cta">
+<a class="btn btn-download" download="kanbanapp.html" href="/kanbanapp.html">下载kanbanapp.html</a>
+<a class="btn btn-open" href="/kanbanapp.html" rel="noopener noreferrer" target="_blank">访问应用程序</a>
+</section>
+<div class="grid">
+<div>
+<h3>为什么这在企业界有效？</h3>
+<ul>
+<li><strong>无需安装</strong>：IT 受限的 PC 的理想选择。</li>
+<li><strong>无需注册</strong>：打开并使用。</li>
+<li><strong>没有云</strong>: 数据仍然存在<strong>100% 浏览器缓存/存储
+                本地</strong>.</li>
+<li><strong>备份到文件</strong>：随时导出并随身携带主板。</li>
+<li><strong>离线</strong>：在旅行、没有互联网或网络受限的环境中有用。</li>
+</ul>
+<h3>开始使用看板时的初步见解：</h3>
+<ul>
+<li>将看板方法与 KanbanApp 板一起使用时的第一印象是工作组织和
+              掌握任务，即使是在极其详细和大量的流程中。</li>
+<li>在日常使用中，您会发现您忘记的事情和错过的细节开始减少了很多。</li>
+<li>有了这种一致性，团队就会认为你是一位专业人士，因为你的思路清晰、思路清晰。
+              执行的可靠性。</li>
+</ul>
+</div>
+<div class="promo-right-column">
+<h3>看板、Scrum 和敏捷——它们可以结合起来吗？</h3>
+<p>是的。将看板视为一种方法<em>管理流量</em>工作（而不是封闭的过程）。
+            您可以将看板与<strong>混乱</strong>以及敏捷领域的其他方法。</p>
+<figure class="promo-board-figure">
+<img alt="带有任务栏和卡片的垂直看板图" class="promo-board-image" decoding="async" height="980" loading="lazy" src="/what-is-kanban/kanban-board-vertical.jpg" title="数字看板的视觉示例" width="900"/>
+<figcaption class="small">具有按列划分的视觉流的看板示例。</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section aria-labelledby="intro-conteudo-title" class="intro-banner">
+<h2 id="intro-conteudo-title">在开始阅读之前：</h2>
+<p>您已经在这里看到应用程序格式的看板可以帮助组织工作、减少工作量
+        健忘并为团队提供更多清晰度。
+        从现在开始，内容将更深入地探讨将最初的感觉转化为结果的基础知识
+        每天保持一致。</p>
+<p>当应用下一个概念时，通常会感觉到控制需求的明显演变
+        即使在复杂而庞大的流程中，生产力也会得到相应的飞跃。</p>
+<figure class="intro-banner-figure">
+<img alt="看板的水平图像，其中包含代表工作流程的三列和卡片" class="intro-banner-image" decoding="async" height="630" loading="lazy" src="/what-is-kanban/kanban-board-social.jpg" title="用于组织和生产力的看板概述" width="1200"/>
+<figcaption class="small">看板的水平视图：待办事项、进度和已完成。</figcaption>
+</figure>
+</section>
+<section id="fundamentos">
+<h2>1）看板概述</h2>
+<p>看板采用渐进式改进方法：您<strong>从今天做的事情开始</strong>,
+        结合小的、渐进的改变并鼓励各级领导。
+        它还具有面向<strong>服务交付</strong>，关注客户需求并
+        持续改进。</p>
+<p>这是一种在汽车行驶时改进发动机的方法，而无需停止一切。</p>
+<h3>1.1 方法、方法论还是框架？</h3>
+<p>
+</p><p>这<strong>看板</strong>表示为<strong>一种管理方法</strong>（而不是方法论
+        规定性的）因为他<strong>不取代</strong>你现有的工作方式甚至没有强加“一步一步”
+        步骤”关闭；他是<strong>额外</strong>现有流程使工作更加<strong>当然</strong>,<strong>稳定的</strong>和<strong>可预测的</strong>。与其一下子改变一切，
+        你首先应用类似的实践<strong>查看工作流程</strong>（留下步骤、规则和
+        透明物品），<strong>控制/限制在制品</strong>（减少拥堵、排队和交换
+        上下文）和<strong>管理流量</strong>专注于以可持续的速度和可预测性完成任务。与
+        因此，系统开始显示<strong>瓶颈</strong>和日常决策，让您能够进行调整<strong>政策</strong>， 减少<strong>超载</strong>并改善<strong>交付
+          服务</strong>持续不断地——也就是说，看板作为一种“强化手段”来改进你已经做的事情和方式
+        确实如此，而不是成为改变当前流程的说明性包。</p>
+<h3>1.2 原理</h3>
+<p>在看板中，这些原则可以作为“指导规则”，帮助您改进工作，而无需
+        从头开始。在变革管理中，想法是从你今天所做的事情开始，即尊重方式
+        当前的工作方式并将其作为起点；然后同意通过改变寻求改进
+        进化，促进在学习的指导下不断调整（而不是突然转变）；和
+        鼓励各级领导的行动，重视任何微小的改进举措
+        人，而不仅仅是正式职位。在服务交付中，看板强化了以客户为导向的愿景：
+        了解并关注需求和期望，管理工作并围绕工作进行自我组织，
+        定期检讨服务网络及政策，调整制度，提升成效
+        随着时间的推移。</p>
+</section>
+<section id="práticas">
+<h2>2）看板实践</h2>
+<p>在看板中，有一套实践作为系统投入运行的基础，
+        随着时间的推移不断发展。这<a href="https://kanban.university/kanban-guide/" rel="noopener noreferrer" target="_blank">看板指南</a>呈现了三种实践——定义和可视化流程
+        工作，积极管理流程中的项目，并不断改进工作流程——有效
+        作为指导采用并确保交付更加清晰、节奏和可预测性的“最低限度”。
+        在此基础上，看板实践有助于将看板和卡片转变为管理系统。
+        工作，明确活动如何进展，如何更好地确定优先顺序以及如何识别瓶颈
+        不断改进。</p>
+<p>这两个列表并不互相冲突；相反。它们相辅相成：</p>
+<h3>三种做法（<a href="https://kanban.university/kanban-guide/" rel="noopener noreferrer" target="_blank">看板指南</a>)</h3>
+<ol>
+<li><strong>设置和查看</strong>一个工作流程。</li>
+<li><strong>积极管理</strong>流中的项目。</li>
+<li><strong>改善</strong>持续工作流程。</li>
+</ol>
+</section>
+<section id="wip-pull">
+<h2>3）WIP和Pull系统</h2>
+<p><strong>WIP（正在进行中的工作）</strong>是项目的数量<em>流内</em>在一个
+        在给定的时刻——它是系统健康状况的直接“温度计”。当你让 WIP 增长太多时，
+        你消除了系统中的“松弛”：一切都 100% 忙碌，出现队列，上下文切换增加（在工作时）
+        知识的流动，这会降低效率），流动就变成了一条拥挤的高速公路——也就是说，<strong>铅
+          时间/周期时间趋于增加且可预测性下降</strong>。 :contentReference[oaicite:0]{index=0} 另外
+        此外，两者之间还存在着众所周知的关系：<strong>更多在制品和更长的周期时间</strong>，以及许多研究
+        指出限制 WIP 有助于避免产能过载并减少时间。</p>
+<p>最重要的一点是<strong>WIP 限制不仅仅是“一个数字”</strong>: 他们看到了一条规则
+        可操作的<strong>力量集中与协作</strong>。当“进行中”栏达到极限时，
+        团队停止推动新事物并开始<strong>结束</strong>已经开始的事情（解除瓶颈，
+        消除障碍，帮助那些受阻的人）。这就是看板运作的原因<strong>系统
+          拉</strong>：只有当有真正的能力时，你才会拉新工作。还有<strong>例外情况</strong>（例如紧急事项）不应非正式地“突破”系统；他们
+        需要预见到<strong>明确的政策</strong>，作为规则<strong>类的
+          服务</strong>，包括明确某个类何时可以超出限制以及会发生什么情况
+        流量的剩余部分。</p>
+</section>
+<section id="dow-board">
+<h2>4）DoW（工作流程的定义）和看板</h2>
+<p>重要的 DoW 概念：</p>
+<ul>
+<li><strong>工作项目</strong>：穿过流的价值单位。</li>
+<li><strong>起点</strong>和<strong>终点</strong>.</li>
+<li><strong>定义状态</strong>物品流经的地方。</li>
+<li><strong>在制品控制</strong>从头到尾。</li>
+<li><strong>明确的政策</strong>用于运动。</li>
+<li><strong>系统性红斑狼疮</strong>（服务水平期望）：时间+遍历系统的概率。</li>
+</ul>
+<p>工作流程 (DoW) 的定义是看板的核心概念之一，因为它
+        代表了对系统内工作流程的明确且共同的理解。她定义
+        清楚地知道工作项（价值单位）是什么、工作从哪里开始和结束、按什么进行
+        说明其经过、WIP（进行中的工作）如何从头到尾进行控制以及政策是什么
+        明确步骤之间的移动。当团队查看董事会并且每个人都解释相同的流程时
+        方式，这意味着 DoW 工作正常。这种对齐减少了歧义，提高了
+        可预测性并加强对交付价值的关注——完全按照看板方法的指导。</p>
+<p>看板是 DoW 的视觉具体化。它使流程透明，突出瓶颈并允许
+        积极管理正在进行的工作。通过限制 WIP 并制定明确的流动政策，
+        系统促进需求和容量之间的平衡，提高效率和可预测性。 SLE（服务
+        Level Expectation）通过建立给定的时间期望来补充此结构
+        物品通过系统的概率，加强数据化管理。在实践中，使用
+        像 KanbanApp 这样的数字板（<a href="https://kanbanapp.io" rel="noopener noreferrer" target="_blank">https://kanbanapp.io</a>）促进了这种实现，因为它允许
+        配置/管理状态、WIP 限制、明确的策略和
+        以清晰、专业和安全的方式遵循流程 - 即使离线且无需安装。
+        因此，看板理论成为日常实践，适用于企业和企业环境。
+        个人的。</p>
+<p>如果团队查看董事会并理解同样的事情，那么 DoW 正在发挥作用。</p>
+<div class="box">
+<h3>看板实践</h3>
+<p>该板是 DoW 的可视化。不存在通用的“一张正确的图片”；框架应该反映上下文
+          真实的。
+          重要的是流量看得见、界限清晰、政策明确。</p>
+</div>
+</section>
+<section id="políticas">
+<h2>5) 明确的策略、块和流质量</h2>
+<p>明确的政策是你的“操作手册”。<strong>看板</strong>:<strong>简单的规则，
+          可见且清醒</strong>告诉系统工作应该如何继续进行<strong>可预测的</strong>和<strong>健康</strong>。他们涵盖了来自<strong>准入标准和
+          退出</strong>（什么可以进入这个阶段？什么时候可以离开？）什么意思<strong>每个都“准备好”
+          专栏</strong>（每步完成的定义），例如<strong>标记并处理堵塞</strong>（当一个
+        项目被视为锁定，如何在板上标记它，预期反应时间是多少以及谁帮助解锁），
+        这是怎么发生的<strong>加油</strong>（谁决定、何时决定以及需要多少工作）以及如何决定
+        处理<strong>紧急情况</strong>（例如像 Expedite 这样的服务类别），而不会扰乱流程。在实践中，
+        明确的政策将“一时冲动”的决策转变为<strong>可重复的</strong>，留下
+        系统更公平，操作更快，更容易改进。</p>
+<p>直接增益为<strong>减少摩擦</strong>：有了明确的规则，你就有了<strong>减少猜测</strong>,
+        减少循环辩论，根据商定的内容做出更客观的决定。例如，如果“In”列
+        验证”有一个<strong>完毕</strong>具体，减少返工和“来回”；被阻止的项目是否有
+        升级政策（例如，24小时封锁后优先解锁），团队不让
+        问题恶化；如果补货有标准（容量、物品大小、优先级），团队
+        保护输入并防止过载；如果限制<strong>在制品</strong>以及规则<strong>类的
+          服务</strong>很明确，每个人都明白什么时候<strong>他可以</strong>拉时<strong>它不能</strong>，以及出现紧急情况时会发生什么。您整理的这份清单非常棒，因为
+        这：它涵盖了影响最大的政策<strong>流动</strong>,<strong>质量</strong>和<strong>可预测性</strong>.</p>
+<div class="box">
+<h3>有用的政策清单</h3>
+<ul>
+<li>按列/步骤完成的定义。</li>
+<li>被阻止项目的规则（标记和解决）。</li>
+<li>补货（由谁决定、补货时间和补货量）。</li>
+<li>每列和/或全局的 WIP 限制。</li>
+<li>按服务类别划分的规则。</li>
+</ul>
+</div>
+</section>
+<section id="métricas">
+<h2>6) 指标和流量管理</h2>
+<p>指标在<strong>看板</strong>存在于<strong>做出更好的流量决策</strong>, 没有
+        “装饰仪表板”。这个逻辑非常实用：如果你测量流量，你就会看到<strong>的健康
+          系统</strong>并设法在事情变得混乱之前采取行动。节点<strong>官方指南</strong>，“主要
+        指标”突出显示的是<strong>交货时间</strong>（从承诺到完成），<strong>费用
+          交付/流量</strong>（每单位时间完成的项目）和<strong>在制品</strong>（项目数量
+        在系统中），他们提供图表来帮助理解系统的行为并识别改进。
+        :contentReference[oaicite:0]{index=0} 否<strong>看板指南 (v2020.12)</strong>，焦点更加
+        “操作”：它定义了一组最小的<strong>强制流动措施</strong>—<strong>在制品</strong>,<strong>吞吐量</strong>,<strong>物品年龄</strong>和<strong>时间
+          周期（周期时间）</strong>- 因为它们真正允许您每天检查和调整系统
+        一天，其开始和结束在您定义<strong>陶氏化学公司</strong>.</p>
+<p>在实践中，这些指标是相辅相成的：<strong>在制品</strong>显示有多少工作“堵塞”了
+        现在系统；<strong>流动</strong>显示您每个时期可以完成多少；<strong>时间
+          循环</strong>和<strong>交货时间</strong>显示“需要多长时间”（在不同的部分），以及<strong>物品年龄</strong>是一个简单的警报，用于检测太旧的物品
+        需要注意。这就是官方指南有用的可视化的用武之地：<strong>运行图</strong>交货时间/周期时间可帮助您了解<strong>倾向</strong>随着时间的推移;这<strong>的分布
+          交货时间</strong>显示了<strong>可预测性</strong>（目标是缩小车道并移动到
+        左）；和<strong>CFD（累积流程图）</strong>使 WIP“堆积”的位置可见，并且
+        流程中存在瓶颈的地方。</p>
+<h3>6.1 中心概念</h3>
+<ul>
+<li><strong>交货时间</strong>：从承诺到交付/完成。</li>
+<li><strong>周期</strong>：从项目的开头到结尾（在 DoW 中定义）。</li>
+<li><strong>吞吐量</strong>：单位时间内完成的项目。</li>
+<li><strong>工作项目年龄</strong>：该项目已经进行了多长时间。</li>
+<li><strong>在制品</strong>：系统（或其一部分）中正在进行的项目。</li>
+</ul>
+<h3>6.2 强制性最低限度措施</h3>
+<p>要操作和改进系统，至少应遵循：</p>
+<ul>
+<li>在制品</li>
+<li>流动</li>
+<li>物品年龄</li>
+<li>周期</li>
+</ul>
+<h3>6.3 有用的视图</h3>
+<ul>
+<li><strong>运行图</strong>查看趋势的时间（领先/周期）。</li>
+<li><strong>交货期分布</strong>理解可预测性（缩小范围并转向
+          左）。</li>
+<li><strong>差价合约</strong>（累积流程图）查看在制品“堆积”的位置并揭示瓶颈。</li>
+</ul>
+<h3>6.4 “Kan-Bahn”：交通隐喻</h3>
+<p>“<strong>干巴恩</strong>” 是一个比喻<strong>过境</strong>解释工作流程
+        在一个系统内：当“道路”（<strong>容量</strong>）变得非常忙碌，任何小
+        变异产生<strong>拥塞</strong>。在工作环境中，这显示为<strong>在制品
+          高</strong>（很多事情同时发生），更多<strong>队列</strong>， 更多的<strong>锁</strong>还有更多<strong>上下文切换</strong>- 这减少了<strong>流动性</strong>和
+        击倒<strong>可预测性</strong>。在这个类比中，看板的逻辑是<strong>减少
+          拥堵</strong>控制 WIP，组织流程，使项目更一致地前进
+        并使用<strong>来自系统本身的数据</strong>（例如时间和队列）调整政策并改进
+        预测交货的能力。</p>
+<p>在此背景下，<strong>承诺点</strong>是一个重要的里程碑：当需求停止时
+        从只是“积压”中的一个选项，变成了<strong>真正的承诺</strong>交货。从那里开始，做
+        意思是测量<strong>交货时间</strong>——从做出承诺到做出承诺所经过的时间<strong>送货</strong>给客户——因为您希望在流程的这一部分中提高可靠性：
+        更少的变化、更少的延迟以及更多<strong>可预测性</strong>对于那些正在等待结果的人。</p>
+</section>
+<section id="classes-serviço">
+<h2>7) 工作类型和服务等级</h2>
+<p>并非每种类型的需求都具有相同的“权重”或相同的紧迫性，因此<strong>工作类型</strong>和<strong>服务等级</strong>存在供您明确定义<strong>喜欢不同的物品
+          进入系统并进行处理</strong>。节点<a href="https://kanban.university/kanban-guide/" rel="noopener noreferrer" target="_blank">看板指南</a>，这个类比是交通：就像<strong>救护车、消防员和车辆</strong>可能在路上有优先权，某些工作项目可能
+        接受差别化待遇——这是<strong>服务等级</strong>。最“经典”的课程是<strong>加急（紧急）</strong>：它允许授权项目更快地通过<strong>即使当
+          超出 WIP 限制</strong>，但这只有在存在时才有效<strong>商定的标准和规则
+          并且为大家所熟知</strong>（谁可以使用它，在什么条件下，如何发出信号，以及团队做了什么
+        “开路”）。</p>
+<p>因此，中心点是<strong>透明度的一致性</strong>：紧迫性可以（并且将会）存在，
+        但它需要附带<strong>明确的政策</strong>以免成为中断流程的“非正式紧急情况”
+        每天。他自己<a href="https://kanban.university/kanban-guide/" rel="noopener noreferrer" target="_blank">看板指南</a>强调明确的政策除了 WIP 限制之外还包括：<strong>处理不同服务类别的物品的政策</strong>，并且这些政策
+        必须是<strong>可见、简单且一致同意</strong>，此外还会随着时间的推移进行修订。那么，你
+        控制异常（Expedite），保护其余部分的可预测性并防止“跳队”成为
+        例行公事。</p>
+<p>要点是保持一致性：紧迫性可能存在，但有明显的规则。</p>
+<h3>服务类别：</h3>
+<ul>
+<li><strong>加急（紧急）</strong>：项目被授权接收优先级并“跳过队列”
+          受控制，有明确的规则。</li>
+<li><strong>普通的</strong>：标准类别，遵循正常的系统流程，无特殊权限。</li>
+<li><strong>特别的</strong>：与正常类别不同的类别，用于需要处理的项目
+          具体的，没有与 Expedite 相同的特权。</li>
+</ul>
+</section>
+<section id="cadências">
+<h2>8) 节奏和反馈循环</h2>
+<p>看板强调<strong>反馈循环</strong>促进<strong>检查和适应</strong>连续流动，并且<strong>节奏</strong>这些正是具有明确目的的会议/审查
+        每天支持这种改进，并始终根据团队和服务的背景进行调整。一般来说，<strong>更短、更客观的循环</strong>比长时间的会议效果更好，因为它们可以集中精力
+        真正解锁系统：<strong>团队看板会议</strong>（通常每天），团队观察到
+        框架，识别障碍并根据<strong>容量</strong>可用的;
+        节点<strong>补货</strong>（每周或必要时），小组选择将进入系统的内容，
+        保持与拉动模型一致的“健康输入”；并在<strong>回顾性</strong>（每两周一次或
+        每月），重点是发展<strong>政策</strong>,<strong>限制</strong>和基于数据的实践
+        学习，强化流程的持续改进。</p>
+<p>以下是节奏和反馈周期的摘要：</p>
+<table>
+<thead>
+<tr>
+<th>节奏</th>
+<th>频率（示例）</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>团队看板会议</td>
+<td>日常的</td>
+<td>观察板上的流量，并根据容量和阻塞情况决定下一步的步骤。</td>
+</tr>
+<tr>
+<td>补货</td>
+<td>每周（或根据需要）</td>
+<td>选择进入系统的内容（拉动），确保健康的输入。</td>
+</tr>
+<tr>
+<td>回顾性</td>
+<td>每两周一次或每月一次</td>
+<td>改进数据驱动的政策、限制和实践。</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="statik">
+<h2>9) STATIK（引入看板的系统思维方法）</h2>
+<p>
+</p><p>这<strong>统计数据</strong>（引入看板的系统思维方法）是一种格式为<strong>车间</strong>到<strong>绘制或重新设计</strong>有意识地建立看板系统，
+        使用<strong>系统思维</strong>和<strong>持续反馈</strong>。而不是拼凑一个框架
+        “根据猜测”（仅复制标准列），STATIK 假设该表只是“提示”
+        更大系统的可见性：<strong>政策</strong>,<strong>限制</strong>,<strong>节奏</strong>,<strong>指标</strong>和协议。因此，首先要查看服务的真实上下文以及内容
+        今天正在造成痛苦，然后将这些发现转化为有意义且可以的流程设计
+        随着时间的推移，根据数据进行调整。</p>
+<p>典型的流程包括：</p>
+<ol>
+<li>找出不满意的根源。</li>
+<li>分析需求（到达的内容、模式、类型）。</li>
+<li>分析容量（流量、时间、可预测性）。</li>
+<li>对流程（活动/步骤）进行建模。</li>
+<li>确定服务类别。</li>
+<li>设计看板系统（看板+政策+指标+节奏）。</li>
+</ol>
+<p>其结果是一个与工作天生“相关”的看板
+        真实、更易于操作、测量和持续改进。</p>
+</section>
+<section id="indústria-toc">
+<h2>10) 工业中的看板和约束理论 (T.O.C)</h2>
+<p>在制造业中，看板表现为控制补货和库存、避免过量和库存的卡系统。
+        缺乏材料
+        并使生产与需求保持一致（拉动生产）。下面我们有定义<strong>约束理论
+          （目录）</strong>,
+        尤其是方法<strong>鼓-肺-绳</strong>和<strong>生产和移动看板</strong>使系统与瓶颈同步：</p>
+<p>这<strong>约束理论（T.O.C.）</strong>在看板的背景下，是看待系统的方式
+        工作作为一个流程，其中结果（交付、速度、可预测性）主要受到以下因素的限制
+        一个或几个瓶颈——“约束”。您无需尝试立即优化所有内容，而是确定
+        工作最多的摊位（累积最多队列或花费最多时间的步骤），并使用看板实践来可视化
+        流量、WIP限制、队列管理和明确的政策来保护和改善约束，减少
+        她周围的头顶。重点变成：保持工作稳定进行，提高产能
+        尽可能地遇到瓶颈，并使需求的输入与系统的实际节奏保持一致，改善最后期限和
+        交货的可靠性。</p>
+<p>即使在工厂之外，该逻辑仍然有用：在实际限制点保护流量。</p>
+<h3>10.1 生产和移动看板</h3>
+<ul>
+<li><strong>钾</strong>：生产看板。</li>
+<li><strong>公里</strong>：运动看板。</li>
+<li>排序是组织供应以最大限度地减少库存并维持流量。</li>
+</ul>
+<p>节点<strong>生产和移动看板</strong>，目标是控制制造什么以及如何替换它
+        视觉和拉形，保持流动稳定并减少过度。 Kp（生产看板）是这样的信号：
+        授权生产特定数量（消耗的东西的替换），而 Km（生产的看板）
+        移动）是授权在阶段之间移动/供应材料的信号，确保正确的物品到达
+        在正确的时间、正确的地点。其中，排序作为供应组织（订单
+        补货和交付），以最大限度地减少库存，避免中断并保持整个流程的连续流动
+        过程。</p>
+<h3>10.2 鼓-肺-绳（TPC）</h3>
+<ul>
+<li><strong>鼓</strong>：由约束（瓶颈）决定的时间表/节奏。</li>
+<li><strong>肺</strong>：防止变化（库存/间隙控制）。</li>
+<li><strong>细绳</strong>：同步释放进来的内容，以免系统过载。</li>
+</ul>
+<p>这<strong>鼓-肺-弦 (TPC)</strong>是一种流程控制逻辑，其中系统的节奏是
+        由约束（瓶颈）控制，防止流程的其余部分产生过多的正在进行的工作。
+        鼓是系统的“节拍”：由限制决定的编程和节奏，它定义了最大节奏
+        可持续的。缓冲是防止变化、受控的松弛/库存（时间或材料）
+        定位于吸收振荡而不停止瓶颈。 Rope 是同步机制：它
+        控制入口处的工作释放，使进入的所有内容都与滚筒对齐，避免
+        超载、不必要的排队以及失去可预测性。</p>
+</section>
+<section id="roteiro">
+<h2>11）实施路线图（一步一步实践）</h2>
+<p>一<strong>部署路线图</strong>帮助您以简单的方式开始使用看板，快速学习
+        并与<strong>受控风险</strong>。这个想法是选择一个<strong>实际服务/流程</strong>（是
+        个人或团队）并明确它是什么<strong>“价值”</strong>那里（意思是“很好地交付”
+        谁接收）。然后，您定义并描述通过的流程<strong>DoW（定义
+          工作流程）</strong>：放入什么类型的物品，工作从哪里开始和结束，步骤是什么，什么
+        政策是有效的，有哪些<strong>在制品限制</strong>以及预期的截止日期（例如：<strong>系统性红斑狼疮</strong>）。有了这个，你就可以组装了<strong>框架</strong>（例如，在<strong>看板应用程序</strong>）并把<strong>真正的工作</strong>旋转，避免创建框架
+        “漂亮”并不代表操作。</p>
+<p>在执行过程中，最重要的是<strong>纪律</strong>和<strong>反馈</strong>： 放<strong>在制品限制</strong>并练习<strong>拉</strong>（只有当有时才开始一个新项目
+        容量），同时测量最少的系统信号 —<strong>在制品</strong>,<strong>流动</strong>,<strong>物品年龄</strong>和<strong>周期</strong>— 查看拥堵情况和
+        改进的机会。为了支持这一点，创建<strong>最小步频</strong>: 简短的会议
+        面向流程（着眼于块和后续步骤），一个时刻<strong>加油</strong>（决定
+        什么进来）和一个<strong>回顾性的</strong>（调整政策、限制和做法）。根据数据和
+        学习出现，使用<strong>统计数据</strong>更有意识地重新设计系统，
+        确保<strong>不断进化</strong>无需从头开始“重新发明”一切。</p>
+<p>如果您想轻松开始，此顺序可以帮助您在控制风险的情况下快速学习。</p>
+<ol>
+<li>选择一个真实的服务/流程（个人或团队）并定义“价值”。</li>
+<li>设计 DoW（项目、开始/结束、步骤、策略、WIP、SLE）。</li>
+<li>组装框架（可以在<strong>看板应用程序</strong>）并投入实际工作。</li>
+<li>设置 WIP 限制并练习有纪律地拉动。</li>
+<li>测量最小值：在制品、流量、产品寿命、周期时间。</li>
+<li>创建最小的节奏：以流程为导向的会议+补充+回顾。</li>
+<li>使用STATIK根据数据和学习进行重新设计。</li>
+</ol>
+</section>
+<section id="vantagens-kanban">
+<h2>12) 使用看板的优点</h2>
+<p>当将看板方法与数字看板一起使用时，我们得到的第一印象<strong>看板应用程序</strong>是对工作组织和任务掌握的认识，必须
+        即使在极其详细和大量的流程中也是如此。</p>
+<p>随着持续使用，专业人士也开始意识到他们忘记的事情和离开的情况要少得多
+        日常花费的细节要少得多。这种效果会增强团队的信心，并让人觉得你
+        他是一位杰出的专业人士。有了这个你将拥有：</p>
+<ul>
+<li><strong>更高的可预测性</strong>：通过受控的 WIP、流量指标和明确的策略，它变得
+          更容易根据实际数据估计截止日期。</li>
+<li><strong>更清晰的优先顺序</strong>：视觉板可帮助您决定先放入什么并避免什么
+          过多的多任务处理会造成浪费。</li>
+<li><strong>生产力与质量</strong>：通过限制正在进行的工作并专注于完成，团队
+          减少瓶颈并加快一致的交付速度。</li>
+<li><strong>加强协作</strong>：因为流程是可见的，所以阻塞很早就出现，团队变得
+          更好地组织起来解决障碍。</li>
+<li><strong>持续改进</strong>：反馈节奏和数据分析使系统能够不断发展，而无需
+          破裂，在短且可持续的周期中。</li>
+</ul>
+</section>
+<section id="conclusao">
+<h2>13）结论</h2>
+<p>看板是一种入门简单、发展强大的方法。在实践中，它提供了即时的洞察力
+        组织和控制任务，减少健忘，提高对细节的关注并增强您的形象
+        团队内的专业人士。</p>
+<p>当流量可见、具有明确的政策、正在进行的工作限制以及持续的分析时
+        指标，团队获得焦点、可预测性、协作和可持续生产力。最好的结果来了
+        从实践出发：从当前环境出发，持续衡量流量，短周期调整系统。</p>
+</section>
+<section id="referencias-bibliograficas">
+<h2>14) 参考书目</h2>
+<p><strong>参考文献（作为基础的文件）：</strong></p>
+<ul>
+<li><strong><a href="https://kanbanguides.org/" rel="noopener noreferrer" target="_blank">看板指南 v2020.12
+              (pt-BR)</a></strong>— 包含核心看板实践、原则和概念的参考文件。</li>
+<li><strong><a href="https://kanban.university/" rel="noopener noreferrer" target="_blank">官方看板
+              指南（葡萄牙语，A4）</a></strong>— 包含基本定义和指南的官方指南。</li>
+<li><strong><a href="https://www.researchgate.net/publication/273328689_The_kanban_approach_between_agility_and_leanness_a_systematic_review" rel="noopener noreferrer" target="_blank">看板方法（Baik，2015）</a></strong>— 材料
+          补充该方法的解释和情境化。</li>
+<li><strong>看板：技术业务的成功演进变革（David J. Anderson）</strong>—
+          进化变革和看板系统设计的经典参考。</li>
+<li>
+<strong>奥利维拉，拉斐尔·德·阿布鲁；加斯帕罗托，安吉丽塔·穆坦·塞戈里亚。</strong>看板系统的使用：与公司约束理论（T.O.C）的发展比较
+          汽车橡胶装置。<em>技术接口</em>，第 17 节，没有。 2, 2020.DOI:<strong>10.31510/infa.v17i2.853</strong>。已发表
+          在：<strong>2020年12月18日</strong>。
+          可以在：<a href="https://revista.fatectq.edu.br/interfacetecnologica/article/view/853" rel="noopener" target="_blank">
+            https://revista.fatectq.edu.br/interfacetecnologica/article/view/853
+          </a>（镜子/研究门：<a href="https://www.researchgate.net/publication/350439389_USO_DO_SISTEMA_KANBAN_UM_COMPARATIVO_COM_O_DESENVOLVIMENTO_DA_TEORIA_DAS_RESTRICOES_TOC_EM_UMA_EMPRESA_DE_DISPOSITIVOS_DE_BORRACHA_AUTOMOTIVA" rel="noopener" target="_blank">研究之门</a>)</li>
+<li><strong>Kaizen 看板：创建优先项目管道的视觉辅助方法</strong>—
+          法布里斯·布歇罗。 ASQ 质量出版社，2017 年。ISBN：9780873899376。</li>
+</ul>
+</section>
+<aside aria-label="相关链接" class="related">
+<h2>相关内容</h2>
+<ul>
+<li><a href="/zh-cn/">家</a></li>
+<li><a href="/zh-cn/shen-me-shi-kanban/">什么是看板？</a></li>
+<li><a href="/zh-cn/shen-me-shi-kanban/">什么是看板？ (pt-BR)</a></li>
+</ul>
+</aside>
+</main>
+<footer>
+<p>版权所有 2026 看板应用程序</p>
+</footer>
+<script>
+    (function () {
+      var menuDetails = document.querySelector('.quick-links-menu details');
+      if (!menuDetails) return;
+
+      function closeMenu() {
+        if (menuDetails.hasAttribute('open')) {
+          menuDetails.removeAttribute('open');
+        }
+      }
+
+      document.addEventListener('click', function (event) {
+        if (!menuDetails.hasAttribute('open')) return;
+        if (menuDetails.contains(event.target)) return;
+        closeMenu();
+      }, true);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeMenu();
+      });
+
+      var links = menuDetails.querySelectorAll('.quick-links-list a');
+      for (var i = 0; i < links.length; i += 1) {
+        links[i].addEventListener('click', function () {
+          closeMenu();
+        });
+      }
+    })();
+
+    (function () {
+      var STORAGE_KEY = 'kanbanappPreferredLanguage';
+      var LANGUAGE_HOMES = { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' };
+      var ROUTE_PAIRS = {
+        '/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
+        '/pt-br/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
+        '/es/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
+        '/ar/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
+        '/hi/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
+        '/zh-cn/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
+
+        '/what-is-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
+        '/pt-br/o-que-e-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
+        '/es/que-es-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
+        '/ar/ma-huwa-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
+        '/hi/kanban-kya-hai/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
+        '/zh-cn/shen-me-shi-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
+
+        '/privacy-policy/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
+        '/pt-br/politica-de-privacidade/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
+        '/es/politica-de-privacidad/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
+        '/ar/siyasat-al-khusoosiya/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
+        '/hi/gopniyata-neeti/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
+        '/zh-cn/yin-si-zheng-ce/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
+
+        '/contact/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
+        '/pt-br/contato/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
+        '/es/contacto/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
+        '/ar/ittisal/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
+        '/hi/sampark/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
+        '/zh-cn/lian-xi/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' }
+      };
+
+      function normalizePath(pathname) {
+        return pathname === '/' ? '/' : pathname.replace(/\/+$/, '') + '/';
+      }
+
+      function resolvePathForLanguage(targetLanguage) {
+        var currentPath = normalizePath(window.location.pathname || '/');
+        var pair = ROUTE_PAIRS[currentPath];
+        if (pair && pair[targetLanguage]) return pair[targetLanguage];
+        return LANGUAGE_HOMES[targetLanguage] || '/';
+      }
+
+      function normalizeLanguage(value) {
+        if (!value) return null;
+        var lower = String(value).toLowerCase();
+        if (lower.indexOf('pt') === 0) return 'pt-BR';
+        if (lower.indexOf('zh') === 0) return 'zh-CN';
+        if (lower.indexOf('es') === 0) return 'es';
+        if (lower.indexOf('ar') === 0) return 'ar';
+        if (lower.indexOf('hi') === 0) return 'hi';
+        return 'en';
+      }
+
+      function getStoredLanguage() {
+        try { return normalizeLanguage(localStorage.getItem(STORAGE_KEY)); } catch (error) { return null; }
+      }
+
+      function saveLanguage(language) {
+        try { localStorage.setItem(STORAGE_KEY, language); } catch (error) {}
+      }
+
+      function getBrowserLanguage() {
+        var browserLanguage = (navigator.languages && navigator.languages[0]) || navigator.language || 'en';
+        return normalizeLanguage(browserLanguage);
+      }
+
+      var preferredLanguage = getStoredLanguage() || getBrowserLanguage() || 'en';
+      saveLanguage(preferredLanguage);
+
+      var langLinks = document.querySelectorAll('.lang-flag-link[data-language]');
+      for (var i = 0; i < langLinks.length; i += 1) {
+        var link = langLinks[i];
+        var linkLanguage = normalizeLanguage(link.getAttribute('data-language'));
+        if (linkLanguage === preferredLanguage) link.classList.add('is-active');
+        link.addEventListener('click', function (event) {
+          var selectedLanguage = normalizeLanguage(this.getAttribute('data-language')) || 'en';
+          var targetUrl = resolvePathForLanguage(selectedLanguage);
+          event.preventDefault();
+          saveLanguage(selectedLanguage);
+          window.location.href = targetUrl;
+        });
+      }
+
+      var pathname = window.location.pathname || '/';
+      var normalizedPath = pathname === '/' ? '/' : pathname.replace(/\/+$/, '') + '/';
+      var homePaths = ['/', '/pt-br/', '/es/', '/ar/', '/hi/', '/zh-cn/'];
+      if (homePaths.indexOf(normalizedPath) >= 0) {
+        var preferredHome = LANGUAGE_HOMES[preferredLanguage] || '/';
+        if (normalizedPath !== preferredHome) window.location.replace(preferredHome);
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
+
