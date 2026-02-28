@@ -22,6 +22,26 @@
   </url>
 
   <url>
+    <loc>https://kanbanapp.io/privacy-policy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/politica-de-privacidade/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/privacy-policy/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kanbanapp.io/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/contact/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/contato/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/contact/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://kanbanapp.io/pt-br/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/" />
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/" />
@@ -40,5 +60,24 @@
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-</urlset>
 
+  <url>
+    <loc>https://kanbanapp.io/pt-br/politica-de-privacidade/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/privacy-policy/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/politica-de-privacidade/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/privacy-policy/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kanbanapp.io/pt-br/contato/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/contact/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/contato/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/contact/" />
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>
