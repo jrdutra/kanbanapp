@@ -11,8 +11,8 @@
 <meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
 <meta content="कानबन क्या है? पेशेवर उपयोग के लिए बुनियादी बातों, प्रथाओं, मेट्रिक्स, सेवा वर्गों, ताल, स्टेटिक और कार्यान्वयन रोडमैप के साथ संपूर्ण मार्गदर्शिका।" name="description"/>
 <title>कानबन क्या है? संपूर्ण गाइड | कंबन ऐप</title>
-<link href="../../favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="../../favicon.svg" rel="shortcut icon"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.svg" rel="shortcut icon"/>
 <link href="https://kanbanapp.io/hi/kanban-kya-hai/" rel="canonical"/>
 <link href="https://kanbanapp.io/sitemap.xml" rel="sitemap" type="application/xml"/><link href="https://kanbanapp.io/what-is-kanban/" hreflang="en" rel="alternate"/><link href="https://kanbanapp.io/pt-br/o-que-e-kanban/" hreflang="pt-BR" rel="alternate"/><link href="https://kanbanapp.io/es/que-es-kanban/" hreflang="es" rel="alternate"/><link href="https://kanbanapp.io/ar/ma-huwa-kanban/" hreflang="ar" rel="alternate"/><link href="https://kanbanapp.io/hi/kanban-kya-hai/" hreflang="hi" rel="alternate"/><link href="https://kanbanapp.io/zh-cn/shen-me-shi-kanban/" hreflang="zh-CN" rel="alternate"/><link href="https://kanbanapp.io/what-is-kanban/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
@@ -593,13 +593,12 @@
       }
     }
 
-
   </style>
 </head>
 <body>
 <header aria-label="वेबसाइट हेडर" class="center" role="banner">
 <div class="site-brand">
-<img alt="कंबन ऐप" aria-hidden="true" class="site-brand-icon" src="../../favicon.svg"/>
+<img alt="कंबन ऐप" aria-hidden="true" class="site-brand-icon" src="/favicon.svg"/>
 <div>
 <div class="site-brand-name">कंबन ऐप</div>
 <p class="tagline">ऑफ़लाइन कानबन बोर्ड</p>
@@ -620,13 +619,16 @@
 </ul>
 </details>
 </nav>
-<div aria-label="भाषा चयनकर्ता" class="lang-switcher">
-<a class="lang-flag-link" data-language="en" href="/" lang="en" title="अंग्रेज़ी"><img alt="संयुक्त राज्य अमेरिका का झंडा" class="lang-flag-icon" src="/flags/us.svg"/></a>
-<a class="lang-flag-link" data-language="pt-BR" href="/pt-br/" lang="pt-BR" title="पुर्तगाली (ब्राजील)"><img alt="ब्राज़ील का झंडा" class="lang-flag-icon" src="/flags/br.svg"/></a>
-<a class="lang-flag-link" data-language="es" href="/es/" lang="es" title="Español"><img alt="स्पेन का झंडा" class="lang-flag-icon" src="/flags/es.svg"/></a>
-<a class="lang-flag-link" data-language="ar" href="/ar/" lang="ar" title="العربية"><img alt="अरबी भाषा ध्वज मार्कर" class="lang-flag-icon" src="/flags/ar.svg"/></a>
-<a class="lang-flag-link" data-language="hi" href="/hi/" lang="hi" title="हिन्दी"><img alt="भारत का झंडा" class="lang-flag-icon" src="/flags/in.svg"/></a>
-<a class="lang-flag-link" data-language="zh-CN" href="/zh-cn/" lang="zh-CN" title="中文 (简体)"><img alt="चीन का झंडा" class="lang-flag-icon" src="/flags/cn.svg"/></a>
+<div aria-label="Language selector" class="lang-switcher">
+<a class="lang-flag-link" data-language="en" href="/" lang="en" title="English"><img alt="United States flag" class="lang-flag-icon" src="/flags/us.svg"/></a>
+<a class="lang-flag-link" data-language="pt-BR" href="/pt-br/" lang="pt-BR" title="Portuguese (Brazil)"><img alt="Brazil flag" class="lang-flag-icon" src="/flags/br.svg"/></a>
+<a class="lang-flag-link" data-language="zh-CN" href="/zh-cn/" lang="zh-CN" title="Chinese (Simplified)"><img alt="China flag" class="lang-flag-icon" src="/flags/cn.svg"/></a>
+<a class="lang-flag-link" data-language="es" href="/es/" lang="es" title="Spanish"><img alt="Spain flag" class="lang-flag-icon" src="/flags/es.svg"/></a>
+<a class="lang-flag-link" data-language="ar" href="/ar/" lang="ar" title="Arabic"><img alt="Arab countries flag" class="lang-flag-icon" src="/flags/ar.svg"/></a>
+<a class="lang-flag-link" data-language="hi" href="/hi/" lang="hi" title="Hindi"><img alt="India flag" class="lang-flag-icon" src="/flags/in.svg"/></a>
+<a class="lang-flag-link" data-language="id" href="/id/" lang="id" title="Indonesian"><img alt="Indonesia flag" class="lang-flag-icon" src="/flags/id.svg"/></a>
+<a class="lang-flag-link" data-language="fr" href="/fr/" lang="fr" title="French"><img alt="France flag" class="lang-flag-icon" src="/flags/fr.svg"/></a>
+<a class="lang-flag-link" data-language="de" href="/de/" lang="de" title="German"><img alt="Germany flag" class="lang-flag-icon" src="/flags/de.svg"/></a>
 </div>
 <header>
 <h1>कानबन क्या है?</h1>
@@ -1136,36 +1138,50 @@
 
     (function () {
       var STORAGE_KEY = 'kanbanappPreferredLanguage';
-      var LANGUAGE_HOMES = { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' };
+      var LANGUAGE_HOMES = { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/', fr: '/fr/', de: '/de/', id: '/id/' };
       var ROUTE_PAIRS = {
-        '/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
-        '/pt-br/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
-        '/es/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
-        '/ar/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
-        '/hi/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
-        '/zh-cn/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/' },
+        '/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/', fr: '/fr/', de: '/de/', id: '/id/' },
+        '/pt-br/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/', fr: '/fr/', de: '/de/', id: '/id/' },
+        '/es/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/', fr: '/fr/', de: '/de/', id: '/id/' },
+        '/ar/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/', fr: '/fr/', de: '/de/', id: '/id/' },
+        '/hi/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/', fr: '/fr/', de: '/de/', id: '/id/' },
+        '/zh-cn/': { en: '/', 'pt-BR': '/pt-br/', es: '/es/', ar: '/ar/', hi: '/hi/', 'zh-CN': '/zh-cn/', fr: '/fr/', de: '/de/', id: '/id/' },
 
-        '/what-is-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
-        '/pt-br/o-que-e-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
-        '/es/que-es-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
-        '/ar/ma-huwa-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
-        '/hi/kanban-kya-hai/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
-        '/zh-cn/shen-me-shi-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/' },
+        '/what-is-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/', fr: '/fr/qu-est-ce-que-kanban/', de: '/de/was-ist-kanban/', id: '/id/apa-itu-kanban/' },
+        '/pt-br/o-que-e-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/', fr: '/fr/qu-est-ce-que-kanban/', de: '/de/was-ist-kanban/', id: '/id/apa-itu-kanban/' },
+        '/es/que-es-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/', fr: '/fr/qu-est-ce-que-kanban/', de: '/de/was-ist-kanban/', id: '/id/apa-itu-kanban/' },
+        '/ar/ma-huwa-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/', fr: '/fr/qu-est-ce-que-kanban/', de: '/de/was-ist-kanban/', id: '/id/apa-itu-kanban/' },
+        '/hi/kanban-kya-hai/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/', fr: '/fr/qu-est-ce-que-kanban/', de: '/de/was-ist-kanban/', id: '/id/apa-itu-kanban/' },
+        '/zh-cn/shen-me-shi-kanban/': { en: '/what-is-kanban/', 'pt-BR': '/pt-br/o-que-e-kanban/', es: '/es/que-es-kanban/', ar: '/ar/ma-huwa-kanban/', hi: '/hi/kanban-kya-hai/', 'zh-CN': '/zh-cn/shen-me-shi-kanban/', fr: '/fr/qu-est-ce-que-kanban/', de: '/de/was-ist-kanban/', id: '/id/apa-itu-kanban/' },
 
-        '/privacy-policy/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
-        '/pt-br/politica-de-privacidade/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
-        '/es/politica-de-privacidad/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
-        '/ar/siyasat-al-khusoosiya/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
-        '/hi/gopniyata-neeti/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
-        '/zh-cn/yin-si-zheng-ce/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/' },
+        '/privacy-policy/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/', fr: '/fr/politique-de-confidentialite/', de: '/de/datenschutzerklaerung/', id: '/id/kebijakan-privasi/' },
+        '/pt-br/politica-de-privacidade/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/', fr: '/fr/politique-de-confidentialite/', de: '/de/datenschutzerklaerung/', id: '/id/kebijakan-privasi/' },
+        '/es/politica-de-privacidad/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/', fr: '/fr/politique-de-confidentialite/', de: '/de/datenschutzerklaerung/', id: '/id/kebijakan-privasi/' },
+        '/ar/siyasat-al-khusoosiya/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/', fr: '/fr/politique-de-confidentialite/', de: '/de/datenschutzerklaerung/', id: '/id/kebijakan-privasi/' },
+        '/hi/gopniyata-neeti/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/', fr: '/fr/politique-de-confidentialite/', de: '/de/datenschutzerklaerung/', id: '/id/kebijakan-privasi/' },
+        '/zh-cn/yin-si-zheng-ce/': { en: '/privacy-policy/', 'pt-BR': '/pt-br/politica-de-privacidade/', es: '/es/politica-de-privacidad/', ar: '/ar/siyasat-al-khusoosiya/', hi: '/hi/gopniyata-neeti/', 'zh-CN': '/zh-cn/yin-si-zheng-ce/', fr: '/fr/politique-de-confidentialite/', de: '/de/datenschutzerklaerung/', id: '/id/kebijakan-privasi/' },
 
-        '/contact/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
-        '/pt-br/contato/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
-        '/es/contacto/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
-        '/ar/ittisal/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
-        '/hi/sampark/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' },
+        '/contact/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/', fr: '/fr/contact/', de: '/de/kontakt/', id: '/id/kontak/' },
+        '/pt-br/contato/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/', fr: '/fr/contact/', de: '/de/kontakt/', id: '/id/kontak/' },
+        '/es/contacto/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/', fr: '/fr/contact/', de: '/de/kontakt/', id: '/id/kontak/' },
+        '/ar/ittisal/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/', fr: '/fr/contact/', de: '/de/kontakt/', id: '/id/kontak/' },
+        '/hi/sampark/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/', fr: '/fr/contact/', de: '/de/kontakt/', id: '/id/kontak/' },
         '/zh-cn/lian-xi/': { en: '/contact/', 'pt-BR': '/pt-br/contato/', es: '/es/contacto/', ar: '/ar/ittisal/', hi: '/hi/sampark/', 'zh-CN': '/zh-cn/lian-xi/' }
       };
+
+      // Locale aliases for non-home pages (FR/DE/ID) to keep language switch on equivalent content page
+      ROUTE_PAIRS['/fr/qu-est-ce-que-kanban/'] = ROUTE_PAIRS['/what-is-kanban/'];
+      ROUTE_PAIRS['/de/was-ist-kanban/'] = ROUTE_PAIRS['/what-is-kanban/'];
+      ROUTE_PAIRS['/id/apa-itu-kanban/'] = ROUTE_PAIRS['/what-is-kanban/'];
+
+      ROUTE_PAIRS['/fr/politique-de-confidentialite/'] = ROUTE_PAIRS['/privacy-policy/'];
+      ROUTE_PAIRS['/de/datenschutzerklaerung/'] = ROUTE_PAIRS['/privacy-policy/'];
+      ROUTE_PAIRS['/id/kebijakan-privasi/'] = ROUTE_PAIRS['/privacy-policy/'];
+
+      ROUTE_PAIRS['/fr/contact/'] = ROUTE_PAIRS['/contact/'];
+      ROUTE_PAIRS['/de/kontakt/'] = ROUTE_PAIRS['/contact/'];
+      ROUTE_PAIRS['/id/kontak/'] = ROUTE_PAIRS['/contact/'];
+
 
       function normalizePath(pathname) {
         return pathname === '/' ? '/' : pathname.replace(/\/+$/, '') + '/';
@@ -1186,6 +1202,10 @@
         if (lower.indexOf('es') === 0) return 'es';
         if (lower.indexOf('ar') === 0) return 'ar';
         if (lower.indexOf('hi') === 0) return 'hi';
+        if (lower.indexOf('ru') === 0) return 'ru';
+        if (lower.indexOf('fr') === 0) return 'fr';
+        if (lower.indexOf('de') === 0) return 'de';
+        if (lower.indexOf('id') === 0) return 'id';
         return 'en';
       }
 
@@ -1230,6 +1250,4 @@
   </script>
 </body>
 </html>
-
-
 
