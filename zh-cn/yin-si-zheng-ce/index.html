@@ -57,13 +57,87 @@
     .small { font-size:.92rem; }
     footer { margin-top:24px; color:rgba(255,255,255,.55); font-size:.9rem; text-align:center; }
     @media (max-width:640px){ body{padding:14px;} .quick-links-menu{top:10px;left:10px;} }
-    .lang-switcher { position:absolute; top:14px; left:64px; z-index:40; display:flex; gap:8px; align-items:center; }
-    main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
-    .lang-flag-link { width:42px; height:42px; border-radius:10px; border:1px solid var(--border); background:var(--panel-2); display:grid; place-items:center; text-decoration:none; transition:transform .15s ease; }
-    .lang-flag-link:hover { transform:translateY(-1px); }
-    .lang-flag-link.is-active { outline:2px solid var(--primary); outline-offset:1px; }
-    .lang-flag-icon { width:24px; height:18px; display:block; border-radius:2px; }
-    @media (max-width:640px){ .lang-switcher{top:10px;left:60px;} }
+main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
+
+
+    /* language dropdown menu */
+    .lang-switcher {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 40;
+    }
+
+    .lang-switcher details { position: relative; }
+
+    .lang-switcher summary {
+      list-style: none;
+      cursor: pointer;
+      min-width: 112px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel-2, var(--secondary, #2c2c3d));
+      color: var(--text);
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      padding: 0 12px;
+      outline: none;
+      user-select: none;
+    }
+
+    .lang-switcher summary::-webkit-details-marker { display: none; }
+
+    .lang-menu-list {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      margin: 0;
+      padding: 10px;
+      min-width: 230px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel-2, #2c2c3d);
+      box-shadow: 0 12px 24px rgba(0,0,0,.35);
+      list-style: none;
+    }
+
+    .lang-menu-list li + li { margin-top: 8px; }
+
+    .lang-flag-link {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel-2, var(--secondary, #2c2c3d));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform .15s ease;
+    }
+
+    .lang-flag-link:hover { transform: translateY(-1px); }
+
+    .lang-flag-link.is-active {
+      outline: 2px solid var(--primary);
+      outline-offset: 1px;
+    }
+
+    .lang-flag-icon { width: 24px; height: 18px; display: block; border-radius: 2px; }
+
+    .lang-label { font-weight: 600; line-height: 1.2; }
+
+    @media (max-width:640px) {
+      .lang-switcher { top: 10px; right: 10px; }
+      .lang-switcher summary { min-width: 104px; }
+      .lang-menu-list { min-width: 210px; }
+    }
+
+
 
   </style>
 <meta content="pc,mobile" name="applicable-device"/><meta content="webkit" name="renderer"/><meta content="webkit" name="force-rendering"/><meta content="telephone=no" name="format-detection"/><meta content="no-transform" http-equiv="Cache-Control"/></head>
@@ -91,16 +165,21 @@
 </ul>
 </details>
 </nav>
-<div aria-label="Language selector" class="lang-switcher">
-<a class="lang-flag-link" data-language="en" href="/" lang="en" title="English"><img alt="United States flag" class="lang-flag-icon" src="/flags/us.svg"/></a>
-<a class="lang-flag-link" data-language="pt-BR" href="/pt-br/" lang="pt-BR" title="Portuguese (Brazil)"><img alt="Brazil flag" class="lang-flag-icon" src="/flags/br.svg"/></a>
-<a class="lang-flag-link" data-language="zh-CN" href="/zh-cn/" lang="zh-CN" title="Chinese (Simplified)"><img alt="China flag" class="lang-flag-icon" src="/flags/cn.svg"/></a>
-<a class="lang-flag-link" data-language="es" href="/es/" lang="es" title="Spanish"><img alt="Spain flag" class="lang-flag-icon" src="/flags/es.svg"/></a>
-<a class="lang-flag-link" data-language="ar" href="/ar/" lang="ar" title="Arabic"><img alt="Arab countries flag" class="lang-flag-icon" src="/flags/ar.svg"/></a>
-<a class="lang-flag-link" data-language="hi" href="/hi/" lang="hi" title="Hindi"><img alt="India flag" class="lang-flag-icon" src="/flags/in.svg"/></a>
-<a class="lang-flag-link" data-language="id" href="/id/" lang="id" title="Indonesian"><img alt="Indonesia flag" class="lang-flag-icon" src="/flags/id.svg"/></a>
-<a class="lang-flag-link" data-language="fr" href="/fr/" lang="fr" title="French"><img alt="France flag" class="lang-flag-icon" src="/flags/fr.svg"/></a>
-<a class="lang-flag-link" data-language="de" href="/de/" lang="de" title="German"><img alt="Germany flag" class="lang-flag-icon" src="/flags/de.svg"/></a>
+<div aria-label="&#35821;&#35328;" class="lang-switcher">
+<details>
+<summary aria-label="&#35821;&#35328;" title="&#35821;&#35328;">&#35821;&#35328;</summary>
+<ul class="lang-menu-list">
+<li><a class="lang-flag-link" data-language="en" href="/" lang="en" title="English"><img alt="United States flag" class="lang-flag-icon" src="/flags/us.svg"/><span class="lang-label">English</span></a></li>
+<li><a class="lang-flag-link" data-language="pt-BR" href="/pt-br/" lang="pt-BR" title="Portuguese (Brazil)"><img alt="Brazil flag" class="lang-flag-icon" src="/flags/br.svg"/><span class="lang-label">Portugu&ecirc;s (Brasil)</span></a></li>
+<li><a class="lang-flag-link" data-language="zh-CN" href="/zh-cn/" lang="zh-CN" title="Chinese (Simplified)"><img alt="China flag" class="lang-flag-icon" src="/flags/cn.svg"/><span class="lang-label">&#20013;&#25991;&#65288;&#31616;&#20307;&#65289;</span></a></li>
+<li><a class="lang-flag-link" data-language="es" href="/es/" lang="es" title="Spanish"><img alt="Spain flag" class="lang-flag-icon" src="/flags/es.svg"/><span class="lang-label">Espa&ntilde;ol</span></a></li>
+<li><a class="lang-flag-link" data-language="ar" href="/ar/" lang="ar" title="Arabic"><img alt="Arab countries flag" class="lang-flag-icon" src="/flags/ar.svg"/><span class="lang-label">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span></a></li>
+<li><a class="lang-flag-link" data-language="hi" href="/hi/" lang="hi" title="Hindi"><img alt="India flag" class="lang-flag-icon" src="/flags/in.svg"/><span class="lang-label">&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;</span></a></li>
+<li><a class="lang-flag-link" data-language="id" href="/id/" lang="id" title="Indonesian"><img alt="Indonesia flag" class="lang-flag-icon" src="/flags/id.svg"/><span class="lang-label">Bahasa Indonesia</span></a></li>
+<li><a class="lang-flag-link" data-language="fr" href="/fr/" lang="fr" title="French"><img alt="France flag" class="lang-flag-icon" src="/flags/fr.svg"/><span class="lang-label">Fran&ccedil;ais</span></a></li>
+<li><a class="lang-flag-link" data-language="de" href="/de/" lang="de" title="German"><img alt="Germany flag" class="lang-flag-icon" src="/flags/de.svg"/><span class="lang-label">Deutsch</span></a></li>
+</ul>
+</details>
 </div>
 <h1>隐私政策</h1>
 <p class="center small"><strong>最后更新：</strong> 2026-02-27</p>
