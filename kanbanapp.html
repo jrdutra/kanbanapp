@@ -1566,7 +1566,21 @@ function escapeHtml(str){
       checklistDragMeta.targetCard = node;
       checklistDragMeta.targetItemsWrap = itemsWrap;
     }
-    placeChecklistItemByCheckState(itemsWrap, dragged);
+    const sameCardDrag = !!(checklistDragMeta && checklistDragMeta.sourceCard === node);
+    if (sameCardDrag){
+      const after = (function(container, y){
+        const items = Array.from(container.querySelectorAll('.checklist-item:not(.dragging)'));
+        for (let i=0;i<items.length;i++){
+          const box = items[i].getBoundingClientRect();
+          if (y < box.top + box.height/2) return items[i];
+        }
+        return null;
+      })(itemsWrap, e.clientY);
+      if (after == null) itemsWrap.appendChild(dragged);
+      else itemsWrap.insertBefore(dragged, after);
+    } else {
+      placeChecklistItemByCheckState(itemsWrap, dragged);
+    }
   });
   async function handleChecklistItemDrop(targetCard, targetItemsWrap){
     const dragged = currentDraggedChecklistItem;
@@ -1579,7 +1593,6 @@ function escapeHtml(str){
     const effectiveTargetCard = domTargetCard || targetCard || meta.targetCard || node;
     const effectiveTargetWrap = domTargetWrap || targetItemsWrap || meta.targetItemsWrap || $('.items', effectiveTargetCard);
     if (!effectiveTargetCard || !effectiveTargetWrap) return;
-    placeChecklistItemByCheckState(effectiveTargetWrap, dragged);
     const sourceCard = meta.sourceCard;
     const sourceWrap = meta.sourceItemsWrap;
     const sourceNext = meta.sourceNextSibling;
@@ -1647,7 +1660,8 @@ function escapeHtml(str){
   }
   itemsWrap.addEventListener('drop', async function(e){
     e.preventDefault();
-    if (currentDraggedChecklistItem) {
+    const sameCardDrag = !!(checklistDragMeta && checklistDragMeta.sourceCard === node);
+    if (currentDraggedChecklistItem && !sameCardDrag) {
       placeChecklistItemByCheckState(itemsWrap, currentDraggedChecklistItem);
     }
     if (checklistDragMeta){
@@ -1681,7 +1695,8 @@ function escapeHtml(str){
   node.addEventListener('drop', async function(e){
     if (!currentDraggedChecklistItem) return;
     e.preventDefault();
-    placeChecklistItemByCheckState(itemsWrap, currentDraggedChecklistItem);
+    const sameCardDrag = !!(checklistDragMeta && checklistDragMeta.sourceCard === node);
+    if (!sameCardDrag) placeChecklistItemByCheckState(itemsWrap, currentDraggedChecklistItem);
     if (checklistDragMeta){
       checklistDragMeta.targetCard = node;
       checklistDragMeta.targetItemsWrap = itemsWrap;
