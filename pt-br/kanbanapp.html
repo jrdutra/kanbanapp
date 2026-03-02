@@ -1949,6 +1949,9 @@ function placeChecklistItemByCheckState(itemsWrap, itemNode){
  itemsWrap.insertBefore(itemNode, first);
  }
 }
+function collapseAllCards(){
+ $$('.card').forEach(function(card){ setCollapsed(card, true); });
+}
 const checklistTransferUI = {
  overlay: null,
  btnCopy: null,
@@ -2424,6 +2427,18 @@ const clickedCard = e.target.closest && e.target.closest('.card');
  setCollapsed(card, card !== clickedCard); 
  }); 
 }); 
+// Durante drag de checklist: em área inválida de drop ("proibido"), fecha todos os cards
+document.addEventListener('dragover', function(e){
+ if (!currentDraggedChecklistItem) return;
+ const x = Number(e.clientX);
+ const y = Number(e.clientY);
+ if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+ const hovered = document.elementFromPoint(x, y);
+ const isValidChecklistDropArea = !!(hovered && hovered.closest && (hovered.closest('.items') || hovered.closest('.card')));
+ if (!isValidChecklistDropArea){
+ collapseAllCards();
+ }
+});
  // ===== AUTOSAVE (LocalStorage) ===== 
  (function enableAutosave(){ 
  const AUTOSAVE_KEY = 'kanbanBoardAutosave.v1'; 
