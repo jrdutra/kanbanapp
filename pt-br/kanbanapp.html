@@ -232,6 +232,9 @@
  transition: gap .52s cubic-bezier(.2,.9,.2,1);
  } 
  .card:hover{ background: var(--card-hover); } 
+ .card.dragging{
+ opacity: 0.45;
+ }
  .card.completed{ 
  background: var(--card-completed); 
  border-color: #333; 
@@ -400,9 +403,24 @@
  border: 1px solid var(--border); 
  border-radius: 8px; 
  padding: 8px; 
- cursor: text; 
+ cursor: default; 
  } 
-/* drag-handle removed: using item-level drag instead */
+ .item-drag-handle{
+  width: 20px;
+  height: 20px;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  line-height: 1;
+  font-size: 12px;
+  background: rgba(255,255,255,0.02);
+ }
+ .item-drag-handle:active{ cursor: grabbing; }
  .item-view{ 
  grid-column: 3 / 4; 
  color: var(--muted); 
@@ -411,6 +429,7 @@
  text-overflow: ellipsis; 
  max-width: 100%; 
  align-self: center;
+ cursor: text;
  }
  .item-view a{ color: #90caf9; text-decoration: underline; } 
  .item-editor{ 
@@ -511,6 +530,21 @@
  .rules-actions { margin-top: 6px; } 
  .modal-close { background: transparent; border: 1px dashed var(--border); } 
  .modal-close:hover { background: rgba(255,255,255,0.06); } 
+ .checklist-transfer-modal{
+ width: auto;
+ max-width: 92vw;
+ }
+ .checklist-transfer-actions{
+ padding: 12px;
+ display: flex;
+ flex-direction: column;
+ gap: 8px;
+ min-width: 220px;
+ }
+ .checklist-transfer-actions .btn{
+ width: 100%;
+ justify-content: center;
+ }
  /* ===== Campo Data de Vencimento ===== */ 
  .card-due{ 
  background: var(--panel-2); 
@@ -520,6 +554,11 @@
  padding: 8px 10px; 
  width: 100%; 
  } 
+ .card-due::-webkit-calendar-picker-indicator{
+ filter: invert(1) brightness(1.1);
+ opacity: 1;
+ cursor: pointer;
+ }
  .due-wrap{ display: flex; flex-direction: column; gap: 6px; } 
  /* ===== NOVO: linha para timestamps quando colapsado ===== */ 
  .card-collapsed-meta{ 
@@ -821,7 +860,7 @@
  </template> 
  <template id="tpl-checklist-item"> 
  <div class="checklist-item"> 
- 
+ <span class="item-drag-handle" title="Arrastar item" aria-label="Arrastar item" draggable="false">⋮⋮</span>
  <input type="checkbox" class="item-check" aria-label="Marcar item"> 
  <div class="item-view" aria-label="Rótulo (clique para editar)"></div> 
  <div class="item-actions"> 
@@ -918,6 +957,18 @@
   </div>
 </div>
 
+<!-- Modal de transferência de item de checklist entre cards -->
+<div id="checklistTransferOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checklistTransferTitle">
+  <div class="modal checklist-transfer-modal">
+    <h2 id="checklistTransferTitle" class="hidden">Transferência de item</h2>
+    <div class="checklist-transfer-actions">
+      <button id="btnChecklistMoveHere" class="btn btn-primary">Mover</button>
+      <button id="btnChecklistCopyHere" class="btn btn-primary">Copiar</button>
+      <button id="btnChecklistCancel" class="btn">Cancelar</button>
+    </div>
+  </div>
+</div>
+
  <script> 
  /* Polyfills essenciais (Edge Legacy) */ 
  (function polyfills(){ 
@@ -944,6 +995,7 @@
  const nextFrame = () => new Promise(r => requestAnimationFrame(() => r())); 
 // Currently dragged checklist item (handle-driven)
 let currentDraggedChecklistItem = null;
+let checklistDragMeta = null;
  function escapeHtml(str){ 
  const s = String(str == null ? '' : str); 
  const map = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }; 
@@ -1381,7 +1433,7 @@ let currentDraggedChecklistItem = null;
  try { e.dataTransfer.dropEffect = 'move'; } catch(_) {} 
  cardsWrap.classList.add('drag-over'); 
  const after = getDragAfterElement(cardsWrap, e.clientY); 
- const dragging = $('.dragging'); 
+ const dragging = $('.card.dragging'); 
  if(dragging){ 
  if(after == null) { cardsWrap.appendChild(dragging); } 
  else { cardsWrap.insertBefore(dragging, after); } 
@@ -1509,23 +1561,131 @@ let currentDraggedChecklistItem = null;
     e.preventDefault();
     const dragged = currentDraggedChecklistItem;
     if (!dragged) return;
-    const after = (function(container, y){
-      const items = Array.from(container.querySelectorAll('.checklist-item:not(.dragging)'));
-      for (let i=0;i<items.length;i++){
-        const box = items[i].getBoundingClientRect();
-        if (y < box.top + box.height/2) return items[i];
-      }
-      return null;
-    })(itemsWrap, e.clientY);
-    if (after == null) itemsWrap.appendChild(dragged);
-    else itemsWrap.insertBefore(dragged, after);
+    if (checklistDragMeta){
+      checklistDragMeta.targetCard = node;
+      checklistDragMeta.targetItemsWrap = itemsWrap;
+    }
+    placeChecklistItemByCheckState(itemsWrap, dragged);
   });
-  itemsWrap.addEventListener('drop', function(e){
+  async function handleChecklistItemDrop(targetCard, targetItemsWrap){
+    const dragged = currentDraggedChecklistItem;
+    const meta = checklistDragMeta;
+    if (!dragged || !meta) return;
+    meta.dropHandled = true;
+    // prioridade: posição real atual do item no DOM no momento do drop
+    const domTargetWrap = dragged.closest('.items');
+    const domTargetCard = dragged.closest('.card');
+    const effectiveTargetCard = domTargetCard || targetCard || meta.targetCard || node;
+    const effectiveTargetWrap = domTargetWrap || targetItemsWrap || meta.targetItemsWrap || $('.items', effectiveTargetCard);
+    if (!effectiveTargetCard || !effectiveTargetWrap) return;
+    placeChecklistItemByCheckState(effectiveTargetWrap, dragged);
+    const sourceCard = meta.sourceCard;
+    const sourceWrap = meta.sourceItemsWrap;
+    const sourceNext = meta.sourceNextSibling;
+    const sourceCol = sourceCard ? sourceCard.closest('.column') : null;
+    const targetCol = effectiveTargetCard ? effectiveTargetCard.closest('.column') : null;
+    const isCrossCard = !!(sourceCard && effectiveTargetCard && sourceCard !== effectiveTargetCard);
+
+    function restoreToSource(){
+      if (!sourceWrap || !dragged) return;
+      if (sourceNext && sourceNext.parentNode === sourceWrap){
+        sourceWrap.insertBefore(dragged, sourceNext);
+      } else {
+        sourceWrap.appendChild(dragged);
+      }
+    }
+    function finalizeCleanup(){
+      currentDraggedChecklistItem = null;
+      checklistDragMeta = null;
+      dragged.classList.remove('dragging');
+    }
+    function refreshCardsAndFilters(refreshSource){
+      if (refreshSource && sourceCard) { updateItemsCount(sourceCard); touchCardUpdated(sourceCard); }
+      if (effectiveTargetCard) { updateItemsCount(effectiveTargetCard); touchCardUpdated(effectiveTargetCard); }
+      if (sourceCol) applyColumnFilter(sourceCol);
+      if (targetCol && targetCol !== sourceCol) applyColumnFilter(targetCol);
+    }
+
+    if (!isCrossCard){
+      updateItemsCount(effectiveTargetCard);
+      touchCardUpdated(effectiveTargetCard);
+      if (targetCol) applyColumnFilter(targetCol);
+      finalizeCleanup();
+      return;
+    }
+
+    const choice = await askChecklistTransferAction();
+    if (choice === 'copy'){
+      const label = $('.item-editor', dragged)?.value || '';
+      const checked = !!$('.item-check', dragged)?.checked;
+      const copyNode = createChecklistItem(label, checked);
+      placeChecklistItemByCheckState(effectiveTargetWrap, copyNode);
+      restoreToSource();
+      refreshCardsAndFilters(false);
+      finalizeCleanup();
+      return;
+    }
+    if (choice === 'move'){
+      placeChecklistItemByCheckState(effectiveTargetWrap, dragged);
+      refreshCardsAndFilters(true);
+      finalizeCleanup();
+      return;
+    }
+    // cancelado: volta para origem
+    restoreToSource();
+    if (sourceCard) {
+      updateItemsCount(sourceCard);
+      touchCardUpdated(sourceCard);
+      if (sourceCol) applyColumnFilter(sourceCol);
+    }
+    if (effectiveTargetCard) {
+      updateItemsCount(effectiveTargetCard);
+      if (targetCol && targetCol !== sourceCol) applyColumnFilter(targetCol);
+    }
+    finalizeCleanup();
+  }
+  itemsWrap.addEventListener('drop', async function(e){
     e.preventDefault();
-    const card = node; // card node is outer scope here
-    updateItemsCount(card);
-    touchCardUpdated(card);
-    currentDraggedChecklistItem = null;
+    if (currentDraggedChecklistItem) {
+      placeChecklistItemByCheckState(itemsWrap, currentDraggedChecklistItem);
+    }
+    if (checklistDragMeta){
+      checklistDragMeta.targetCard = node;
+      checklistDragMeta.targetItemsWrap = itemsWrap;
+    }
+    await handleChecklistItemDrop(node, itemsWrap);
+  });
+  // Permite dropar item mesmo quando o card destino estava colapsado
+  node.addEventListener('dragenter', function(e){
+    if (!currentDraggedChecklistItem) return;
+    e.preventDefault();
+    if (checklistDragMeta){
+      checklistDragMeta.targetCard = node;
+      checklistDragMeta.targetItemsWrap = itemsWrap;
+    }
+    if (node.classList.contains('collapsed')) setCollapsed(node, false);
+  });
+  node.addEventListener('dragover', function(e){
+    const dragged = currentDraggedChecklistItem;
+    if (!dragged) return;
+    e.preventDefault();
+    if (checklistDragMeta){
+      checklistDragMeta.targetCard = node;
+      checklistDragMeta.targetItemsWrap = itemsWrap;
+    }
+    if (node.classList.contains('collapsed')) setCollapsed(node, false);
+    // Ao pairar no card (incluindo header), posiciona no checklist para permitir soltar
+    if (!itemsWrap.contains(dragged)) itemsWrap.appendChild(dragged);
+  });
+  node.addEventListener('drop', async function(e){
+    if (!currentDraggedChecklistItem) return;
+    e.preventDefault();
+    placeChecklistItemByCheckState(itemsWrap, currentDraggedChecklistItem);
+    if (checklistDragMeta){
+      checklistDragMeta.targetCard = node;
+      checklistDragMeta.targetItemsWrap = itemsWrap;
+    }
+    await handleChecklistItemDrop(node, itemsWrap);
   });
  // Concluir card: move para o fim se marcado 
  const done = $('.card-done', node); 
@@ -1559,12 +1719,28 @@ let currentDraggedChecklistItem = null;
  } 
  node.classList.add('dragging'); 
  try { 
+ const rect = node.getBoundingClientRect();
+ const dragImage = node.cloneNode(true);
+ dragImage.classList.remove('dragging');
+ dragImage.style.position = 'fixed';
+ dragImage.style.top = '-10000px';
+ dragImage.style.left = '-10000px';
+ dragImage.style.width = rect.width + 'px';
+ dragImage.style.pointerEvents = 'none';
+ dragImage.style.opacity = '0.98';
+ document.body.appendChild(dragImage);
+ node.__dragImageEl = dragImage;
+ e.dataTransfer.setDragImage(dragImage, Math.min(40, Math.max(8, rect.width / 2)), 20);
  e.dataTransfer.effectAllowed = 'move'; 
  e.dataTransfer.setData('text/plain', node.dataset.id || 'card'); 
  } catch(_) {} 
  }); 
  node.addEventListener('dragend', function(){ 
  node.classList.remove('dragging'); 
+ if (node.__dragImageEl && node.__dragImageEl.parentNode) {
+ node.__dragImageEl.parentNode.removeChild(node.__dragImageEl);
+ }
+ node.__dragImageEl = null;
  const col = node.closest('.column'); 
  if (col) applyColumnFilter(col); 
  applyDueColorToCard(node); 
@@ -1590,20 +1766,79 @@ let currentDraggedChecklistItem = null;
  updateChecklistProgress(node); 
  return node; 
  } 
- function createChecklistItem(labelText='', checked=false){ 
+function createChecklistItem(labelText='', checked=false){ 
  const node = tplItem.content.firstElementChild.cloneNode(true); 
-  // make whole item draggable (no visible handle)
-  node.draggable = true;
-  node.addEventListener('dragstart', function(e){
+  // drag iniciado pelo handle; o item é o objeto movido
+  node.draggable = false;
+ const dragHandle = $('.item-drag-handle', node);
+ if (dragHandle){
+  dragHandle.draggable = true;
+  dragHandle.addEventListener('dragstart', function(e){
+    e.stopPropagation();
+    const sourceCard = node.closest('.card');
+    const sourceItemsWrap = node.closest('.items');
     currentDraggedChecklistItem = node;
+    checklistDragMeta = {
+      sourceCard: sourceCard,
+      sourceItemsWrap: sourceItemsWrap,
+      sourceNextSibling: node.nextElementSibling,
+      targetCard: sourceCard,
+      targetItemsWrap: sourceItemsWrap,
+      dropHandled: false
+    };
     node.classList.add('dragging');
-    try{ e.dataTransfer.setData('text/plain', ''); e.dataTransfer.effectAllowed = 'move'; }catch(_){ }
+    try{
+      const rect = node.getBoundingClientRect();
+      const dragImage = node.cloneNode(true);
+      dragImage.style.position = 'fixed';
+      dragImage.style.top = '-10000px';
+      dragImage.style.left = '-10000px';
+      dragImage.style.width = rect.width + 'px';
+      dragImage.style.pointerEvents = 'none';
+      dragImage.style.opacity = '0.98';
+      document.body.appendChild(dragImage);
+      node.__dragImageEl = dragImage;
+      e.dataTransfer.setDragImage(dragImage, Math.min(40, Math.max(8, rect.width / 2)), 20);
+      e.dataTransfer.setData('text/plain', node.dataset.id || '');
+      e.dataTransfer.effectAllowed = 'move';
+    }catch(_){ }
   });
-  node.addEventListener('dragend', function(e){
+  dragHandle.addEventListener('dragend', function(e){
+    e.stopPropagation();
+    const meta = checklistDragMeta;
+    if (meta && !meta.dropHandled && currentDraggedChecklistItem === node){
+      const sourceWrap = meta.sourceItemsWrap;
+      const sourceNext = meta.sourceNextSibling;
+      const sourceCard = meta.sourceCard;
+      if (sourceWrap){
+        if (sourceNext && sourceNext.parentNode === sourceWrap) sourceWrap.insertBefore(node, sourceNext);
+        else sourceWrap.appendChild(node);
+      }
+      if (sourceCard){
+        updateItemsCount(sourceCard);
+        const sourceCol = sourceCard.closest('.column');
+        if (sourceCol) applyColumnFilter(sourceCol);
+      }
+      const targetCardNow = node.closest('.card');
+      if (targetCardNow && targetCardNow !== sourceCard){
+        updateItemsCount(targetCardNow);
+        const targetCol = targetCardNow.closest('.column');
+        if (targetCol) applyColumnFilter(targetCol);
+      }
+    }
     node.classList.remove('dragging');
-    currentDraggedChecklistItem = null;
-    const card = node.closest('.card'); if (card) { updateItemsCount(card); touchCardUpdated(card); }
+    if (node.__dragImageEl && node.__dragImageEl.parentNode) {
+      node.__dragImageEl.parentNode.removeChild(node.__dragImageEl);
+    }
+    node.__dragImageEl = null;
+    if (currentDraggedChecklistItem === node) currentDraggedChecklistItem = null;
+    if (checklistDragMeta && checklistDragMeta.sourceCard === node.closest('.card')) checklistDragMeta = null;
   });
+  dragHandle.addEventListener('click', function(e){
+    e.stopPropagation();
+    e.preventDefault();
+  });
+ }
  const chk = $('.item-check', node); 
  const view = $('.item-view', node); 
  const editor = $('.item-editor', node); 
@@ -1627,12 +1862,17 @@ let currentDraggedChecklistItem = null;
     if(e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'a') return; 
     enterEdit(); 
   });
-  node.addEventListener('click', function(e){ 
-    const t = e.target; 
-    if (t && t.classList && t.classList.contains('item-check')) return; 
-    if (t && t.closest && t.closest('.delete-item')) return; 
-    if (t && t.tagName && t.tagName.toLowerCase() === 'a') return; 
-    if (editor.classList.contains('hidden')) enterEdit(); 
+  node.addEventListener('click', function(e){
+    const t = e.target;
+    if (!t) return;
+    if (t.closest && t.closest('.item-drag-handle')) return; // área esquerda: drag
+    if (t.closest && t.closest('.item-check')) return; // checkbox mantém função própria
+    if (t.closest && t.closest('.delete-item')) return; // botão excluir
+    if (t.tagName && t.tagName.toLowerCase() === 'a') return; // links na visualização
+    const chkRect = chk.getBoundingClientRect();
+    if (typeof e.clientX === 'number' && e.clientX > chkRect.right){
+      if (editor.classList.contains('hidden')) enterEdit();
+    }
   });
  editor.addEventListener('blur', function(){ 
  exitEdit(true); 
@@ -1677,8 +1917,74 @@ let currentDraggedChecklistItem = null;
  }); 
   syncView(); 
   return node; 
- } 
- function updateItemsCount(cardNode){ 
+} 
+function placeChecklistItemByCheckState(itemsWrap, itemNode){
+ if (!itemsWrap || !itemNode) return;
+ const checked = !!($('.item-check', itemNode) && $('.item-check', itemNode).checked);
+ if (checked){
+ itemsWrap.appendChild(itemNode);
+ return;
+ }
+ const first = itemsWrap.firstElementChild;
+ if (!first){
+ itemsWrap.appendChild(itemNode);
+ return;
+ }
+ if (first !== itemNode){
+ itemsWrap.insertBefore(itemNode, first);
+ }
+}
+const checklistTransferUI = {
+ overlay: null,
+ btnCopy: null,
+ btnMove: null,
+ btnCancel: null,
+ closeBtn: null,
+ _resolver: null
+};
+function ensureChecklistTransferRefs(){
+ if (checklistTransferUI.overlay) return;
+ checklistTransferUI.overlay = document.getElementById('checklistTransferOverlay');
+ if (!checklistTransferUI.overlay) return;
+ checklistTransferUI.btnCopy = document.getElementById('btnChecklistCopyHere');
+ checklistTransferUI.btnMove = document.getElementById('btnChecklistMoveHere');
+ checklistTransferUI.btnCancel = document.getElementById('btnChecklistCancel');
+ checklistTransferUI.closeBtn = checklistTransferUI.overlay.querySelector('.modal-close');
+ const close = function(choice){
+ const ov = checklistTransferUI.overlay;
+ if (ov) ov.classList.add('hidden');
+ const resolve = checklistTransferUI._resolver;
+ checklistTransferUI._resolver = null;
+ if (resolve) resolve(choice || null);
+ };
+ if (checklistTransferUI.btnCopy) checklistTransferUI.btnCopy.addEventListener('click', function(){ close('copy'); });
+ if (checklistTransferUI.btnMove) checklistTransferUI.btnMove.addEventListener('click', function(){ close('move'); });
+ if (checklistTransferUI.btnCancel) checklistTransferUI.btnCancel.addEventListener('click', function(){ close(null); });
+ if (checklistTransferUI.closeBtn) checklistTransferUI.closeBtn.addEventListener('click', function(){ close(null); });
+ checklistTransferUI.overlay.addEventListener('click', function(e){ if (e.target === checklistTransferUI.overlay) close(null); });
+ checklistTransferUI.overlay.addEventListener('keydown', function(e){
+ const key = e.key || e.code || '';
+ if (key === 'Escape' || key === 'Esc') close(null);
+ });
+}
+function askChecklistTransferAction(){
+ ensureChecklistTransferRefs();
+ return new Promise(function(resolve){
+ const ov = checklistTransferUI.overlay;
+ if (!ov){
+ resolve('move');
+ return;
+ }
+ if (checklistTransferUI._resolver) {
+ try { checklistTransferUI._resolver(null); } catch(_) {}
+ checklistTransferUI._resolver = null;
+ }
+ checklistTransferUI._resolver = resolve;
+ ov.classList.remove('hidden');
+ try { (checklistTransferUI.btnMove || checklistTransferUI.btnCopy || checklistTransferUI.btnCancel || ov).focus(); } catch(_) {}
+ });
+}
+function updateItemsCount(cardNode){ 
  const count = $$('.checklist-item', cardNode).length; 
  const badge = $('.items-count', cardNode); 
  if(badge) badge.textContent = String(count); 
