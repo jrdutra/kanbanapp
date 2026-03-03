@@ -122,8 +122,8 @@
 .board-scroll-overlay{ position: fixed; left: 0; right: 0; bottom: 0; height: 30px; background: transparent; pointer-events: none; z-index: 6; }
  } 
  .column{ 
-  min-width: 320px;
-  max-width: 380px;
+  min-width: 352px;
+  max-width: 418px;
   display: flex;
   flex-direction: column;
   /* Aplicar visual do primeiro quadro em index.html: fundo sutil, borda neutra, radius maior e sombra mais pronunciada */
@@ -448,7 +448,9 @@
  .hidden{ display: none !important; } 
  /* Card colapsado: mostra só header */ 
  .card.collapsed{ cursor: pointer; gap: 0; } 
+ .card.collapsed .card-header { grid-template-columns: 1fr; }
  .card.collapsed .card-header-actions { display: none; } 
+ .card.collapsed .card-title { grid-column: 1 / -1; }
  .card.collapsed .card-body { max-height: 0; opacity: 0; pointer-events: none; } 
  /* Título quando concluído */ 
  .card.completed .card-title{ 
@@ -563,14 +565,24 @@
  /* ===== NOVO: linha para timestamps quando colapsado ===== */ 
  .card-collapsed-meta{ 
  grid-column: 1 / -1; 
+ display: grid;
+ grid-template-columns: minmax(0, 1fr) auto;
+ column-gap: 8px;
+ align-items: center;
  font-size: 11px; 
  color: var(--muted); 
  margin-top: -6px; 
  padding-left: 4px; 
+ } 
+ .card-collapsed-meta-text{
+ min-width: 0;
  white-space: nowrap; 
  overflow: hidden; 
  text-overflow: ellipsis; 
- } 
+ }
+ .card-collapsed-meta .open-card-modal{
+ justify-self: end;
+ }
 /* ===== Barra de Progresso (Checklist) ===== */ 
 .progress-wrap{ 
  grid-column: 1 / -1; 
@@ -647,6 +659,9 @@
   pointer-events: none;
   opacity: 0.48;
   filter: saturate(0.75) brightness(0.9);
+}
+#cardOverlay .open-card-modal{
+  display: none !important;
 }
 
 /* Spacer below topbar matching board background */
@@ -829,7 +844,10 @@
  <span class="meta-item updated">🖉 <time class="updated-at" datetime=""></time></span> 
  </div> 
  <!-- NOVO: linha curta (apenas quando colapsado) --> 
- <div class="card-collapsed-meta hidden"></div> 
+ <div class="card-collapsed-meta hidden">
+ <span class="card-collapsed-meta-text"></span>
+ <button class="btn-small btn-ghost open-card-modal" title="Abrir em modal">⤢</button>
+ </div> 
  <!-- NOVO: barra de progresso (sempre visível) --> 
  <div class="progress-wrap" aria-hidden="false"> 
  <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progresso do checklist"> 
@@ -1467,15 +1485,17 @@ let checklistDragMeta = null;
  metaCollapsed.classList.add('hidden'); 
  } 
  } 
- function makeCardCollapsible(cardNode){ 
+function makeCardCollapsible(cardNode){ 
  setCollapsed(cardNode, true); 
- cardNode.addEventListener('click', function(){ 
+ cardNode.addEventListener('click', function(e){ 
+ if (e && e.target && e.target.closest && e.target.closest('.open-card-modal')) return;
  setCollapsed(cardNode, false); 
  }); 
- cardNode.addEventListener('focusin', function(){ 
+ cardNode.addEventListener('focusin', function(e){ 
+ if (e && e.target && e.target.closest && e.target.closest('.open-card-modal')) return;
  setCollapsed(cardNode, false); 
  }); 
- } 
+} 
  // NOVO: linha de meta quando colapsado 
  function renderCollapsedMeta(card) { 
  const box = card.querySelector('.card-collapsed-meta'); 
@@ -1495,9 +1515,12 @@ let checklistDragMeta = null;
  right = 'Sem data de vencimento'; 
  } 
  } 
- box.textContent = `${shortDate} — ${right}`; 
+ const collapsedText = `${shortDate} — ${right}`;
+ const textNode = box.querySelector('.card-collapsed-meta-text');
+ if (textNode) textNode.textContent = collapsedText;
+ else box.textContent = collapsedText;
 } 
- function createCard(id){ 
+function createCard(id){ 
  const node = tplCard.content.firstElementChild.cloneNode(true); 
  node.dataset.id = id; 
  // timestamps iniciais 
@@ -1725,6 +1748,13 @@ let checklistDragMeta = null;
  if (col) applyColumnFilter(col); 
  } 
  }); 
+ // Abrir card em modal sem expandir o card ao clicar no botao
+ $$('.open-card-modal', node).forEach(function(btn){
+ btn.addEventListener('click', function(e){
+ e.stopPropagation();
+ openCardModal(node);
+ });
+ });
  // Drag & drop (card) 
  node.addEventListener('dragstart', function(e){ 
  // NOVO: impedir arrastar quando expandido 
