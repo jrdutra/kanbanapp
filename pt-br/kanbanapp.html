@@ -947,7 +947,7 @@
  <span>Checklist <span class="badge items-count">0</span></span> 
  <button class="btn-small add-item">+ Item</button> 
  </div> 
- <input type="text" class="filter-checklist" placeholder="Filtrar itens do checklist (titulo ou anotacao)" aria-label="Filtrar itens do checklist por titulo ou anotacao"> 
+ <input type="text" class="filter-checklist" placeholder="Filtrar itens do checklist (titulo ou detalhes)" aria-label="Filtrar itens do checklist por titulo ou detalhes"> 
  <div class="items"></div> 
  </div> 
  </div> 
@@ -959,7 +959,7 @@
  <input type="checkbox" class="item-check" aria-label="Marcar item"> 
  <div class="item-view" aria-label="Rótulo (clique para editar)"></div> 
  <div class="item-actions"> 
- <button class="btn-small btn-ghost open-item-note" title="Adicionar anotação ao item" aria-label="Adicionar anotação ao item"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3.5h7.5L19 8v12.5H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 3.5V8H19" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 12h6M10 15.5h6M10 19h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button> 
+ <button class="btn-small btn-ghost open-item-note" title="Adicionar detalhes do item" aria-label="Adicionar detalhes do item"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3.5h7.5L19 8v12.5H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 3.5V8H19" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 12h6M10 15.5h6M10 19h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button> 
  <button class="btn-small btn-ghost delete-item" title="Remover item">✖</button> 
  </div> 
  <textarea class="item-editor hidden" placeholder="Texto do item (URLs ficam clicáveis na visualização)"></textarea> 
@@ -1057,13 +1057,13 @@
 <div id="checklistItemOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checklistItemModalTitle">
   <div class="modal modal-card">
     <div class="modal-header">
-      <h2 id="checklistItemModalTitle">Item do checklist</h2>
+      <h2 id="checklistItemModalTitle">Detalhes do item do checklist</h2>
       <button class="btn btn-small modal-close" aria-label="Fechar">✖</button>
     </div>
     <div class="modal-body">
-      <div class="field-label">Conteúdo:</div>
-      <div id="checklistItemContentView" class="render" aria-label="Conteúdo renderizado com links"></div>
-      <textarea id="checklistItemContentEditor" class="item-note-editor hidden" placeholder="Digite uma anotação (suporta links)"></textarea>
+      <div class="field-label">Detalhes:</div>
+      <div id="checklistItemContentView" class="render" aria-label="Detalhes renderizados com links"></div>
+      <textarea id="checklistItemContentEditor" class="item-note-editor hidden" placeholder="Digite os detalhes (suporta links)"></textarea>
     </div>
     <div class="modal-footer">
       <button id="btnChecklistItemSave" class="btn btn-primary">Salvar</button>
@@ -1112,7 +1112,7 @@ let currentDraggedChecklistItem = null;
 let checklistDragMeta = null;
 function getChecklistItemContent(itemNode){
  if(!itemNode || !itemNode.dataset) return '';
- return String(itemNode.dataset.content || '');
+ return String(itemNode.dataset.details || '');
 }
 function hasChecklistItemContent(itemNode){
  return getChecklistItemContent(itemNode).trim().length > 0;
@@ -1122,16 +1122,16 @@ function updateChecklistItemNoteButtonState(itemNode){
  if(!btn) return;
  const filled = hasChecklistItemContent(itemNode);
  btn.classList.toggle('has-content', filled);
- btn.title = filled ? 'Editar anotação do item' : 'Adicionar anotação ao item';
+ btn.title = filled ? 'Editar detalhes do item' : 'Adicionar detalhes do item';
  btn.setAttribute('aria-label', btn.title);
 }
 function setChecklistItemContent(itemNode, content){
  if(!itemNode || !itemNode.dataset) return;
  const text = String(content == null ? '' : content);
  if(text.trim()){
- itemNode.dataset.content = text;
+ itemNode.dataset.details = text;
  } else {
- delete itemNode.dataset.content;
+ delete itemNode.dataset.details;
  }
  updateChecklistItemNoteButtonState(itemNode);
 }
@@ -1344,7 +1344,7 @@ function syncCardDescriptionSizeState(cardNode){
  label: editor ? editor.value : '' 
  };
  const noteContent = getChecklistItemContent(it);
- if (noteContent.trim()) itemData.content = noteContent;
+ if (noteContent.trim()) itemData.details = noteContent;
  checklist.push(itemData); 
  }); 
  colData.cards.push({ 
@@ -1422,7 +1422,7 @@ function syncCardDescriptionSizeState(cardNode){
  .map(x => x.it);
  for(let ck = 0; ck < orderedChecklist.length; ck++){ 
  const it = orderedChecklist[ck] || {}; 
- const inode = createChecklistItem(it.label || '', !!it.checked, (typeof it.content === 'string' ? it.content : '')); 
+ const inode = createChecklistItem(it.label || '', !!it.checked, (typeof it.details === 'string' ? it.details : (typeof it.content === 'string' ? it.content : ''))); 
  itemsWrap.appendChild(inode); 
  await nextFrame(); 
  } 
