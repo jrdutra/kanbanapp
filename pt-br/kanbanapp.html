@@ -63,8 +63,15 @@
   color: var(--text);
   box-shadow: 0 10px 26px rgba(0,0,0,0.28);
 }
- .brand{ font-weight: 700; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.55)); } 
+.brand{ font-weight: 700; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.55)); } 
 .brand{ font-size: 120%; }
+.brand-link,
+.brand-link:visited,
+.brand-link:hover,
+.brand-link:active{
+  color: inherit;
+  text-decoration: none;
+}
 .brand-icon{ width: 24px; height: 24px; display: inline-block; border-radius: 6px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.55)); }
  .menu{ display: flex; gap: 8px; align-items: center; flex-wrap: wrap; } 
  button, .btn{ 
@@ -353,6 +360,9 @@
  padding: 8px 10px; 
  font-family: inherit; 
  } 
+ .card-desc.empty-desc{
+ min-height: calc(2.2em + 20px);
+ }
  .render{ 
  border-left: 3px solid var(--purple); 
  background: rgba(255,255,255,0.04); 
@@ -432,6 +442,28 @@
  cursor: text;
  }
  .item-view a{ color: #90caf9; text-decoration: underline; } 
+ .item-actions{
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ }
+ .open-item-note{
+ color: #ffffff;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ min-width: 28px;
+ min-height: 28px;
+ padding: 4px 6px;
+ }
+ .open-item-note svg{
+ width: 14px;
+ height: 14px;
+ display: block;
+ }
+ .open-item-note.has-content{
+ color: var(--progress-color, var(--purple));
+ }
  .item-editor{ 
  grid-column: 1 / -1; 
  margin-left: 26px; 
@@ -618,8 +650,14 @@
 } 
 
 /* Modal para card (visual de card em foco) */
-.modal-card { width: min(900px, 96vw); }
-.modal-card .modal-body { background: var(--panel); }
+.modal-card { width: min(900px, 96vw); height: min(920px, calc(100vh - 2em)); max-height: min(920px, calc(100vh - 2em)); }
+.modal-card .modal-body { background: var(--panel); flex: 1; min-height: 0; }
+#cardOverlay.modal-overlay,
+#checklistItemOverlay.modal-overlay{
+  padding-top: 2em;
+  padding-bottom: 2em;
+  box-sizing: border-box;
+}
 #cardOverlay.modal-overlay{
   opacity: 0;
   pointer-events: none;
@@ -659,6 +697,35 @@
   pointer-events: none;
   opacity: 0.48;
   filter: saturate(0.75) brightness(0.9);
+}
+#checklistItemOverlay .modal-body{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#checklistItemOverlay .field-label{
+  font-weight: 700;
+  font-size: 14px;
+}
+#checklistItemContentView,
+#checklistItemContentEditor{
+  flex: 1;
+  min-height: 0;
+}
+#checklistItemContentView{
+  border-left: 3px solid var(--item-modal-accent, var(--purple));
+}
+.item-note-editor{
+  width: 100%;
+  min-height: 100%;
+  resize: vertical;
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--item-modal-accent, var(--purple));
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: inherit;
 }
 #cardOverlay .open-card-modal{
   display: none !important;
@@ -776,7 +843,7 @@
 </head> 
 <body> 
  <header class="topbar"> 
- <div class="brand"><img class="brand-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLYW5iYW5BcHAgZmF2aWNvbiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxMjEzMWQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjY1MGU2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxNCIgZmlsbD0idXJsKCNiZykiLz4KICA8cmVjdCB4PSIxNCIgeT0iMTYiIHdpZHRoPSIxMCIgaGVpZ2h0PSIzMiIgcng9IjMiIGZpbGw9IiNkOGQ4ZmYiIGZpbGwtb3BhY2l0eT0iLjkwIi8+CiAgPHJlY3QgeD0iMjciIHk9IjE2IiB3aWR0aD0iMTAiIGhlaWdodD0iMzIiIHJ4PSIzIiBmaWxsPSIjYmRhNmZmIiBmaWxsLW9wYWNpdHk9Ii45MiIvPgogIDxyZWN0IHg9IjQwIiB5PSIxNiIgd2lkdGg9IjEwIiBoZWlnaHQ9IjMyIiByeD0iMyIgZmlsbD0iIzdhNjdmMCIgZmlsbC1vcGFjaXR5PSIuOTUiLz4KPC9zdmc+Cg==" alt="" aria-hidden="true">KanbanApp</div> 
+ <a class="brand brand-link" href="https://kanbanapp.io" target="_blank" rel="noopener noreferrer"><img class="brand-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLYW5iYW5BcHAgZmF2aWNvbiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxMjEzMWQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjY1MGU2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxNCIgZmlsbD0idXJsKCNiZykiLz4KICA8cmVjdCB4PSIxNCIgeT0iMTYiIHdpZHRoPSIxMCIgaGVpZ2h0PSIzMiIgcng9IjMiIGZpbGw9IiNkOGQ4ZmYiIGZpbGwtb3BhY2l0eT0iLjkwIi8+CiAgPHJlY3QgeD0iMjciIHk9IjE2IiB3aWR0aD0iMTAiIGhlaWdodD0iMzIiIHJ4PSIzIiBmaWxsPSIjYmRhNmZmIiBmaWxsLW9wYWNpdHk9Ii45MiIvPgogIDxyZWN0IHg9IjQwIiB5PSIxNiIgd2lkdGg9IjEwIiBoZWlnaHQ9IjMyIiByeD0iMyIgZmlsbD0iIzdhNjdmMCIgZmlsbC1vcGFjaXR5PSIuOTUiLz4KPC9zdmc+Cg==" alt="" aria-hidden="true">KanbanApp.io</a> 
  <div class="menu"> 
  <button id="btnAddColumn" class="btn">+ Coluna</button> 
  <button id="btnSettings" class="btn">Configurações</button> 
@@ -882,6 +949,7 @@
  <input type="checkbox" class="item-check" aria-label="Marcar item"> 
  <div class="item-view" aria-label="Rótulo (clique para editar)"></div> 
  <div class="item-actions"> 
+ <button class="btn-small btn-ghost open-item-note" title="Adicionar anotação ao item" aria-label="Adicionar anotação ao item"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3.5h7.5L19 8v12.5H7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 3.5V8H19" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 12h6M10 15.5h6M10 19h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button> 
  <button class="btn-small btn-ghost delete-item" title="Remover item">✖</button> 
  </div> 
  <textarea class="item-editor hidden" placeholder="Texto do item (URLs ficam clicáveis na visualização)"></textarea> 
@@ -975,6 +1043,24 @@
   </div>
 </div>
 
+<!-- Modal de anotação por item de checklist -->
+<div id="checklistItemOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checklistItemModalTitle">
+  <div class="modal modal-card">
+    <div class="modal-header">
+      <h2 id="checklistItemModalTitle">Item do checklist</h2>
+      <button class="btn btn-small modal-close" aria-label="Fechar">✖</button>
+    </div>
+    <div class="modal-body">
+      <div class="field-label">Conteúdo:</div>
+      <div id="checklistItemContentView" class="render" aria-label="Conteúdo renderizado com links"></div>
+      <textarea id="checklistItemContentEditor" class="item-note-editor hidden" placeholder="Digite uma anotação (suporta links)"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button id="btnChecklistItemSave" class="btn btn-primary">Salvar</button>
+    </div>
+  </div>
+</div>
+
 <!-- Modal de transferência de item de checklist entre cards -->
 <div id="checklistTransferOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checklistTransferTitle">
   <div class="modal checklist-transfer-modal">
@@ -1014,6 +1100,37 @@
 // Currently dragged checklist item (handle-driven)
 let currentDraggedChecklistItem = null;
 let checklistDragMeta = null;
+function getChecklistItemContent(itemNode){
+ if(!itemNode || !itemNode.dataset) return '';
+ return String(itemNode.dataset.content || '');
+}
+function hasChecklistItemContent(itemNode){
+ return getChecklistItemContent(itemNode).trim().length > 0;
+}
+function updateChecklistItemNoteButtonState(itemNode){
+ const btn = $('.open-item-note', itemNode);
+ if(!btn) return;
+ const filled = hasChecklistItemContent(itemNode);
+ btn.classList.toggle('has-content', filled);
+ btn.title = filled ? 'Editar anotação do item' : 'Adicionar anotação ao item';
+ btn.setAttribute('aria-label', btn.title);
+}
+function setChecklistItemContent(itemNode, content){
+ if(!itemNode || !itemNode.dataset) return;
+ const text = String(content == null ? '' : content);
+ if(text.trim()){
+ itemNode.dataset.content = text;
+ } else {
+ delete itemNode.dataset.content;
+ }
+ updateChecklistItemNoteButtonState(itemNode);
+}
+function syncCardDescriptionSizeState(cardNode){
+ const ta = $('.card-desc', cardNode);
+ if(!ta) return;
+ const empty = !String(ta.value || '').trim();
+ ta.classList.toggle('empty-desc', empty);
+}
  function escapeHtml(str){ 
  const s = String(str == null ? '' : str); 
  const map = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }; 
@@ -1212,10 +1329,13 @@ let checklistDragMeta = null;
  const checklist = []; 
  $$('.checklist-item', card).forEach(function(it){ 
  const editor = $('.item-editor', it); 
- checklist.push({ 
+ const itemData = { 
  checked: $('.item-check', it).checked, 
  label: editor ? editor.value : '' 
- }); 
+ };
+ const noteContent = getChecklistItemContent(it);
+ if (noteContent.trim()) itemData.content = noteContent;
+ checklist.push(itemData); 
  }); 
  colData.cards.push({ 
  id: card.dataset.id, 
@@ -1265,6 +1385,7 @@ let checklistDragMeta = null;
  const ta = $('.card-desc', cnode); 
  const view = $('.desc-view', cnode); 
  ta.value = cd.description || ''; 
+ syncCardDescriptionSizeState(cnode);
  view.innerHTML = linkify(cd.description || ''); 
  const done = $('.card-done', cnode); 
  done.checked = !!cd.completed; 
@@ -1291,7 +1412,7 @@ let checklistDragMeta = null;
  .map(x => x.it);
  for(let ck = 0; ck < orderedChecklist.length; ck++){ 
  const it = orderedChecklist[ck] || {}; 
- const inode = createChecklistItem(it.label || '', !!it.checked); 
+ const inode = createChecklistItem(it.label || '', !!it.checked, (typeof it.content === 'string' ? it.content : '')); 
  itemsWrap.appendChild(inode); 
  await nextFrame(); 
  } 
@@ -1472,9 +1593,10 @@ let checklistDragMeta = null;
  } 
  /* Helpers para colapsar/expandir */ 
  function setCollapsed(cardNode, collapsed){ 
- cardNode.classList.toggle('collapsed', !!collapsed); 
- const metaFull = cardNode.querySelector('.card-meta'); 
- const metaCollapsed = cardNode.querySelector('.card-collapsed-meta'); 
+  if (collapsed && cardNode && cardNode.dataset && cardNode.dataset.lockExpanded === '1') return;
+  cardNode.classList.toggle('collapsed', !!collapsed); 
+  const metaFull = cardNode.querySelector('.card-meta'); 
+  const metaCollapsed = cardNode.querySelector('.card-collapsed-meta'); 
  if (!metaFull || !metaCollapsed) return; 
  if (collapsed) { 
  metaFull.classList.add('hidden'); 
@@ -1539,6 +1661,7 @@ function createCard(id){
  }; 
  const exitDescEdit = function(save=true){ 
  if(!save) ta.value = ta.dataset.original || ta.value; 
+ syncCardDescriptionSizeState(node);
  view.innerHTML = linkify(ta.value); 
  // destaque do filtro se ativo 
  const col = node.closest('.column'); 
@@ -1558,6 +1681,10 @@ function createCard(id){
  if(key === 'Escape' || key === 'Esc'){ exitDescEdit(false); ta.blur(); } 
  if((e.ctrlKey || e.metaKey) && (key === 'Enter')){ ta.blur(); } 
  }); 
+ ta.addEventListener('input', function(){
+ syncCardDescriptionSizeState(node);
+ });
+ syncCardDescriptionSizeState(node);
  view.innerHTML = linkify(ta.value || ''); 
  // due date altera 'Editado' + repintar + re-render colapsado 
  if (due) { 
@@ -1654,7 +1781,8 @@ function createCard(id){
     if (choice === 'copy'){
       const label = $('.item-editor', dragged)?.value || '';
       const checked = !!$('.item-check', dragged)?.checked;
-      const copyNode = createChecklistItem(label, checked);
+      const noteContent = getChecklistItemContent(dragged);
+      const copyNode = createChecklistItem(label, checked, noteContent);
       placeChecklistItemByCheckState(effectiveTargetWrap, copyNode);
       restoreToSource();
       refreshCardsAndFilters(false);
@@ -1811,7 +1939,7 @@ function createCard(id){
  updateChecklistProgress(node); 
  return node; 
  } 
-function createChecklistItem(labelText='', checked=false){ 
+function createChecklistItem(labelText='', checked=false, itemContentText=''){ 
  const node = tplItem.content.firstElementChild.cloneNode(true); 
   // drag iniciado pelo handle; o item é o objeto movido
   node.draggable = false;
@@ -1887,6 +2015,7 @@ function createChecklistItem(labelText='', checked=false){
  const chk = $('.item-check', node); 
  const view = $('.item-view', node); 
  const editor = $('.item-editor', node); 
+ const noteBtn = $('.open-item-note', node);
  chk.checked = !!checked; 
  editor.value = labelText || ''; 
  const syncView = () => { view.innerHTML = linkify(editor.value); }; 
@@ -1913,6 +2042,7 @@ function createChecklistItem(labelText='', checked=false){
     if (t.closest && t.closest('.item-drag-handle')) return; // área esquerda: drag
     if (t.closest && t.closest('.item-check')) return; // checkbox mantém função própria
     if (t.closest && t.closest('.delete-item')) return; // botão excluir
+    if (t.closest && t.closest('.open-item-note')) return; // botão anotação
     if (t.tagName && t.tagName.toLowerCase() === 'a') return; // links na visualização
     const chkRect = chk.getBoundingClientRect();
     if (typeof e.clientX === 'number' && e.clientX > chkRect.right){
@@ -1960,9 +2090,110 @@ function createChecklistItem(labelText='', checked=false){
  const col = node.closest('.column'); 
  if (col) applyColumnFilter(col); 
  }); 
+ if (noteBtn){
+ noteBtn.addEventListener('click', function(e){
+ e.stopPropagation();
+ openChecklistItemModal(node);
+ });
+ }
+ setChecklistItemContent(node, itemContentText || '');
   syncView(); 
   return node; 
 } 
+const checklistItemModalUI = {
+ overlay: null,
+ title: null,
+ view: null,
+ editor: null,
+ saveBtn: null,
+ closeBtn: null,
+ currentItem: null
+};
+function ensureChecklistItemModalRefs(){
+ if (checklistItemModalUI.overlay) return checklistItemModalUI;
+ const ui = checklistItemModalUI;
+ ui.overlay = document.getElementById('checklistItemOverlay');
+ ui.title = document.getElementById('checklistItemModalTitle');
+ ui.view = document.getElementById('checklistItemContentView');
+ ui.editor = document.getElementById('checklistItemContentEditor');
+ ui.saveBtn = document.getElementById('btnChecklistItemSave');
+ ui.closeBtn = ui.overlay ? ui.overlay.querySelector('.modal-close') : null;
+ if (!ui.overlay || !ui.view || !ui.editor) return ui;
+ const enterEdit = function(){
+ ui.editor.dataset.original = ui.editor.value;
+ ui.editor.classList.remove('hidden');
+ ui.view.classList.add('hidden');
+ ui.editor.focus();
+ try { ui.editor.selectionStart = ui.editor.selectionEnd = ui.editor.value.length; } catch(_) {}
+ };
+ const exitEdit = function(save=true){
+ if(!save) ui.editor.value = ui.editor.dataset.original || ui.editor.value;
+ ui.view.innerHTML = linkify(ui.editor.value || '');
+ ui.editor.classList.add('hidden');
+ ui.view.classList.remove('hidden');
+ };
+ ui.view.addEventListener('click', function(e){
+ if(e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'a') return;
+ enterEdit();
+ });
+ ui.editor.addEventListener('blur', function(){ exitEdit(true); });
+ ui.editor.addEventListener('keydown', function(e){
+ const key = e.key || e.code || '';
+ if (key === 'Escape' || key === 'Esc'){ exitEdit(false); ui.editor.blur(); }
+ if ((e.ctrlKey || e.metaKey) && key === 'Enter'){ ui.editor.blur(); }
+ });
+ if (ui.saveBtn) ui.saveBtn.addEventListener('click', closeChecklistItemModal);
+ if (ui.closeBtn) ui.closeBtn.addEventListener('click', closeChecklistItemModal);
+ ui.overlay.addEventListener('click', function(e){ if (e.target === ui.overlay) closeChecklistItemModal(); });
+ ui.overlay.addEventListener('keydown', function(e){
+ const key = e.key || e.code || '';
+ if (key === 'Escape' || key === 'Esc') closeChecklistItemModal();
+ });
+ return ui;
+}
+function openChecklistItemModal(itemNode){
+ const ui = ensureChecklistItemModalRefs();
+ if (!ui || !ui.overlay || !itemNode) return;
+ if (ui.currentItem && ui.currentItem !== itemNode) closeChecklistItemModal();
+ ui.currentItem = itemNode;
+ const ownerCard = itemNode.closest('.card');
+ const accent = ownerCard ? (getComputedStyle(ownerCard).getPropertyValue('--progress-color') || '').trim() : '';
+ if (ui.overlay && ui.overlay.style){
+ ui.overlay.style.setProperty('--item-modal-accent', accent || 'var(--purple)');
+ }
+ const label = ($('.item-editor', itemNode)?.value || '').trim();
+ if (ui.title) ui.title.textContent = label || 'Item sem título';
+ const content = getChecklistItemContent(itemNode);
+ ui.editor.value = content;
+ ui.view.innerHTML = linkify(content);
+ ui.editor.classList.add('hidden');
+ ui.view.classList.remove('hidden');
+ ui.overlay.classList.remove('hidden');
+ try {
+ const active = document.activeElement;
+ if (active && typeof active.blur === 'function') active.blur();
+ ui.editor.blur();
+ } catch(_) {}
+}
+function closeChecklistItemModal(){
+ const ui = ensureChecklistItemModalRefs();
+ if (!ui || !ui.overlay) return;
+ if (!ui.currentItem) {
+ ui.overlay.classList.add('hidden');
+ return;
+ }
+ const text = ui.editor ? ui.editor.value : '';
+ setChecklistItemContent(ui.currentItem, text);
+ const card = ui.currentItem.closest('.card');
+ const col = ui.currentItem.closest('.column');
+ if (card){
+ updateItemsCount(card);
+ touchCardUpdated(card);
+ }
+ if (col) applyColumnFilter(col);
+ ui.currentItem = null;
+ ui.overlay.classList.add('hidden');
+}
 function placeChecklistItemByCheckState(itemsWrap, itemNode){
  if (!itemsWrap || !itemNode) return;
  const checked = !!($('.item-check', itemNode) && $('.item-check', itemNode).checked);
@@ -2342,6 +2573,7 @@ function openCardModal(card){
   modal.columnGhost.setAttribute('aria-hidden', 'true');
   card.parentNode.insertBefore(modal.columnGhost, card);
   // expande o card
+  card.dataset.lockExpanded = '1';
   setCollapsed(card, false);
   // move para o modal
   modal.content.appendChild(card);
@@ -2382,6 +2614,7 @@ function closeCardModal(immediate){
       modal.columnGhost.parentNode.insertBefore(modal.currentCard, modal.columnGhost);
       modal.columnGhost.remove();
     }
+    if (modal.currentCard && modal.currentCard.dataset) delete modal.currentCard.dataset.lockExpanded;
     if (modal.currentCard) setCollapsed(modal.currentCard, true);
     modal.currentCard = null;
     modal.columnGhost = null;
