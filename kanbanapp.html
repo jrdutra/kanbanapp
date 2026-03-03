@@ -404,6 +404,15 @@ border-left: 3px solid var(--purple);
  font-size: 13px; 
  color: var(--muted); 
  } 
+ .filter-checklist{
+ width: 100%;
+ background: var(--panel-2);
+ color: var(--text);
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ padding: 8px 10px;
+ font-size: 13px;
+ }
  .items{ display: flex; flex-direction: column; gap: 8px; } 
  .checklist-item{ 
  display: grid; 
@@ -939,6 +948,7 @@ margin-left: 26px;
  <span>Checklist <span class="badge items-count">0</span></span> 
  <button class="btn-small add-item">+ Item</button> 
  </div> 
+ <input type="text" class="filter-checklist" placeholder="Filter checklist items (title or note)" aria-label="Filter checklist items by title or note"> 
  <div class="items"></div> 
  </div> 
  </div> 
@@ -1696,6 +1706,12 @@ function createCard(id){
  } 
  // Checklist 
  const itemsWrap = $('.items', node); 
+ const checklistFilterInput = $('.filter-checklist', node);
+ if (checklistFilterInput){
+ checklistFilterInput.addEventListener('input', function(){
+ applyChecklistFilter(node);
+ });
+ }
  $('.add-item', node).addEventListener('click', function(e){ 
  e.stopPropagation(); 
  const newItem = createChecklistItem();
@@ -2195,6 +2211,18 @@ function closeChecklistItemModal(){
  ui.currentItem = null;
  ui.overlay.classList.add('hidden');
 }
+function applyChecklistFilter(cardNode){
+ if (!cardNode) return;
+ const input = $('.filter-checklist', cardNode);
+ const term = normalizeText(input ? input.value : '');
+ $$('.checklist-item', cardNode).forEach(function(item){
+ const label = normalizeText($('.item-editor', item)?.value || '');
+ const contentRaw = getChecklistItemContent(item);
+ const content = normalizeText(contentRaw);
+ const match = !term || label.includes(term) || (content ? content.includes(term) : false);
+ item.style.display = match ? '' : 'none';
+ });
+}
 function placeChecklistItemByCheckState(itemsWrap, itemNode){
  if (!itemsWrap || !itemNode) return;
  const checked = !!($('.item-check', itemNode) && $('.item-check', itemNode).checked);
@@ -2268,6 +2296,7 @@ function askChecklistTransferAction(){
  const count = $$('.checklist-item', cardNode).length; 
  const badge = $('.items-count', cardNode); 
  if(badge) badge.textContent = String(count); 
+ applyChecklistFilter(cardNode);
  // NOVO: atualizar barra de progresso sempre que o count mudar 
  updateChecklistProgress(cardNode); 
 } 
