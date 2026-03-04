@@ -604,6 +604,7 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 <li><a class="text-link" href="/zh-cn/shen-me-shi-kanban/">什么是看板？</a></li>
 <li><a class="text-link" href="/zh-cn/yin-si-zheng-ce/">隐私政策</a></li>
 <li><a class="text-link" href="/zh-cn/lian-xi/">接触</a></li>
+<li><a class="text-link" href="/licence.html">许可证</a></li>
 </ul>
 </details>
 </nav>
@@ -711,32 +712,58 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 <script>
     (function () {
       var menuDetails = document.querySelector('.quick-links-menu details');
-      if (!menuDetails) return;
+      var langDetails = document.querySelector('.lang-switcher details');
+      if (!menuDetails && !langDetails) return;
 
       function closeMenu() {
+        if (!menuDetails) return;
         if (menuDetails.hasAttribute('open')) {
           menuDetails.removeAttribute('open');
         }
       }
 
+      function closeLangMenu() {
+        if (!langDetails) return;
+        if (langDetails.hasAttribute('open')) {
+          langDetails.removeAttribute('open');
+        }
+      }
+
       document.addEventListener('click', function (event) {
-        if (!menuDetails.hasAttribute('open')) return;
-        if (menuDetails.contains(event.target)) return;
-        closeMenu();
+        if (menuDetails && menuDetails.hasAttribute('open') && !menuDetails.contains(event.target)) {
+          closeMenu();
+        }
+        if (langDetails && langDetails.hasAttribute('open') && !langDetails.contains(event.target)) {
+          closeLangMenu();
+        }
       }, true);
 
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') closeMenu();
+        if (event.key === 'Escape') {
+          closeMenu();
+          closeLangMenu();
+        }
       });
 
-      var links = menuDetails.querySelectorAll('.quick-links-list a');
-      for (var i = 0; i < links.length; i += 1) {
-        var link = links[i];
-        link.addEventListener('click', function () {
-          closeMenu();
-        });
+      if (menuDetails) {
+        var links = menuDetails.querySelectorAll('.quick-links-list a');
+        for (var i = 0; i < links.length; i += 1) {
+          links[i].addEventListener('click', function () {
+            closeMenu();
+          });
+        }
+      }
+
+      if (langDetails) {
+        var langLinks = langDetails.querySelectorAll('.lang-menu-list a');
+        for (var j = 0; j < langLinks.length; j += 1) {
+          langLinks[j].addEventListener('click', function () {
+            closeLangMenu();
+          });
+        }
       }
     })();
+
 
     (function () {
       var STORAGE_KEY = 'kanbanappPreferredLanguage';

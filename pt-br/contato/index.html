@@ -148,7 +148,7 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
   </style>
 </head>
 <body>
-<header aria-label="Website header" class="center" role="banner">
+<header aria-label="Cabeçalho do site" class="center" role="banner">
 <div class="site-brand">
 <img alt="KanbanApp" aria-hidden="true" class="site-brand-icon" src="/favicon.svg"/>
 <div>
@@ -159,15 +159,16 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 </header>
 <div aria-hidden="true" style="height:18px;"></div>
 <main>
-<nav aria-label="Site menu" class="quick-links-menu">
+<nav aria-label="Menu do site" class="quick-links-menu">
 <details>
-<summary aria-label="Open menu" title="Menu">
+<summary aria-label="Abrir menu" title="Menu">
 <span aria-hidden="true" class="quick-links-toggle"><span></span><span></span><span></span></span>
 </summary>
 <ul class="quick-links-list">
 <li><a href="/pt-br/">Início</a></li>
-<li><a href="/pt-br/o-que-e-kanban/">What is Kanban</a></li>
+<li><a href="/pt-br/o-que-e-kanban/">O que é Kanban</a></li>
 <li><a href="/pt-br/politica-de-privacidade/">Política de Privacidade</a></li>
+<li><a href="/licence.html">Licença</a></li>
 </ul>
 </details>
 </nav>
@@ -189,26 +190,70 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 </div>
 <h1>Contato</h1>
 <div class="box">
-<img alt="João Dutra" class="contact-photo" src="/contact/avatar.jpg"/>
 <h2 style="margin-top:0;border-top:none;padding-top:0;">Informações e Contato</h2>
 <p><strong>Autor:</strong> João Dutra</p>
-<p><strong>Email:</strong> jrdutra.com.br@gmail.com</p>
+<p><strong>Email:</strong> 4mefly@gmail.com</p>
 </div>
 <footer>
-<p>© <span id="year"></span> KanbanApp • <a href="/pt-br/">Início</a> • <a href="/pt-br/o-que-e-kanban/">What is Kanban</a></p>
+<p>© <span id="year"></span> KanbanApp • <a href="/pt-br/">Início</a> • <a href="/pt-br/o-que-e-kanban/">O que é Kanban</a></p>
 </footer>
 </main>
 <script>
     document.getElementById("year").textContent = new Date().getFullYear();
     (function () {
       var menuDetails = document.querySelector('.quick-links-menu details');
-      if (!menuDetails) return;
-      function closeMenu() { if (menuDetails.hasAttribute('open')) menuDetails.removeAttribute('open'); }
-      document.addEventListener('click', function (event) { if (!menuDetails.hasAttribute('open')) return; if (menuDetails.contains(event.target)) return; closeMenu(); }, true);
-      document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeMenu(); });
-      var links = menuDetails.querySelectorAll('.quick-links-list a');
-      for (var i = 0; i < links.length; i += 1) { links[i].addEventListener('click', function () { closeMenu(); }); }
+      var langDetails = document.querySelector('.lang-switcher details');
+      if (!menuDetails && !langDetails) return;
+
+      function closeMenu() {
+        if (!menuDetails) return;
+        if (menuDetails.hasAttribute('open')) {
+          menuDetails.removeAttribute('open');
+        }
+      }
+
+      function closeLangMenu() {
+        if (!langDetails) return;
+        if (langDetails.hasAttribute('open')) {
+          langDetails.removeAttribute('open');
+        }
+      }
+
+      document.addEventListener('click', function (event) {
+        if (menuDetails && menuDetails.hasAttribute('open') && !menuDetails.contains(event.target)) {
+          closeMenu();
+        }
+        if (langDetails && langDetails.hasAttribute('open') && !langDetails.contains(event.target)) {
+          closeLangMenu();
+        }
+      }, true);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          closeMenu();
+          closeLangMenu();
+        }
+      });
+
+      if (menuDetails) {
+        var links = menuDetails.querySelectorAll('.quick-links-list a');
+        for (var i = 0; i < links.length; i += 1) {
+          links[i].addEventListener('click', function () {
+            closeMenu();
+          });
+        }
+      }
+
+      if (langDetails) {
+        var langLinks = langDetails.querySelectorAll('.lang-menu-list a');
+        for (var j = 0; j < langLinks.length; j += 1) {
+          langLinks[j].addEventListener('click', function () {
+            closeLangMenu();
+          });
+        }
+      }
     })();
+
 
     (function () {
       var STORAGE_KEY = 'kanbanappPreferredLanguage';

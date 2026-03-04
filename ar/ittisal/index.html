@@ -168,6 +168,7 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 <li><a href="/ar/">بيت</a></li>
 <li><a href="/ar/ma-huwa-kanban/">ما هو كانبان</a></li>
 <li><a href="/ar/siyasat-al-khusoosiya/">سياسة الخصوصية</a></li>
+<li><a href="/licence.html">الترخيص</a></li>
 </ul>
 </details>
 </nav>
@@ -189,10 +190,9 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 </div>
 <h1>اتصال</h1>
 <div class="box">
-<img alt="جواو دوترا" class="contact-photo" src="/contact/avatar.jpg"/>
 <h2 style="margin-top:0;border-top:none;padding-top:0;">المعلومات والاتصال</h2>
 <p><strong>مؤلف:</strong>جواو دوترا</p>
-<p><strong>بريد إلكتروني:</strong>jrdutra.com.br@gmail.com</p>
+<p><strong>بريد إلكتروني:</strong>4mefly@gmail.com</p>
 </div>
 <footer>
 <p>©<span id="year"></span>كانباناب •<a href="/ar/">بيت</a>•<a href="/ar/ma-huwa-kanban/">ما هو كانبان</a></p>
@@ -202,13 +202,58 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
     document.getElementById("year").textContent = new Date().getFullYear();
     (function () {
       var menuDetails = document.querySelector('.quick-links-menu details');
-      if (!menuDetails) return;
-      function closeMenu() { if (menuDetails.hasAttribute('open')) menuDetails.removeAttribute('open'); }
-      document.addEventListener('click', function (event) { if (!menuDetails.hasAttribute('open')) return; if (menuDetails.contains(event.target)) return; closeMenu(); }, true);
-      document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeMenu(); });
-      var links = menuDetails.querySelectorAll('.quick-links-list a');
-      for (var i = 0; i < links.length; i += 1) { links[i].addEventListener('click', function () { closeMenu(); }); }
+      var langDetails = document.querySelector('.lang-switcher details');
+      if (!menuDetails && !langDetails) return;
+
+      function closeMenu() {
+        if (!menuDetails) return;
+        if (menuDetails.hasAttribute('open')) {
+          menuDetails.removeAttribute('open');
+        }
+      }
+
+      function closeLangMenu() {
+        if (!langDetails) return;
+        if (langDetails.hasAttribute('open')) {
+          langDetails.removeAttribute('open');
+        }
+      }
+
+      document.addEventListener('click', function (event) {
+        if (menuDetails && menuDetails.hasAttribute('open') && !menuDetails.contains(event.target)) {
+          closeMenu();
+        }
+        if (langDetails && langDetails.hasAttribute('open') && !langDetails.contains(event.target)) {
+          closeLangMenu();
+        }
+      }, true);
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          closeMenu();
+          closeLangMenu();
+        }
+      });
+
+      if (menuDetails) {
+        var links = menuDetails.querySelectorAll('.quick-links-list a');
+        for (var i = 0; i < links.length; i += 1) {
+          links[i].addEventListener('click', function () {
+            closeMenu();
+          });
+        }
+      }
+
+      if (langDetails) {
+        var langLinks = langDetails.querySelectorAll('.lang-menu-list a');
+        for (var j = 0; j < langLinks.length; j += 1) {
+          langLinks[j].addEventListener('click', function () {
+            closeLangMenu();
+          });
+        }
+      }
     })();
+
 
     (function () {
       var STORAGE_KEY = 'kanbanappPreferredLanguage';

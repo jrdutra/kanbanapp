@@ -656,6 +656,7 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 <li><a href="../">घर</a></li>
 <li><a href="/hi/gopniyata-neeti/">गोपनीयता नीति</a></li>
 <li><a href="/hi/sampark/">संपर्क</a></li>
+<li><a href="/licence.html">लाइसेंस</a></li>
 </ul>
 </details>
 </nav>
@@ -699,7 +700,7 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 <p>जब आप कानबन का उपयोग करते हैं तो सीखना बहुत आसान हो जाता है<strong>कानबन बोर्ड</strong>असली।<strong>कंबन ऐप</strong>एक है<strong>कानबन बोर्ड</strong>सरल जो चलता है<strong>सीधे ब्राउज़र में</strong>- कोई लॉगिन नहीं, कोई इंस्टॉल नहीं
         कुछ भी नहीं और सर्वर पर निर्भर हुए बिना।
         इसे उन लोगों के लिए डिज़ाइन किया गया था जो गोपनीयता के साथ उत्पादकता चाहते हैं<strong>कॉर्पोरेट उपयोग</strong>.</p>
-<p class="open-links">आप यहां कानबनएप तक पहुंच सकते हैं<a href="https://kanbanapp.io">https://kanbanapp.io</a>या पर<a href="/kanbanapp.html">https://jrdutra.github.io/kanbanapp/kanbanapp.html</a>.
+<p class="open-links">आप यहां कानबनएप तक पहुंच सकते हैं<a href="https://kanbanapp.io">https://kanbanapp.io</a>या पर<a href="https://jrdutra.github.io/kanbanapp/kanbanapp.html">GIthub</a>.
         यदि आप चाहें, तो इसे ऑफ़लाइन उपयोग करें: HTML फ़ाइल डाउनलोड करें और इसे सीधे अपने ब्राउज़र में खोलें।</p>
 <section aria-label="मुख्य क्रियाएं" class="cta">
 <a class="btn btn-download" download="kanbanapp.html" href="/kanbanapp.html">kanbanapp.html डाउनलोड करें</a>
@@ -1155,31 +1156,58 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 <script>
     (function () {
       var menuDetails = document.querySelector('.quick-links-menu details');
-      if (!menuDetails) return;
+      var langDetails = document.querySelector('.lang-switcher details');
+      if (!menuDetails && !langDetails) return;
 
       function closeMenu() {
+        if (!menuDetails) return;
         if (menuDetails.hasAttribute('open')) {
           menuDetails.removeAttribute('open');
         }
       }
 
+      function closeLangMenu() {
+        if (!langDetails) return;
+        if (langDetails.hasAttribute('open')) {
+          langDetails.removeAttribute('open');
+        }
+      }
+
       document.addEventListener('click', function (event) {
-        if (!menuDetails.hasAttribute('open')) return;
-        if (menuDetails.contains(event.target)) return;
-        closeMenu();
+        if (menuDetails && menuDetails.hasAttribute('open') && !menuDetails.contains(event.target)) {
+          closeMenu();
+        }
+        if (langDetails && langDetails.hasAttribute('open') && !langDetails.contains(event.target)) {
+          closeLangMenu();
+        }
       }, true);
 
       document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') closeMenu();
+        if (event.key === 'Escape') {
+          closeMenu();
+          closeLangMenu();
+        }
       });
 
-      var links = menuDetails.querySelectorAll('.quick-links-list a');
-      for (var i = 0; i < links.length; i += 1) {
-        links[i].addEventListener('click', function () {
-          closeMenu();
-        });
+      if (menuDetails) {
+        var links = menuDetails.querySelectorAll('.quick-links-list a');
+        for (var i = 0; i < links.length; i += 1) {
+          links[i].addEventListener('click', function () {
+            closeMenu();
+          });
+        }
+      }
+
+      if (langDetails) {
+        var langLinks = langDetails.querySelectorAll('.lang-menu-list a');
+        for (var j = 0; j < langLinks.length; j += 1) {
+          langLinks[j].addEventListener('click', function () {
+            closeLangMenu();
+          });
+        }
       }
     })();
+
 
     (function () {
       var STORAGE_KEY = 'kanbanappPreferredLanguage';
@@ -1295,4 +1323,3 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
   </script>
 </body>
 </html>
-
