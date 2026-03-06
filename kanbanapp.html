@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+﻿<!DOCTYPE html> 
 <html lang="en-US"> 
 <head>
  <meta charset="utf-8" />
@@ -20,8 +20,8 @@
  --border: #3a3a3a; 
  --text: #ffffff; 
  --muted: #bdbdbd; 
- --purple: #6650e6; /* roxo padrÃ£o dos cards sem data (baseado na imagem) */
- --purple-dark: #2a254b; /* faixa roxa mais escura (concluÃ­do) */
+ --purple: #6650e6; /* roxo padrÃƒÂ£o dos cards sem data (baseado na imagem) */
+ --purple-dark: #2a254b; /* faixa roxa mais escura (concluÃƒÂ­do) */
  --purple-2: #d4a8ff;
  --purple-strong: #7a00ff; /* roxo mais escuro para checkboxes*/
  --menu-purple-base: #6650e6;
@@ -66,6 +66,218 @@ body {
   border-radius: 0;
   color: var(--text);
   box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+}
+.hover-menu{
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 95vw;
+  min-width: 320px;
+  max-width: 95vw;
+  min-height: 72px;
+  background: linear-gradient(180deg, #3b3b3f 0%, #2a2a2e 100%);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 24px 52px 18px rgba(0,0,0,0.34);
+  transform: translateX(-50%) translateY(calc(-100% + 7px));
+  transition: transform .52s cubic-bezier(.22, 1, .36, 1);
+  z-index: 9;
+  pointer-events: none;
+  overflow: visible;
+  box-sizing: border-box;
+}
+.hover-menu.open{
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+  box-shadow: 0 34px 72px 26px rgba(0,0,0,0.56);
+}
+.hover-menu-content{
+  min-height: 72px;
+  min-width: max-content;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px 18px;
+  box-sizing: border-box;
+}
+.hover-menu-items{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.board-switch-out,
+.board-switch-in{
+  pointer-events: none;
+}
+.board-switch-out{
+  animation: boardSwitchOut .42s cubic-bezier(.22, 1, .36, 1) both;
+}
+.board-switch-in{
+  animation: boardSwitchIn .52s cubic-bezier(.22, 1, .36, 1) both;
+}
+@keyframes boardSwitchOut{
+  from{ transform: translateX(0); opacity: 1; }
+  to{ transform: translateX(calc(var(--board-switch-dir, 1) * 68px)); opacity: 0; }
+}
+@keyframes boardSwitchIn{
+  from{ transform: translateX(calc(var(--board-switch-dir, 1) * 68px)); opacity: 0; }
+  to{ transform: translateX(0); opacity: 1; }
+}
+.hover-menu-item{
+  flex: 0 0 222px;
+  width: 222px;
+  height: 44px;
+  display: block;
+  position: relative;
+  padding: 0 40px 0 40px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  background: var(--bg);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.22);
+  color: #f4f1ff;
+  font-size: 16.8px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transform: translateY(0) scale(1);
+  transition: transform .34s cubic-bezier(.22, 1, .36, 1), box-shadow .34s cubic-bezier(.22, 1, .36, 1), border-color .24s ease;
+  overflow: hidden;
+  text-align: center;
+  line-height: 42px;
+  cursor: pointer;
+  will-change: transform, box-shadow;
+}
+.hover-menu-item:hover,
+.hover-menu-item.active,
+.hover-menu-item.drag-target{
+  transform: translateY(-5px) scale(1.015);
+  box-shadow: 0 20px 32px rgba(0,0,0,0.36);
+}
+.hover-menu-item-text{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hover-menu-item-edit,
+.hover-menu-item-remove{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: var(--bg);
+  color: rgba(244,241,255,0.88);
+  font-size: 16px;
+  line-height: 1;
+  box-shadow: none;
+  cursor: pointer;
+}
+.hover-menu-item-edit{
+  left: 0;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.hover-menu-item-remove{
+  right: 0;
+  border-left: 1px solid rgba(255,255,255,0.12);
+}
+.hover-menu-item-remove:hover,
+.hover-menu-item-edit:hover{
+  background: color-mix(in srgb, var(--bg) 82%, #ffffff);
+  transform: translateY(-50%);
+}
+.hover-menu-editor{
+  position: fixed;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  width: 240px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  background: #1a1d29;
+  box-shadow: 0 18px 30px rgba(0,0,0,0.42);
+  z-index: 20;
+}
+.hover-menu-editor.open{
+  display: flex;
+}
+.hover-menu-edit-input{
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  background: #0f121b;
+  color: var(--text);
+}
+.hover-menu-edit-save{
+  flex: 0 0 auto;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 6px;
+}
+.hover-menu-add{
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 19.2px;
+  line-height: 1;
+}
+.hover-menu::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 57px;
+  height: 13px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #343438 0%, #2a2a2e 100%);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: 0 12px 22px rgba(0,0,0,0.22);
+  pointer-events: auto;
+}
+.hover-menu::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #707076;
+  z-index: 1;
+  pointer-events: none;
+}
+.topbar-hover-trigger{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  z-index: 11;
+  background: transparent;
 }
  .brand{ font-weight: 700; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.55)); } 
 .brand{ font-size: 120%; }
@@ -126,9 +338,9 @@ button, .btn{
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-  /* reduzir padding interno em 50% (valor anterior usado como referÃªncia) */
+  /* reduzir padding interno em 50% (valor anterior usado como referÃƒÂªncia) */
   padding: clamp(6px, 1vw, 9px);
-    /* EspaÃ§o inferior fixo relativo Ã  altura da viewport (5% da altura da pÃ¡gina) */
+    /* EspaÃƒÂ§o inferior fixo relativo ÃƒÂ  altura da viewport (5% da altura da pÃƒÂ¡gina) */
     margin-bottom: 5vh;
     margin-top: 0.1vh;
  } 
@@ -336,7 +548,7 @@ button, .btn{
  input.item-check:checked::after {
   transform: translate(-50%, -50%) rotate(45deg) scale(1);
  }
- /* Timestamps abaixo do tÃ­tulo */ 
+ /* Timestamps abaixo do tÃƒÂ­tulo */ 
  .card-meta{ 
  grid-column: 1 / -1; 
  display: flex; 
@@ -358,7 +570,7 @@ button, .btn{
  transition: max-height .52s cubic-bezier(.2,.9,.2,1), opacity .36s ease;
  } 
  .field-label{ font-size: 12px; color: var(--muted); } 
- /* DescriÃ§Ã£o */ 
+ /* DescriÃƒÂ§ÃƒÂ£o */ 
 textarea.card-desc{ 
 width: 100%; 
 min-height: 90px; 
@@ -504,13 +716,13 @@ margin-left: 26px;
  font-family: inherit; 
  } 
  .hidden{ display: none !important; } 
- /* Card colapsado: mostra sÃ³ header */ 
+ /* Card colapsado: mostra sÃƒÂ³ header */ 
  .card.collapsed{ cursor: pointer; gap: 0; } 
  .card.collapsed .card-header { grid-template-columns: 1fr; }
  .card.collapsed .card-header-actions { display: none; } 
  .card.collapsed .card-title { grid-column: 1 / -1; }
  .card.collapsed .card-body { max-height: 0; opacity: 0; pointer-events: none; } 
- /* TÃ­tulo quando concluÃ­do */ 
+ /* TÃƒÂ­tulo quando concluÃƒÂ­do */ 
  .card.completed .card-title{ 
  color: var(--text-completed); 
  /* text-decoration: line-through; opcional */ 
@@ -524,7 +736,8 @@ margin-left: 26px;
  padding: 0 2px; 
  } 
  /* Scrollbars (webkit) */ 
- ::-webkit-scrollbar { height: 4px; width: 8px; } 
+ ::-webkit-scrollbar { height: 8px; width: 8px; } 
+ ::-webkit-scrollbar:horizontal:hover { height: 16px; } 
  ::-webkit-scrollbar-track { background: var(--panel-2); } 
  ::-webkit-scrollbar-thumb { background: #555; border-radius: 20px; } 
  ::-webkit-scrollbar-thumb:hover { background: #666; } 
@@ -535,7 +748,7 @@ margin-left: 26px;
  outline-offset: 2px; 
  filter: brightness(1.02); 
  } 
- @media (max-width: 640px){ 
+@media (max-width: 640px){ 
  .column{ min-width: 92vw; } 
  .card-header{ grid-template-columns: 1fr; } 
  .filter-row{ grid-template-columns: 1fr auto; } 
@@ -737,6 +950,68 @@ margin-left: 26px;
   opacity: 0.48;
   filter: saturate(0.75) brightness(0.9);
 }
+.board-loading-overlay{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 10, 16, 0.74);
+  backdrop-filter: blur(4px) brightness(0.62);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .22s ease;
+  z-index: 30;
+}
+.board-loading-overlay.open{
+  opacity: 1;
+  pointer-events: auto;
+}
+.board-loading-panel{
+  min-width: min(420px, 92vw);
+  padding: 22px 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(25,28,40,0.96) 0%, rgba(17,19,28,0.98) 100%);
+  box-shadow: 0 26px 60px rgba(0,0,0,0.42);
+  text-align: center;
+}
+.board-loading-title{
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.board-loading-text{
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.board-loading-bars{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8px;
+  height: 42px;
+  margin: 16px 0 10px;
+}
+.board-loading-bars span{
+  width: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #7a67f0 0%, #5f72ff 100%);
+  box-shadow: 0 0 18px rgba(95,114,255,0.2);
+  animation: boardLoadingPulse 1.05s ease-in-out infinite;
+}
+.board-loading-bars span:nth-child(1){ height: 18px; animation-delay: 0s; }
+.board-loading-bars span:nth-child(2){ height: 30px; animation-delay: 0.12s; }
+.board-loading-bars span:nth-child(3){ height: 24px; animation-delay: 0.24s; }
+.board-loading-bars span:nth-child(4){ height: 34px; animation-delay: 0.36s; }
+.board-loading-bars span:nth-child(5){ height: 20px; animation-delay: 0.48s; }
+@keyframes boardLoadingPulse{
+  0%, 100%{ transform: translateY(0) scaleY(0.82); opacity: 0.6; }
+  50%{ transform: translateY(-4px) scaleY(1.08); opacity: 1; }
+}
 #checklistItemOverlay .modal-body{
   display: flex;
   flex-direction: column;
@@ -873,12 +1148,11 @@ margin-left: 26px;
 
 /* ===== Topbar Hamburger Menu ===== */
 .hamburger{
-  margin-left: 0;
-  position: fixed;
-  top: 12px;
-  right: 16px;
-  z-index: 13;
+  margin-left: auto;
   display: inline-flex;
+  position: fixed;
+  top: 0;
+  right: 16px;
   background: var(--panel-2);
   border: 1px solid rgba(255,255,255,0.15);
   color: var(--text);
@@ -936,8 +1210,32 @@ margin-left: 26px;
 <body> 
  <header class="topbar"> 
  <a class="brand brand-link" href="https://kanbanapp.io" target="_blank" rel="noopener noreferrer"><img class="brand-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLYW5iYW5BcHAgZmF2aWNvbiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxMjEzMWQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjY1MGU2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxNCIgZmlsbD0idXJsKCNiZykiLz4KICA8cmVjdCB4PSIxNCIgeT0iMTYiIHdpZHRoPSIxMCIgaGVpZ2h0PSIzMiIgcng9IjMiIGZpbGw9IiNkOGQ4ZmYiIGZpbGwtb3BhY2l0eT0iLjkwIi8+CiAgPHJlY3QgeD0iMjciIHk9IjE2IiB3aWR0aD0iMTAiIGhlaWdodD0iMzIiIHJ4PSIzIiBmaWxsPSIjYmRhNmZmIiBmaWxsLW9wYWNpdHk9Ii45MiIvPgogIDxyZWN0IHg9IjQwIiB5PSIxNiIgd2lkdGg9IjEwIiBoZWlnaHQ9IjMyIiByeD0iMyIgZmlsbD0iIzdhNjdmMCIgZmlsbC1vcGFjaXR5PSIuOTUiLz4KPC9zdmc+Cg==" alt="" aria-hidden="true">KanbanApp.io</a> 
- <button id="hamburgerBtn" class="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
+  <button id="hamburgerBtn" class="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
  </header> 
+<div id="topbarHoverTrigger" class="topbar-hover-trigger" aria-hidden="true"></div>
+<div id="hoverMenu" class="hover-menu" aria-hidden="true">
+  <div id="hoverMenuContent" class="hover-menu-content">
+    <div id="hoverMenuItems" class="hover-menu-items"></div>
+    <button id="hoverMenuAddBtn" type="button" class="hover-menu-item hover-menu-add" aria-label="Add board">+</button>
+  </div>
+</div>
+<div id="hoverMenuEditor" class="hover-menu-editor" aria-hidden="true">
+  <input id="hoverMenuEditorInput" class="hover-menu-edit-input" type="text" maxlength="120">
+  <button id="hoverMenuEditorSave" type="button" class="btn hover-menu-edit-save">Save</button>
+</div>
+<div id="boardLoadingOverlay" class="board-loading-overlay" aria-hidden="true">
+  <div class="board-loading-panel">
+    <div class="board-loading-bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <p class="board-loading-title">Loading boards</p>
+    <p class="board-loading-text">Preparing columns and cards for the active board.</p>
+  </div>
+</div>
 <!-- Opaque spacer, same height as topbar, same color as board background -->
 <div id="topbarSpacer" class="topbar-spacer" aria-hidden="true"></div>
 <!-- Mobile menu container (hidden by default) -->
@@ -967,7 +1265,7 @@ margin-left: 26px;
  <button class="btn-small add-card">+ Card</button> 
  <button class="btn-small select-all" title="Select all cards">Select</button> 
  <button class="btn-small conclude-all" title="Mark all cards as completed">Complete</button> 
- <!-- NOVOS botÃµes na coluna --> 
+ <!-- NOVOS botÃƒÂµes na coluna --> 
  <button class="btn-small sort-date" title="Sort by date (toggle ascending/descending)">Sort by date</button> 
  <button class="btn-small group-completed" title="Incomplete first, completed at the end">Group completed</button> 
  <button class="btn-small btn-danger delete-column" title="Delete this column">Delete</button> 
@@ -1010,7 +1308,7 @@ margin-left: 26px;
  <span class="card-collapsed-meta-text"></span>
  <button class="btn-small btn-ghost open-card-modal" title="Open in modal">Open</button>
  </div> 
- <!-- NOVO: barra de progresso (sempre visÃ­vel) --> 
+ <!-- NOVO: barra de progresso (sempre visÃƒÂ­vel) --> 
  <div class="progress-wrap" aria-hidden="false"> 
  <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Checklist progress"> 
  <div class="progress-bar" style="width:0%"></div> 
@@ -1041,7 +1339,7 @@ margin-left: 26px;
  </template> 
  <template id="tpl-checklist-item"> 
  <div class="checklist-item"> 
- <span class="item-drag-handle" title="Drag item" aria-label="Drag item" draggable="false">⋮⋮</span>
+ <span class="item-drag-handle" title="Drag item" aria-label="Drag item" draggable="false">â‹®â‹®</span>
  <input type="checkbox" class="item-check" aria-label="Check item"> 
  <div class="item-view" aria-label="Label (click to edit)"></div> 
  <div class="item-actions"> 
@@ -1051,7 +1349,7 @@ margin-left: 26px;
  <textarea class="item-editor hidden" placeholder="Item text (URLs become clickable in preview)"></textarea> 
  </div> 
  </template> 
- <!-- Modal de ConfiguraÃ§Ãµes --> 
+ <!-- Modal de ConfiguraÃƒÂ§ÃƒÂµes --> 
  <div id="settingsOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"> 
  <div class="modal"> 
  <div class="modal-header"> 
@@ -1062,7 +1360,7 @@ margin-left: 26px;
  <section class="settings-section"> 
  <h3 class="section-title">Card age color rules</h3> 
  <p class="section-help"> 
- Define rows with <strong>days</strong> and a <strong>color</strong>. Example: 7 days â†’ yellow. 
+ Define rows with <strong>days</strong> and a <strong>color</strong>. Example: 7 days Ã¢â€ â€™ yellow. 
  </p> 
  <div id="rulesList" class="rules-list" aria-live="polite"></div> 
  <div class="rules-actions"> 
@@ -1154,34 +1452,34 @@ SOFTWARE.
  <!-- Fallback: combobox de cores (tons pedidos) --> 
  <select class="rule-color-select"> 
  <!-- Amarelo --> 
- <option value="#fffde7">Yellow 50 â€” #fffde7</option> 
- <option value="#fff59d">Yellow 300 â€” #fff59d</option> 
- <option value="#ffeb3b">Yellow 500 â€” #ffeb3b</option> 
- <option value="#fbc02d">Yellow 700 â€” #fbc02d</option> 
+ <option value="#fffde7">Yellow 50 Ã¢â‚¬â€ #fffde7</option> 
+ <option value="#fff59d">Yellow 300 Ã¢â‚¬â€ #fff59d</option> 
+ <option value="#ffeb3b">Yellow 500 Ã¢â‚¬â€ #ffeb3b</option> 
+ <option value="#fbc02d">Yellow 700 Ã¢â‚¬â€ #fbc02d</option> 
  <!-- Vermelho --> 
- <option value="#ffebee">Red 50 â€” #ffebee</option> 
- <option value="#ffcdd2">Red 200 â€” #ffcdd2</option> 
- <option value="#ef5350">Red 400 â€” #ef5350</option> 
- <option value="#b71c1c">Red 900 â€” #b71c1c</option> 
+ <option value="#ffebee">Red 50 Ã¢â‚¬â€ #ffebee</option> 
+ <option value="#ffcdd2">Red 200 Ã¢â‚¬â€ #ffcdd2</option> 
+ <option value="#ef5350">Red 400 Ã¢â‚¬â€ #ef5350</option> 
+ <option value="#b71c1c">Red 900 Ã¢â‚¬â€ #b71c1c</option> 
  <!-- Azul --> 
- <option value="#e3f2fd">Blue 50 â€” #e3f2fd</option> 
- <option value="#90caf9">Blue 200 â€” #90caf9</option> 
- <option value="#2196f3">Blue 500 â€” #2196f3</option> 
- <option value="#0d47a1">Blue 900 â€” #0d47a1</option> 
+ <option value="#e3f2fd">Blue 50 Ã¢â‚¬â€ #e3f2fd</option> 
+ <option value="#90caf9">Blue 200 Ã¢â‚¬â€ #90caf9</option> 
+ <option value="#2196f3">Blue 500 Ã¢â‚¬â€ #2196f3</option> 
+ <option value="#0d47a1">Blue 900 Ã¢â‚¬â€ #0d47a1</option> 
  <!-- Roxo --> 
- <option value="#f3e5f5">Purple 50 â€” #f3e5f5</option> 
- <option value="#ce93d8">Purple 200 â€” #ce93d8</option> 
- <option value="#9c27b0">Purple 500 â€” #9c27b0</option> 
- <option value="#4a148c">Purple 900 â€” #4a148c</option> 
+ <option value="#f3e5f5">Purple 50 Ã¢â‚¬â€ #f3e5f5</option> 
+ <option value="#ce93d8">Purple 200 Ã¢â‚¬â€ #ce93d8</option> 
+ <option value="#9c27b0">Purple 500 Ã¢â‚¬â€ #9c27b0</option> 
+ <option value="#4a148c">Purple 900 Ã¢â‚¬â€ #4a148c</option> 
  <!-- Cinza --> 
- <option value="#fafafa">Gray 50 â€” #fafafa</option> 
- <option value="#e0e0e0">Gray 300 â€” #e0e0e0</option> 
- <option value="#9e9e9e">Gray 500 â€” #9e9e9e</option> 
- <option value="#616161">Gray 700 â€” #616161</option> 
- <option value="#212121">Gray 900 â€” #212121</option> 
+ <option value="#fafafa">Gray 50 Ã¢â‚¬â€ #fafafa</option> 
+ <option value="#e0e0e0">Gray 300 Ã¢â‚¬â€ #e0e0e0</option> 
+ <option value="#9e9e9e">Gray 500 Ã¢â‚¬â€ #9e9e9e</option> 
+ <option value="#616161">Gray 700 Ã¢â‚¬â€ #616161</option> 
+ <option value="#212121">Gray 900 Ã¢â‚¬â€ #212121</option> 
  <!-- Branco/Preto --> 
- <option value="#ffffff">White â€” #ffffff</option> 
- <option value="#000000">Black â€” #000000</option> 
+ <option value="#ffffff">White Ã¢â‚¬â€ #ffffff</option> 
+ <option value="#000000">Black Ã¢â‚¬â€ #000000</option> 
  </select> 
  </div> 
  <div class="rule-actions"> 
@@ -1190,7 +1488,7 @@ SOFTWARE.
  </div> 
  </template> 
 
-<!-- Modal de Card (abre o prÃ³prio card no centro) -->
+<!-- Modal de Card (abre o prÃƒÂ³prio card no centro) -->
 <div id="cardOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="cardModalTitle">
   <div class="modal modal-card">
     <div class="modal-header">
@@ -1261,10 +1559,16 @@ const $ = (sel, ctx=document) => ctx.querySelector(sel);
 const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel)); 
 const uid = (p='id') => `${p}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`; 
 const nextFrame = () => new Promise(r => requestAnimationFrame(() => r())); 
+const wait = (ms) => new Promise(r => setTimeout(r, ms));
+const UNTITLED_BOARD_NAME = 'Untitled Board';
+const DEFAULT_NEW_BOARD_NAME = 'New Board';
 let isBoardHydrating = false;
+let activeBoardName = UNTITLED_BOARD_NAME;
+let boardSwitchToken = 0;
 // Currently dragged checklist item (handle-driven)
 let currentDraggedChecklistItem = null;
 let checklistDragMeta = null;
+let cardBoardHoverSwitchTimer = null;
 function getChecklistItemContent(itemNode){
  if(!itemNode || !itemNode.dataset) return '';
  return String(itemNode.dataset.details || '');
@@ -1338,7 +1642,7 @@ function escapeHtml(str){
  const map = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }; 
  return s.replace(/[&<>"']/g, m => map[m]); 
  } 
- // Normaliza para busca case/acento-insensÃ­vel 
+ // Normaliza para busca case/acento-insensÃƒÂ­vel 
  function normalizeText(s) { 
  return String(s || '') 
  .normalize('NFD') 
@@ -1353,7 +1657,7 @@ function escapeHtml(str){
  const urlRegex = /((https?:\/\/[\w.-]+(?:\:[0-9]+)?(?:\/[\w.,@?^=%&:/~+#-]*)?))/gi; 
  return safe.replace(urlRegex, (raw) => { 
  const href = raw.startsWith('http') ? raw : 'http://' + raw; 
- // remover pontuaÃ§Ã£o final solta 
+ // remover pontuaÃƒÂ§ÃƒÂ£o final solta 
  const m = href.match(/^(.*?)([),.;!?:]+)?$/); 
  let url = href, trailing = ''; 
  if (m) { url = m[1]; trailing = m[2] || ''; } 
@@ -1509,27 +1813,126 @@ function escapeHtml(str){
  try { card.style.setProperty('--progress-color', color); } catch(_) {} 
  card.style.boxShadow = `var(--shadow), inset 3px 0 0 ${color}`; 
  if(descView){ descView.style.borderLeft = `3px solid ${color}`; } 
- // NOVO: sempre atualizar a linha colapsada apÃ³s pintar 
+ // NOVO: sempre atualizar a linha colapsada apÃƒÂ³s pintar 
  renderCollapsedMeta(card); 
  } 
- function applyDueColorsAll(){
- $$('.card').forEach(function(card){
- applyDueColorToCard(card);
- $$('.checklist-item', card).forEach(updateChecklistItemNoteButtonState);
+function applyDueColorsAll(){
+$$('.card').forEach(function(card){
+applyDueColorToCard(card);
+$$('.checklist-item', card).forEach(updateChecklistItemNoteButtonState);
+});
+} 
+function normalizeBoardName(name, fallback){
+ const base = (typeof name === 'string' ? name : '').replace(/\s+/g, ' ').trim();
+ return base || fallback || UNTITLED_BOARD_NAME;
+}
+function normalizeBoardData(data){
+ if (!data || !Array.isArray(data.columns)) return data;
+ data.columns.forEach(function(col){
+  if (!col || typeof col !== 'object') return;
+  col.board = normalizeBoardName(col.board, UNTITLED_BOARD_NAME);
  });
- } 
- // ===== SERIALIZAÃ‡ÃƒO ===== 
+ return data;
+}
+function getColumnBoardName(columnNode){
+ if (!columnNode || !columnNode.dataset) return UNTITLED_BOARD_NAME;
+ return normalizeBoardName(columnNode.dataset.board, UNTITLED_BOARD_NAME);
+}
+function setColumnBoardName(columnNode, boardName){
+ if (!columnNode || !columnNode.dataset) return;
+ columnNode.dataset.board = normalizeBoardName(boardName, UNTITLED_BOARD_NAME);
+}
+function getBoardNamesFromDom(){
+ const names = [];
+ $$('.column', board).forEach(function(col){
+  const boardName = getColumnBoardName(col);
+  if (!names.includes(boardName)) names.push(boardName);
+ });
+ return names;
+}
+function getColumnsForBoardName(boardName){
+ const normalized = normalizeBoardName(boardName, UNTITLED_BOARD_NAME);
+ return $$('.column', board).filter(function(col){ return getColumnBoardName(col) === normalized; });
+}
+function notifyBoardsChanged(){
+ document.dispatchEvent(new CustomEvent('kanban:boards-changed'));
+ if (typeof window.__scheduleBoardAutosave === 'function') window.__scheduleBoardAutosave();
+}
+function ensureActiveBoardName(){
+ const boards = getBoardNamesFromDom();
+ if (!boards.length){
+  activeBoardName = null;
+  return activeBoardName;
+ }
+ if (!boards.includes(activeBoardName)) activeBoardName = boards[0];
+ return activeBoardName;
+}
+function getPreferredActiveBoardName(data){
+ if (!data || !data.meta) return null;
+ return normalizeBoardName(data.meta.activeBoard, '');
+}
+function setBoardLoadingState(open){
+ const overlay = document.getElementById('boardLoadingOverlay');
+ if (!overlay) return;
+ overlay.classList.toggle('open', !!open);
+ overlay.setAttribute('aria-hidden', String(!open));
+}
+function applyActiveBoardVisibility(){
+ const active = ensureActiveBoardName();
+ $$('.column', board).forEach(function(col){
+  col.style.display = (!active || getColumnBoardName(col) === active) ? '' : 'none';
+ });
+ if (typeof syncTopbarSpacer === 'function') syncTopbarSpacer();
+}
+async function switchActiveBoard(nextBoardName, options){
+ const opts = Object.assign({ animate: true, direction: 1, force: false }, options || {});
+ const target = normalizeBoardName(nextBoardName, UNTITLED_BOARD_NAME);
+ const previous = ensureActiveBoardName();
+ const boards = getBoardNamesFromDom();
+ if (!boards.length){
+  activeBoardName = null;
+  applyActiveBoardVisibility();
+  return;
+ }
+ const targetBoard = boards.includes(target) ? target : boards[0];
+ activeBoardName = targetBoard;
+ if (!opts.force && previous === targetBoard){
+  applyActiveBoardVisibility();
+  return;
+ }
+ if (!opts.animate || !previous){
+  applyActiveBoardVisibility();
+  return;
+ }
+ const token = ++boardSwitchToken;
+ board.style.setProperty('--board-switch-dir', String(opts.direction || 1));
+ board.classList.remove('board-switch-in', 'board-switch-out');
+ void board.offsetWidth;
+ board.classList.add('board-switch-out');
+ await wait(240);
+ if (token !== boardSwitchToken) return;
+ applyActiveBoardVisibility();
+ board.classList.remove('board-switch-out');
+ void board.offsetWidth;
+ board.classList.add('board-switch-in');
+ await wait(340);
+ if (token !== boardSwitchToken) return;
+ board.classList.remove('board-switch-in');
+}
+ // ===== SERIALIZAÃƒâ€¡ÃƒÆ’O ===== 
  function serializeBoard(){ 
  const data = { 
- meta: { version: 11, exportedAt: new Date().toISOString() }, 
+ meta: { version: 12, exportedAt: new Date().toISOString() }, 
  columns: [] 
  }; 
  // regras de cor 
  data.meta.ageColorRules = Array.isArray(boardMeta.ageColorRules) ? boardMeta.ageColorRules : []; 
+ data.meta.activeBoard = ensureActiveBoardName() || UNTITLED_BOARD_NAME;
  $$('.column', board).forEach(function(col){ 
  const colData = { 
  id: col.dataset.id, 
  title: $('.column-title', col).value.trim(), 
+ board: getColumnBoardName(col),
  cards: [] 
  }; 
  $$('.card', col).forEach(function(card){ 
@@ -1561,11 +1964,13 @@ function escapeHtml(str){
  }); 
  return data; 
  } 
- async function loadBoardSequential(data){ 
+async function loadBoardSequential(data){ 
  if(!data || !Array.isArray(data.columns)){ 
  alert('Invalid JSON: object does not contain "columns".'); 
  return; 
  } 
+ normalizeBoardData(data);
+ setBoardLoadingState(true);
  isBoardHydrating = true;
  try{
  // carregar regras 
@@ -1578,10 +1983,11 @@ function escapeHtml(str){
  } catch (_) { 
  boardMeta.ageColorRules = []; 
  } 
+ activeBoardName = getPreferredActiveBoardName(data) || activeBoardName || UNTITLED_BOARD_NAME;
  board.innerHTML = ''; 
  for(let ci = 0; ci < data.columns.length; ci++){ 
  const colData = data.columns[ci] || {}; 
- const colNode = createColumn(colData.id || uid('col'), colData.title || ''); 
+ const colNode = createColumn(colData.id || uid('col'), colData.title || '', colData.board || UNTITLED_BOARD_NAME); 
  board.appendChild(colNode); 
  await nextFrame(); 
  const cardsArr = Array.isArray(colData.cards) ? colData.cards : []; 
@@ -1643,23 +2049,28 @@ function escapeHtml(str){
  // aplica filtro inicial (se houver valor no input) 
  applyColumnFilter(colNode); 
  } 
- // opcional: se modal jÃ¡ foi inicializado, atualiza a UI 
+ // opcional: se modal jÃƒÂ¡ foi inicializado, atualiza a UI 
  if (settingsUI.overlay) renderSettingsRows(boardMeta.ageColorRules); 
  // garantia 
  applyDueColorsAll(); 
+ ensureActiveBoardName();
+ applyActiveBoardVisibility();
+ document.dispatchEvent(new CustomEvent('kanban:boards-changed'));
  } finally {
  isBoardHydrating = false;
+ setBoardLoadingState(false);
  }
  }
  
  function getDefaultBoardData(){
  const now = nowISO();
  return {
- meta: { version: 11, exportedAt: now, ageColorRules: Array.isArray(boardMeta.ageColorRules) ? boardMeta.ageColorRules : [] },
+ meta: { version: 12, exportedAt: now, ageColorRules: Array.isArray(boardMeta.ageColorRules) ? boardMeta.ageColorRules : [], activeBoard: UNTITLED_BOARD_NAME },
  columns: [
  {
  id: uid('col'),
  title: 'To Do',
+ board: UNTITLED_BOARD_NAME,
  cards: [
  { id: uid('card'), title: 'Define weekly scope', description: 'List priorities and align team expectations. Reference: https://www.atlassian.com/agile/project-management', completed: false, checklist: [{ checked: true, label: 'Gather team demands' }, { checked: false, label: 'Define sprint priorities' }, { checked: false, label: 'Validate weekly capacity' }], createdAt: now, updatedAt: now, dueDate: '' },
  { id: uid('card'), title: 'Organize backlog', description: 'Review pending tasks and sort by priority. Technique example: https://www.scrum.org/resources/what-is-a-product-backlog', completed: false, checklist: [{ checked: true, label: 'Remove duplicated items' }, { checked: true, label: 'Standardize titles' }, { checked: false, label: 'Reprioritize stories' }], createdAt: now, updatedAt: now, dueDate: '' },
@@ -1669,6 +2080,7 @@ function escapeHtml(str){
  {
  id: uid('col'),
  title: 'Doing',
+ board: UNTITLED_BOARD_NAME,
  cards: [
  { id: uid('card'), title: 'Implement home screen', description: 'Adjust layout and key page texts. Usability guide: https://www.nngroup.com/articles/ten-usability-heuristics/', completed: false, checklist: [{ checked: true, label: 'Create base HTML structure' }, { checked: false, label: 'Adjust mobile spacing' }, { checked: false, label: 'Review color contrast' }], createdAt: now, updatedAt: now, dueDate: '' },
  { id: uid('card'), title: 'Validate usage flow', description: 'Test app opening and JSON export/import. JSON reference: https://developer.mozilla.org/docs/Learn_web_development/Core/Scripting/JSON', completed: false, checklist: [{ checked: true, label: 'Test column creation' }, { checked: false, label: 'Test JSON import' }, { checked: false, label: 'Test JSON export' }], createdAt: now, updatedAt: now, dueDate: '' },
@@ -1678,6 +2090,7 @@ function escapeHtml(str){
  {
  id: uid('col'),
  title: 'Done',
+ board: UNTITLED_BOARD_NAME,
  cards: [
  { id: uid('card'), title: 'Create board structure', description: 'Initial board configured with default columns. Kanban model: https://kanban.university/kanban-guide/', completed: true, checklist: [{ checked: true, label: 'Create initial columns' }, { checked: true, label: 'Add card actions' }, { checked: true, label: 'Validate drag and drop' }], createdAt: now, updatedAt: now, dueDate: '' },
  { id: uid('card'), title: 'Publish first version', description: 'First version delivered to the team. Release log: https://keepachangelog.com/en/1.1.0/', completed: true, checklist: [{ checked: true, label: 'Generate release package' }, { checked: true, label: 'Update changelog' }, { checked: true, label: 'Notify stakeholders' }], createdAt: now, updatedAt: now, dueDate: '' },
@@ -1687,14 +2100,16 @@ function escapeHtml(str){
  ]
  };
  }
- // ===== CriaÃ§Ã£o de elementos ===== 
+ // ===== CriaÃƒÂ§ÃƒÂ£o de elementos ===== 
  const board = document.getElementById('board'); 
  const tplColumn = document.getElementById('tpl-column'); 
  const tplCard = document.getElementById('tpl-card'); 
  const tplItem = document.getElementById('tpl-checklist-item'); 
- function createColumn(id, title){ 
+ function createColumn(id, title, boardName){ 
  const node = tplColumn.content.firstElementChild.cloneNode(true); 
  node.dataset.id = id; 
+ setColumnBoardName(node, boardName || activeBoardName || UNTITLED_BOARD_NAME);
+ node.style.display = (normalizeBoardName(getColumnBoardName(node), UNTITLED_BOARD_NAME) === normalizeBoardName(activeBoardName, UNTITLED_BOARD_NAME)) ? '' : 'none';
  $('.column-title', node).value = title || ''; 
  // Filtro 
  const filterInput = $('.filter-cards', node); 
@@ -1726,7 +2141,7 @@ function escapeHtml(str){
  const total = $$('.card', node).length; 
  filterCount.textContent = `${total}/${total}`; 
  } 
- // AÃ§Ãµes 
+ // AÃƒÂ§ÃƒÂµes 
  $('.add-card', node).addEventListener('click', function(e){ 
  e.stopPropagation(); 
  const c = createCard(uid('card')); 
@@ -1757,10 +2172,10 @@ function escapeHtml(str){
  }); 
  applyColumnFilter(node); 
  }); 
- // Ordenar por data (ediÃ§Ã£o) toggle desc/asc 
+ // Ordenar por data (ediÃƒÂ§ÃƒÂ£o) toggle desc/asc 
  const sortBtn = $('.sort-date', node); 
  if (sortBtn){ 
- node.dataset.sortNext = 'desc'; // 1Âº clique = desc 
+ node.dataset.sortNext = 'desc'; // 1Ã‚Âº clique = desc 
  sortBtn.addEventListener('click', function(e){ 
  e.stopPropagation(); 
  const dir = node.dataset.sortNext || 'desc'; 
@@ -1768,7 +2183,7 @@ function escapeHtml(str){
  node.dataset.sortNext = (dir === 'desc' ? 'asc' : 'desc'); 
  }); 
  } 
- // Agrupar concluÃ­dos 
+ // Agrupar concluÃƒÂ­dos 
  const groupBtn = $('.group-completed', node); 
  if (groupBtn){ 
  groupBtn.addEventListener('click', function(e){ 
@@ -1782,6 +2197,9 @@ function escapeHtml(str){
  const title = (($('.column-title', node).value || '').trim()) || 'Untitled'; 
  if (confirm(`Delete column "${title}"?\nAll cards inside it will be removed.`)) { 
  node.remove(); 
+ notifyBoardsChanged();
+ ensureActiveBoardName();
+ applyActiveBoardVisibility();
  } 
  }); 
  // Drag & drop (container) 
@@ -1856,7 +2274,7 @@ function makeCardCollapsible(cardNode){
  right = 'No due date'; 
  } 
  } 
- const collapsedText = `${shortDate} — ${right}`;
+ const collapsedText = `${shortDate} â€” ${right}`;
  const textNode = box.querySelector('.card-collapsed-meta-text');
  if (textNode) textNode.textContent = collapsedText;
  else box.textContent = collapsedText;
@@ -1868,7 +2286,7 @@ function createCard(id){
  node.dataset.created = nowISO(); 
  node.dataset.updated = node.dataset.created; 
  renderCardTimestamps(node); 
- // DescriÃ§Ã£o: ver â†’ editar 
+ // DescriÃƒÂ§ÃƒÂ£o: ver Ã¢â€ â€™ editar 
  const ta = $('.card-desc', node); 
  const view = $('.desc-view', node); 
  const due = $('.card-due', node); 
@@ -1961,7 +2379,7 @@ function createCard(id){
     const meta = checklistDragMeta;
     if (!dragged || !meta) return;
     meta.dropHandled = true;
-    // prioridade: posição real atual do item no DOM no momento do drop
+    // prioridade: posiÃ§Ã£o real atual do item no DOM no momento do drop
     const domTargetWrap = dragged.closest('.items');
     const domTargetCard = dragged.closest('.card');
     const effectiveTargetCard = domTargetCard || targetCard || meta.targetCard || node;
@@ -2091,7 +2509,7 @@ function createCard(id){
  } 
  if (col) applyColumnFilter(col); 
  applyDueColorToCard(node); 
- // por especificaÃ§Ã£o, marcar concluÃ­do NÃƒO altera updatedAt 
+ // por especificaÃƒÂ§ÃƒÂ£o, marcar concluÃƒÂ­do NÃƒÆ’O altera updatedAt 
  }); 
  // Excluir card 
  $('.delete-card', node).addEventListener('click', function(e){ 
@@ -2137,7 +2555,7 @@ function createCard(id){
  if (col) applyColumnFilter(col); 
  applyDueColorToCard(node); 
  }); 
- // MudanÃ§as no tÃ­tulo reavaliam filtro e atualizam timestamp (on change) 
+ // MudanÃƒÂ§as no tÃƒÂ­tulo reavaliam filtro e atualizam timestamp (on change) 
  $('.card-title', node).addEventListener('input', function(){ 
  const col = node.closest('.column'); 
  if (col) applyColumnFilter(col); 
@@ -2145,12 +2563,12 @@ function createCard(id){
  $('.card-title', node).addEventListener('change', function(){ 
  touchCardUpdated(node); 
  }); 
- // MudanÃ§as na descriÃ§Ã£o durante a digitaÃ§Ã£o: reavaliam filtro 
+ // MudanÃƒÂ§as na descriÃƒÂ§ÃƒÂ£o durante a digitaÃƒÂ§ÃƒÂ£o: reavaliam filtro 
  ta.addEventListener('input', function(){ 
  const col = node.closest('.column'); 
  if (col) applyColumnFilter(col); 
  }); 
- // Colapso/expansÃ£o 
+ // Colapso/expansÃƒÂ£o 
  // Open card in modal without expanding it when clicking the button
  $$('.open-card-modal', node).forEach(function(btn){
  btn.addEventListener('click', function(e){
@@ -2159,7 +2577,7 @@ function createCard(id){
  });
  });
  makeCardCollapsible(node); 
- // pinta inicialmente (caso due prÃ©-definido) e compÃµe linha colapsada 
+ // pinta inicialmente (caso due prÃƒÂ©-definido) e compÃƒÂµe linha colapsada 
  applyDueColorToCard(node); 
  renderCollapsedMeta(node); 
  updateChecklistProgress(node); 
@@ -2590,7 +3008,7 @@ function updateChecklistProgress(cardNode){
  }); 
  if (countEl) countEl.textContent = `${matched}/${total}`; 
  } 
- // ===== OrdenaÃ§Ã£o e agrupamento ===== 
+ // ===== OrdenaÃƒÂ§ÃƒÂ£o e agrupamento ===== 
  function sortCardsByDate(columnNode, dir='desc'){ 
  const wrap = $('.cards', columnNode); 
  const cards = $$('.card', wrap); 
@@ -2612,7 +3030,7 @@ function updateChecklistProgress(cardNode){
  const db = Date.parse(b.dataset.updated || b.dataset.created || 0) || 0; 
  return db - da; // dentro do grupo, mais novos primeiro 
  } 
- return ac - bc; // nÃ£o concluÃ­do (0) antes de concluÃ­do (1) 
+ return ac - bc; // nÃƒÂ£o concluÃƒÂ­do (0) antes de concluÃƒÂ­do (1) 
  }).forEach(c => wrap.appendChild(c)); 
  applyColumnFilter(columnNode); 
  } 
@@ -2624,8 +3042,10 @@ function updateChecklistProgress(cardNode){
  || t.closest('.cards') 
  || t.closest('.card'))); 
  } 
- function getColAfterElement(container, x){ 
- const els = $$('.column:not(.dragging-col)', container); 
+function getColAfterElement(container, x){ 
+ const els = $$('.column:not(.dragging-col)', container).filter(function(el){
+ return el.style.display !== 'none';
+ }); 
  let closest = { offset: Number.POSITIVE_INFINITY, element: null }; 
  els.forEach(function(el){ 
  const box = el.getBoundingClientRect(); 
@@ -2636,7 +3056,7 @@ function updateChecklistProgress(cardNode){
  }); 
  return closest.element; 
  } 
- // habilita draggable somente se mousedown for em Ã¡rea nÃ£o-interativa 
+ // habilita draggable somente se mousedown for em ÃƒÂ¡rea nÃƒÂ£o-interativa 
  document.addEventListener('mousedown', function(e){ 
  const col = e.target.closest && e.target.closest('.column'); 
  if (!col) return; 
@@ -2665,7 +3085,7 @@ function updateChecklistProgress(cardNode){
  const draggingCol = $('.dragging-col'); 
  if (draggingCol){ draggingCol.classList.remove('dragging-col'); draggingCol.draggable = false; } 
  }); 
- // ===== ConfiguraÃ§Ãµes / Metadados do board ===== 
+ // ===== ConfiguraÃƒÂ§ÃƒÂµes / Metadados do board ===== 
  let boardMeta = { 
  ageColorRules: [] // [{ days: number, color: "#rrggbb" }] 
  }; 
@@ -2740,7 +3160,7 @@ function adjustPriorityDays(delta){
  ensureSettingsRefs(); 
  renderSettingsRows(boardMeta.ageColorRules && boardMeta.ageColorRules.length 
  ? boardMeta.ageColorRules 
- : [{ days: 7, color: '#ffeb3b' }]); // padrÃ£o 
+ : [{ days: 7, color: '#ffeb3b' }]); // padrÃƒÂ£o 
  settingsUI.overlay.classList.remove('hidden'); 
  const firstInput = settingsUI.rulesList.querySelector('.rule-days'); 
  if (firstInput) firstInput.focus(); 
@@ -3039,7 +3459,7 @@ function renderPriorityReport(){
  } 
  
 
-// ====== NOVO: suporte a Modal de Card (com tÃ­tulo dinÃ¢mico) ======
+// ====== NOVO: suporte a Modal de Card (com tÃƒÂ­tulo dinÃƒÂ¢mico) ======
 const CARD_MODAL_ANIM_MS = 224;
 function ensureCardModalRefs(){
   if (window.__cardModal) return window.__cardModal;
@@ -3066,7 +3486,7 @@ function openCardModal(card, options){
   modal.isClosing = false;
   if (modal.currentCard) closeCardModal(true);
   modal.returnToPriorityReport = !!opts.returnToPriorityReport;
-  // card fantasma para manter contexto visual da posiÃ§Ã£o original
+  // card fantasma para manter contexto visual da posiÃƒÂ§ÃƒÂ£o original
   modal.columnGhost = card.cloneNode(true);
   modal.columnGhost.classList.add('card-modal-ghost');
   modal.columnGhost.setAttribute('aria-hidden', 'true');
@@ -3077,7 +3497,7 @@ function openCardModal(card, options){
   // move para o modal
   modal.content.appendChild(card);
   modal.currentCard = card;
-  // --- tÃ­tulo dinÃ¢mico ---
+  // --- tÃƒÂ­tulo dinÃƒÂ¢mico ---
   const titleInput = card.querySelector('.card-title');
   const titleEl = modal.overlay ? modal.overlay.querySelector('#cardModalTitle') : null;
   function __syncModalTitle(){ if (titleEl) titleEl.textContent = (titleInput && titleInput.value.trim()) ? titleInput.value.trim() : 'Untitled'; }
@@ -3141,7 +3561,7 @@ function closeCardModal(immediate){
   }
   modal.closeTimer = setTimeout(finishClose, CARD_MODAL_ANIM_MS);
 }
-// DelegaÃ§Ã£o para botÃµes que abrem em modal
+// DelegaÃƒÂ§ÃƒÂ£o para botÃƒÂµes que abrem em modal
 // (funciona com .open-card-modal ou .expand-card)
 document.addEventListener('click', function(e){
   const btn = (e.target && e.target.closest && (e.target.closest('.open-card-modal') || e.target.closest('.expand-card')));
@@ -3153,9 +3573,11 @@ document.addEventListener('click', function(e){
 
  // ===== Menu ===== 
  document.getElementById('btnAddColumn').addEventListener('click', function(){
- const col = createColumn(uid('col'), 'New column');
+ const col = createColumn(uid('col'), 'New column', activeBoardName || UNTITLED_BOARD_NAME);
  board.appendChild(col);
  applyColumnFilter(col);
+ applyActiveBoardVisibility();
+ notifyBoardsChanged();
  }); 
  document.getElementById('btnSettings').addEventListener('click', function(){ 
  openSettingsModal(); 
@@ -3188,7 +3610,7 @@ document.addEventListener('click', function(e){
  fileInput.value = ''; 
  } 
  }); 
- // Clique fora de qualquer card â†’ minimiza todos; clique em um card â†’ expande somente aquele 
+ // Clique fora de qualquer card Ã¢â€ â€™ minimiza todos; clique em um card Ã¢â€ â€™ expande somente aquele 
 document.addEventListener('click', function(e){ 
 const clickedCard = e.target.closest && e.target.closest('.card'); 
  $$('.card').forEach(function(card){ 
@@ -3222,6 +3644,7 @@ document.addEventListener('dragover', function(e){
  catch(e){ console.warn('Autosave: localStorage setItem failed', e); } 
  } 
  const scheduleAutosave = debounce(saveToLocalIfChanged, 500); 
+ window.__scheduleBoardAutosave = scheduleAutosave;
  async function restoreFromAutosave(){ 
  try{ 
  const json = localStorage.getItem(AUTOSAVE_KEY); 
@@ -3253,6 +3676,8 @@ function syncTopbarSpacer(){
   try{
     const tb = document.querySelector('.topbar');
     const sp = document.getElementById('topbarSpacer');
+    const hoverMenu = document.getElementById('hoverMenu');
+    const hoverTrigger = document.getElementById('topbarHoverTrigger');
     if (!tb || !sp) return;
     const boardEl = document.getElementById('board');
     const mainEl = document.querySelector('main');
@@ -3261,6 +3686,14 @@ function syncTopbarSpacer(){
     const targetWidth = Math.max(viewportW, Math.ceil((boardEl ? boardEl.scrollWidth : 0) + mainPad));
     tb.style.width = targetWidth + 'px';
     const h = Math.ceil(tb.getBoundingClientRect().height);
+    if (hoverMenu){
+      hoverMenu.style.top = h + 'px';
+    }
+    if (hoverTrigger){
+      hoverTrigger.style.width = targetWidth + 'px';
+      hoverTrigger.style.height = Math.max(10, Math.ceil(h / 4)) + 'px';
+      hoverTrigger.style.top = Math.max(0, h - Math.max(10, Math.ceil(h / 4))) + 'px';
+    }
     const hamburgerEl = document.getElementById('hamburgerBtn');
     if (hamburgerEl){
       const hbH = Math.ceil(hamburgerEl.getBoundingClientRect().height || 36);
@@ -3291,6 +3724,413 @@ if (boardElForObs) boardObs.observe(boardElForObs);
 // initial sync (defer a frame to ensure layout computed)
 requestAnimationFrame(syncTopbarSpacer);
  })(); 
+// ===== Hover menu below topbar =====
+(function(){
+  const topbar = document.querySelector('.topbar');
+  const hoverTrigger = document.getElementById('topbarHoverTrigger');
+  const hoverMenu = document.getElementById('hoverMenu');
+  const hoverMenuContent = document.getElementById('hoverMenuContent');
+  const hoverMenuItems = document.getElementById('hoverMenuItems');
+  const hoverMenuAddBtn = document.getElementById('hoverMenuAddBtn');
+  const hoverMenuEditor = document.getElementById('hoverMenuEditor');
+  const hoverMenuEditorInput = document.getElementById('hoverMenuEditorInput');
+  const hoverMenuEditorSave = document.getElementById('hoverMenuEditorSave');
+  if(!topbar || !hoverTrigger || !hoverMenu || !hoverMenuContent || !hoverMenuItems || !hoverMenuAddBtn || !hoverMenuEditor || !hoverMenuEditorInput || !hoverMenuEditorSave) return;
+
+  let closeTimer = null;
+  let pointerWatchActive = false;
+  let activeEditBoardName = null;
+  let hoveredBoardDuringCardDrag = null;
+
+  function isBoardTransferDragActive(){
+    return !!($('.dragging-col') || $('.card.dragging'));
+  }
+
+  function clearCloseTimer(){
+    if (closeTimer){
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+  }
+
+  function setHoverMenuOpen(open){
+    if (!open && hoverMenuEditor.classList.contains('open')) return;
+    clearCloseTimer();
+    hoverMenu.classList.toggle('open', !!open);
+    hoverMenu.setAttribute('aria-hidden', String(!open));
+    pointerWatchActive = !!open;
+  }
+
+  function scheduleClose(){
+    if (isBoardTransferDragActive()) return;
+    clearCloseTimer();
+    setHoverMenuOpen(false);
+  }
+
+  function clearBoardHoverSwitchTimer(){
+    if (cardBoardHoverSwitchTimer){
+      clearTimeout(cardBoardHoverSwitchTimer);
+      cardBoardHoverSwitchTimer = null;
+    }
+  }
+
+  function getUniqueBoardName(baseName, excludeName){
+    const base = normalizeBoardName(baseName, DEFAULT_NEW_BOARD_NAME);
+    const existing = getBoardNamesFromDom().filter(function(name){ return name !== excludeName; });
+    if (!existing.includes(base)) return base;
+    let index = 2;
+    while (existing.includes(`${base} ${index}`)) index++;
+    return `${base} ${index}`;
+  }
+
+  function createHoverMenuItem(label){
+    const item = document.createElement('div');
+    const textSpan = document.createElement('span');
+    const editBtn = document.createElement('button');
+    const removeBtn = document.createElement('button');
+    item.className = 'hover-menu-item';
+    item.setAttribute('data-menu-item', 'true');
+    item.setAttribute('data-board-name', label);
+    if (normalizeBoardName(label, UNTITLED_BOARD_NAME) === normalizeBoardName(activeBoardName, UNTITLED_BOARD_NAME)){
+      item.classList.add('active');
+    }
+    textSpan.className = 'hover-menu-item-text';
+    textSpan.textContent = label;
+    editBtn.type = 'button';
+    editBtn.className = 'hover-menu-item-edit';
+    editBtn.setAttribute('aria-label', 'Rename board');
+    editBtn.textContent = '✎';
+    removeBtn.type = 'button';
+    removeBtn.className = 'hover-menu-item-remove';
+    removeBtn.setAttribute('aria-label', 'Delete board');
+    removeBtn.textContent = '-';
+    item.appendChild(editBtn);
+    item.appendChild(textSpan);
+    item.appendChild(removeBtn);
+    return item;
+  }
+
+  function getMenuItemByBoardName(boardName){
+    return $$('.hover-menu-item[data-board-name]', hoverMenuItems).find(function(item){
+      return normalizeBoardName(item.dataset.boardName, UNTITLED_BOARD_NAME) === normalizeBoardName(boardName, UNTITLED_BOARD_NAME);
+    }) || null;
+  }
+
+  function renderHoverMenuItems(){
+    const boards = getBoardNamesFromDom();
+    hoverMenuItems.innerHTML = '';
+    boards.forEach(function(boardName){
+      hoverMenuItems.appendChild(createHoverMenuItem(boardName));
+    });
+  }
+
+  function getBoardSwitchDirection(targetBoardName){
+    const boards = getBoardNamesFromDom();
+    const currentIndex = boards.indexOf(normalizeBoardName(activeBoardName, UNTITLED_BOARD_NAME));
+    const targetIndex = boards.indexOf(normalizeBoardName(targetBoardName, UNTITLED_BOARD_NAME));
+    if (currentIndex === -1 || targetIndex === -1) return 1;
+    return targetIndex >= currentIndex ? 1 : -1;
+  }
+
+  async function activateBoardFromMenu(boardName, options){
+    const normalized = normalizeBoardName(boardName, UNTITLED_BOARD_NAME);
+    const direction = getBoardSwitchDirection(normalized);
+    await switchActiveBoard(normalized, Object.assign({ animate: true, direction: direction }, options || {}));
+    renderHoverMenuItems();
+  }
+
+  function positionEditor(item){
+    const rect = item.getBoundingClientRect();
+    const editorWidth = Math.ceil(hoverMenuEditor.getBoundingClientRect().width || 240);
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+    let left = rect.left + ((rect.width - editorWidth) / 2);
+    left = Math.max(8, Math.min(left, viewportWidth - editorWidth - 8));
+    hoverMenuEditor.style.left = Math.round(left) + 'px';
+    hoverMenuEditor.style.top = Math.round(rect.bottom + 10) + 'px';
+  }
+
+  function openEditor(boardName, item){
+    activeEditBoardName = normalizeBoardName(boardName, UNTITLED_BOARD_NAME);
+    hoverMenuEditorInput.value = activeEditBoardName;
+    hoverMenuEditor.classList.add('open');
+    hoverMenuEditor.setAttribute('aria-hidden', 'false');
+    positionEditor(item);
+    hoverMenuEditorInput.focus();
+    hoverMenuEditorInput.select();
+  }
+
+  function closeAllEditPopovers(){
+    activeEditBoardName = null;
+    hoverMenuEditor.classList.remove('open');
+    hoverMenuEditor.setAttribute('aria-hidden', 'true');
+  }
+
+  async function saveBoardRename(){
+    if (!activeEditBoardName) return;
+    const nextBoardName = getUniqueBoardName(normalizeBoardName(hoverMenuEditorInput.value, UNTITLED_BOARD_NAME), activeEditBoardName);
+    getColumnsForBoardName(activeEditBoardName).forEach(function(col){
+      setColumnBoardName(col, nextBoardName);
+    });
+    if (normalizeBoardName(activeBoardName, UNTITLED_BOARD_NAME) === normalizeBoardName(activeEditBoardName, UNTITLED_BOARD_NAME)){
+      activeBoardName = nextBoardName;
+    }
+    closeAllEditPopovers();
+    notifyBoardsChanged();
+    await activateBoardFromMenu(nextBoardName, { animate: false, force: true });
+    setHoverMenuOpen(false);
+  }
+
+  async function deleteBoard(boardName){
+    const normalized = normalizeBoardName(boardName, UNTITLED_BOARD_NAME);
+    const cols = getColumnsForBoardName(normalized);
+    if (!cols.length) return;
+    if (!confirm(`Delete board "${normalized}"?\nAll columns and cards in this board will be removed.`)) return;
+    closeAllEditPopovers();
+    cols.forEach(function(col){ col.remove(); });
+    notifyBoardsChanged();
+    const remainingBoards = getBoardNamesFromDom();
+    if (remainingBoards.length){
+      await activateBoardFromMenu(remainingBoards[0], { animate: false, force: true });
+    } else {
+      activeBoardName = null;
+      applyActiveBoardVisibility();
+      renderHoverMenuItems();
+    }
+  }
+
+  function clearDragTargets(){
+    $$('.hover-menu-item.drag-target', hoverMenuItems).forEach(function(item){ item.classList.remove('drag-target'); });
+  }
+
+  function markDragTarget(item){
+    clearDragTargets();
+    if (item) item.classList.add('drag-target');
+  }
+
+  function scheduleBoardSwitchForDraggedCard(boardName){
+    clearBoardHoverSwitchTimer();
+    const normalized = normalizeBoardName(boardName, UNTITLED_BOARD_NAME);
+    if (normalized === normalizeBoardName(activeBoardName, UNTITLED_BOARD_NAME)) return;
+    if (hoveredBoardDuringCardDrag === normalized) return;
+    hoveredBoardDuringCardDrag = normalized;
+    activateBoardFromMenu(normalized, { animate: true });
+  }
+
+  function isInTongueZone(x, y){
+    const menuRect = hoverMenu.getBoundingClientRect();
+    const tongueWidth = 57;
+    const tongueHeight = 21;
+    const tongueLeft = (menuRect.left + (menuRect.width / 2)) - (tongueWidth / 2);
+    const tongueRight = tongueLeft + tongueWidth;
+    const tongueTop = menuRect.bottom - 2;
+    const tongueBottom = tongueTop + tongueHeight;
+    return x >= tongueLeft && x <= tongueRight && y >= tongueTop && y <= tongueBottom;
+  }
+
+  function shouldOpenHoverMenuForDrag(clientX, clientY){
+    const topbarRect = topbar.getBoundingClientRect();
+    const menuRect = hoverMenu.getBoundingClientRect();
+    const nearTopbar =
+      clientX >= topbarRect.left &&
+      clientX <= topbarRect.right &&
+      clientY >= topbarRect.top &&
+      clientY <= (topbarRect.bottom + 12);
+    const nearMenu =
+      clientX >= menuRect.left &&
+      clientX <= menuRect.right &&
+      clientY >= (menuRect.top - 16) &&
+      clientY <= (menuRect.bottom + 24);
+    return nearTopbar || nearMenu || isInTongueZone(clientX, clientY);
+  }
+
+  hoverTrigger.addEventListener('mouseenter', function(){ setHoverMenuOpen(true); });
+  topbar.addEventListener('mouseenter', function(){
+    if (hoverMenu.classList.contains('open')) setHoverMenuOpen(true);
+  });
+  hoverMenu.addEventListener('mouseenter', function(){ setHoverMenuOpen(true); });
+  hoverTrigger.addEventListener('dragenter', function(){
+    if (isBoardTransferDragActive()) setHoverMenuOpen(true);
+  });
+  topbar.addEventListener('dragenter', function(){
+    if (isBoardTransferDragActive()) setHoverMenuOpen(true);
+  });
+  topbar.addEventListener('dragover', function(e){
+    if (!isBoardTransferDragActive()) return;
+    e.preventDefault();
+    setHoverMenuOpen(true);
+  });
+  hoverMenu.addEventListener('dragenter', function(){
+    if (isBoardTransferDragActive()) setHoverMenuOpen(true);
+  });
+  hoverMenu.addEventListener('dragover', function(e){
+    if (!isBoardTransferDragActive()) return;
+    e.preventDefault();
+    setHoverMenuOpen(true);
+  });
+  hoverMenuAddBtn.addEventListener('click', async function(){
+    const newBoardName = getUniqueBoardName(DEFAULT_NEW_BOARD_NAME);
+    const col = createColumn(uid('col'), 'New column', newBoardName);
+    board.appendChild(col);
+    applyColumnFilter(col);
+    notifyBoardsChanged();
+    await activateBoardFromMenu(newBoardName, { animate: true, force: true });
+    const item = getMenuItemByBoardName(newBoardName);
+    if (item) openEditor(newBoardName, item);
+  });
+  hoverMenuContent.addEventListener('click', function(e){
+    const editBtn = e.target && e.target.closest ? e.target.closest('.hover-menu-item-edit') : null;
+    if (editBtn){
+      e.preventDefault();
+      e.stopPropagation();
+      const itemToEdit = editBtn.closest('.hover-menu-item[data-board-name]');
+      if (!itemToEdit) return;
+      const boardName = normalizeBoardName(itemToEdit.dataset.boardName, UNTITLED_BOARD_NAME);
+      if (activeEditBoardName === boardName && hoverMenuEditor.classList.contains('open')){
+        closeAllEditPopovers();
+        return;
+      }
+      openEditor(boardName, itemToEdit);
+      return;
+    }
+    const removeBtn = e.target && e.target.closest ? e.target.closest('.hover-menu-item-remove') : null;
+    if (removeBtn){
+      e.preventDefault();
+      e.stopPropagation();
+      const itemToRemove = removeBtn.closest('.hover-menu-item[data-board-name]');
+      if (!itemToRemove) return;
+      deleteBoard(itemToRemove.dataset.boardName);
+      return;
+    }
+    const item = e.target && e.target.closest ? e.target.closest('.hover-menu-item[data-board-name]') : null;
+    if (!item) return;
+    activateBoardFromMenu(item.dataset.boardName, { animate: true });
+  });
+  hoverMenuEditorSave.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    saveBoardRename();
+  });
+  hoverMenuEditorInput.addEventListener('keydown', function(e){
+    if (!activeEditBoardName) return;
+    if (e.key === 'Enter'){
+      e.preventDefault();
+      saveBoardRename();
+      return;
+    }
+    if (e.key === 'Escape'){
+      e.preventDefault();
+      closeAllEditPopovers();
+    }
+  });
+
+  document.addEventListener('keydown', function(e){
+    const key = e.key || e.code || '';
+    if (key === 'Escape' || key === 'Esc') setHoverMenuOpen(false);
+  });
+  document.addEventListener('click', function(e){
+    if (hoverMenuContent.contains(e.target) || hoverMenuEditor.contains(e.target)) return;
+    closeAllEditPopovers();
+  });
+  window.addEventListener('resize', function(){
+    const item = activeEditBoardName ? getMenuItemByBoardName(activeEditBoardName) : null;
+    if (item && hoverMenuEditor.classList.contains('open')) positionEditor(item);
+  });
+  document.addEventListener('kanban:boards-changed', function(){
+    renderHoverMenuItems();
+    applyActiveBoardVisibility();
+  });
+  hoverMenuContent.addEventListener('dragover', function(e){
+    const item = e.target && e.target.closest ? e.target.closest('.hover-menu-item[data-board-name]') : null;
+    const draggingCol = $('.dragging-col');
+    const draggingCard = $('.card.dragging');
+    if (!draggingCol && !draggingCard) return;
+    if (!item){
+      clearBoardHoverSwitchTimer();
+      clearDragTargets();
+      return;
+    }
+    e.preventDefault();
+    markDragTarget(item);
+    if (draggingCard){
+      const targetBoardName = normalizeBoardName(item.dataset.boardName, UNTITLED_BOARD_NAME);
+      if (targetBoardName !== hoveredBoardDuringCardDrag){
+        hoveredBoardDuringCardDrag = null;
+        scheduleBoardSwitchForDraggedCard(targetBoardName);
+      }
+    }
+  });
+  hoverMenuContent.addEventListener('dragleave', function(e){
+    if (e.target === hoverMenuContent) clearDragTargets();
+  });
+  hoverMenuContent.addEventListener('drop', async function(e){
+    const item = e.target && e.target.closest ? e.target.closest('.hover-menu-item[data-board-name]') : null;
+    const draggingCol = $('.dragging-col');
+    const draggingCard = $('.card.dragging');
+    clearBoardHoverSwitchTimer();
+    clearDragTargets();
+    if (!item) return;
+    if (draggingCol){
+      e.preventDefault();
+      const targetBoard = normalizeBoardName(item.dataset.boardName, UNTITLED_BOARD_NAME);
+      setColumnBoardName(draggingCol, targetBoard);
+      draggingCol.classList.remove('dragging-col');
+      draggingCol.draggable = false;
+      notifyBoardsChanged();
+      await activateBoardFromMenu(targetBoard, { animate: true, force: true });
+      return;
+    }
+    if (draggingCard){
+      e.preventDefault();
+    }
+  });
+  document.addEventListener('dragend', function(){
+    clearBoardHoverSwitchTimer();
+    clearDragTargets();
+    hoveredBoardDuringCardDrag = null;
+  }, true);
+
+  document.addEventListener('mousemove', function(e){
+    const x = e.clientX;
+    const y = e.clientY;
+    if (isBoardTransferDragActive()){
+      if (shouldOpenHoverMenuForDrag(x, y)) setHoverMenuOpen(true);
+      return;
+    }
+    if (!hoverMenu.classList.contains('open')){
+      if (isInTongueZone(x, y)) setHoverMenuOpen(true);
+      return;
+    }
+    if (!pointerWatchActive) return;
+    const topbarRect = topbar.getBoundingClientRect();
+    const menuRect = hoverMenu.getBoundingClientRect();
+    const extendedBottom = menuRect.bottom + (menuRect.height * 0.5);
+    const insideTopbar =
+      x >= topbarRect.left &&
+      x <= topbarRect.right &&
+      y >= topbarRect.top &&
+      y <= topbarRect.bottom;
+    const nearMenu =
+      x >= menuRect.left &&
+      x <= menuRect.right &&
+      y >= menuRect.top &&
+      y <= extendedBottom;
+
+    if (insideTopbar || nearMenu){
+      clearCloseTimer();
+      return;
+    }
+    scheduleClose();
+  });
+  document.addEventListener('dragover', function(e){
+    if (!isBoardTransferDragActive()) return;
+    if (shouldOpenHoverMenuForDrag(e.clientX, e.clientY)){
+      e.preventDefault();
+      setHoverMenuOpen(true);
+    }
+  }, true);
+
+  renderHoverMenuItems();
+})();
 // ===== Topbar hamburger behaviour =====
 (function(){
   const mobileMenu = document.getElementById('mobileMenu');
@@ -3301,6 +4141,13 @@ requestAnimationFrame(syncTopbarSpacer);
     mobileMenu.classList.toggle('open', !!open);
     mobileMenu.setAttribute('aria-hidden', String(!open));
     hamburger.setAttribute('aria-expanded', String(!!open));
+    if (open){
+      const hoverMenu = document.getElementById('hoverMenu');
+      if (hoverMenu){
+        hoverMenu.classList.remove('open');
+        hoverMenu.setAttribute('aria-hidden', 'true');
+      }
+    }
     if (open) positionMenu();
   }
 
