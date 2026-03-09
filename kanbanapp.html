@@ -29,6 +29,8 @@
  --menu-purple-deep: #4c3cad;
  --menu-blue-soft: #5f72ff;
  --menu-border-soft: #cfd3ff;
+ --board-edge-gap: 16px;
+ --submenu-collapsed-peek: 7px;
  --card: #2f2f2f; 
  --card-hover: #363636; 
  --card-completed: #262626; /* levemente mais escuro */ 
@@ -40,22 +42,39 @@
  } 
  * { box-sizing: border-box; } 
  html, body { height: 100%; } 
-body { 
+body {
  margin: 0; 
  background: var(--bg); 
  color: var(--text); 
  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; 
- overflow-x: auto;
+ overflow-x: hidden;
  } 
+
+#window-controls{
+  display:none;
+  align-items: center;
+  gap: 8px;
+  -webkit-app-region: no-drag;
+}
+
+#window-controls button{
+  width:36px;
+  height:36px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
 .topbar{
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  padding-right: 64px;
+  padding: 12px 132px 12px 16px;
+  width: 100%;
   min-width: 100%;
   /* Paleta inspirada no og-image.svg (roxo/azul) */
   background:
@@ -66,6 +85,22 @@ body {
   border-radius: 0;
   color: var(--text);
   box-shadow: 0 10px 26px rgba(0,0,0,0.28);
+  -webkit-app-region: drag;
+}
+.topbar-actions{
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  -webkit-app-region: no-drag;
+}
+.brand-link,
+.hamburger{
+  -webkit-app-region: no-drag;
 }
 .hover-menu{
   position: fixed;
@@ -85,7 +120,7 @@ body {
   transition: transform .52s cubic-bezier(.22, 1, .36, 1);
   z-index: 9;
   pointer-events: none;
-  overflow: visible;
+  overflow: hidden;
   box-sizing: border-box;
 }
 .hover-menu.open{
@@ -95,21 +130,26 @@ body {
 }
 .hover-menu-content{
   min-height: 72px;
-  min-width: max-content;
+  width: 100%;
+  min-width: 0;
   overflow-x: auto;
   overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable both-edges;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 18px 18px;
+  padding: 14px 18px 10px;
   box-sizing: border-box;
 }
 .hover-menu-items{
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 0 0 auto;
+  min-width: max-content;
 }
 .board-switch-out,
 .board-switch-in{
@@ -246,7 +286,7 @@ body {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -14px;
+  bottom: 0;
   width: 57px;
   height: 13px;
   transform: translateX(-50%);
@@ -260,7 +300,7 @@ body {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -8px;
+  bottom: 5px;
   transform: translateX(-50%);
   width: 0;
   height: 0;
@@ -274,12 +314,12 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 12px;
   z-index: 11;
   background: transparent;
 }
- .brand{ font-weight: 700; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.55)); } 
+.brand{ font-weight: 700; letter-spacing: 0.3px; display: inline-flex; align-items: center; gap: 8px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.55)); min-width: 0; max-width: calc(100vw - 88px); } 
 .brand{ font-size: 120%; }
 .brand-link,
 .brand-link:visited,
@@ -287,6 +327,10 @@ body {
 .brand-link:active{
   color: inherit;
   text-decoration: none;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .brand-icon{ width: 24px; height: 24px; display: inline-block; border-radius: 6px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.55)); }
 button, .btn{ 
@@ -304,29 +348,60 @@ button, .btn{
  .btn-danger{ background: #B00020; border-color: rgba(255,255,255,0.25); color: #fff; } 
  .btn-danger:hover{ filter: brightness(1.1); } 
  /* Board */ 
- main{ padding: 16px 16px 0; padding-top: 18px; } 
- .board{ 
+ main{ padding: 16px 0 0; padding-top: 18px; } 
+.board-scroll-region{
+ width: 100%;
+ max-width: 100%;
+ overflow-x: auto;
+ overflow-y: hidden;
+ padding-left: var(--board-edge-gap);
+ padding-right: var(--board-edge-gap);
+ padding-bottom: 12px;
+ scrollbar-width: none;
+ -ms-overflow-style: none;
+}
+.board-scroll-region::-webkit-scrollbar{
+ height: 0;
+}
+.board{ 
  display: flex; 
  align-items: flex-start; 
  gap: 16px; 
- overflow-x: auto; 
- padding-bottom: 0; 
- width: 100%;
+ width: max-content;
+ min-width: 100%;
+ padding-right: calc(var(--board-edge-gap) + 16px);
  } 
 
  @media (min-width: 900px){
  .board{
- overflow-x: visible;
  width: max-content;
  min-width: 100%;
  }
  }
 
 /* Extra spacer at board footer to ensure space larger than column shadow */
-.board-bottom-spacer{ width:100%; height:0; }
+.board-bottom-spacer{ width:100%; height:28px; }
 
-/* Fixed transparent overlay right above the viewport scrollbar (30px height) */
-.board-scroll-overlay{ position: fixed; left: 0; right: 0; bottom: 0; height: 30px; background: transparent; pointer-events: none; z-index: 6; }
+.board-fixed-scroll{
+ position: fixed;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ height: 22px;
+ overflow-x: auto;
+ overflow-y: hidden;
+ z-index: 7;
+ background: color-mix(in srgb, var(--bg) 88%, transparent);
+ border-top-left-radius: 10px;
+ border-top-right-radius: 10px;
+ scrollbar-gutter: stable;
+}
+.board-fixed-scroll.hidden{
+ display: none;
+}
+.board-fixed-scroll-inner{
+ height: 1px;
+}
  .column{ 
   min-width: 352px;
   max-width: 418px;
@@ -348,11 +423,38 @@ button, .btn{
  .column-header{ 
  padding: 12px; 
  border-bottom: 1px solid var(--border); 
- display: grid; 
- grid-template-columns: 1fr auto; 
+ display: flex;
+ flex-direction: column;
  gap: 8px; 
- align-items: center; 
+ align-items: stretch; 
  } 
+.column-title-row{
+ display: grid;
+ grid-template-columns: 1fr auto;
+ gap: 8px;
+ align-items: center;
+}
+.column-drag-handle{
+  width: 28px;
+  height: 28px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  line-height: 1;
+  font-size: 14px;
+  background: rgba(255,255,255,0.03);
+  touch-action: none;
+  justify-self: end;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+ }
+ .column-drag-handle:active{ cursor: grabbing; }
  .column-title{ 
  width: 100%; 
  background: var(--panel-2); 
@@ -650,6 +752,11 @@ border-left: 3px solid var(--purple);
 .checklist-item.has-due{
  box-shadow: inset 3px 0 0 var(--item-due-color, var(--purple));
 }
+.checklist-item.touch-dragging,
+.column.touch-dragging-col{
+ opacity: 0.9;
+ box-shadow: 0 24px 44px rgba(0,0,0,0.38);
+}
  .item-drag-handle{
   width: 20px;
   height: 20px;
@@ -664,6 +771,10 @@ border-left: 3px solid var(--purple);
   line-height: 1;
   font-size: 12px;
   background: rgba(255,255,255,0.02);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
  }
  .item-drag-handle:active{ cursor: grabbing; }
  .item-view{ 
@@ -970,12 +1081,15 @@ margin-left: 26px;
 }
 .board-loading-panel{
   min-width: min(420px, 92vw);
+  width: min(420px, 92vw);
+  max-width: 92vw;
   padding: 22px 24px;
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
   background: linear-gradient(180deg, rgba(25,28,40,0.96) 0%, rgba(17,19,28,0.98) 100%);
   box-shadow: 0 26px 60px rgba(0,0,0,0.42);
   text-align: center;
+  margin: 0 auto;
 }
 .board-loading-title{
   margin: 0 0 8px;
@@ -1148,11 +1262,7 @@ margin-left: 26px;
 
 /* ===== Topbar Hamburger Menu ===== */
 .hamburger{
-  margin-left: auto;
   display: inline-flex;
-  position: fixed;
-  top: 0;
-  right: 16px;
   background: var(--panel-2);
   border: 1px solid rgba(255,255,255,0.15);
   color: var(--text);
@@ -1198,10 +1308,22 @@ margin-left: 26px;
 }
 @media (max-width: 640px){
   .topbar{ padding: 10px 12px; }
-  .hamburger{ right: 12px; }
+  .brand{ max-width: calc(100vw - 76px); font-size: 110%; }
+  :root{ --board-edge-gap: 12px; }
   .mobile-menu{
     right: 12px;
     max-width: calc(100vw - 24px);
+  }
+}
+@media (orientation: portrait){
+  .board-loading-overlay{
+    padding: 16px;
+  }
+  .board-loading-panel{
+    min-width: 0;
+    width: min(420px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    padding: 20px 18px;
   }
 }
 
@@ -1210,7 +1332,14 @@ margin-left: 26px;
 <body> 
  <header class="topbar"> 
  <a class="brand brand-link" href="https://kanbanapp.io" target="_blank" rel="noopener noreferrer"><img class="brand-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJLYW5iYW5BcHAgZmF2aWNvbiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMxMjEzMWQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjY1MGU2Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHJ4PSIxNCIgZmlsbD0idXJsKCNiZykiLz4KICA8cmVjdCB4PSIxNCIgeT0iMTYiIHdpZHRoPSIxMCIgaGVpZ2h0PSIzMiIgcng9IjMiIGZpbGw9IiNkOGQ4ZmYiIGZpbGwtb3BhY2l0eT0iLjkwIi8+CiAgPHJlY3QgeD0iMjciIHk9IjE2IiB3aWR0aD0iMTAiIGhlaWdodD0iMzIiIHJ4PSIzIiBmaWxsPSIjYmRhNmZmIiBmaWxsLW9wYWNpdHk9Ii45MiIvPgogIDxyZWN0IHg9IjQwIiB5PSIxNiIgd2lkdGg9IjEwIiBoZWlnaHQ9IjMyIiByeD0iMyIgZmlsbD0iIzdhNjdmMCIgZmlsbC1vcGFjaXR5PSIuOTUiLz4KPC9zdmc+Cg==" alt="" aria-hidden="true">KanbanApp.io</a> 
+ <div class="topbar-actions">
   <button id="hamburgerBtn" class="hamburger" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu">☰</button>
+  <div id="window-controls">
+   <button id="btn-minimize" type="button" title="Minimize">—</button>
+   <button id="btn-maximize" type="button" title="Maximize">□</button>
+   <button id="btn-close" type="button" title="Close">✕</button>
+  </div>
+ </div>
  </header> 
 <div id="topbarHoverTrigger" class="topbar-hover-trigger" aria-hidden="true"></div>
 <div id="hoverMenu" class="hover-menu" aria-hidden="true">
@@ -1251,16 +1380,22 @@ margin-left: 26px;
   </div>
 </div>
  <main> 
+ <div class="board-scroll-region">
  <div id="board" class="board" aria-live="polite"></div> 
+ </div>
 <div class="board-bottom-spacer" aria-hidden="true"></div>
-<!-- Transparent overlay immediately above the viewport scrollbar (visual only) -->
-<div class="board-scroll-overlay" aria-hidden="true"></div>
+<div id="boardFixedScroll" class="board-fixed-scroll hidden" aria-hidden="true">
+  <div id="boardFixedScrollInner" class="board-fixed-scroll-inner"></div>
+</div>
  </main> 
  <!-- Templates --> 
  <template id="tpl-column"> 
  <div class="column" data-id=""> 
  <div class="column-header"> 
- <input type="text" class="column-title" placeholder="Column title" /><br> 
+ <div class="column-title-row">
+ <input type="text" class="column-title" placeholder="Column title" />
+ <span class="column-drag-handle" title="Drag column" aria-label="Drag column">⋮⋮</span>
+ </div>
  <div class="column-actions"> 
  <button class="btn-small add-card">+ Card</button> 
  <button class="btn-small select-all" title="Select all cards">Select</button> 
@@ -1339,7 +1474,7 @@ margin-left: 26px;
  </template> 
  <template id="tpl-checklist-item"> 
  <div class="checklist-item"> 
- <span class="item-drag-handle" title="Drag item" aria-label="Drag item" draggable="false">â‹®â‹®</span>
+ <span class="item-drag-handle" title="Drag item" aria-label="Drag item" draggable="false">⋮⋮</span>
  <input type="checkbox" class="item-check" aria-label="Check item"> 
  <div class="item-view" aria-label="Label (click to edit)"></div> 
  <div class="item-actions"> 
@@ -1536,6 +1671,24 @@ SOFTWARE.
 </div>
 
  <script> 
+ document.addEventListener("DOMContentLoaded", () => {
+
+  const body = document.body;
+  const controls = document.getElementById("window-controls");
+  const topbar = document.querySelector(".topbar");
+
+  if (window.electronAPI && controls) {
+    body?.classList.add("is-electron");
+    topbar?.classList.add("is-electron");
+    controls.style.display = "flex";
+    return;
+  }
+
+  body?.classList.remove("is-electron");
+  topbar?.classList.remove("is-electron");
+  if (controls) controls.style.display = "none";
+
+});
  /* Polyfills essenciais (Edge Legacy) */ 
  (function polyfills(){ 
  if (!Element.prototype.matches) { 
@@ -1568,7 +1721,22 @@ let boardSwitchToken = 0;
 // Currently dragged checklist item (handle-driven)
 let currentDraggedChecklistItem = null;
 let checklistDragMeta = null;
+let touchChecklistDragState = null;
+let touchColumnDragState = null;
 let cardBoardHoverSwitchTimer = null;
+function isCoarsePointer(){
+ try{
+  return !!(window.matchMedia && (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches));
+ }catch(_){
+  return false;
+ }
+}
+function isElectronShell(){
+ return !!window.electronAPI;
+}
+function isTouchLikePointerEvent(e){
+ return !!(e && (e.pointerType === 'touch' || e.pointerType === 'pen' || isCoarsePointer()));
+}
 function getChecklistItemContent(itemNode){
  if(!itemNode || !itemNode.dataset) return '';
  return String(itemNode.dataset.details || '');
@@ -2105,12 +2273,59 @@ async function loadBoardSequential(data){
  const tplColumn = document.getElementById('tpl-column'); 
  const tplCard = document.getElementById('tpl-card'); 
  const tplItem = document.getElementById('tpl-checklist-item'); 
- function createColumn(id, title, boardName){ 
+function createColumn(id, title, boardName){ 
  const node = tplColumn.content.firstElementChild.cloneNode(true); 
  node.dataset.id = id; 
  setColumnBoardName(node, boardName || activeBoardName || UNTITLED_BOARD_NAME);
  node.style.display = (normalizeBoardName(getColumnBoardName(node), UNTITLED_BOARD_NAME) === normalizeBoardName(activeBoardName, UNTITLED_BOARD_NAME)) ? '' : 'none';
  $('.column-title', node).value = title || ''; 
+ const dragHandle = $('.column-drag-handle', node);
+ if (dragHandle && window.PointerEvent){
+  dragHandle.addEventListener('contextmenu', function(e){
+   e.preventDefault();
+  });
+  const cleanupTouchColumnDrag = function(){
+   if (!touchColumnDragState || touchColumnDragState.column !== node) return;
+   node.classList.remove('touch-dragging-col');
+   if (!node.classList.contains('dragging-col')) node.draggable = false;
+   touchColumnDragState = null;
+   scheduleAutosave();
+  };
+  dragHandle.addEventListener('pointerdown', function(e){
+   if (!isTouchLikePointerEvent(e)) return;
+   if (e.button != null && e.button !== 0) return;
+   e.stopPropagation();
+   node.draggable = true;
+   touchColumnDragState = {
+    pointerId: e.pointerId,
+    column: node,
+    startX: e.clientX,
+    startY: e.clientY,
+    active: false
+   };
+   try{ dragHandle.setPointerCapture(e.pointerId); }catch(_){}
+  });
+  dragHandle.addEventListener('pointermove', function(e){
+   if (!touchColumnDragState || touchColumnDragState.column !== node || touchColumnDragState.pointerId !== e.pointerId) return;
+   const dx = Math.abs(e.clientX - touchColumnDragState.startX);
+   const dy = Math.abs(e.clientY - touchColumnDragState.startY);
+   if (!touchColumnDragState.active){
+    if (Math.max(dx, dy) < 8) return;
+    touchColumnDragState.active = true;
+    node.classList.add('touch-dragging-col');
+   }
+   e.preventDefault();
+   const after = getColAfterElement(board, e.clientX);
+   if (after == null) board.appendChild(node);
+   else if (after !== node) board.insertBefore(node, after);
+  });
+  dragHandle.addEventListener('pointerup', function(e){
+   if (!touchColumnDragState || touchColumnDragState.column !== node || touchColumnDragState.pointerId !== e.pointerId) return;
+   e.preventDefault();
+   cleanupTouchColumnDrag();
+  });
+  dragHandle.addEventListener('pointercancel', cleanupTouchColumnDrag);
+ }
  // Filtro 
  const filterInput = $('.filter-cards', node); 
  const filterCount = $('.filter-count', node); 
@@ -2520,6 +2735,13 @@ function createCard(id){
  if (col) applyColumnFilter(col); 
  } 
  }); 
+ // Open card in modal without expanding it when clicking the button
+ $$('.open-card-modal', node).forEach(function(btn){
+ btn.addEventListener('click', function(e){
+ e.stopPropagation();
+ openCardModal(node);
+ });
+ });
  // Drag & drop (card) 
  node.addEventListener('dragstart', function(e){ 
  // NOVO: impedir arrastar quando expandido 
@@ -2569,13 +2791,6 @@ function createCard(id){
  if (col) applyColumnFilter(col); 
  }); 
  // Colapso/expansÃƒÂ£o 
- // Open card in modal without expanding it when clicking the button
- $$('.open-card-modal', node).forEach(function(btn){
- btn.addEventListener('click', function(e){
- e.stopPropagation();
- openCardModal(node);
- });
- });
  makeCardCollapsible(node); 
  // pinta inicialmente (caso due prÃƒÂ©-definido) e compÃƒÂµe linha colapsada 
  applyDueColorToCard(node); 
@@ -2589,6 +2804,86 @@ function createChecklistItem(labelText='', checked=false, itemContentText='', it
   node.draggable = false;
  const dragHandle = $('.item-drag-handle', node);
  if (dragHandle){
+  dragHandle.addEventListener('contextmenu', function(e){
+   e.preventDefault();
+  });
+  if (window.PointerEvent){
+   const cleanupTouchChecklistDrag = async function(e){
+    if (!touchChecklistDragState || touchChecklistDragState.item !== node) return;
+    const state = touchChecklistDragState;
+    touchChecklistDragState = null;
+    if (!state.active){
+      node.classList.remove('touch-dragging');
+      currentDraggedChecklistItem = null;
+      checklistDragMeta = null;
+      return;
+    }
+    if (e && e.cancelable) e.preventDefault();
+    const targetCard = state.targetCard || state.sourceCard;
+    const targetItemsWrap = state.targetItemsWrap || state.sourceItemsWrap;
+    await finalizeChecklistItemDrop(targetCard, targetItemsWrap, state.sourceCard);
+    scheduleAutosave();
+   };
+   dragHandle.addEventListener('pointerdown', function(e){
+    if (!isTouchLikePointerEvent(e)) return;
+    if (e.button != null && e.button !== 0) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const sourceCard = node.closest('.card');
+    const sourceItemsWrap = node.closest('.items');
+    currentDraggedChecklistItem = node;
+    checklistDragMeta = {
+     sourceCard: sourceCard,
+     sourceItemsWrap: sourceItemsWrap,
+     sourceNextSibling: node.nextElementSibling,
+     targetCard: sourceCard,
+     targetItemsWrap: sourceItemsWrap,
+     dropHandled: false
+    };
+    touchChecklistDragState = {
+     pointerId: e.pointerId,
+     item: node,
+     sourceCard: sourceCard,
+     sourceItemsWrap: sourceItemsWrap,
+     targetCard: sourceCard,
+     targetItemsWrap: sourceItemsWrap,
+     startX: e.clientX,
+     startY: e.clientY,
+     active: false
+    };
+    try{ dragHandle.setPointerCapture(e.pointerId); }catch(_){}
+   });
+   dragHandle.addEventListener('pointermove', function(e){
+    if (!touchChecklistDragState || touchChecklistDragState.item !== node || touchChecklistDragState.pointerId !== e.pointerId) return;
+    const dx = Math.abs(e.clientX - touchChecklistDragState.startX);
+    const dy = Math.abs(e.clientY - touchChecklistDragState.startY);
+    if (!touchChecklistDragState.active){
+     if (Math.max(dx, dy) < 6) return;
+     touchChecklistDragState.active = true;
+     node.classList.add('touch-dragging');
+    }
+    e.preventDefault();
+    const target = document.elementFromPoint(e.clientX, e.clientY);
+    const targetCard = target && target.closest ? target.closest('.card') : null;
+    const targetItemsWrap = targetCard ? $('.items', targetCard) : touchChecklistDragState.sourceItemsWrap;
+    if (!targetItemsWrap) return;
+    if (targetCard && targetCard.classList.contains('collapsed')) setCollapsed(targetCard, false);
+    touchChecklistDragState.targetCard = targetCard || touchChecklistDragState.sourceCard;
+    touchChecklistDragState.targetItemsWrap = targetItemsWrap;
+    if (checklistDragMeta){
+     checklistDragMeta.targetCard = touchChecklistDragState.targetCard;
+     checklistDragMeta.targetItemsWrap = targetItemsWrap;
+    }
+    const after = getChecklistItemAfterElement(targetItemsWrap, e.clientY, node);
+    if (after == null) targetItemsWrap.appendChild(node);
+    else if (after !== node) targetItemsWrap.insertBefore(node, after);
+   });
+   dragHandle.addEventListener('pointerup', function(e){
+    if (!touchChecklistDragState || touchChecklistDragState.item !== node || touchChecklistDragState.pointerId !== e.pointerId) return;
+    cleanupTouchChecklistDrag(e);
+   });
+   dragHandle.addEventListener('pointercancel', cleanupTouchChecklistDrag);
+  }
   dragHandle.draggable = true;
   dragHandle.addEventListener('dragstart', function(e){
     e.stopPropagation();
@@ -2964,6 +3259,94 @@ function updateChecklistProgress(cardNode){
  prog.title = total > 0 ? `${checked}/${total} itens` : `0/0 itens`; 
  } 
 } 
+function getChecklistItemAfterElement(container, y, draggingNode){
+ const els = $$('.checklist-item', container).filter(function(el){
+  return el !== draggingNode && !el.classList.contains('dragging') && !el.classList.contains('touch-dragging');
+ });
+ let closest = { offset: Number.POSITIVE_INFINITY, element: null };
+ els.forEach(function(el){
+  const box = el.getBoundingClientRect();
+  const offset = y - (box.top + box.height / 2);
+  if(offset < 0 && Math.abs(offset) < closest.offset){
+   closest = { offset: Math.abs(offset), element: el };
+  }
+ });
+ return closest.element;
+}
+async function finalizeChecklistItemDrop(targetCard, targetItemsWrap, fallbackCard){
+ const dragged = currentDraggedChecklistItem;
+ const meta = checklistDragMeta;
+ if (!dragged || !meta) return;
+ meta.dropHandled = true;
+ const domTargetWrap = dragged.closest('.items');
+ const domTargetCard = dragged.closest('.card');
+ const effectiveTargetCard = domTargetCard || targetCard || meta.targetCard || fallbackCard || meta.sourceCard;
+ const effectiveTargetWrap = domTargetWrap || targetItemsWrap || meta.targetItemsWrap || (effectiveTargetCard ? $('.items', effectiveTargetCard) : null);
+ if (!effectiveTargetCard || !effectiveTargetWrap) return;
+ const sourceCard = meta.sourceCard;
+ const sourceWrap = meta.sourceItemsWrap;
+ const sourceNext = meta.sourceNextSibling;
+ const sourceCol = sourceCard ? sourceCard.closest('.column') : null;
+ const targetCol = effectiveTargetCard ? effectiveTargetCard.closest('.column') : null;
+ const isCrossCard = !!(sourceCard && effectiveTargetCard && sourceCard !== effectiveTargetCard);
+
+ function restoreToSource(){
+  if (!sourceWrap || !dragged) return;
+  if (sourceNext && sourceNext.parentNode === sourceWrap) sourceWrap.insertBefore(dragged, sourceNext);
+  else sourceWrap.appendChild(dragged);
+ }
+ function finalizeCleanup(){
+  currentDraggedChecklistItem = null;
+  checklistDragMeta = null;
+  dragged.classList.remove('dragging');
+  dragged.classList.remove('touch-dragging');
+ }
+ function refreshCardsAndFilters(refreshSource){
+  if (refreshSource && sourceCard) { updateItemsCount(sourceCard); touchCardUpdated(sourceCard); }
+  if (effectiveTargetCard) { updateItemsCount(effectiveTargetCard); touchCardUpdated(effectiveTargetCard); }
+  if (sourceCol) applyColumnFilter(sourceCol);
+  if (targetCol && targetCol !== sourceCol) applyColumnFilter(targetCol);
+ }
+
+ if (!isCrossCard){
+  updateItemsCount(effectiveTargetCard);
+  touchCardUpdated(effectiveTargetCard);
+  if (targetCol) applyColumnFilter(targetCol);
+  finalizeCleanup();
+  return;
+ }
+
+ const choice = await askChecklistTransferAction();
+ if (choice === 'copy'){
+  const label = $('.item-editor', dragged)?.value || '';
+  const checked = !!$('.item-check', dragged)?.checked;
+  const noteContent = getChecklistItemContent(dragged);
+  const dueDate = getChecklistItemDueDate(dragged);
+  const copyNode = createChecklistItem(label, checked, noteContent, dueDate);
+  placeChecklistItemByCheckState(effectiveTargetWrap, copyNode);
+  restoreToSource();
+  refreshCardsAndFilters(false);
+  finalizeCleanup();
+  return;
+ }
+ if (choice === 'move'){
+  placeChecklistItemByCheckState(effectiveTargetWrap, dragged);
+  refreshCardsAndFilters(true);
+  finalizeCleanup();
+  return;
+ }
+ restoreToSource();
+ if (sourceCard) {
+  updateItemsCount(sourceCard);
+  touchCardUpdated(sourceCard);
+  if (sourceCol) applyColumnFilter(sourceCol);
+ }
+ if (effectiveTargetCard) {
+  updateItemsCount(effectiveTargetCard);
+  if (targetCol && targetCol !== sourceCol) applyColumnFilter(targetCol);
+ }
+ finalizeCleanup();
+}
  function getDragAfterElement(container, y){ 
  const els = $$('.card:not(.dragging)', container); 
  let closest = { offset: Number.POSITIVE_INFINITY, element: null }; 
@@ -3242,12 +3625,11 @@ function adjustPriorityDays(delta){
  });
  }
  $$('.checklist-item', cardNode).forEach(function(itemNode){
- const itemChecked = !!($('.item-check', itemNode)?.checked);
- if (itemChecked) return;
  const itemDue = getChecklistItemDueDate(itemNode).trim();
  const itemDueDate = parseDateOnly(itemDue);
  if (!itemDueDate) return;
  const itemLabel = (($('.item-editor', itemNode)?.value) || '').trim() || 'Untitled item';
+ const itemDaysRemaining = diffDays(startOfToday(), itemDueDate);
  items.push({
  itemNode: itemNode,
  cardNode: cardNode,
@@ -3255,7 +3637,8 @@ function adjustPriorityDays(delta){
  cardTitle: cardTitle,
  itemLabel: itemLabel,
  dueDate: itemDue,
- dueTs: itemDueDate.getTime()
+ dueTs: itemDueDate.getTime(),
+ daysRemaining: itemDaysRemaining
  });
  });
  });
@@ -3281,14 +3664,17 @@ function renderPriorityReport(){
  priorityReportUI.cardsList.innerHTML = '';
  const data = collectPriorityReportData();
  const maxDays = getPriorityDaysValue();
+ const itemsForReport = Number.isFinite(maxDays) ? data.items.filter(function(item){ return item.daysRemaining <= maxDays; }) : data.items;
  const cardsForReport = Number.isFinite(maxDays) ? data.cards.filter(function(c){ return c.daysRemaining <= maxDays; }) : data.cards;
- if (!data.items.length){
+ if (!itemsForReport.length){
  const empty = document.createElement('div');
  empty.className = 'priority-report-empty';
- empty.textContent = 'No unchecked checklist item has a due date.';
+ empty.textContent = Number.isFinite(maxDays)
+ ? `No checklist item is due in ${maxDays} day(s) or less.`
+ : 'No checklist item has a due date.';
  priorityReportUI.itemsList.appendChild(empty);
  } else {
- data.items.forEach(function(entry){
+ itemsForReport.forEach(function(entry){
  const wrap = document.createElement('div');
  wrap.className = 'priority-report-entry';
  const source = document.createElement('div');
@@ -3679,25 +4065,19 @@ function syncTopbarSpacer(){
     const hoverMenu = document.getElementById('hoverMenu');
     const hoverTrigger = document.getElementById('topbarHoverTrigger');
     if (!tb || !sp) return;
+    const viewportW = window.innerWidth || document.documentElement.clientWidth || 0;
     const boardEl = document.getElementById('board');
     const mainEl = document.querySelector('main');
-    const viewportW = window.innerWidth || document.documentElement.clientWidth || 0;
-    const mainPad = mainEl ? ((parseFloat(getComputedStyle(mainEl).paddingLeft) || 0) + (parseFloat(getComputedStyle(mainEl).paddingRight) || 0)) : 0;
-    const targetWidth = Math.max(viewportW, Math.ceil((boardEl ? boardEl.scrollWidth : 0) + mainPad));
+    const targetWidth = viewportW;
     tb.style.width = targetWidth + 'px';
     const h = Math.ceil(tb.getBoundingClientRect().height);
     if (hoverMenu){
       hoverMenu.style.top = h + 'px';
     }
     if (hoverTrigger){
-      hoverTrigger.style.width = targetWidth + 'px';
+      hoverTrigger.style.width = Math.floor(targetWidth * 0.75) + 'px';
       hoverTrigger.style.height = Math.max(10, Math.ceil(h / 4)) + 'px';
       hoverTrigger.style.top = Math.max(0, h - Math.max(10, Math.ceil(h / 4))) + 'px';
-    }
-    const hamburgerEl = document.getElementById('hamburgerBtn');
-    if (hamburgerEl){
-      const hbH = Math.ceil(hamburgerEl.getBoundingClientRect().height || 36);
-      hamburgerEl.style.top = Math.max(0, Math.floor((h - hbH) / 2)) + 'px';
     }
     sp.style.height = h + 'px';
     // place spacer just beneath topbar so it does not appear above it
@@ -3705,7 +4085,12 @@ function syncTopbarSpacer(){
     // ensure spacer uses the current board bg color variable
     const rootStyles = getComputedStyle(document.documentElement);
     const bg = rootStyles.getPropertyValue('--bg') || '';
+    const edgeGap = parseFloat(rootStyles.getPropertyValue('--board-edge-gap')) || 16;
+    const submenuPeek = parseFloat(rootStyles.getPropertyValue('--submenu-collapsed-peek')) || 7;
     if (bg) sp.style.background = bg.trim();
+    if (mainEl){
+      mainEl.style.paddingTop = (h + submenuPeek + edgeGap) + 'px';
+    }
     if (boardEl) {
       const rect = boardEl.getBoundingClientRect();
       const viewportH = window.innerHeight || document.documentElement.clientHeight;
@@ -3724,6 +4109,43 @@ if (boardElForObs) boardObs.observe(boardElForObs);
 // initial sync (defer a frame to ensure layout computed)
 requestAnimationFrame(syncTopbarSpacer);
  })(); 
+(function(){
+  const boardScrollRegion = document.querySelector('.board-scroll-region');
+  const fixedScroll = document.getElementById('boardFixedScroll');
+  const fixedScrollInner = document.getElementById('boardFixedScrollInner');
+  const boardEl = document.getElementById('board');
+  if (!boardScrollRegion || !fixedScroll || !fixedScrollInner || !boardEl) return;
+
+  let syncing = false;
+
+  function syncFixedBoardScrollbar(){
+    const scrollWidth = Math.ceil(boardEl.scrollWidth || 0);
+    const clientWidth = Math.ceil(boardScrollRegion.clientWidth || 0);
+    fixedScrollInner.style.width = scrollWidth + 'px';
+    fixedScroll.classList.toggle('hidden', scrollWidth <= clientWidth + 1);
+    if (!syncing) fixedScroll.scrollLeft = boardScrollRegion.scrollLeft;
+  }
+
+  boardScrollRegion.addEventListener('scroll', function(){
+    if (syncing) return;
+    syncing = true;
+    fixedScroll.scrollLeft = boardScrollRegion.scrollLeft;
+    syncing = false;
+  }, { passive: true });
+
+  fixedScroll.addEventListener('scroll', function(){
+    if (syncing) return;
+    syncing = true;
+    boardScrollRegion.scrollLeft = fixedScroll.scrollLeft;
+    syncing = false;
+  }, { passive: true });
+
+  window.addEventListener('resize', syncFixedBoardScrollbar);
+  const boardWidthObs = new ResizeObserver(syncFixedBoardScrollbar);
+  boardWidthObs.observe(boardEl);
+  boardWidthObs.observe(boardScrollRegion);
+  requestAnimationFrame(syncFixedBoardScrollbar);
+})();
 // ===== Hover menu below topbar =====
 (function(){
   const topbar = document.querySelector('.topbar');
@@ -3741,6 +4163,8 @@ requestAnimationFrame(syncTopbarSpacer);
   let pointerWatchActive = false;
   let activeEditBoardName = null;
   let hoveredBoardDuringCardDrag = null;
+  let hoverMenuAutoScrollRaf = 0;
+  let hoverMenuAutoScrollVelocity = 0;
 
   function isBoardTransferDragActive(){
     return !!($('.dragging-col') || $('.card.dragging'));
@@ -3759,6 +4183,7 @@ requestAnimationFrame(syncTopbarSpacer);
     hoverMenu.classList.toggle('open', !!open);
     hoverMenu.setAttribute('aria-hidden', String(!open));
     pointerWatchActive = !!open;
+    if (!open) stopHoverMenuAutoScroll();
   }
 
   function scheduleClose(){
@@ -3772,6 +4197,66 @@ requestAnimationFrame(syncTopbarSpacer);
       clearTimeout(cardBoardHoverSwitchTimer);
       cardBoardHoverSwitchTimer = null;
     }
+  }
+
+  function stopHoverMenuAutoScroll(){
+    hoverMenuAutoScrollVelocity = 0;
+    if (hoverMenuAutoScrollRaf){
+      cancelAnimationFrame(hoverMenuAutoScrollRaf);
+      hoverMenuAutoScrollRaf = 0;
+    }
+  }
+
+  function stepHoverMenuAutoScroll(){
+    if (!hoverMenuAutoScrollVelocity || !isBoardTransferDragActive()){
+      hoverMenuAutoScrollRaf = 0;
+      return;
+    }
+    const maxScrollLeft = Math.max(0, hoverMenuContent.scrollWidth - hoverMenuContent.clientWidth);
+    if (!maxScrollLeft){
+      stopHoverMenuAutoScroll();
+      return;
+    }
+    const nextScrollLeft = Math.max(0, Math.min(maxScrollLeft, hoverMenuContent.scrollLeft + hoverMenuAutoScrollVelocity));
+    hoverMenuContent.scrollLeft = nextScrollLeft;
+    if ((hoverMenuAutoScrollVelocity < 0 && nextScrollLeft <= 0) || (hoverMenuAutoScrollVelocity > 0 && nextScrollLeft >= maxScrollLeft)){
+      stopHoverMenuAutoScroll();
+      return;
+    }
+    hoverMenuAutoScrollRaf = requestAnimationFrame(stepHoverMenuAutoScroll);
+  }
+
+  function updateHoverMenuAutoScroll(clientX, clientY){
+    if (!hoverMenu.classList.contains('open') || !isBoardTransferDragActive()){
+      stopHoverMenuAutoScroll();
+      return;
+    }
+    const maxScrollLeft = Math.max(0, hoverMenuContent.scrollWidth - hoverMenuContent.clientWidth);
+    if (!maxScrollLeft){
+      stopHoverMenuAutoScroll();
+      return;
+    }
+    const rect = hoverMenuContent.getBoundingClientRect();
+    const verticalMargin = 18;
+    if (clientY < (rect.top - verticalMargin) || clientY > (rect.bottom + verticalMargin)){
+      stopHoverMenuAutoScroll();
+      return;
+    }
+    const edgeSize = Math.max(56, Math.min(104, rect.width * 0.18));
+    let velocity = 0;
+    if (clientX < (rect.left + edgeSize)){
+      const ratio = Math.min(1, ((rect.left + edgeSize) - clientX) / edgeSize);
+      velocity = -Math.ceil(2 + (8 * ratio));
+    } else if (clientX > (rect.right - edgeSize)){
+      const ratio = Math.min(1, (clientX - (rect.right - edgeSize)) / edgeSize);
+      velocity = Math.ceil(2 + (8 * ratio));
+    }
+    if (!velocity){
+      stopHoverMenuAutoScroll();
+      return;
+    }
+    hoverMenuAutoScrollVelocity = velocity;
+    if (!hoverMenuAutoScrollRaf) hoverMenuAutoScrollRaf = requestAnimationFrame(stepHoverMenuAutoScroll);
   }
 
   function getUniqueBoardName(baseName, excludeName){
@@ -3916,6 +4401,21 @@ requestAnimationFrame(syncTopbarSpacer);
     activateBoardFromMenu(normalized, { animate: true });
   }
 
+  function getTopbarOpenBoundary(){
+    const rect = topbar.getBoundingClientRect();
+    return rect.left + (rect.width * 0.75);
+  }
+
+  function isInTopbarOpenZone(x, y, extraBottom){
+    const topbarRect = topbar.getBoundingClientRect();
+    return (
+      x >= topbarRect.left &&
+      x <= getTopbarOpenBoundary() &&
+      y >= topbarRect.top &&
+      y <= (topbarRect.bottom + (extraBottom || 0))
+    );
+  }
+
   function isInTongueZone(x, y){
     const menuRect = hoverMenu.getBoundingClientRect();
     const tongueWidth = 57;
@@ -3928,13 +4428,8 @@ requestAnimationFrame(syncTopbarSpacer);
   }
 
   function shouldOpenHoverMenuForDrag(clientX, clientY){
-    const topbarRect = topbar.getBoundingClientRect();
     const menuRect = hoverMenu.getBoundingClientRect();
-    const nearTopbar =
-      clientX >= topbarRect.left &&
-      clientX <= topbarRect.right &&
-      clientY >= topbarRect.top &&
-      clientY <= (topbarRect.bottom + 12);
+    const nearTopbar = isInTopbarOpenZone(clientX, clientY, 12);
     const nearMenu =
       clientX >= menuRect.left &&
       clientX <= menuRect.right &&
@@ -3956,6 +4451,7 @@ requestAnimationFrame(syncTopbarSpacer);
   });
   topbar.addEventListener('dragover', function(e){
     if (!isBoardTransferDragActive()) return;
+    if (!isInTopbarOpenZone(e.clientX, e.clientY, 12)) return;
     e.preventDefault();
     setHoverMenuOpen(true);
   });
@@ -3966,6 +4462,7 @@ requestAnimationFrame(syncTopbarSpacer);
     if (!isBoardTransferDragActive()) return;
     e.preventDefault();
     setHoverMenuOpen(true);
+    updateHoverMenuAutoScroll(e.clientX, e.clientY);
   });
   hoverMenuAddBtn.addEventListener('click', async function(){
     const newBoardName = getUniqueBoardName(DEFAULT_NEW_BOARD_NAME);
@@ -4044,6 +4541,7 @@ requestAnimationFrame(syncTopbarSpacer);
     const draggingCol = $('.dragging-col');
     const draggingCard = $('.card.dragging');
     if (!draggingCol && !draggingCard) return;
+    updateHoverMenuAutoScroll(e.clientX, e.clientY);
     if (!item){
       clearBoardHoverSwitchTimer();
       clearDragTargets();
@@ -4060,6 +4558,7 @@ requestAnimationFrame(syncTopbarSpacer);
     }
   });
   hoverMenuContent.addEventListener('dragleave', function(e){
+    stopHoverMenuAutoScroll();
     if (e.target === hoverMenuContent) clearDragTargets();
   });
   hoverMenuContent.addEventListener('drop', async function(e){
@@ -4068,6 +4567,7 @@ requestAnimationFrame(syncTopbarSpacer);
     const draggingCard = $('.card.dragging');
     clearBoardHoverSwitchTimer();
     clearDragTargets();
+    stopHoverMenuAutoScroll();
     if (!item) return;
     if (draggingCol){
       e.preventDefault();
@@ -4087,6 +4587,7 @@ requestAnimationFrame(syncTopbarSpacer);
     clearBoardHoverSwitchTimer();
     clearDragTargets();
     hoveredBoardDuringCardDrag = null;
+    stopHoverMenuAutoScroll();
   }, true);
 
   document.addEventListener('mousemove', function(e){
@@ -4126,7 +4627,10 @@ requestAnimationFrame(syncTopbarSpacer);
     if (shouldOpenHoverMenuForDrag(e.clientX, e.clientY)){
       e.preventDefault();
       setHoverMenuOpen(true);
+      updateHoverMenuAutoScroll(e.clientX, e.clientY);
+      return;
     }
+    stopHoverMenuAutoScroll();
   }, true);
 
   renderHoverMenuItems();
@@ -4183,8 +4687,52 @@ requestAnimationFrame(syncTopbarSpacer);
     if (mobileMenu.classList.contains('open')) positionMenu();
   });
 
-  setOpen(false);
+ setOpen(false);
 })();
  </script> 
+ <script>
+ window.addEventListener('DOMContentLoaded', async () => {
+  const api = window.electronAPI;
+  if (!api) return;
+
+  const btnMin = document.getElementById('btn-minimize');
+  const btnMax = document.getElementById('btn-maximize');
+  const btnClose = document.getElementById('btn-close');
+
+  async function updateMaximizeButton() {
+   if (!btnMax) return;
+   const maximized = await api.isMaximized();
+   btnMax.textContent = maximized ? '❐' : '□';
+   btnMax.title = maximized ? 'Restore' : 'Maximize';
+  }
+
+  btnMin?.addEventListener('click', () => {
+   api.minimize();
+  });
+
+  btnMax?.addEventListener('click', () => {
+   api.maximizeRestore();
+  });
+
+  btnClose?.addEventListener('click', () => {
+   api.close();
+  });
+
+  const unsubscribe = api.onWindowStateChange(() => {
+   updateMaximizeButton();
+  });
+
+  await updateMaximizeButton();
+
+  window.addEventListener('resize', updateMaximizeButton);
+  window.addEventListener(
+   'beforeunload',
+   () => {
+    unsubscribe();
+   },
+   { once: true }
+  );
+ });
+ </script>
 </body> 
 </html>

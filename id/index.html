@@ -891,14 +891,7 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
           window.location.href = targetUrl;
         });
       }
-
-      var pathname = window.location.pathname || '/';
-      var normalizedPath = pathname === '/' ? '/' : pathname.replace(/\/+$/, '') + '/';
-      var homePaths = ['/', '/pt-br/', '/es/', '/ar/', '/hi/', '/zh-cn/'];
-      if (homePaths.indexOf(normalizedPath) >= 0) {
-        var preferredHome = LANGUAGE_HOMES[preferredLanguage] || '/';
-        if (normalizedPath !== preferredHome) window.location.replace(preferredHome);
-      }
+      // Automatic language redirect removed so each URL remains directly crawlable and indexable.
     })();
 
   </script>

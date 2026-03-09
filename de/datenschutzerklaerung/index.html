@@ -13,7 +13,7 @@
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/favicon.svg" rel="shortcut icon"/>
 <link href="https://kanbanapp.io/de/datenschutzerklaerung/" rel="canonical"/>
-<link href="https://kanbanapp.io/sitemap.xml" rel="sitemap" type="application/xml"/><link href="https://kanbanapp.io/privacy-policy/" hreflang="en" rel="alternate"/><link href="https://kanbanapp.io/pt-br/politica-de-privacidade/" hreflang="pt-BR" rel="alternate"/><link href="https://kanbanapp.io/es/politica-de-privacidad/" hreflang="es" rel="alternate"/><link href="https://kanbanapp.io/ar/siyasat-al-khusoosiya/" hreflang="ar" rel="alternate"/><link href="https://kanbanapp.io/hi/gopniyata-neeti/" hreflang="hi" rel="alternate"/><link href="https://kanbanapp.io/zh-cn/yin-si-zheng-ce/" hreflang="zh-CN" rel="alternate"/><link href="https://kanbanapp.io/privacy-policy/" hreflang="x-default" rel="alternate"/>
+<link href="https://kanbanapp.io/sitemap.xml" rel="sitemap" type="application/xml"/><link href="https://kanbanapp.io/privacy-policy/" hreflang="en" rel="alternate"/><link href="https://kanbanapp.io/pt-br/politica-de-privacidade/" hreflang="pt-BR" rel="alternate"/><link href="https://kanbanapp.io/es/politica-de-privacidad/" hreflang="es" rel="alternate"/><link href="https://kanbanapp.io/ar/siyasat-al-khusoosiya/" hreflang="ar" rel="alternate"/><link href="https://kanbanapp.io/hi/gopniyata-neeti/" hreflang="hi" rel="alternate"/><link href="https://kanbanapp.io/zh-cn/yin-si-zheng-ce/" hreflang="zh-CN" rel="alternate"/><link href="https://kanbanapp.io/fr/politique-de-confidentialite/" hreflang="fr" rel="alternate"/><link href="https://kanbanapp.io/de/datenschutzerklaerung/" hreflang="de" rel="alternate"/><link href="https://kanbanapp.io/id/kebijakan-privasi/" hreflang="id" rel="alternate"/><link href="https://kanbanapp.io/privacy-policy/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
 <meta content="en" property="og:locale"/>
 <meta content="KanbanApp" property="og:site_name"/>
@@ -395,14 +395,7 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
           window.location.href = targetUrl;
         });
       }
-
-      var pathname = window.location.pathname || '/';
-      var normalizedPath = pathname === '/' ? '/' : pathname.replace(/\/+$/, '') + '/';
-      var homePaths = ['/', '/pt-br/', '/es/', '/ar/', '/hi/', '/zh-cn/'];
-      if (homePaths.indexOf(normalizedPath) >= 0) {
-        var preferredHome = LANGUAGE_HOMES[preferredLanguage] || '/';
-        if (normalizedPath !== preferredHome) window.location.replace(preferredHome);
-      }
+      // Automatic language redirect removed so each URL remains directly crawlable and indexable.
     })();
   </script>
 </body>
