@@ -1,5 +1,7 @@
 # Kanban App 🗂️  
 [https://KanbanApp.io](https://kanbanapp.io)
+
+
 **Kanban Board | Task Manager | Productivity Tool | HTML, CSS, JavaScript**
 
 Kanban App is a lightweight **Kanban board** for task management and productivity, built with **pure HTML, CSS, and JavaScript**.  
