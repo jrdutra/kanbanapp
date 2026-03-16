@@ -20,8 +20,8 @@
  --border: #3a3a3a; 
  --text: #ffffff; 
  --muted: #bdbdbd; 
- --purple: #6650e6; /* roxo padrÃƒÂ£o dos cards sem data (baseado na imagem) */
- --purple-dark: #2a254b; /* faixa roxa mais escura (concluÃƒÂ­do) */
+ --purple: #6650e6; /* default purple for cards without due date */
+ --purple-dark: #2a254b; /* darker purple band for completed cards */
  --purple-2: #d4a8ff;
  --purple-strong: #7a00ff; /* roxo mais escuro para checkboxes*/
  --menu-purple-base: #6650e6;
@@ -76,11 +76,7 @@ body {
   padding: 12px 132px 12px 16px;
   width: 100%;
   min-width: 100%;
-  /* Paleta inspirada no og-image.svg (roxo/azul) */
-  background:
-    radial-gradient(circle at 88% -40%, color-mix(in srgb, var(--menu-purple-light) 56%, transparent), transparent 45%),
-    radial-gradient(circle at 8% 130%, color-mix(in srgb, var(--menu-blue-soft) 50%, transparent), transparent 42%),
-    linear-gradient(120deg, #090b14 0%, color-mix(in srgb, var(--menu-purple-deep) 76%, #141a2b) 24%, color-mix(in srgb, var(--menu-purple-base) 52%, #2a3060) 100%);
+  background: #4c3cad;
   border: none;
   border-radius: 0;
   color: var(--text);
@@ -419,9 +415,9 @@ button, .btn{
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-  /* reduzir padding interno em 50% (valor anterior usado como referÃƒÂªncia) */
+  /* reduce internal padding by 50% from the previous value */
   padding: clamp(6px, 1vw, 9px);
-    /* EspaÃƒÂ§o inferior fixo relativo ÃƒÂ  altura da viewport (5% da altura da pÃƒÂ¡gina) */
+    /* fixed bottom spacing relative to viewport height (5%) */
     margin-bottom: 5vh;
     margin-top: 0.1vh;
  } 
@@ -656,7 +652,7 @@ button, .btn{
  input.item-check:checked::after {
   transform: translate(-50%, -50%) rotate(45deg) scale(1);
  }
- /* Timestamps abaixo do tÃƒÂ­tulo */ 
+ /* Timestamps below the title */ 
  .card-meta{ 
  grid-column: 1 / -1; 
  display: flex; 
@@ -678,7 +674,7 @@ button, .btn{
  transition: max-height .52s cubic-bezier(.2,.9,.2,1), opacity .36s ease;
  } 
  .field-label{ font-size: 12px; color: var(--muted); } 
- /* DescriÃƒÂ§ÃƒÂ£o */ 
+ /* Description */ 
 textarea.card-desc{ 
 width: 100%; 
 min-height: 90px; 
@@ -837,13 +833,13 @@ margin-left: 26px;
  font-family: inherit; 
  } 
  .hidden{ display: none !important; } 
- /* Card colapsado: mostra sÃƒÂ³ header */ 
+ /* Collapsed card: show header only */ 
  .card.collapsed{ cursor: pointer; gap: 0; } 
  .card.collapsed .card-header { grid-template-columns: 1fr; }
  .card.collapsed .card-header-actions { display: none; } 
  .card.collapsed .card-title { grid-column: 1 / -1; }
  .card.collapsed .card-body { max-height: 0; opacity: 0; pointer-events: none; } 
- /* TÃƒÂ­tulo quando concluÃƒÂ­do */ 
+ /* Title when completed */ 
  .card.completed .card-title{ 
  color: var(--text-completed); 
  /* text-decoration: line-through; opcional */ 
@@ -1410,7 +1406,7 @@ margin-left: 26px;
  <button class="btn-small add-card">+ Card</button> 
  <button class="btn-small select-all" title="Select all cards">Select</button> 
  <button class="btn-small conclude-all" title="Mark all cards as completed">Complete</button> 
- <!-- NOVOS botÃƒÂµes na coluna --> 
+ <!-- New buttons in the column --> 
  <button class="btn-small sort-date" title="Sort by date (toggle ascending/descending)">Sort by date</button> 
  <button class="btn-small group-completed" title="Incomplete first, completed at the end">Group completed</button> 
  <button class="btn-small btn-danger delete-column" title="Delete this column">Delete</button> 
@@ -1453,7 +1449,7 @@ margin-left: 26px;
  <span class="card-collapsed-meta-text"></span>
  <button class="btn-small btn-ghost open-card-modal" title="Open in modal">Open</button>
  </div> 
- <!-- NOVO: barra de progresso (sempre visÃƒÂ­vel) --> 
+ <!-- Progress bar (always visible) --> 
  <div class="progress-wrap" aria-hidden="false"> 
  <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Checklist progress"> 
  <div class="progress-bar" style="width:0%"></div> 
@@ -1494,7 +1490,7 @@ margin-left: 26px;
  <textarea class="item-editor hidden" placeholder="Item text (URLs become clickable in preview)"></textarea> 
  </div> 
  </template> 
- <!-- Modal de ConfiguraÃƒÂ§ÃƒÂµes --> 
+<!-- Settings modal --> 
  <div id="settingsOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"> 
  <div class="modal"> 
  <div class="modal-header"> 
@@ -1505,7 +1501,7 @@ margin-left: 26px;
  <section class="settings-section"> 
  <h3 class="section-title">Card age color rules</h3> 
  <p class="section-help"> 
- Define rows with <strong>days</strong> and a <strong>color</strong>. Example: 7 days Ã¢â€ â€™ yellow. 
+ Define rows with <strong>days</strong> and a <strong>color</strong>. Example: 7 days -> yellow. 
  </p> 
  <div id="rulesList" class="rules-list" aria-live="polite"></div> 
  <div class="rules-actions"> 
@@ -1583,7 +1579,7 @@ SOFTWARE.
  </div>
  </div>
  </div>
- <!-- Template de uma linha de regra (dias + cor) --> 
+ <!-- Rule row template (days + color) --> 
  <template id="tpl-rule-row"> 
  <div class="rule-row"> 
  <div class="rule-field"> 
@@ -1592,39 +1588,39 @@ SOFTWARE.
  </div> 
  <div class="rule-field"> 
  <label class="field-label">Color</label> 
- <!-- Color picker (preferencial) --> 
+ <!-- Preferred color picker --> 
  <input type="color" class="rule-color"> 
- <!-- Fallback: combobox de cores (tons pedidos) --> 
+ <!-- Fallback color combobox --> 
  <select class="rule-color-select"> 
- <!-- Amarelo --> 
- <option value="#fffde7">Yellow 50 Ã¢â‚¬â€ #fffde7</option> 
- <option value="#fff59d">Yellow 300 Ã¢â‚¬â€ #fff59d</option> 
- <option value="#ffeb3b">Yellow 500 Ã¢â‚¬â€ #ffeb3b</option> 
- <option value="#fbc02d">Yellow 700 Ã¢â‚¬â€ #fbc02d</option> 
- <!-- Vermelho --> 
- <option value="#ffebee">Red 50 Ã¢â‚¬â€ #ffebee</option> 
- <option value="#ffcdd2">Red 200 Ã¢â‚¬â€ #ffcdd2</option> 
- <option value="#ef5350">Red 400 Ã¢â‚¬â€ #ef5350</option> 
- <option value="#b71c1c">Red 900 Ã¢â‚¬â€ #b71c1c</option> 
- <!-- Azul --> 
- <option value="#e3f2fd">Blue 50 Ã¢â‚¬â€ #e3f2fd</option> 
- <option value="#90caf9">Blue 200 Ã¢â‚¬â€ #90caf9</option> 
- <option value="#2196f3">Blue 500 Ã¢â‚¬â€ #2196f3</option> 
- <option value="#0d47a1">Blue 900 Ã¢â‚¬â€ #0d47a1</option> 
- <!-- Roxo --> 
- <option value="#f3e5f5">Purple 50 Ã¢â‚¬â€ #f3e5f5</option> 
- <option value="#ce93d8">Purple 200 Ã¢â‚¬â€ #ce93d8</option> 
- <option value="#9c27b0">Purple 500 Ã¢â‚¬â€ #9c27b0</option> 
- <option value="#4a148c">Purple 900 Ã¢â‚¬â€ #4a148c</option> 
- <!-- Cinza --> 
- <option value="#fafafa">Gray 50 Ã¢â‚¬â€ #fafafa</option> 
- <option value="#e0e0e0">Gray 300 Ã¢â‚¬â€ #e0e0e0</option> 
- <option value="#9e9e9e">Gray 500 Ã¢â‚¬â€ #9e9e9e</option> 
- <option value="#616161">Gray 700 Ã¢â‚¬â€ #616161</option> 
- <option value="#212121">Gray 900 Ã¢â‚¬â€ #212121</option> 
- <!-- Branco/Preto --> 
- <option value="#ffffff">White Ã¢â‚¬â€ #ffffff</option> 
- <option value="#000000">Black Ã¢â‚¬â€ #000000</option> 
+ <!-- Yellow --> 
+ <option value="#fffde7">Yellow 50 - #fffde7</option> 
+ <option value="#fff59d">Yellow 300 - #fff59d</option> 
+ <option value="#ffeb3b">Yellow 500 - #ffeb3b</option> 
+ <option value="#fbc02d">Yellow 700 - #fbc02d</option> 
+ <!-- Red --> 
+ <option value="#ffebee">Red 50 - #ffebee</option> 
+ <option value="#ffcdd2">Red 200 - #ffcdd2</option> 
+ <option value="#ef5350">Red 400 - #ef5350</option> 
+ <option value="#b71c1c">Red 900 - #b71c1c</option> 
+ <!-- Blue --> 
+ <option value="#e3f2fd">Blue 50 - #e3f2fd</option> 
+ <option value="#90caf9">Blue 200 - #90caf9</option> 
+ <option value="#2196f3">Blue 500 - #2196f3</option> 
+ <option value="#0d47a1">Blue 900 - #0d47a1</option> 
+ <!-- Purple --> 
+ <option value="#f3e5f5">Purple 50 - #f3e5f5</option> 
+ <option value="#ce93d8">Purple 200 - #ce93d8</option> 
+ <option value="#9c27b0">Purple 500 - #9c27b0</option> 
+ <option value="#4a148c">Purple 900 - #4a148c</option> 
+ <!-- Gray --> 
+ <option value="#fafafa">Gray 50 - #fafafa</option> 
+ <option value="#e0e0e0">Gray 300 - #e0e0e0</option> 
+ <option value="#9e9e9e">Gray 500 - #9e9e9e</option> 
+ <option value="#616161">Gray 700 - #616161</option> 
+ <option value="#212121">Gray 900 - #212121</option> 
+ <!-- White / Black --> 
+ <option value="#ffffff">White - #ffffff</option> 
+ <option value="#000000">Black - #000000</option> 
  </select> 
  </div> 
  <div class="rule-actions"> 
@@ -1633,7 +1629,7 @@ SOFTWARE.
  </div> 
  </template> 
 
-<!-- Modal de Card (abre o prÃƒÂ³prio card no centro) -->
+<!-- Card modal (opens the card itself in the center) -->
 <div id="cardOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="cardModalTitle">
   <div class="modal modal-card">
     <div class="modal-header">
@@ -1829,7 +1825,7 @@ function escapeHtml(str){
  const map = { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }; 
  return s.replace(/[&<>"']/g, m => map[m]); 
  } 
- // Normaliza para busca case/acento-insensÃƒÂ­vel 
+ // Normalize for case/accent-insensitive search 
  function normalizeText(s) { 
  return String(s || '') 
  .normalize('NFD') 
@@ -1844,7 +1840,7 @@ function escapeHtml(str){
  const urlRegex = /((https?:\/\/[\w.-]+(?:\:[0-9]+)?(?:\/[\w.,@?^=%&:/~+#-]*)?))/gi; 
  return safe.replace(urlRegex, (raw) => { 
  const href = raw.startsWith('http') ? raw : 'http://' + raw; 
- // remover pontuaÃƒÂ§ÃƒÂ£o final solta 
+ // remove trailing punctuation 
  const m = href.match(/^(.*?)([),.;!?:]+)?$/); 
  let url = href, trailing = ''; 
  if (m) { url = m[1]; trailing = m[2] || ''; } 
@@ -2002,7 +1998,7 @@ function escapeHtml(str){
  try { card.style.setProperty('--progress-color', color); } catch(_) {} 
  card.style.boxShadow = `var(--shadow), inset 3px 0 0 ${color}`; 
  if(descView){ descView.style.borderLeft = `3px solid ${color}`; } 
- // NOVO: sempre atualizar a linha colapsada apÃƒÂ³s pintar 
+ // Always refresh the collapsed line after repainting 
  renderCollapsedMeta(card); 
  } 
 function applyDueColorsAll(){
@@ -2108,7 +2104,7 @@ async function switchActiveBoard(nextBoardName, options){
  if (token !== boardSwitchToken) return;
  board.classList.remove('board-switch-in');
 }
- // ===== SERIALIZAÃƒâ€¡ÃƒÆ’O ===== 
+ // ===== SERIALIZATION ===== 
  function serializeBoard(){ 
  const data = { 
  meta: { version: 12, exportedAt: new Date().toISOString() }, 
@@ -2238,7 +2234,7 @@ async function loadBoardSequential(data){
  // aplica filtro inicial (se houver valor no input) 
  applyColumnFilter(colNode); 
  } 
- // opcional: se modal jÃƒÂ¡ foi inicializado, atualiza a UI 
+ // optional: if the modal is already initialized, refresh the UI 
  if (settingsUI.overlay) renderSettingsRows(boardMeta.ageColorRules); 
  // garantia 
  applyDueColorsAll(); 
@@ -2289,7 +2285,7 @@ async function loadBoardSequential(data){
  ]
  };
  }
- // ===== CriaÃƒÂ§ÃƒÂ£o de elementos ===== 
+ // ===== Element creation ===== 
  const board = document.getElementById('board'); 
  const tplColumn = document.getElementById('tpl-column'); 
  const tplCard = document.getElementById('tpl-card'); 
@@ -2377,7 +2373,7 @@ function createColumn(id, title, boardName){
  const total = $$('.card', node).length; 
  filterCount.textContent = `${total}/${total}`; 
  } 
- // AÃƒÂ§ÃƒÂµes 
+ // Actions 
  $('.add-card', node).addEventListener('click', function(e){ 
  e.stopPropagation(); 
  const c = createCard(uid('card')); 
@@ -2409,10 +2405,10 @@ function createColumn(id, title, boardName){
  }); 
  applyColumnFilter(node); 
  }); 
- // Ordenar por data (ediÃƒÂ§ÃƒÂ£o) toggle desc/asc 
+ // Sort by date (edit mode), toggle desc/asc 
  const sortBtn = $('.sort-date', node); 
  if (sortBtn){ 
- node.dataset.sortNext = 'desc'; // 1Ã‚Âº clique = desc 
+ node.dataset.sortNext = 'desc'; // 1st click = desc 
  sortBtn.addEventListener('click', function(e){ 
  e.stopPropagation(); 
  const dir = node.dataset.sortNext || 'desc'; 
@@ -2420,7 +2416,7 @@ function createColumn(id, title, boardName){
  node.dataset.sortNext = (dir === 'desc' ? 'asc' : 'desc'); 
  }); 
  } 
- // Agrupar concluÃƒÂ­dos 
+ // Group completed cards 
  const groupBtn = $('.group-completed', node); 
  if (groupBtn){ 
  groupBtn.addEventListener('click', function(e){ 
@@ -2511,7 +2507,7 @@ function makeCardCollapsible(cardNode){
  right = 'No due date'; 
  } 
  } 
- const collapsedText = `${shortDate} â€” ${right}`;
+ const collapsedText = `${shortDate} - ${right}`;
  const textNode = box.querySelector('.card-collapsed-meta-text');
  if (textNode) textNode.textContent = collapsedText;
  else box.textContent = collapsedText;
@@ -2523,7 +2519,7 @@ function createCard(id){
  node.dataset.created = nowISO(); 
  node.dataset.updated = node.dataset.created; 
  renderCardTimestamps(node); 
- // DescriÃƒÂ§ÃƒÂ£o: ver Ã¢â€ â€™ editar 
+ // Description: preview -> edit 
  const ta = $('.card-desc', node); 
  const view = $('.desc-view', node); 
  const due = $('.card-due', node); 
@@ -2616,7 +2612,7 @@ function createCard(id){
     const meta = checklistDragMeta;
     if (!dragged || !meta) return;
     meta.dropHandled = true;
-    // prioridade: posiÃ§Ã£o real atual do item no DOM no momento do drop
+    // priority: use the item's current DOM position at drop time
     const domTargetWrap = dragged.closest('.items');
     const domTargetCard = dragged.closest('.card');
     const effectiveTargetCard = domTargetCard || targetCard || meta.targetCard || node;
@@ -2747,7 +2743,7 @@ if (wrap) wrap.appendChild(node);
 } 
  if (col) applyColumnFilter(col); 
  applyDueColorToCard(node); 
- // por especificaÃƒÂ§ÃƒÂ£o, marcar concluÃƒÂ­do NÃƒÆ’O altera updatedAt 
+ // By design, marking completed does not change updatedAt 
  }); 
  // Excluir card 
  $('.delete-card', node).addEventListener('click', function(e){ 
@@ -2800,7 +2796,7 @@ if (wrap) wrap.appendChild(node);
  if (col) applyColumnFilter(col); 
  applyDueColorToCard(node); 
  }); 
- // MudanÃƒÂ§as no tÃƒÂ­tulo reavaliam filtro e atualizam timestamp (on change) 
+ // Title changes re-evaluate the filter and update the timestamp (on change) 
  $('.card-title', node).addEventListener('input', function(){ 
  const col = node.closest('.column'); 
  if (col) applyColumnFilter(col); 
@@ -2808,14 +2804,14 @@ if (wrap) wrap.appendChild(node);
  $('.card-title', node).addEventListener('change', function(){ 
  touchCardUpdated(node); 
  }); 
- // MudanÃƒÂ§as na descriÃƒÂ§ÃƒÂ£o durante a digitaÃƒÂ§ÃƒÂ£o: reavaliam filtro 
+ // Description changes while typing re-evaluate the filter 
  ta.addEventListener('input', function(){ 
  const col = node.closest('.column'); 
  if (col) applyColumnFilter(col); 
  }); 
- // Colapso/expansÃƒÂ£o 
+ // Collapse / expand 
  makeCardCollapsible(node); 
- // pinta inicialmente (caso due prÃƒÂ©-definido) e compÃƒÂµe linha colapsada 
+ // Apply initial due styling and compose collapsed line 
  applyDueColorToCard(node); 
  renderCollapsedMeta(node); 
  updateChecklistProgress(node); 
@@ -3414,7 +3410,7 @@ async function finalizeChecklistItemDrop(targetCard, targetItemsWrap, fallbackCa
  }); 
  if (countEl) countEl.textContent = `${matched}/${total}`; 
  } 
- // ===== OrdenaÃƒÂ§ÃƒÂ£o e agrupamento ===== 
+ // ===== Sorting and grouping ===== 
  function sortCardsByDate(columnNode, dir='desc'){ 
  const wrap = $('.cards', columnNode); 
  const cards = $$('.card', wrap); 
@@ -3436,7 +3432,7 @@ async function finalizeChecklistItemDrop(targetCard, targetItemsWrap, fallbackCa
  const db = Date.parse(b.dataset.updated || b.dataset.created || 0) || 0; 
  return db - da; // dentro do grupo, mais novos primeiro 
  } 
- return ac - bc; // nÃƒÂ£o concluÃƒÂ­do (0) antes de concluÃƒÂ­do (1) 
+ return ac - bc; // incomplete (0) before completed (1) 
  }).forEach(c => wrap.appendChild(c)); 
  applyColumnFilter(columnNode); 
  } 
@@ -3462,7 +3458,7 @@ function getColAfterElement(container, x){
  }); 
  return closest.element; 
  } 
- // habilita draggable somente se mousedown for em ÃƒÂ¡rea nÃƒÂ£o-interativa 
+ // enable draggable only when mousedown starts in a non-interactive area 
  document.addEventListener('mousedown', function(e){ 
  const col = e.target.closest && e.target.closest('.column'); 
  if (!col) return; 
@@ -3491,7 +3487,7 @@ function getColAfterElement(container, x){
  const draggingCol = $('.dragging-col'); 
  if (draggingCol){ draggingCol.classList.remove('dragging-col'); draggingCol.draggable = false; } 
  }); 
- // ===== ConfiguraÃƒÂ§ÃƒÂµes / Metadados do board ===== 
+ // ===== Board settings / metadata ===== 
  let boardMeta = { 
  ageColorRules: [] // [{ days: number, color: "#rrggbb" }] 
  }; 
@@ -3566,7 +3562,7 @@ function adjustPriorityDays(delta){
  ensureSettingsRefs(); 
  renderSettingsRows(boardMeta.ageColorRules && boardMeta.ageColorRules.length 
  ? boardMeta.ageColorRules 
- : [{ days: 7, color: '#ffeb3b' }]); // padrÃƒÂ£o 
+ : [{ days: 7, color: '#ffeb3b' }]); // default 
  settingsUI.overlay.classList.remove('hidden'); 
  const firstInput = settingsUI.rulesList.querySelector('.rule-days'); 
  if (firstInput) firstInput.focus(); 
@@ -3872,7 +3868,7 @@ function renderPriorityReport(){
  } 
  
 
-// ====== NOVO: suporte a Modal de Card (com tÃƒÂ­tulo dinÃƒÂ¢mico) ======
+// ====== Card modal support (with dynamic title) ======
 const CARD_MODAL_ANIM_MS = 224;
 function ensureCardModalRefs(){
   if (window.__cardModal) return window.__cardModal;
@@ -3899,7 +3895,7 @@ function openCardModal(card, options){
   modal.isClosing = false;
   if (modal.currentCard) closeCardModal(true);
   modal.returnToPriorityReport = !!opts.returnToPriorityReport;
-  // card fantasma para manter contexto visual da posiÃƒÂ§ÃƒÂ£o original
+  // ghost card keeps visual context of the original position
   modal.columnGhost = card.cloneNode(true);
   modal.columnGhost.classList.add('card-modal-ghost');
   modal.columnGhost.setAttribute('aria-hidden', 'true');
@@ -3910,7 +3906,7 @@ function openCardModal(card, options){
   // move para o modal
   modal.content.appendChild(card);
   modal.currentCard = card;
-  // --- tÃƒÂ­tulo dinÃƒÂ¢mico ---
+  // --- dynamic title ---
   const titleInput = card.querySelector('.card-title');
   const titleEl = modal.overlay ? modal.overlay.querySelector('#cardModalTitle') : null;
   function __syncModalTitle(){ if (titleEl) titleEl.textContent = (titleInput && titleInput.value.trim()) ? titleInput.value.trim() : 'Untitled'; }
@@ -3974,7 +3970,7 @@ function closeCardModal(immediate){
   }
   modal.closeTimer = setTimeout(finishClose, CARD_MODAL_ANIM_MS);
 }
-// DelegaÃƒÂ§ÃƒÂ£o para botÃƒÂµes que abrem em modal
+// Delegation for buttons that open in the modal
 // (funciona com .open-card-modal ou .expand-card)
 document.addEventListener('click', function(e){
   const btn = (e.target && e.target.closest && (e.target.closest('.open-card-modal') || e.target.closest('.expand-card')));
@@ -4023,7 +4019,7 @@ document.addEventListener('click', function(e){
  fileInput.value = ''; 
  } 
  }); 
- // Clique fora de qualquer card Ã¢â€ â€™ minimiza todos; clique em um card Ã¢â€ â€™ expande somente aquele 
+ // Click outside any card -> collapse all; click a card -> expand only that one 
 document.addEventListener('click', function(e){ 
 const clickedCard = e.target.closest && e.target.closest('.card'); 
  $$('.card').forEach(function(card){ 
