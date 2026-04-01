@@ -1646,7 +1646,7 @@ body[data-ui-language="ar"] .language-option{
     <input type="file" id="fileJson" accept="application/json" hidden>
     <button id="btnImportCard" class="btn" data-i18n="menuImportCard">Importar Card</button>
     <input type="file" id="fileCardJson" accept="application/json" hidden>
-    <button id="btnSave" class="btn" data-i18n="menuSaveBoard">Salvar Board</button>
+    <button id="btnSave" class="btn" data-i18n="menuSaveBoard">Exportar Board</button>
     <button id="btnAddColumn" class="btn" data-i18n="menuAddColumn">+ Coluna</button>
     <button id="btnSettings" class="btn" data-i18n="menuSettings">Configurações</button>
     <button id="btnPriorityReport" class="btn" data-i18n="menuPriorityReport">Relatório de prioridades</button>
@@ -2297,7 +2297,7 @@ LANGUAGE_LIBRARY.en = {
  loadingText: 'Preparing columns and cards for the active board.',
  menuImportBoard: 'Import Board',
  menuImportCard: 'Import Card',
- menuSaveBoard: 'Save Board',
+ menuSaveBoard: 'Export Board',
  menuLoadJson: 'Load JSON',
  menuSaveJson: 'Save JSON',
  menuAddColumn: '+ Column',
@@ -2428,7 +2428,7 @@ LANGUAGE_LIBRARY['pt-BR'] = {
  loadingText: 'Preparando colunas e cards do quadro ativo.',
  menuImportBoard: 'Importar Board',
  menuImportCard: 'Importar Card',
- menuSaveBoard: 'Salvar Board',
+ menuSaveBoard: 'Exportar Board',
  menuLoadJson: 'Carregar JSON',
  menuSaveJson: 'Salvar JSON',
  menuAddColumn: '+ Coluna',
@@ -4807,8 +4807,11 @@ function closeChecklistItemModal(){
 }
 const importedCardHighlightState = {
  cards: new Set(),
- armed: false,
- armTimer: null
+ pendingBoardInteraction: false
+};
+const importedCardPreviewState = {
+ host: null,
+ card: null
 };
 function pruneImportedCardHighlights(){
  Array.from(importedCardHighlightState.cards).forEach(function(card){
@@ -4817,24 +4820,11 @@ function pruneImportedCardHighlights(){
 }
 function armImportedCardHighlightClear(){
  pruneImportedCardHighlights();
- if (importedCardHighlightState.armTimer){
- clearTimeout(importedCardHighlightState.armTimer);
- importedCardHighlightState.armTimer = null;
- }
- importedCardHighlightState.armed = false;
- importedCardHighlightState.armTimer = setTimeout(function(){
-  importedCardHighlightState.armTimer = null;
-  pruneImportedCardHighlights();
-  importedCardHighlightState.armed = importedCardHighlightState.cards.size > 0;
- }, 0);
+ importedCardHighlightState.pendingBoardInteraction = importedCardHighlightState.cards.size > 0;
 }
 function clearImportedCardHighlights(immediate){
  pruneImportedCardHighlights();
- if (importedCardHighlightState.armTimer){
-  clearTimeout(importedCardHighlightState.armTimer);
-  importedCardHighlightState.armTimer = null;
- }
- importedCardHighlightState.armed = false;
+ importedCardHighlightState.pendingBoardInteraction = false;
  const cards = Array.from(importedCardHighlightState.cards);
  importedCardHighlightState.cards.clear();
  cards.forEach(function(card){
@@ -4863,13 +4853,53 @@ function markCardAsRecentlyImported(cardNode){
  });
  armImportedCardHighlightClear();
 }
-function handleImportedCardHighlightInteraction(){
- if (!importedCardHighlightState.armed) return;
+function handleImportedCardHighlightBoardInteraction(){
+ if (!importedCardHighlightState.pendingBoardInteraction) return;
  clearImportedCardHighlights(false);
 }
-['pointerdown', 'keydown', 'input', 'change', 'dragstart', 'wheel'].forEach(function(eventName){
- document.addEventListener(eventName, handleImportedCardHighlightInteraction, true);
-});
+const boardScrollRegion = document.querySelector('.board-scroll-region');
+if (board) board.addEventListener('click', handleImportedCardHighlightBoardInteraction, true);
+if (boardScrollRegion) boardScrollRegion.addEventListener('click', handleImportedCardHighlightBoardInteraction, true);
+function ensureImportedCardPreviewHost(){
+ if (importedCardPreviewState.host && importedCardPreviewState.host.isConnected) return importedCardPreviewState.host;
+ const host = document.createElement('div');
+ host.id = 'importedCardPreviewHost';
+ host.className = 'hidden';
+ host.setAttribute('aria-hidden', 'true');
+ document.body.appendChild(host);
+ importedCardPreviewState.host = host;
+ return host;
+}
+function clearImportedCardPreview(){
+ const card = importedCardPreviewState.card;
+ if (card && card.parentNode) card.remove();
+ importedCardPreviewState.card = null;
+}
+function handleImportedCardPreviewClosed(cardNode){
+ const serialized = cardNode ? sanitizeImportedCardData(serializeCardNode(cardNode)) : null;
+ clearImportedCardPreview();
+ if (!serialized){
+  alert(t('invalidCardJsonAlert'));
+  return;
+ }
+ openCardImportModal(serialized);
+}
+function openImportedCardPreview(cardData){
+ const sanitized = sanitizeImportedCardData(cardData);
+ if (!sanitized){
+  alert(t('invalidCardJsonAlert'));
+  return;
+ }
+ clearImportedCardPreview();
+ const host = ensureImportedCardPreviewHost();
+ const previewCard = createCard(sanitized.id || uid('card'));
+ populateCardNodeFromData(previewCard, sanitized);
+ host.appendChild(previewCard);
+ importedCardPreviewState.card = previewCard;
+ openCardModal(previewCard, {
+  afterClose: handleImportedCardPreviewClosed
+ });
+}
 const cardImportUI = {
  overlay: null,
  combobox: null,
@@ -6073,7 +6103,7 @@ function ensureCardModalRefs(){
   window.__cardModal = {
     overlay, content, closeBtn, currentCard: null, columnGhost: null,
     _titleInput: null, _titleHandler: null, isClosing: false, closeTimer: null,
-    returnToPriorityReport: false
+    returnToPriorityReport: false, afterClose: null
   };
   if (overlay){
     if (closeBtn) closeBtn.addEventListener('click', closeCardModal);
@@ -6090,6 +6120,7 @@ function openCardModal(card, options){
   modal.isClosing = false;
   if (modal.currentCard) closeCardModal(true);
   modal.returnToPriorityReport = !!opts.returnToPriorityReport;
+  modal.afterClose = typeof opts.afterClose === 'function' ? opts.afterClose : null;
   // card fantasma para manter contexto visual da posição original
   modal.columnGhost = card.cloneNode(true);
   modal.columnGhost.classList.add('card-modal-ghost');
@@ -6099,6 +6130,7 @@ function openCardModal(card, options){
   card.dataset.lockExpanded = '1';
   setCollapsed(card, false);
   card.classList.add('card-in-modal');
+  card.style.display = '';
   // move para o modal
   modal.content.appendChild(card);
   modal.currentCard = card;
@@ -6129,6 +6161,9 @@ function closeCardModal(immediate){
   const shouldCloseInstant = immediate === true;
   const finishClose = function(){
     const shouldReopenPriorityReport = !!modal.returnToPriorityReport;
+    const afterClose = modal.afterClose;
+    const closedCard = modal.currentCard;
+    let cardColumn = null;
     if (modal._titleInput && modal._titleHandler){
       modal._titleInput.removeEventListener('input', modal._titleHandler);
       modal._titleInput.removeEventListener('change', modal._titleHandler);
@@ -6137,22 +6172,27 @@ function closeCardModal(immediate){
     }
     if (modal.currentCard && modal.columnGhost && modal.columnGhost.parentNode){
       modal.columnGhost.parentNode.insertBefore(modal.currentCard, modal.columnGhost);
+      cardColumn = modal.currentCard.closest('.column');
       modal.columnGhost.remove();
     }
     if (modal.currentCard) modal.currentCard.classList.remove('card-in-modal');
     if (modal.currentCard && modal.currentCard.dataset) delete modal.currentCard.dataset.lockExpanded;
     if (modal.currentCard) setCollapsed(modal.currentCard, true);
+    if (cardColumn) applyColumnFilter(cardColumn);
     modal.currentCard = null;
     modal.columnGhost = null;
     modal.returnToPriorityReport = false;
+    modal.afterClose = null;
     modal.overlay.classList.remove('opening', 'open', 'closing');
     modal.overlay.classList.add('hidden');
     modal.isClosing = false;
     if (modal.closeTimer){ clearTimeout(modal.closeTimer); modal.closeTimer = null; }
     if (shouldReopenPriorityReport) openPriorityReportModal();
+    if (typeof afterClose === 'function') afterClose(closedCard);
   };
   if (!modal.currentCard) {
     modal.returnToPriorityReport = false;
+    modal.afterClose = null;
     modal.overlay.classList.remove('opening', 'open', 'closing');
     modal.overlay.classList.add('hidden');
     return;
@@ -6228,7 +6268,7 @@ const file = `kanban-${new Date().toISOString().replace(/[T:.Z]/g,'-')}.json`;
  try{
  const txt = await file.text();
  const data = JSON.parse(txt);
- openCardImportModal(data);
+ openImportedCardPreview(data);
  }catch(err){
  console.error('Erro ao ler/importar JSON do card:', err);
  alert(t('cardImportFailedAlert'));
@@ -6301,7 +6341,7 @@ document.addEventListener('dragover', function(e){
  const restored = await restoreFromAutosave();
  if(!restored){ await loadBoardSequential(getDefaultBoardData()); }
  const sharedCardData = consumeSharedCardFromLocation();
- if (sharedCardData) openCardImportModal(sharedCardData);
+ if (sharedCardData) openImportedCardPreview(sharedCardData);
  })(); 
 // Sync spacer height to match the topbar height so it sits immediately below the menu
 function syncTopbarSpacer(){
