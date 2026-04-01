@@ -15,7 +15,7 @@
 <link href="https://kanbanapp.io/hi/sampark/" rel="canonical"/>
 <link href="https://kanbanapp.io/sitemap.xml" rel="sitemap" type="application/xml"/><link href="https://kanbanapp.io/contact/" hreflang="en" rel="alternate"/><link href="https://kanbanapp.io/pt-br/contato/" hreflang="pt-BR" rel="alternate"/><link href="https://kanbanapp.io/es/contacto/" hreflang="es" rel="alternate"/><link href="https://kanbanapp.io/ar/ittisal/" hreflang="ar" rel="alternate"/><link href="https://kanbanapp.io/hi/sampark/" hreflang="hi" rel="alternate"/><link href="https://kanbanapp.io/zh-cn/lian-xi/" hreflang="zh-CN" rel="alternate"/><link href="https://kanbanapp.io/fr/contact/" hreflang="fr" rel="alternate"/><link href="https://kanbanapp.io/de/kontakt/" hreflang="de" rel="alternate"/><link href="https://kanbanapp.io/id/kontak/" hreflang="id" rel="alternate"/><link href="https://kanbanapp.io/contact/" hreflang="x-default" rel="alternate"/>
 <meta content="article" property="og:type"/>
-<meta content="en" property="og:locale"/>
+<meta content="hi_IN" property="og:locale"/>
 <meta content="KanbanApp" property="og:site_name"/>
 <meta content="https://kanbanapp.io/hi/sampark/" property="og:url"/>
 <meta content="&#2360;&#2306;&#2346;&#2352;&#2381;&#2325; &#2346;&#2371;&#2359;&#2381;&#2336; | KanbanApp" property="og:title"/>
@@ -148,6 +148,254 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 
 
 
+  /* layout-unified:start */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e1e2f 0%, var(--bg) 55%) !important;
+      color: var(--text);
+      padding: 24px;
+    }
+
+    main {
+      width: min(960px, 100%) !important;
+      margin: 0 auto !important;
+      position: relative !important;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 18px !important;
+      padding: clamp(24px, 4vw, 48px) !important;
+      padding-top: calc(clamp(24px, 4vw, 48px) + 56px) !important;
+      box-shadow: 0 20px 40px rgba(0,0,0,.35) !important;
+    }
+
+    header[role="banner"] {
+      text-align: center;
+      max-width: 82ch;
+      margin: 0 auto;
+    }
+
+    header[role="banner"] .site-brand {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      text-align: left !important;
+    }
+
+    header[role="banner"] .site-brand-icon {
+      width: 44px !important;
+      height: 44px !important;
+      display: inline-block !important;
+      border-radius: 6px !important;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.55));
+      flex: 0 0 auto !important;
+    }
+
+    header[role="banner"] .site-brand-name {
+      font-weight: 800 !important;
+      color: var(--text) !important;
+      line-height: 1.2 !important;
+    }
+
+    header[role="banner"] .tagline {
+      margin: 6px 0 0 !important;
+      color: var(--muted) !important;
+      line-height: 1.2 !important;
+    }
+
+    .quick-links-menu {
+      position: absolute !important;
+      top: 14px !important;
+      left: 14px !important;
+      z-index: 40 !important;
+      margin: 0 !important;
+    }
+
+    .quick-links-menu details { position: relative !important; }
+
+    .quick-links-menu summary {
+      list-style: none !important;
+      cursor: pointer !important;
+      border: 1px solid var(--border) !important;
+      background: #2c2c3d !important;
+      color: var(--text) !important;
+      border-radius: 10px !important;
+      padding: 8px !important;
+      font-size: 1rem !important;
+      line-height: 1 !important;
+      width: 42px !important;
+      height: 42px !important;
+      display: grid !important;
+      place-items: center !important;
+      outline: none !important;
+    }
+
+    .quick-links-menu summary::-webkit-details-marker { display: none !important; }
+
+    .quick-links-toggle {
+      width: 20px !important;
+      height: 14px !important;
+      position: relative !important;
+      display: inline-block !important;
+    }
+
+    .quick-links-toggle span {
+      position: absolute !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 2px !important;
+      background: currentColor !important;
+      border-radius: 2px !important;
+      transition: transform .15s ease, opacity .15s ease !important;
+    }
+
+    .quick-links-toggle span:nth-child(1) { top: 0 !important; }
+    .quick-links-toggle span:nth-child(2) { top: 6px !important; }
+    .quick-links-toggle span:nth-child(3) { top: 12px !important; }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg) !important;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(2) {
+      opacity: 0 !important;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg) !important;
+    }
+
+    .quick-links-list {
+      position: absolute !important;
+      top: 50px !important;
+      left: 0 !important;
+      margin: 0 !important;
+      padding: 10px 12px !important;
+      list-style: none !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      background: #1e1e2a !important;
+      min-width: 240px !important;
+      box-shadow: 0 22px 46px rgba(0,0,0,.68), 0 8px 18px rgba(0,0,0,.52) !important;
+    }
+
+    .quick-links-list li + li { margin-top: 8px !important; }
+
+    .quick-links-list a,
+    .quick-links-list a.text-link {
+      display: block !important;
+      padding: 10px 12px !important;
+      border-radius: 9px !important;
+      border: 1px solid var(--border) !important;
+      background: #2c2c3d !important;
+      color: var(--text) !important;
+      text-decoration: none !important;
+      font-weight: 600 !important;
+    }
+
+    .quick-links-list a:hover,
+    .quick-links-list a.text-link:hover {
+      background: var(--primary) !important;
+      color: #fff !important;
+      border-color: transparent !important;
+      transform: none !important;
+    }
+
+    .lang-switcher {
+      position: absolute !important;
+      top: 14px !important;
+      right: 14px !important;
+      z-index: 40 !important;
+    }
+
+    .lang-switcher details { position: relative !important; }
+
+    .lang-switcher summary {
+      list-style: none !important;
+      cursor: pointer !important;
+      min-width: 112px !important;
+      height: 42px !important;
+      border-radius: 10px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--panel-2, var(--secondary, #2c2c3d)) !important;
+      color: var(--text) !important;
+      font-weight: 700 !important;
+      display: grid !important;
+      place-items: center !important;
+      padding: 0 12px !important;
+      outline: none !important;
+      user-select: none !important;
+    }
+
+    .lang-switcher summary::-webkit-details-marker { display: none !important; }
+
+    .lang-menu-list {
+      position: absolute !important;
+      top: 50px !important;
+      right: 0 !important;
+      margin: 0 !important;
+      padding: 10px !important;
+      min-width: 230px !important;
+      border-radius: 12px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--panel-2, #2c2c3d) !important;
+      box-shadow: 0 12px 24px rgba(0,0,0,.35) !important;
+      list-style: none !important;
+    }
+
+    .lang-menu-list li + li { margin-top: 8px !important; }
+
+    .lang-flag-link {
+      width: 100% !important;
+      min-height: 42px !important;
+      border-radius: 10px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--panel-2, var(--secondary, #2c2c3d)) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      padding: 8px 10px !important;
+      text-decoration: none !important;
+      color: var(--text) !important;
+      transition: transform .15s ease !important;
+    }
+
+    .lang-flag-link:hover { transform: translateY(-1px) !important; }
+
+    .lang-flag-link.is-active {
+      outline: 2px solid var(--primary) !important;
+      outline-offset: 1px !important;
+    }
+
+    .lang-flag-icon {
+      width: 24px !important;
+      height: 18px !important;
+      display: block !important;
+      border-radius: 2px !important;
+    }
+
+    .lang-label {
+      font-weight: 600 !important;
+      line-height: 1.2 !important;
+    }
+
+    footer {
+      max-width: 960px;
+      margin: 24px auto 0;
+      color: rgba(255,255,255,.55);
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    @media (max-width:640px) {
+      body { padding: 14px !important; }
+      .quick-links-menu { top: 10px !important; left: 10px !important; }
+      .lang-switcher { top: 10px !important; right: 10px !important; }
+      .lang-switcher summary { min-width: 104px !important; }
+      .lang-menu-list { min-width: 210px !important; }
+    }
+/* layout-unified:end */
   </style>
 </head>
 <body>
@@ -167,28 +415,22 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 <summary aria-label="&#2350;&#2375;&#2344;&#2370; &#2326;&#2379;&#2354;&#2375;&#2306;" title="&#2350;&#2375;&#2344;&#2370;">
 <span aria-hidden="true" class="quick-links-toggle"><span></span><span></span><span></span></span>
 </summary>
-<ul class="quick-links-list">
-<li><a href="/hi/">&#2328;&#2352;</a></li>
-<li><a class="text-link" href="/hi/board-first-kanban/">बोर्ड फर्स्ट लेख</a></li>
-<li><a href="/hi/kanban-kya-hai/">&#2325;&#2366;&#2344;&#2348;&#2344; &#2325;&#2381;&#2351;&#2366; &#2361;&#2376;&#63;</a></li>
-<li><a href="/hi/gopniyata-neeti/">&#2327;&#2379;&#2346;&#2344;&#2368;&#2351;&#2340;&#2366; &#2344;&#2368;&#2340;&#2367;</a></li>
-<li><a href="/licence.html">&#2354;&#2366;&#2311;&#2360;&#2375;&#2306;&#2360;</a></li>
-</ul>
+<ul class="quick-links-list"><li><a href="../">&#2361;&#2379;&#2350;</a></li><li><a class="text-link" href="/hi/blog/">&#2348;&#2381;&#2354;&#2377;&#2327;</a></li><li><a href="/hi/gopniyata-neeti/">&#2327;&#2379;&#2346;&#2344;&#2368;&#2351;&#2340;&#2366; &#2344;&#2368;&#2340;&#2367;</a></li><li><a href="/hi/sampark/">&#2360;&#2306;&#2346;&#2352;&#2381;&#2325;</a></li><li><a href="/licence.html">&#2354;&#2366;&#2311;&#2360;&#2375;&#2306;&#2360;</a></li></ul>
 </details>
 </nav>
 <div aria-label="&#2349;&#2366;&#2359;&#2366;&#2319;&#2305;" class="lang-switcher">
 <details>
 <summary aria-label="&#2349;&#2366;&#2359;&#2366;&#2319;&#2305;" title="&#2349;&#2366;&#2359;&#2366;&#2319;&#2305;">&#2349;&#2366;&#2359;&#2366;&#2319;&#2305;</summary>
 <ul class="lang-menu-list">
-<li><a class="lang-flag-link" data-language="en" href="/" lang="en" title="English"><img alt="United States flag" class="lang-flag-icon" src="/flags/us.svg"/><span class="lang-label">English</span></a></li>
-<li><a class="lang-flag-link" data-language="pt-BR" href="/pt-br/" lang="pt-BR" title="Portuguese (Brazil)"><img alt="Brazil flag" class="lang-flag-icon" src="/flags/br.svg"/><span class="lang-label">Portugu&ecirc;s (Brasil)</span></a></li>
-<li><a class="lang-flag-link" data-language="zh-CN" href="/zh-cn/" lang="zh-CN" title="Chinese (Simplified)"><img alt="China flag" class="lang-flag-icon" src="/flags/cn.svg"/><span class="lang-label">&#20013;&#25991;&#65288;&#31616;&#20307;&#65289;</span></a></li>
-<li><a class="lang-flag-link" data-language="es" href="/es/" lang="es" title="Spanish"><img alt="Spain flag" class="lang-flag-icon" src="/flags/es.svg"/><span class="lang-label">Espa&ntilde;ol</span></a></li>
-<li><a class="lang-flag-link" data-language="ar" href="/ar/" lang="ar" title="Arabic"><img alt="Arab countries flag" class="lang-flag-icon" src="/flags/ar.svg"/><span class="lang-label">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span></a></li>
-<li><a class="lang-flag-link" data-language="hi" href="/hi/" lang="hi" title="Hindi"><img alt="India flag" class="lang-flag-icon" src="/flags/in.svg"/><span class="lang-label">&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;</span></a></li>
-<li><a class="lang-flag-link" data-language="id" href="/id/" lang="id" title="Indonesian"><img alt="Indonesia flag" class="lang-flag-icon" src="/flags/id.svg"/><span class="lang-label">Bahasa Indonesia</span></a></li>
-<li><a class="lang-flag-link" data-language="fr" href="/fr/" lang="fr" title="French"><img alt="France flag" class="lang-flag-icon" src="/flags/fr.svg"/><span class="lang-label">Fran&ccedil;ais</span></a></li>
-<li><a class="lang-flag-link" data-language="de" href="/de/" lang="de" title="German"><img alt="Germany flag" class="lang-flag-icon" src="/flags/de.svg"/><span class="lang-label">Deutsch</span></a></li>
+<li><a class="lang-flag-link" data-language="en" href="/contact/" lang="en" title="English"><img alt="United States flag" class="lang-flag-icon" src="/flags/us.svg"/><span class="lang-label">English</span></a></li>
+<li><a class="lang-flag-link" data-language="pt-BR" href="/pt-br/contato/" lang="pt-BR" title="Portuguese (Brazil)"><img alt="Brazil flag" class="lang-flag-icon" src="/flags/br.svg"/><span class="lang-label">Portugu&ecirc;s (Brasil)</span></a></li>
+<li><a class="lang-flag-link" data-language="zh-CN" href="/zh-cn/lian-xi/" lang="zh-CN" title="Chinese (Simplified)"><img alt="China flag" class="lang-flag-icon" src="/flags/cn.svg"/><span class="lang-label">&#20013;&#25991;&#65288;&#31616;&#20307;&#65289;</span></a></li>
+<li><a class="lang-flag-link" data-language="es" href="/es/contacto/" lang="es" title="Spanish"><img alt="Spain flag" class="lang-flag-icon" src="/flags/es.svg"/><span class="lang-label">Espa&ntilde;ol</span></a></li>
+<li><a class="lang-flag-link" data-language="ar" href="/ar/ittisal/" lang="ar" title="Arabic"><img alt="Arab countries flag" class="lang-flag-icon" src="/flags/ar.svg"/><span class="lang-label">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</span></a></li>
+<li><a class="lang-flag-link is-active" data-language="hi" href="/hi/sampark/" lang="hi" title="Hindi"><img alt="India flag" class="lang-flag-icon" src="/flags/in.svg"/><span class="lang-label">&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;</span></a></li>
+<li><a class="lang-flag-link" data-language="id" href="/id/kontak/" lang="id" title="Indonesian"><img alt="Indonesia flag" class="lang-flag-icon" src="/flags/id.svg"/><span class="lang-label">Bahasa Indonesia</span></a></li>
+<li><a class="lang-flag-link" data-language="fr" href="/fr/contact/" lang="fr" title="French"><img alt="France flag" class="lang-flag-icon" src="/flags/fr.svg"/><span class="lang-label">Fran&ccedil;ais</span></a></li>
+<li><a class="lang-flag-link" data-language="de" href="/de/kontakt/" lang="de" title="German"><img alt="Germany flag" class="lang-flag-icon" src="/flags/de.svg"/><span class="lang-label">Deutsch</span></a></li>
 </ul>
 </details>
 </div>
@@ -199,7 +441,7 @@ main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
 <p><strong>LinkedIn:</strong> <a class="contact-link" href="https://www.linkedin.com/in/joao-ricardo-dutra/" rel="me noopener noreferrer" target="_blank"><svg aria-hidden="true" class="contact-link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.34 10.11H5.67V18H8.34V10.11ZM7 5.88A1.56 1.56 0 1 0 7 9A1.56 1.56 0 0 0 7 5.88ZM18.33 13.2C18.33 10.74 16.77 9.89 15.3 9.89C14.11 9.89 13.58 10.55 13.28 11V10.11H10.72V18H13.39V13.73C13.39 12.6 13.6 11.5 15 11.5C16.38 11.5 16.4 12.79 16.4 13.8V18H19.07V12.74L18.33 13.2Z"/></svg><span>https://www.linkedin.com/in/joao-ricardo-dutra/</span></a></p>
 </div>
 <footer>
-<p>&copy;<span id="year"></span> KanbanApp &bull;<a href="/hi/">&#2328;&#2352;</a>&bull;<a href="/hi/kanban-kya-hai/">&#2325;&#2366;&#2344;&#2348;&#2344; &#2325;&#2381;&#2351;&#2366; &#2361;&#2376;&#63;</a></p>
+<p>&copy; <span id="year"></span> KanbanApp &bull; <a href="/hi/">&#2361;&#2379;&#2350;</a> &bull; <a href="/hi/blog/">&#2348;&#2381;&#2354;&#2377;&#2327;</a></p>
 </footer>
 </main>
 <script>

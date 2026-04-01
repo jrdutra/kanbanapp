@@ -17,6 +17,150 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://kanbanapp.io/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/pt-br/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/es/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/ar/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/hi/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/zh-cn/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/fr/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/de/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/id/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/blog/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/blog/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/blog/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/blog/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/blog/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/blog/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/blog/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://kanbanapp.io/pt-br/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/" />
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/" />
