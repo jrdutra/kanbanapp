@@ -28,7 +28,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -44,7 +44,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -60,7 +60,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -76,7 +76,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -92,7 +92,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -108,7 +108,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -124,7 +124,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -140,7 +140,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -156,7 +156,7 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/blog/" />
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/blog/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/blog/" />
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -861,6 +861,150 @@
     <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/board-first-kanban/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/board-first-kanban/" />
     <lastmod>2026-03-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/offline-kanban/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/pt-br/kanban-offline/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/zh-cn/li-xian-kanban/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/es/kanban-offline/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/ar/kanban-offline/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/hi/offline-kanban/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/id/kanban-offline/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/fr/kanban-offline/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kanbanapp.io/de/offline-kanban/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kanbanapp.io/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://kanbanapp.io/pt-br/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://kanbanapp.io/zh-cn/li-xian-kanban/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://kanbanapp.io/es/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://kanbanapp.io/ar/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://kanbanapp.io/hi/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="id" href="https://kanbanapp.io/id/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://kanbanapp.io/fr/kanban-offline/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://kanbanapp.io/de/offline-kanban/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kanbanapp.io/offline-kanban/" />
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

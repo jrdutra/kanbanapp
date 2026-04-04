@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="fr" prefix="og: https://ogp.me/ns#" data-consent-services="google-adsense">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="KanbanApp" name="application-name"/>
+<meta content="KanbanApp" name="author"/>
+<meta content="KanbanApp" name="generator"/>
+<meta content="#7c4dff" name="theme-color"/>
+<meta content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" name="robots"/>
+<meta content="Découvrez KanbanApp, une board app de Kanban offline avec stockage local, sans login, idéale pour les environnements privés et les entreprises restrictives." name="description"/>
+<title>Kanban Offline : board app privée pour les flux locaux et d’entreprise | KanbanApp</title>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="/favicon.svg" rel="shortcut icon"/>
+<link href="https://kanbanapp.io/fr/kanban-offline/" rel="canonical"/>
+<link href="https://kanbanapp.io/sitemap.xml" rel="sitemap" type="application/xml"/>
+<link href="https://kanbanapp.io/offline-kanban/" hreflang="en" rel="alternate"/>
+<link href="https://kanbanapp.io/pt-br/kanban-offline/" hreflang="pt-BR" rel="alternate"/>
+<link href="https://kanbanapp.io/zh-cn/li-xian-kanban/" hreflang="zh-CN" rel="alternate"/>
+<link href="https://kanbanapp.io/es/kanban-offline/" hreflang="es" rel="alternate"/>
+<link href="https://kanbanapp.io/ar/kanban-offline/" hreflang="ar" rel="alternate"/>
+<link href="https://kanbanapp.io/hi/offline-kanban/" hreflang="hi" rel="alternate"/>
+<link href="https://kanbanapp.io/id/kanban-offline/" hreflang="id" rel="alternate"/>
+<link href="https://kanbanapp.io/fr/kanban-offline/" hreflang="fr" rel="alternate"/>
+<link href="https://kanbanapp.io/de/offline-kanban/" hreflang="de" rel="alternate"/>
+<link href="https://kanbanapp.io/offline-kanban/" hreflang="x-default" rel="alternate"/>
+<meta content="article" property="og:type"/>
+<meta content="fr_FR" property="og:locale"/>
+<meta content="KanbanApp" property="og:site_name"/>
+<meta content="https://kanbanapp.io/fr/kanban-offline/" property="og:url"/>
+<meta content="Kanban Offline : board app privée pour les flux locaux et d’entreprise | KanbanApp" property="og:title"/>
+<meta content="Découvrez KanbanApp, une board app de Kanban offline avec stockage local, sans login, idéale pour les environnements privés et les entreprises restrictives." property="og:description"/>
+<meta content="https://kanbanapp.io/fr/kanban-offline/offline-kanban-social.png" property="og:image"/>
+<meta content="https://kanbanapp.io/fr/kanban-offline/offline-kanban-social.png" property="og:image:secure_url"/>
+<meta content="image/png" property="og:image:type"/>
+<meta content="https://kanbanapp.io/fr/kanban-offline/offline-kanban-social.png" property="og:image:url"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="Visuel d’une board app Kanban hors ligne avec données locales et sans login." property="og:image:alt"/>
+<meta content="Kanban" property="article:section"/>
+<meta content="KanbanApp" property="article:author"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Kanban Offline : board app privée pour les flux locaux et d’entreprise | KanbanApp" name="twitter:title"/>
+<meta content="Découvrez KanbanApp, une board app de Kanban offline avec stockage local, sans login, idéale pour les environnements privés et les entreprises restrictives." name="twitter:description"/>
+<meta content="https://kanbanapp.io/fr/kanban-offline/offline-kanban-social.png" name="twitter:image"/>
+<meta content="Visuel d’une board app Kanban hors ligne avec données locales et sans login." name="twitter:image:alt"/>
+<meta content="https://kanbanapp.io/fr/kanban-offline/offline-kanban-social.png" itemprop="image"/>
+<meta content="Kanban Offline, Offline Kanban, Offline Kanban Board, Board App, tableau Kanban hors ligne, Kanban privé, Kanban local, Kanban entreprise" name="keywords"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Kanban Offline : une board app privée pour les flux locaux et d’entreprise","description":"Découvrez KanbanApp, une board app de Kanban offline avec stockage local, sans login, idéale pour les environnements privés et les entreprises restrictives.","inLanguage":"fr","url":"https://kanbanapp.io/fr/kanban-offline/","image":["https://kanbanapp.io/fr/kanban-offline/offline-kanban-social.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://kanbanapp.io/fr/kanban-offline/"},"author":{"@type":"Organization","name":"KanbanApp"},"publisher":{"@type":"Organization","name":"KanbanApp"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ImageObject","name":"Offline Kanban social image","description":"Visuel d’une board app Kanban hors ligne avec données locales et sans login.","contentUrl":"https://kanbanapp.io/fr/kanban-offline/offline-kanban-social.png","url":"https://kanbanapp.io/fr/kanban-offline/offline-kanban-social.png","encodingFormat":"image/png","width":1200,"height":630,"inLanguage":"fr"}</script>
+<style>
+    :root {
+      --bg: #13131a;
+      --panel: #1e1e2a;
+      --panel-2: #2c2c3d;
+      --text: #f5f5ff;
+      --muted: #b8b8c7;
+      --primary: #7c4dff;
+      --primary-hover: #6b3ff2;
+      --border: #3b3b52;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e1e2f 0%, var(--bg) 55%);
+      color: var(--text);
+      padding: 24px;
+    }
+
+    main {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      position: relative;
+      background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(24px, 4vw, 48px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin-top: 30px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      font-size: clamp(1.08rem, 2.4vw, 1.35rem);
+    }
+
+    h3 {
+      margin-top: 18px;
+    }
+
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 12px;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    code,
+    pre {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    pre {
+      padding: 12px;
+      overflow: auto;
+    }
+
+    code {
+      padding: 2px 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 8px;
+      vertical-align: top;
+      color: var(--muted);
+    }
+
+    th {
+      background: rgba(255, 255, 255, .03);
+      text-align: left;
+      color: var(--text);
+    }
+
+    .small {
+      font-size: 12px;
+      color: #a8a8bc;
+    }
+
+    .site-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .site-brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+    }
+
+    .site-brand-name {
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .tagline {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.2;
+    }
+
+    .center {
+      text-align: center;
+      max-width: 82ch;
+      margin: 0 auto;
+    }
+
+    .quick-links-menu {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 40;
+      margin: 0;
+    }
+
+    .quick-links-menu details { position: relative; }
+
+    .quick-links-menu summary {
+      list-style: none;
+      cursor: pointer;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      display: grid;
+      place-items: center;
+      padding: 0;
+      outline: none;
+    }
+
+    .quick-links-menu summary::-webkit-details-marker { display: none; }
+
+    .quick-links-toggle {
+      width: 18px;
+      height: 14px;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quick-links-toggle span {
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--text);
+      transition: transform .2s ease, opacity .2s ease;
+      transform-origin: center;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .quick-links-list {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      margin: 0;
+      padding: 10px;
+      min-width: 180px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, .35);
+      list-style: none;
+    }
+
+    .quick-links-list li + li { margin-top: 8px; }
+
+    .quick-links-list a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .quick-links-list a:hover {
+      background: var(--primary);
+      border-color: transparent;
+    }
+
+    .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+      margin-top: 0;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin: 14px 0;
+    }
+
+    .kanban-collapse {
+      margin: 18px 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .02);
+      overflow: hidden;
+    }
+
+    .kanban-collapse>summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      font-weight: 800;
+      color: #e3dbff;
+      background: rgba(124, 77, 255, .12);
+      border-bottom: 1px solid rgba(124, 77, 255, .25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .kanban-collapse>summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .kanban-collapse-icon {
+      font-size: 12px;
+      line-height: 1;
+      color: #e3dbff;
+      transition: transform .2s ease;
+    }
+
+    .kanban-collapse[open] .kanban-collapse-icon {
+      transform: rotate(180deg);
+    }
+
+    .kanban-collapse-hint {
+      margin: 0;
+      padding: 12px 16px 4px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .kanban-collapse[open] .kanban-collapse-hint {
+      display: none;
+    }
+
+    .kanban-collapse-content {
+      padding: 2px 16px 16px;
+    }
+
+    .promo {
+      border-color: rgba(124, 77, 255, .45);
+      background: rgba(124, 77, 255, .08);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .promo-right-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .promo-board-figure {
+      margin: 10px 0 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .promo-board-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .promo-board-figure figcaption {
+      margin: 0;
+      padding: 8px 10px 10px;
+    }
+
+    .intro-banner {
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .02);
+      padding: 14px;
+    }
+
+    .intro-banner h2 {
+      margin-top: 0;
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .intro-banner-figure {
+      margin: 10px 0 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .intro-banner-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .intro-banner-figure figcaption {
+      margin: 0;
+      padding: 8px 10px 10px;
+    }
+
+    .open-links a {
+      color: #c9b9ff;
+      text-underline-offset: 2px;
+    }
+
+    .open-links a:hover {
+      color: #e3dbff;
+    }
+
+    .cta {
+      margin: 24px 0 8px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .btn-download {
+      background: var(--panel-2);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-open {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-open:hover {
+      background: var(--primary-hover);
+    }
+
+    .related {
+      margin-top: 22px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .02);
+    }
+
+    .related h2 {
+      margin: 0 0 10px;
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .related ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .related a {
+      color: #c9b9ff;
+      text-underline-offset: 2px;
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255, 255, 255, .35);
+      margin-top: 18px;
+      font-size: .9rem;
+    }
+
+    @media (min-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 14px;
+      }
+
+      .quick-links-menu {
+        top: 10px;
+        left: 10px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+main { padding-top: calc(clamp(24px, 4vw, 48px) + 56px); }
+
+
+
+    /* language dropdown menu */
+    .lang-switcher {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 40;
+    }
+
+    .lang-switcher details { position: relative; }
+
+    .lang-switcher summary {
+      list-style: none;
+      cursor: pointer;
+      min-width: 112px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel-2, var(--secondary, #2c2c3d));
+      color: var(--text);
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      padding: 0 12px;
+      outline: none;
+      user-select: none;
+    }
+
+    .lang-switcher summary::-webkit-details-marker { display: none; }
+
+    .lang-menu-list {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      margin: 0;
+      padding: 10px;
+      min-width: 230px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--panel-2, #2c2c3d);
+      box-shadow: 0 12px 24px rgba(0,0,0,.35);
+      list-style: none;
+    }
+
+    .lang-menu-list li + li { margin-top: 8px; }
+
+    .lang-flag-link {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel-2, var(--secondary, #2c2c3d));
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform .15s ease;
+    }
+
+    .lang-flag-link:hover { transform: translateY(-1px); }
+
+    .lang-flag-link.is-active {
+      outline: 2px solid var(--primary);
+      outline-offset: 1px;
+    }
+
+    .lang-flag-icon { width: 24px; height: 18px; display: block; border-radius: 2px; }
+
+    .lang-label { font-weight: 600; line-height: 1.2; }
+
+    @media (max-width:640px) {
+      .lang-switcher { top: 10px; right: 10px; }
+      .lang-switcher summary { min-width: 104px; }
+      .lang-menu-list { min-width: 210px; }
+    }
+
+
+
+  /* layout-unified:start */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(circle at top, #1e1e2f 0%, var(--bg) 55%) !important;
+      color: var(--text);
+      padding: 24px;
+    }
+
+    main {
+      width: min(960px, 100%) !important;
+      margin: 0 auto !important;
+      position: relative !important;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 18px !important;
+      padding: clamp(24px, 4vw, 48px) !important;
+      padding-top: calc(clamp(24px, 4vw, 48px) + 56px) !important;
+      box-shadow: 0 20px 40px rgba(0,0,0,.35) !important;
+    }
+
+    header[role="banner"] {
+      text-align: center;
+      max-width: 82ch;
+      margin: 0 auto;
+    }
+
+    header[role="banner"] .site-brand {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      text-align: left !important;
+    }
+
+    header[role="banner"] .site-brand-icon {
+      width: 44px !important;
+      height: 44px !important;
+      display: inline-block !important;
+      border-radius: 6px !important;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.55));
+      flex: 0 0 auto !important;
+    }
+
+    header[role="banner"] .site-brand-name {
+      font-weight: 800 !important;
+      color: var(--text) !important;
+      line-height: 1.2 !important;
+    }
+
+    header[role="banner"] .tagline {
+      margin: 6px 0 0 !important;
+      color: var(--muted) !important;
+      line-height: 1.2 !important;
+    }
+
+    .quick-links-menu {
+      position: absolute !important;
+      top: 14px !important;
+      left: 14px !important;
+      z-index: 40 !important;
+      margin: 0 !important;
+    }
+
+    .quick-links-menu details { position: relative !important; }
+
+    .quick-links-menu summary {
+      list-style: none !important;
+      cursor: pointer !important;
+      border: 1px solid var(--border) !important;
+      background: #2c2c3d !important;
+      color: var(--text) !important;
+      border-radius: 10px !important;
+      padding: 8px !important;
+      font-size: 1rem !important;
+      line-height: 1 !important;
+      width: 42px !important;
+      height: 42px !important;
+      display: grid !important;
+      place-items: center !important;
+      outline: none !important;
+    }
+
+    .quick-links-menu summary::-webkit-details-marker { display: none !important; }
+
+    .quick-links-toggle {
+      width: 20px !important;
+      height: 14px !important;
+      position: relative !important;
+      display: inline-block !important;
+    }
+
+    .quick-links-toggle span {
+      position: absolute !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 2px !important;
+      background: currentColor !important;
+      border-radius: 2px !important;
+      transition: transform .15s ease, opacity .15s ease !important;
+    }
+
+    .quick-links-toggle span:nth-child(1) { top: 0 !important; }
+    .quick-links-toggle span:nth-child(2) { top: 6px !important; }
+    .quick-links-toggle span:nth-child(3) { top: 12px !important; }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg) !important;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(2) {
+      opacity: 0 !important;
+    }
+
+    .quick-links-menu details[open] .quick-links-toggle span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg) !important;
+    }
+
+    .quick-links-list {
+      position: absolute !important;
+      top: 50px !important;
+      left: 0 !important;
+      margin: 0 !important;
+      padding: 10px 12px !important;
+      list-style: none !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      background: #1e1e2a !important;
+      min-width: 240px !important;
+      box-shadow: 0 22px 46px rgba(0,0,0,.68), 0 8px 18px rgba(0,0,0,.52) !important;
+    }
+
+    .quick-links-list li + li { margin-top: 8px !important; }
+
+    .quick-links-list a,
+    .quick-links-list a.text-link {
+      display: block !important;
+      padding: 10px 12px !important;
+      border-radius: 9px !important;
+      border: 1px solid var(--border) !important;
+      background: #2c2c3d !important;
+      color: var(--text) !important;
+      text-decoration: none !important;
+      font-weight: 600 !important;
+    }
+
+    .quick-links-list a:hover,
+    .quick-links-list a.text-link:hover {
+      background: var(--primary) !important;
+      color: #fff !important;
+      border-color: transparent !important;
+      transform: none !important;
+    }
+
+    .lang-switcher {
+      position: absolute !important;
+      top: 14px !important;
+      right: 14px !important;
+      z-index: 40 !important;
+    }
+
+    .lang-switcher details { position: relative !important; }
+
+    .lang-switcher summary {
+      list-style: none !important;
+      cursor: pointer !important;
+      min-width: 112px !important;
+      height: 42px !important;
+      border-radius: 10px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--panel-2, var(--secondary, #2c2c3d)) !important;
+      color: var(--text) !important;
+      font-weight: 700 !important;
+      display: grid !important;
+      place-items: center !important;
+      padding: 0 12px !important;
+      outline: none !important;
+      user-select: none !important;
+    }
+
+    .lang-switcher summary::-webkit-details-marker { display: none !important; }
+
+    .lang-menu-list {
+      position: absolute !important;
+      top: 50px !important;
+      right: 0 !important;
+      margin: 0 !important;
+      padding: 10px !important;
+      min-width: 230px !important;
+      border-radius: 12px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--panel-2, #2c2c3d) !important;
+      box-shadow: 0 12px 24px rgba(0,0,0,.35) !important;
+      list-style: none !important;
+    }
+
+    .lang-menu-list li + li { margin-top: 8px !important; }
+
+    .lang-flag-link {
+      width: 100% !important;
+      min-height: 42px !important;
+      border-radius: 10px !important;
+      border: 1px solid var(--border) !important;
+      background: var(--panel-2, var(--secondary, #2c2c3d)) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      padding: 8px 10px !important;
+      text-decoration: none !important;
+      color: var(--text) !important;
+      transition: transform .15s ease !important;
+    }
+
+    .lang-flag-link:hover { transform: translateY(-1px) !important; }
+
+    .lang-flag-link.is-active {
+      outline: 2px solid var(--primary) !important;
+      outline-offset: 1px !important;
+    }
+
+    .lang-flag-icon {
+      width: 24px !important;
+      height: 18px !important;
+      display: block !important;
+      border-radius: 2px !important;
+    }
+
+    .lang-label {
+      font-weight: 600 !important;
+      line-height: 1.2 !important;
+    }
+
+    footer {
+      max-width: 960px;
+      margin: 24px auto 0;
+      color: rgba(255,255,255,.55);
+      font-size: .9rem;
+      text-align: center;
+    }
+
+    @media (max-width:640px) {
+      body { padding: 14px !important; }
+      .quick-links-menu { top: 10px !important; left: 10px !important; }
+      .lang-switcher { top: 10px !important; right: 10px !important; }
+      .lang-switcher summary { min-width: 104px !important; }
+      .lang-menu-list { min-width: 210px !important; }
+    }
+/* layout-unified:end */
+  
+    .site-header {
+      text-align: center;
+      max-width: 82ch;
+      margin: 0 auto;
+    }
+
+    .center-text {
+      text-align: center;
+    }
+
+    .header-spacer {
+      height: 18px;
+    }
+
+    .box h2,
+    .related h2 {
+      margin-top: 0;
+      border-top: none;
+      padding-top: 0;
+    }
+</style>
+</head>
+<body>
+<header aria-label="Site header" class="site-header" role="banner"><div class="center-text"><div class="site-brand"><img alt="KanbanApp" aria-hidden="true" class="site-brand-icon" src="/favicon.svg"/><div><div class="site-brand-name">KanbanApp</div><p class="tagline">Offline Kanban Board</p></div></div></div></header>
+<div aria-hidden="true" class="header-spacer"></div>
+<main aria-label="Article Kanban Offline">
+<nav aria-label="Site menu" class="quick-links-menu"><details><summary aria-label="Open menu" title="Menu"><span aria-hidden="true" class="quick-links-toggle"><span></span><span></span><span></span></span></summary><ul class="quick-links-list"><li><a class="text-link" href="/fr/">Accueil</a></li>
+<li><a class="text-link" href="/fr/blog/">Blog</a></li>
+<li><a class="text-link" href="/fr/politique-de-confidentialite/">Politique de confidentialité</a></li>
+<li><a class="text-link" href="/fr/contact/">Contact</a></li>
+<li><a class="text-link" href="/licence.html">Licence</a></li></ul></details></nav>
+<div aria-label="Languages" class="lang-switcher"><details><summary aria-label="Languages" title="Languages">Languages</summary><ul class="lang-menu-list"><li><a class="lang-flag-link" data-language="en" href="/offline-kanban/" lang="en" title="English"><img alt="United States flag" class="lang-flag-icon" src="/flags/us.svg"/><span class="lang-label">English</span></a></li>
+<li><a class="lang-flag-link" data-language="pt-BR" href="/pt-br/kanban-offline/" lang="pt-BR" title="Portuguese (Brazil)"><img alt="Brazil flag" class="lang-flag-icon" src="/flags/br.svg"/><span class="lang-label">Portugu&#234;s (Brasil)</span></a></li>
+<li><a class="lang-flag-link" data-language="zh-CN" href="/zh-cn/li-xian-kanban/" lang="zh-CN" title="Chinese (Simplified)"><img alt="China flag" class="lang-flag-icon" src="/flags/cn.svg"/><span class="lang-label">中文（简体）</span></a></li>
+<li><a class="lang-flag-link" data-language="es" href="/es/kanban-offline/" lang="es" title="Spanish"><img alt="Spain flag" class="lang-flag-icon" src="/flags/es.svg"/><span class="lang-label">Espa&#241;ol</span></a></li>
+<li><a class="lang-flag-link" data-language="ar" href="/ar/kanban-offline/" lang="ar" title="Arabic"><img alt="Arab countries flag" class="lang-flag-icon" src="/flags/ar.svg"/><span class="lang-label">العربية</span></a></li>
+<li><a class="lang-flag-link" data-language="hi" href="/hi/offline-kanban/" lang="hi" title="Hindi"><img alt="India flag" class="lang-flag-icon" src="/flags/in.svg"/><span class="lang-label">हिन्दी</span></a></li>
+<li><a class="lang-flag-link" data-language="id" href="/id/kanban-offline/" lang="id" title="Indonesian"><img alt="Indonesia flag" class="lang-flag-icon" src="/flags/id.svg"/><span class="lang-label">Bahasa Indonesia</span></a></li>
+<li><a class="lang-flag-link is-active" data-language="fr" href="/fr/kanban-offline/" lang="fr" title="French"><img alt="France flag" class="lang-flag-icon" src="/flags/fr.svg"/><span class="lang-label">Fran&#231;ais</span></a></li>
+<li><a class="lang-flag-link" data-language="de" href="/de/offline-kanban/" lang="de" title="German"><img alt="Germany flag" class="lang-flag-icon" src="/flags/de.svg"/><span class="lang-label">Deutsch</span></a></li></ul></details></div>
+<header><h1>Kanban Offline : une board app privée pour les flux locaux et d’entreprise</h1></header>
+<section class="intro-banner"><figure class="intro-banner-figure"><img alt="Visuel d’une board app Kanban hors ligne avec données locales et sans login." class="intro-banner-image" decoding="async" height="630" loading="lazy" src="offline-kanban-social.png" width="1200"/><figcaption class="small">Kanban Offline : une board app locale pensée pour la confidentialité, la rapidité et une adoption sans friction.</figcaption></figure></section>
+<section class="box" id="section-1">
+<h2>Pourquoi Kanban Offline est particulièrement pertinent aujourd’hui</h2>
+<p>Les équipes ont besoin de visibilité, de confidentialité et d’outils capables de fonctionner dans des réseaux d’entreprise restrictifs. C’est précisément là que KanbanApp se démarque comme Offline Kanban Board App.</p>
+<p>Disponible sur <a href="https://kanbanapp.io">https://kanbanapp.io</a>, KanbanApp permet d’ouvrir un board, d’organiser le travail et d’avancer sans dépendances inutiles. Pour celles et ceux qui veulent un tableau Kanban hors ligne, cette simplicité devient un véritable avantage stratégique.</p>
+</section>
+<section class="box" id="section-2">
+<h2>Sans login, sans compte et sans friction</h2>
+<p>KanbanApp n’impose ni inscription obligatoire ni configuration serveur. Une équipe peut essayer la board app immédiatement, et une personne peut commencer à planifier en quelques secondes.</p>
+<p>L’adoption devient plus légère, car l’organisation n’ajoute pas une dépendance cloud supplémentaire à son environnement de travail. En pratique, cela rend Offline Kanban plus simple à tester et plus simple à conserver dans la durée.</p>
+</section>
+<section class="box" id="section-3">
+<h2>Plusieurs façons de l’utiliser en local</h2>
+<p>Le produit peut être ouvert directement via <a href="https://kanbanapp.io/kanbanapp.html">https://kanbanapp.io/kanbanapp.html</a>. Le package desktop est disponible sur <a href="https://kanbanapp.io/KanbanApp.zip">https://kanbanapp.io/KanbanApp.zip</a>, et le fichier HTML peut aussi être téléchargé depuis la page d’accueil pour être stocké localement.</p>
+<p>Une version Android est également disponible sur <a href="https://play.google.com/store/apps/details?id=io.kanbanapp">https://play.google.com/store/apps/details?id=io.kanbanapp</a>, ce qui permet d’utiliser le même Offline Kanban board dans des contextes très variés.</p>
+</section>
+<section class="box" id="section-4">
+<h2>La confidentialité comme fondation</h2>
+<p>KanbanApp conserve les tâches, les priorités et la structure sur l’appareil de l’utilisateur. Le board reste local dans le navigateur ou sur Android, au lieu de dépendre d’un stockage externe par défaut.</p>
+<p>Pour les entreprises sensibles à la confidentialité, c’est un avantage majeur. La politique de confidentialité est disponible sur <a href="https://kanbanapp.io/privacy-policy/">https://kanbanapp.io/privacy-policy/</a>.</p>
+</section>
+<section class="box" id="section-5">
+<h2>Une bonne réponse aux environnements d’entreprise restrictifs</h2>
+<p>Les grandes entreprises bloquent souvent des domaines, limitent les installations et examinent de près les outils dépendants d’infrastructures externes. Dans ces contextes, une solution local-first est souvent beaucoup plus adaptée.</p>
+<p>Avec <code>kanbanapp.html</code>, le board peut être distribué en interne et ouvert immédiatement dans le navigateur d’entreprise. Les données restant locales, la conformité est plus simple à préserver.</p>
+</section>
+<section class="box" id="section-6">
+<h2>Un produit pratique et crédible</h2>
+<p>KanbanApp mise sur un board visuel clair, une priorisation simple et une utilisation rapide. Il est disponible dans plusieurs langues, sous licence MIT, et s’appuie aussi sur un assistant Kanban dédié sur ChatGPT : <a href="https://chatgpt.com/g/g-69a1b48eef5081918bf6aa804dd89301-kanban">https://chatgpt.com/g/g-69a1b48eef5081918bf6aa804dd89301-kanban</a>.</p>
+<p>Si vous cherchez une board app sans login, locale et adaptée au travail réel, KanbanApp mérite clairement votre attention.</p>
+</section>
+<div class="cta"><a class="btn btn-open" href="https://kanbanapp.io/kanbanapp.html">Ouvrir KanbanApp</a><a class="btn btn-download" href="https://kanbanapp.io/KanbanApp.zip">Télécharger le ZIP</a></div>
+<aside aria-label="Related content" class="related"><h2>Contenu associé</h2><ul><li><a href="/fr/">Accueil</a></li>
+<li><a href="/fr/blog/">Blog</a></li>
+<li><a href="/fr/qu-est-ce-que-kanban/">Qu’est-ce que Kanban ?</a></li>
+<li><a href="/fr/board-first-kanban/">Article Board First</a></li></ul></aside>
+</main>
+<footer aria-label="Site footer" role="contentinfo"><p>&copy; 2026 KanbanApp</p><p>Tableau Kanban hors ligne, gratuit et privé.</p></footer>
+</body>
+</html>

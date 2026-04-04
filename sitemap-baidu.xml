@@ -30,4 +30,9 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-</urlset>
+  <url>
+    <loc>https://kanbanapp.io/zh-cn/li-xian-kanban/</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url></urlset>
