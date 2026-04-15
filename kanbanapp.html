@@ -1676,7 +1676,8 @@ body[data-ui-language="ar"] .language-option{
  <button class="btn-small select-all" title="Selecionar todos os cards" data-i18n="columnSelectAll" data-i18n-title="columnSelectAllTitle">Selecionar</button> 
  <button class="btn-small conclude-all" title="Marcar todos os cards como concluídos" data-i18n="columnConcludeAll" data-i18n-title="columnConcludeAllTitle">Concluir</button> 
  <!-- NOVOS botões na coluna --> 
- <button class="btn-small sort-date" title="Ordenar por data (alternar crescente/decrescente)" data-i18n="columnSortDate" data-i18n-title="columnSortDateTitle">Ordenar por data</button> 
+ <button class="btn-small sort-date" title="Ordenar por data de criação (alternar crescente/decrescente)" data-i18n="columnSortCreatedDate" data-i18n-title="columnSortCreatedDateTitle">Data de criação</button> 
+ <button class="btn-small sort-created-date" title="Ordenar por data de vencimento (alternar crescente/decrescente)" data-i18n="columnSortDate" data-i18n-title="columnSortDateTitle">Data de vencimento</button>
  <button class="btn-small group-completed" title="Não concluídos primeiro, concluídos no final" data-i18n="columnGroupCompleted" data-i18n-title="columnGroupCompletedTitle">Agrupar concluídos</button> 
  <button class="btn-small btn-danger delete-column" title="Excluir esta coluna" data-i18n="columnDelete" data-i18n-title="columnDeleteTitle">Excluir</button> 
  </div> 
@@ -2329,8 +2330,10 @@ LANGUAGE_LIBRARY.en = {
  columnSelectAllTitle: 'Select all cards',
  columnConcludeAll: 'Complete',
  columnConcludeAllTitle: 'Mark all cards as completed',
- columnSortDate: 'Sort by date',
- columnSortDateTitle: 'Sort by date (toggle ascending/descending)',
+ columnSortDate: 'Due date',
+ columnSortDateTitle: 'Sort by due date (toggle ascending/descending)',
+ columnSortCreatedDate: 'Created date',
+ columnSortCreatedDateTitle: 'Sort by created date (toggle ascending/descending)',
  columnGroupCompleted: 'Group completed',
  columnGroupCompletedTitle: 'Uncompleted first, completed at the end',
  columnDelete: 'Delete',
@@ -2460,8 +2463,10 @@ LANGUAGE_LIBRARY['pt-BR'] = {
  columnSelectAllTitle: 'Selecionar todos os cards',
  columnConcludeAll: 'Concluir',
  columnConcludeAllTitle: 'Marcar todos os cards como concluídos',
- columnSortDate: 'Ordenar por data',
- columnSortDateTitle: 'Ordenar por data (alternar crescente/decrescente)',
+ columnSortDate: 'Data de vencimento',
+ columnSortDateTitle: 'Ordenar por data de vencimento (alternar crescente/decrescente)',
+ columnSortCreatedDate: 'Data de criação',
+ columnSortCreatedDateTitle: 'Ordenar por data de criação (alternar crescente/decrescente)',
  columnGroupCompleted: 'Agrupar concluídos',
  columnGroupCompletedTitle: 'Não concluídos primeiro, concluídos no final',
  columnDelete: 'Excluir',
@@ -5707,6 +5712,61 @@ function syncCardDescriptionSizeState(cardNode){
  } 
  // ===== Timestamps ===== 
  const nowISO = () => new Date().toISOString(); 
+ function parseTimestampFlexible(value){
+  if (value == null) return NaN;
+  const raw = String(value).trim();
+  if (!raw) return NaN;
+  if (/^\d+$/.test(raw)){
+   const n = Number(raw);
+   if (Number.isFinite(n)){
+    const ms = n < 1e11 ? (n * 1000) : n;
+    const dt = new Date(ms);
+    if (!isNaN(dt.getTime())) return dt.getTime();
+   }
+  }
+  const parsedNative = Date.parse(raw);
+  if (Number.isFinite(parsedNative)) return parsedNative;
+  const br = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+  if (br){
+   const d = parseInt(br[1], 10);
+   const m = parseInt(br[2], 10);
+   const yRaw = parseInt(br[3], 10);
+   const y = yRaw < 100 ? (2000 + yRaw) : yRaw;
+   const hh = br[4] != null ? parseInt(br[4], 10) : 0;
+   const mm = br[5] != null ? parseInt(br[5], 10) : 0;
+   const ss = br[6] != null ? parseInt(br[6], 10) : 0;
+   const dt = new Date(y, m - 1, d, hh, mm, ss, 0);
+   if (
+    dt.getFullYear() === y &&
+    dt.getMonth() === (m - 1) &&
+    dt.getDate() === d &&
+    dt.getHours() === hh &&
+    dt.getMinutes() === mm &&
+    dt.getSeconds() === ss
+   ) return dt.getTime();
+  }
+  const brLoose = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+  if (brLoose){
+   const d = parseInt(brLoose[1], 10);
+   const m = parseInt(brLoose[2], 10);
+   const yRaw = parseInt(brLoose[3], 10);
+   const y = yRaw < 100 ? (2000 + yRaw) : yRaw;
+   const dt = new Date(y, m - 1, d, 0, 0, 0, 0);
+   if (
+    dt.getFullYear() === y &&
+    dt.getMonth() === (m - 1) &&
+    dt.getDate() === d
+   ) return dt.getTime();
+  }
+  return NaN;
+ }
+ function normalizeTimestampISO(value, fallback){
+  const parsed = parseTimestampFlexible(value);
+  if (Number.isFinite(parsed)) return new Date(parsed).toISOString();
+  const fallbackParsed = parseTimestampFlexible(fallback);
+  if (Number.isFinite(fallbackParsed)) return new Date(fallbackParsed).toISOString();
+  return nowISO();
+ }
 function formatDateForDisplay(iso){ 
  try { 
  const d = new Date(iso);
@@ -5998,8 +6058,10 @@ function sanitizeImportedCardData(data){
   return Object.prototype.hasOwnProperty.call(data, key);
  });
  if (!hasKnownField) return null;
- const createdAt = (typeof data.createdAt === 'string' && data.createdAt.trim()) ? data.createdAt : nowISO();
- const updatedAt = (typeof data.updatedAt === 'string' && data.updatedAt.trim()) ? data.updatedAt : createdAt;
+ const createdAtRaw = (typeof data.createdAt === 'string' && data.createdAt.trim()) ? data.createdAt : nowISO();
+ const updatedAtRaw = (typeof data.updatedAt === 'string' && data.updatedAt.trim()) ? data.updatedAt : createdAtRaw;
+ const createdAt = normalizeTimestampISO(createdAtRaw, nowISO());
+ const updatedAt = normalizeTimestampISO(updatedAtRaw, createdAt);
  return {
   id: (typeof data.id === 'string' && data.id.trim()) ? data.id.trim() : uid('card'),
   title: typeof data.title === 'string' ? data.title : '',
@@ -6140,8 +6202,8 @@ async function loadBoardSequential(data){
  done.checked = !!cd.completed; 
  cnode.classList.toggle('completed', done.checked); 
  // timestamps 
- const created = cd.createdAt || nowISO(); 
- const updated = cd.updatedAt || created; 
+ const created = normalizeTimestampISO(cd.createdAt, nowISO()); 
+ const updated = normalizeTimestampISO(cd.updatedAt, created); 
  cnode.dataset.created = created; 
  cnode.dataset.updated = updated; 
  renderCardTimestamps(cnode); 
@@ -6353,17 +6415,28 @@ function createColumn(id, title, boardName){
  }); 
  applyColumnFilter(node); 
  }); 
- // Ordenar por data (edição) toggle desc/asc 
+ // Ordenar por data de criação toggle desc/asc
  const sortBtn = $('.sort-date', node); 
  if (sortBtn){ 
- node.dataset.sortNext = 'desc'; // 1º clique = desc 
+ node.dataset.sortCreatedNext = 'desc'; // 1º clique = desc 
  sortBtn.addEventListener('click', function(e){ 
  e.stopPropagation(); 
- const dir = node.dataset.sortNext || 'desc'; 
- sortCardsByDate(node, dir); 
- node.dataset.sortNext = (dir === 'desc' ? 'asc' : 'desc'); 
+ const dir = node.dataset.sortCreatedNext || 'desc'; 
+ sortCardsByCreatedDate(node, dir); 
+ node.dataset.sortCreatedNext = (dir === 'desc' ? 'asc' : 'desc'); 
  }); 
  } 
+ // Ordenar por data de vencimento toggle desc/asc
+ const sortDueBtn = $('.sort-created-date', node);
+ if (sortDueBtn){
+ node.dataset.sortDueNext = 'desc'; // 1º clique = desc
+ sortDueBtn.addEventListener('click', function(e){
+ e.stopPropagation();
+ const dir = node.dataset.sortDueNext || 'desc';
+ sortCardsByDate(node, dir);
+ node.dataset.sortDueNext = (dir === 'desc' ? 'asc' : 'desc');
+ });
+ }
  // Agrupar concluídos 
  const groupBtn = $('.group-completed', node); 
  if (groupBtn){ 
@@ -7848,16 +7921,70 @@ async function finalizeChecklistItemDrop(targetCard, targetItemsWrap, fallbackCa
  if (countEl) countEl.textContent = `${matched}/${total}`; 
  } 
  // ===== Ordenação e agrupamento ===== 
- function sortCardsByDate(columnNode, dir='desc'){ 
- const wrap = $('.cards', columnNode); 
- const cards = $$('.card', wrap); 
- const parseKey = (card) => Date.parse(card.dataset.updated || card.dataset.created || 0) || 0; 
+function sortCardsByDate(columnNode, dir='desc'){ 
+const wrap = $('.cards', columnNode); 
+const cards = $$('.card', wrap); 
+ const parseKey = (card) => {
+ const due = $('.card-due', card);
+ const value = due && typeof due.value === 'string' ? due.value.trim() : '';
+ if (!value) return null;
+ const parsed = Date.parse(value + 'T00:00:00');
+ return Number.isFinite(parsed) ? parsed : null;
+ };
+ const completionRank = (card) => $('.card-done', card).checked ? 1 : 0;
  cards.sort((a,b)=>{ 
- const da = parseKey(a), db = parseKey(b); 
+ const ac = completionRank(a), bc = completionRank(b);
+ if (ac !== bc) return ac - bc; // concluídos sempre por último
+ const da = parseKey(a), db = parseKey(b);
+ const aMissing = da === null;
+ const bMissing = db === null;
+ if (aMissing && bMissing) return 0;
+ if (aMissing) return 1;
+ if (bMissing) return -1;
  return dir === 'asc' ? (da - db) : (db - da); 
  }).forEach(c => wrap.appendChild(c)); 
  applyColumnFilter(columnNode); 
  } 
+function sortCardsByCreatedDate(columnNode, dir='desc'){
+const wrap = $('.cards', columnNode);
+const cards = $$('.card', wrap);
+ const parseCreated = (card) => {
+  const fromDataset = card && card.dataset && typeof card.dataset.created === 'string'
+  ? card.dataset.created.trim()
+  : '';
+  const createdTime = $('.created-at', card);
+  const fromTime = createdTime ? String(createdTime.getAttribute('datetime') || '').trim() : '';
+  const fromText = createdTime ? String(createdTime.textContent || '').trim() : '';
+  const parsed = parseTimestampFlexible(fromDataset || fromTime || fromText);
+  if (Number.isFinite(parsed) && card && card.dataset) {
+   card.dataset.created = new Date(parsed).toISOString();
+  }
+  return Number.isFinite(parsed) ? parsed : 0;
+  };
+ const openCards = [];
+ const completedCards = [];
+ cards.forEach(function(card, idx){
+ const done = $('.card-done', card);
+ if (done && done.checked) {
+ completedCards.push({ card: card, idx: idx });
+ return;
+ }
+ const item = { card: card, created: parseCreated(card), idx: idx };
+ let pos = openCards.length;
+ while (pos > 0) {
+ const prev = openCards[pos - 1];
+ const shouldComeBefore = dir === 'asc'
+ ? item.created < prev.created
+ : item.created > prev.created;
+ if (!shouldComeBefore) break;
+ pos--;
+ }
+ openCards.splice(pos, 0, item);
+ });
+ openCards.forEach(function(item){ wrap.appendChild(item.card); });
+ completedCards.forEach(function(item){ wrap.appendChild(item.card); });
+ applyColumnFilter(columnNode);
+ }
  function groupByCompletion(columnNode){ 
  const wrap = $('.cards', columnNode); 
  const cards = $$('.card', wrap); 
